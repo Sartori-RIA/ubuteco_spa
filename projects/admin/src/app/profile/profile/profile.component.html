@@ -1,0 +1,54 @@
+<div fxLayout="row wrap">
+  <div fxFlex="100" fxFlex.gt-md="300px" fxFlex.gt-sm="50" >
+    <mat-card class="profile-sidebar mb-1 pb-0">
+      <div class="propic text-center">
+        <img src="assets/images/sq-face-220.jpg" alt="">
+      </div>
+      <div class="profile-title text-center mb-1">
+        <div class="main-title">{{user.name}}</div>
+        <div class="">{{user.company_name}}</div>
+      </div>
+
+      <div class="profile-nav">
+        <mat-nav-list>
+          <mat-list-item routerLink="/perfil" routerLinkActive="list-item-active">
+            <mat-icon>home</mat-icon>
+            Overview
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/perfil/configuracoes" routerLinkActive="list-item-active">
+            <mat-icon>settings</mat-icon>
+            Configurações
+          </mat-list-item><mat-list-item routerLink="/perfil/tema" routerLinkActive="list-item-active">
+            <mat-icon>settings</mat-icon>
+            Tema
+          </mat-list-item>
+          <mat-divider></mat-divider>
+<!--          <mat-list-item routerLink="/profile/blank" routerLinkActive="list-item-active">-->
+<!--            <mat-icon>content_paste</mat-icon>-->
+<!--            Blank-->
+<!--          </mat-list-item>-->
+        </mat-nav-list>
+      </div>
+    </mat-card>
+
+
+    <!-- Contact Information -->
+    <mat-card class="default">
+      <mat-card-title>Contato</mat-card-title>
+      <mat-card-content class="pt-0">
+        <mat-list>
+          <mat-list-item><mat-icon class="mr-1">public</mat-icon> cookiecode.com.br</mat-list-item>
+          <mat-list-item><mat-icon class="mr-1">email</mat-icon> {{user.email}}</mat-list-item>
+<!--          <mat-list-item><mat-icon class="mr-1">phone</mat-icon> 8801822778800</mat-list-item>-->
+<!--          <mat-list-item><mat-icon class="mr-1">add_location</mat-icon> SUST, Sylhet, BD</mat-list-item>-->
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Profile Views -->
+  <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="calc(100% - 300px)">
+    <router-outlet></router-outlet>
+  </div>
+</div>

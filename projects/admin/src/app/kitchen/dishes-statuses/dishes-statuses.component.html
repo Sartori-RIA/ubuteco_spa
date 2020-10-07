@@ -1,0 +1,7 @@
+<div [formGroup]="form">
+  <mat-select (selectionChange)="onStatusChange($event)"  [compareWith]="compareSelectValues" formControlName="status">
+    <mat-option *ngFor="let status of statuses" [value]="status">
+      {{translateStatus(status)}}
+    </mat-option>
+  </mat-select>
+</div>

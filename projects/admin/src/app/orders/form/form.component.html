@@ -1,0 +1,69 @@
+<mat-card class="form-card-8 content-center" *ngIf="order$ | async; let order">
+  <mat-card-header>
+    <mat-card-title>
+      Pedido #{{order?.id}}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+
+    <div [formGroup]="form" fxLayout="row wrap" fxLayoutAlign="space-between">
+      <div fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxFlex.xs="100">
+        <mat-form-field appearance="outline">
+          <mat-label>Mesa</mat-label>
+          <mat-select (selectionChange)="onSelectTable($event)" formControlName="table"
+                      [compareWith]="compareSelectedTable">
+            <mat-option *ngFor="let table of tables$ | async"
+                        [value]="table"
+            >
+              {{table?.name}} - Lugares: {{table?.chairs}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="p-t-1" fxFlex="100">
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <button fxFlex="20"
+                  mat-flat-button
+                  (click)="onAddDrink(order.id)"
+                  color="primary"
+          >
+            <fa-icon class="width-4" size="3x" [icon]="['fas', 'cocktail']"></fa-icon>
+          </button>
+          <button fxFlex="20"
+                  mat-flat-button
+                  color="primary"
+                  (click)="onAddBeer(order.id)"
+          >
+            <fa-icon class="width-4" size="3x" [icon]="['fas', 'beer']"></fa-icon>
+          </button>
+          <button fxFlex="20"
+                  mat-flat-button
+                  (click)="onAddFood(order.id)"
+                  color="primary"
+          >
+            <fa-icon class="width-4" size="3x" [icon]="['fas', 'hamburger']"></fa-icon>
+          </button>
+          <button fxFlex="20"
+                  mat-flat-button
+                  (click)="onAddWine(order.id)"
+                  color="primary"
+          >
+            <fa-icon class="width-4" size="3x" [icon]="['fas', 'wine-bottle']"></fa-icon>
+          </button>
+        </div>
+      </div>
+
+      <div fxFlex="100" class="p-t-1" *ngIf="orderItems$ | async; let items">
+
+        <div class="margin-333 pt-05">
+          <app-order-items></app-order-items>
+          <app-finish-order-card [order]="order"></app-finish-order-card>
+        </div>
+      </div>
+
+    </div>
+
+
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,67 @@
+<div class="sidenav-hold">
+  <div class="icon-menu mb-1" *ngIf="hasIconMenu">
+    <!-- Icon menu separator -->
+    <div class="mb-1 nav-item-sep">
+      <mat-divider [ngStyle]="{margin: '0 -24px'}"></mat-divider>
+      <span class="text-muted icon-menu-title">{{hasIconMenu}}</span>
+    </div>
+    <!-- Icon menu items -->
+    <div class="icon-menu-item" *ngFor="let item of items">
+      <button *ngIf="!item.disabled && item.type === 'icon'" mat-raised-button [matTooltip]="item.tooltip"
+              routerLink="/{{item.state}}"
+              routerLinkActive="mat-bg-primary">
+        <div [ngSwitch]="item.iconType">
+          <mat-icon *ngSwitchCase="'material-design'">{{item.icon}}</mat-icon>
+          <mat-icon *ngSwitchCase="'font-awesome'" [fontSet]="item.fontSet" [fontIcon]="item.icon" inline></mat-icon>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <ul libDropdown class="sidenav">
+    <li *ngFor="let item of items" libDropdownLink routerLinkActive="open">
+      <div class="nav-item-sep" *ngIf="item.type === 'separator'">
+        <mat-divider></mat-divider>
+        <span class="text-muted">{{item.name }}</span>
+      </div>
+      <div *ngIf="!item.disabled && item.type !== 'separator' && item.type !== 'icon'" class="lvl1">
+        <div [ngSwitch]="item.type">
+          <a *ngSwitchCase="'link'" routerLink="/{{item.state}}" libDropdownToggle matRipple>
+            <div [ngSwitch]="item.iconType">
+              <mat-icon *ngSwitchCase="'material-design'">{{item.icon}}</mat-icon>
+<!--              <fa-icon *ngSwitchCase="'font-awesome'" [icon]="[item.fontSet, item.icon]"></fa-icon>-->
+              <mat-icon *ngSwitchCase="'font-awesome'" [fontSet]="item.fontSet" [fontIcon]="item.icon" inline></mat-icon>
+            </div>
+            <span class="item-name lvl1">{{item.name}}</span>
+            <span fxFlex></span>
+            <span class="menuitem-badge mat-bg-{{ badge.color }}" [ngStyle]="{background: badge.color}"
+                  *ngFor="let badge of item.badges">{{ badge.value }}</span>
+          </a>
+          <a *ngSwitchCase="'extLink'" [href]="item.state" libDropdownToggle matRipple target="_blank">
+            <div [ngSwitch]="item.iconType">
+              <mat-icon *ngSwitchCase="'material-design'">{{item.icon}}</mat-icon>
+              <mat-icon *ngSwitchCase="'font-awesome'" [fontSet]="item.fontSet" [fontIcon]="item.icon"
+                        inline></mat-icon>
+            </div>
+            <span class="item-name lvl1">{{item.name}}</span>
+            <span fxFlex></span>
+            <span class="menuitem-badge mat-bg-{{ badge.color }}" [ngStyle]="{background: badge.color}"
+                  *ngFor="let badge of item.badges">{{ badge.value }}</span>
+          </a>
+          <a *ngSwitchCase="'dropDown'" libDropdownToggle matRipple>
+            <div [ngSwitch]="item.iconType">
+              <mat-icon *ngSwitchCase="'material-design'">{{item.icon}}</mat-icon>
+              <mat-icon *ngSwitchCase="'font-awesome'" [fontSet]="item.fontSet" [fontIcon]="item.icon"
+                        inline></mat-icon>
+            </div>
+            <span class="item-name lvl1">{{item.name}}</span>
+            <span fxFlex></span>
+            <span class="menuitem-badge mat-bg-{{ badge.color }}" [ngStyle]="{background: badge.color}"
+                  *ngFor="let badge of item.badges">{{ badge.value }}</span>
+            <mat-icon class="menu-caret">keyboard_arrow_right</mat-icon>
+          </a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

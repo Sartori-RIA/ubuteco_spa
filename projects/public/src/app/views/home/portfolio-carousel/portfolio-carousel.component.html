@@ -1,0 +1,36 @@
+<section id="portfolio-section" class="portfolio-section home-section" [ngClass]="{'light-gray': backgroundGray}">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Works</h2>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat unde inventore molestias ab adipisci eius nisi placeat
+          at.
+        </p>
+      </div>
+    <ngu-carousel
+    #portfolioCarousel
+    class="carousel"
+    [inputs]="carouselOptions" [dataSource]="portfolios">
+      <ngu-item NguCarouselItem *nguCarouselDef="let p; let j = index">
+          <mat-card class="p-0">
+              <img mat-card-image [src]="p.photo">
+              <mat-card-content>
+                <h5><strong><a href="">{{p.title}}</a></strong></h5>
+                <p>
+                  {{p.text}}
+                </p>
+                <mat-divider class="mb-1"></mat-divider>
+                <button mat-icon-button><mat-icon class="text-muted">link</mat-icon></button>
+                <button mat-icon-button><mat-icon class="text-muted" (click)="openShareComponent()">share</mat-icon></button>
+              </mat-card-content>
+            </mat-card>
+      </ngu-item>
+
+      <button mat-fab NguCarouselPrev class='carousel-left'><mat-icon>keyboard_arrow_left</mat-icon></button>
+      <button mat-fab NguCarouselNext class='carousel-right'><mat-icon>keyboard_arrow_right</mat-icon></button>
+
+      <ul NguCarouselPoint class="carousel-point">
+        <li *ngFor="let pointNumber of portfolioCarousel.pointNumbers; let  i= index" [class.active]="i==portfolioCarousel.activePoint" (click)="portfolioCarousel.moveTo(pointNumber)"></li>
+      </ul>
+  </ngu-carousel>
+    </div>
+</section>

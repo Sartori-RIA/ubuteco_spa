@@ -1,0 +1,17 @@
+// Remove imports which are not needed for your project
+@import "inbox";
+@import "calendar";
+@import "chats";
+@import "gallery";
+@import "pricings";
+@import "users";
+@import "profile";
+@import "shop";
+@import "home";
+@import "invoice";
+
+/*
+  Only Required if you want to use Angular Landing
+  (https://themeforest.net/item/angular-landing-material-design-angular-app-landing-page/21198258)
+*/
+// @import "landing";

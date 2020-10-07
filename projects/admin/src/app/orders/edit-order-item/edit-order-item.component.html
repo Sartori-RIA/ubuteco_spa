@@ -1,0 +1,13 @@
+<td>
+  <div fxLayout="row">
+    <div [formGroup]="form" fxFlex="80">
+      <mat-form-field appearance="outline" style="width: 80px">
+        <input formControlName="quantity" matInput type="number">
+      </mat-form-field>
+    </div>
+    <button (click)="onUpdate()" mat-button color="accent" fxFlexOffset="10">
+      <mat-icon>cached</mat-icon>
+    </button>
+  </div>
+</td>
+

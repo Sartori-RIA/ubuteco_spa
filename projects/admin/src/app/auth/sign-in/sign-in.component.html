@@ -1,0 +1,60 @@
+<div class="seciton-left">
+  <div class="section-left-content">
+<!--    <h1 class="text-36 font-weight-light">Don't have an account?</h1>-->
+<!--    <p class="mb-24 text-small">Stop wasting time and money. It's free!</p>-->
+<!--    <button mat-flat-button color="accent" [routerLink]="'/auth/cadastre-se'">Sign Up</button>-->
+  </div>
+</div>
+
+
+<div class="form-holder height-100vh mat-elevation-z4"
+     [perfectScrollbar]="{}"
+     [@animate]="{value:'*',params:{y: '40px', opacity:'0',delay:'100ms', duration: '400ms'}}"
+>
+
+  <div
+    [formGroup]="form"
+    class="signup-form"
+    fxLayout="column"
+  >
+
+    <!-- headline -->
+    <div class="form-headline text-center mb-32">
+      <h1 class="font-weight-light">Sign in to your account</h1>
+    </div>
+    <div class="mb-48" fxLayout="row wrap" fxLayoutAlign="center center">
+      <img
+        width="200px"
+        src="assets/images/illustrations/breaking_barriers.svg"
+        alt=""
+      />
+    </div>
+
+    {{errors$ | async | json}}
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        formControlName="email"
+        type="email"
+        name="email"
+        placeholder="Email"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        formControlName="password"
+        type="password"
+        name="password"
+        placeholder="********"
+      />
+    </mat-form-field>
+
+
+    <button (click)="onSubmit()" mat-flat-button color="primary">SignIn</button>
+
+  </div>
+</div>

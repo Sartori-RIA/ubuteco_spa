@@ -1,0 +1,119 @@
+<div mat-dialog-title>
+  <div class="text-center">
+    <h1 *ngIf="data; else newWine">Atualizando Vinho: {{data?.name}} #{{data?.id}}</h1>
+    <ng-template #newWine>
+      <h1>Novo Vinho</h1>
+    </ng-template>
+  </div>
+</div>
+
+<div mat-dialog-content>
+  <div [formGroup]="form">
+
+    <div>
+
+      <div>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input formControlName="name" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Descrição</mat-label>
+          <textarea rows="5" formControlName="description" matInput></textarea>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>Quantidade em estoque</mat-label>
+          <input formControlName="quantity_stock" type="number" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Preço</mat-label>
+          <input formControlName="price" matInput type="number">
+          <mat-icon matPrefix>attach_money</mat-icon>
+        </mat-form-field>
+
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Estilo de vinho</mat-label>
+            <input matInput
+                   formControlName="wine_style"
+                   [matAutocomplete]="styleAuto">
+          </mat-form-field>
+
+          <mat-autocomplete autoActiveFirstOption
+                            #styleAuto="matAutocomplete"
+                            [displayWith]="displayFn">
+            <mat-option *ngFor="let wineStyle of wineStyles$ | async"
+                        [value]="wineStyle">
+              {{wineStyle.name}}
+            </mat-option>
+          </mat-autocomplete>
+
+          <button matTooltip="Adicionar Estilo de vinho" (click)="openDialogWineStyle()" mat-mini-fab>+
+          </button>
+        </div>
+
+
+        <div>
+          <mat-form-field appearance="outline" fxFlex="80">
+            <mat-label>Vinicola</mat-label>
+            <input matInput
+                   formControlName="maker"
+                   [matAutocomplete]="makerAuto">
+          </mat-form-field>
+
+          <mat-autocomplete autoActiveFirstOption
+                            #makerAuto="matAutocomplete"
+                            [displayWith]="displayFn">
+            <mat-option *ngFor="let maker of makers$ | async"
+                        [value]="maker">
+              {{maker.name}}- {{maker?.state}}/{{maker?.country}}
+            </mat-option>
+          </mat-autocomplete>
+
+          <button matTooltip="Adicionar Vinicola" (click)="openDialogAddMaker()" mat-mini-fab>+
+          </button>
+        </div>
+
+        <mat-form-field appearance="outline">
+          <mat-label>ABV</mat-label>
+          <input formControlName="abv" matInput type="number">
+          <fa-icon matSuffix [icon]="['fas','percentage']"></fa-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>vintage_wine</mat-label>
+          <input formControlName="vintage_wine" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>visual</mat-label>
+          <input formControlName="visual" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>ripening</mat-label>
+          <input formControlName="ripening" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>grapes</mat-label>
+          <input formControlName="grapes" matInput>
+        </mat-form-field>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button (click)="onCancel()" mat-button color="warn">Cancelar</button>
+  <span fxFlex></span>
+  <button (click)="onSubmit()" mat-raised-button color="primary">Salvar</button>
+</div>
+

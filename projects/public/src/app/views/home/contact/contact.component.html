@@ -1,0 +1,45 @@
+<section id="contact-section" class="home-section" [ngClass]="{'light-gray': backgroundGray}">
+  <div class="container">
+    <div class="section-header">
+      <h2>Send Us An Email</h2>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam, error.</p>
+    </div>
+    <form [formGroup]="contactForm">
+      <div fxLayout="row wrap" fxLayout.lt-md="column">
+        <div fxFlex="100">
+          <div class="pb-1">
+            <mat-form-field class="full-width">
+              <input matInput name="name" [formControl]="contactForm.controls['name']" placeholder="Your Name">
+            </mat-form-field>
+            <small *ngIf="contactForm?.controls?.name?.touched && contactForm.controls.name.errors?.required" class="form-error-msg">Name is required</small>
+          </div>
+          <div class="pb-1">
+            <mat-form-field class="full-width">
+              <input matInput name="email" [formControl]="contactForm.controls['email']" placeholder="Your Email">
+            </mat-form-field>
+            <small *ngIf="contactForm.controls.email.touched && contactForm.controls.email.errors?.email" class="form-error-msg">Invalid Email</small>
+          </div>
+
+        </div>
+        <div fxFlex="100">
+          <div class="pb-1">
+            <mat-form-field class="full-width">
+              <input matInput name="subject" [formControl]="contactForm.controls['subject']" placeholder="Subject">
+            </mat-form-field>
+            <small *ngIf="contactForm.controls.subject.touched && contactForm.controls.subject.errors?.required" class="form-error-msg">Subject is required</small>
+          </div>
+          <div class="pb-1">
+            <mat-form-field class="full-width">
+              <textarea matInput row="8" name="message" [formControl]="contactForm.controls['message']" placeholder="Message"></textarea>
+            </mat-form-field>
+            <small *ngIf="contactForm.controls.message.touched && contactForm.controls.message.errors?.required" class="form-error-msg">Message is required</small>
+          </div>
+        </div>
+
+        <div fxFlex="100">
+          <button mat-fab color="primary" [disabled]="!contactForm.valid"><mat-icon>send</mat-icon></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+.rounded {
+  border-radius: 8px;
+  &-circle {
+    border-radius: 50%;
+  }
+  &.mat-progress-bar,
+  .mat-progress-bar-fill {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+}
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
+// Alignment
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+.float-none {
+  float: none;
+}
+
+// BACKGROUND SIZES
+.background-size-cover {
+  background-size: cover;
+}
+.background-size-contain {
+  background-size: contain;
+}
+.background-size-100 {
+  background-size: 100%;
+}
+
+[dir="rtl"] {
+  .float-left {
+    float: right;
+  }
+  .float-right {
+    float: left;
+  }
+}

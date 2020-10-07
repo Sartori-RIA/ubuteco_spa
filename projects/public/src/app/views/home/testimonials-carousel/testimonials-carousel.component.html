@@ -1,0 +1,30 @@
+<section id="testimonials-section" class="testimonials-section home-section" [ngClass]="{'light-gray': backgroundGray}">
+  <div class="container">
+    <div class="section-header">
+      <h2>What our customers says</h2>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat unde inventore molestias ab adipisci eius nisi placeat
+        at.
+      </p>
+    </div>
+    
+  <ngu-carousel
+  [inputs]="carouselOptions" [dataSource]="testimonials">
+    <ngu-item NguCarouselItem *nguCarouselDef="let tm; let j = index">
+        <mat-card class="p-0">
+            <mat-card-content class="">
+              <img class="company-logo" [src]="tm.logo">
+              <p class="text">{{tm.text}}</p>
+              <div class="user-detail">
+                <span class="toolbar-avatar md user-photo"><img [src]="tm.photo" alt=""></span>
+                <span class="user-title">{{tm.title}}</span>
+                <span class="user-subtitle text-muted">{{tm.subtitle}}</span>
+              </div>
+            </mat-card-content>
+        </mat-card>
+    </ngu-item>
+    
+    <button mat-fab NguCarouselPrev class='carousel-left'><mat-icon>keyboard_arrow_left</mat-icon></button>
+    <button mat-fab NguCarouselNext class='carousel-right'><mat-icon>keyboard_arrow_right</mat-icon></button>
+</ngu-carousel>
+  </div>
+</section>

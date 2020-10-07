@@ -1,0 +1,107 @@
+<div class="seciton-left">
+</div>
+<div
+  class="form-holder height-100vh mat-elevation-z4"
+  [perfectScrollbar]="{}"
+>
+  <form
+    [formGroup]="form"
+    class="signup-form"
+    fxLayout="column"
+    fxLayoutAlign="start"
+    (ngSubmit)="onSubmit()"
+  >
+    <!-- headline -->
+    <div class="form-headline text-center mb-16">
+      <h1 class="font-weight-bold">Lets get started!</h1>
+      <p class="text-muted">Create an account get unlimited access</p>
+    </div>
+    <div class="mb-32" fxLayout="row wrap" fxLayoutAlign="center center">
+      <img width="200px" src="assets/images/illustrations/posting_photo.svg" alt="">
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap.md="16px" fxLayoutGap.lg="16px">
+      <mat-form-field fxFlex="1 1 0%" appearance="outline">
+        <mat-label>First name</mat-label>
+        <input
+          formControlName="firstName"
+          matInput
+          type="text"
+          name="first_name"
+          placeholder="First name"
+        />
+      </mat-form-field>
+      <mat-form-field fxFlex="1 1 0%" appearance="outline">
+        <mat-label>Last name</mat-label>
+        <input
+          formControlName="lastName"
+          matInput
+          type="text"
+          name="Last_name"
+          placeholder="Last name"
+        />
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        formControlName="username"
+        type="text"
+        name="username"
+        placeholder="Username"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        formControlName="email"
+        type="email"
+        name="email"
+        placeholder="Email"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        formControlName="password"
+        type="password"
+        name="password"
+        placeholder="********"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Confirm password</mat-label>
+      <input
+        matInput
+        type="password"
+        name="confirm_password"
+        placeholder="********"
+        formControlName="confirmPassword"
+      />
+      <mat-error>
+        Password didn't match
+      </mat-error>
+    </mat-form-field>
+
+    <mat-checkbox class="mb-24" formControlName="agreed"
+    >I agree with terms and condtions</mat-checkbox
+    >
+    <button  mat-raised-button color="primary">Signup</button>
+    <mat-divider class="my-32"></mat-divider>
+
+
+    <div class="text-center">
+      <a
+        [routerLink]="'/auth/entrar'"
+        class="mat-color-primary text-center full-width"
+      >Sign in with an existing account</a
+      >
+    </div>
+  </form>
+</div>

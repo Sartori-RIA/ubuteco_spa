@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>{{label}}</h1>
+
+<div mat-dialog-content [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>Selecione o item</mat-label>
+    <mat-select formControlName="item">
+      <mat-option *ngFor="let item of items$ | async" [value]="item">
+        {{item.name}} - R${{item.price}} - Dísponiveis: {{item.quantity_stock}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Quantidade</mat-label>
+    <input formControlName="quantity" matInput>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button color="warn"
+          (click)="onClose()"
+          (keydown.escape)="onClose()"
+  >Cancelar</button>
+  <button mat-button color="primary"
+          cdkFocusInitial
+          (keydown.enter)="onSubmit()"
+          (click)="onSubmit()">Adicionar item
+  </button>
+</div>

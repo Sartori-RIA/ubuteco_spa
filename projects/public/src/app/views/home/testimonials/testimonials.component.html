@@ -1,0 +1,25 @@
+<section id="testimonials-section" class="testimonials-section home-section" [ngClass]="{'light-gray': backgroundGray}">
+  <div class="container">
+    <div class="section-header">
+      <h2>What our customers says</h2>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat unde inventore molestias ab adipisci eius nisi placeat
+        at.
+      </p>
+    </div>
+    <div fxLayout="row" fxLayout.lt-md="column"  fxLayoutGap="30px">
+      <div fxFlex="33.33" *ngFor="let tm of testimonials">
+          <mat-card class="p-0">
+              <mat-card-content class="">
+                <img class="company-logo" [src]="tm.logo">
+                <p class="text">{{tm.text}}</p>
+                <div class="user-detail">
+                  <span class="toolbar-avatar md user-photo"><img [src]="tm.photo" alt=""></span>
+                  <span class="user-title">{{tm.title}}</span>
+                  <span class="user-subtitle text-muted">{{tm.subtitle}}</span>
+                </div>
+              </mat-card-content>
+          </mat-card>
+      </div>
+    </div>
+  </div>
+</section>

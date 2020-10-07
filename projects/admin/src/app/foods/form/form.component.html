@@ -1,0 +1,46 @@
+<div mat-dialog-title>
+  <h1 *ngIf="data; else newFood">Atualizando Alimento: {{data?.name}} #{{data?.id}}</h1>
+  <ng-template #newFood>
+    <h1>Novo Alimento</h1>
+  </ng-template>
+</div>
+
+<div mat-dialog-content>
+  <div [formGroup]="form">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+      <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>Nome</mat-label>
+        <input formControlName="name" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>Quantidade em estoque</mat-label>
+        <input formControlName="quantity_stock" type="number" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>Valor de Compra</mat-label>
+        <input formControlName="price" matInput type="number">
+        <mat-icon matPrefix>attach_money</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>Valido até</mat-label>
+        <input matInput formControlName="valid_until" [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker [startAt]="startDate"></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button (click)="onSubmit()" mat-raised-button color="primary">Salvar</button>
+  <span fxFlex></span>
+  <button (click)="onCancel()" mat-button color="warn">Cancelar</button>
+</div>

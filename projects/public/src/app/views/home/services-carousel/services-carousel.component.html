@@ -1,0 +1,35 @@
+<section id="service-section" class="service-section home-section" [ngClass]="{'light-gray': backgroundGray}">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Services</h2>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat unde inventore molestias ab adipisci eius nisi placeat
+          at.
+        </p>
+      </div>
+    <ngu-carousel
+    [inputs]="carouselOptions" [dataSource]="services">
+      <ngu-item NguCarouselItem *nguCarouselDef="let s; let j = index">
+          <mat-card class="home-fancy-card">
+              <div fxLayout="column">
+                <div class="text-center">
+                  <mat-icon mat-card-icon>{{s.icon}}</mat-icon>
+                </div>
+                <span fxFlex="20px"></span>
+                <h3 class="m-0 font-light">{{s.title}}</h3>
+                <span fxFlex="20px"></span>
+                <p class="m-0 description">
+                  {{s.text}}
+                </p>
+                <span fxFlex="40px"></span>
+                <div>
+                  <button mat-button><strong class="text-muted">READ MORE</strong></button>
+                </div>
+              </div>
+            </mat-card>
+      </ngu-item>
+      
+      <button mat-fab NguCarouselPrev class='carousel-left'><mat-icon>keyboard_arrow_left</mat-icon></button>
+      <button mat-fab NguCarouselNext class='carousel-right'><mat-icon>keyboard_arrow_right</mat-icon></button>
+  </ngu-carousel>
+    </div>
+  </section>

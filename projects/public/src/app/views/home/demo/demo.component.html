@@ -1,0 +1,38 @@
+<section id="section-demo" class="landing home-section">
+
+  <div class="container">
+    <div class="section-header">
+      <h2>Choose a Demo</h2>
+      <p>Each Section is an Angular Component and located in it's own directory. So it's super easy to customize.</p>
+    </div>
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutWrap="nowrap" fxLayoutGap="30px">
+      <div fxFlex="33.33">
+        <mat-card matRipple [routerLink]="'/home/one'">
+          <mat-card-content class="p-1 m-0">
+            <h5>Version 1</h5>
+          </mat-card-content>
+          <img mat-card-image class="m-0" src="assets/images/demo_home_one.jpg">
+        </mat-card>
+      </div>
+      <div fxFlex="33.33">
+        <mat-card matRipple [routerLink]="'/home/two'">
+          <mat-card-content class="p-1 m-0">
+            <h5>Version 2</h5>
+          </mat-card-content>
+          <img mat-card-image class="m-0" src="assets/images/demo_home_two.jpg">
+        </mat-card>
+      </div>
+      <div fxFlex="33.33">
+        <mat-card matRipple [routerLink]="'/home/all'">
+          <mat-card-content class="p-1 m-0">
+            <h5>All Sections</h5>
+          </mat-card-content>
+          <img mat-card-image class="m-0" src="assets/images/demo_all.jpg">
+        </mat-card>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="demo-button-wrap">
+      <button mat-raised-button mat-lg-button color="accent" (click)="moreTemplates()">Free Templates</button>
+    </div>
+  </div>
+</section>

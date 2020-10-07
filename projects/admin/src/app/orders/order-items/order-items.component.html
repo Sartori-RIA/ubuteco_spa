@@ -1,0 +1,44 @@
+<table class="cart-table default-bg mat-elevation-z1"
+       [@animate]="{value:'*',params:{delay: '100ms', x:'-50px'}}"
+>
+  <thead>
+  <tr>
+    <th class="text-muted">Remover</th>
+    <th class="text-muted">Foto</th>
+    <th class="text-muted">Produto</th>
+    <th class="text-muted">Categoria</th>
+    <th class="text-muted">Valor</th>
+    <th class="text-muted">Quantidade</th>
+    <th class="text-muted">Total</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <ng-container *ngFor="let item of items$ | async">
+    <tr>
+      <td>
+        <button (click)="onRemoveItem(item)" mat-icon-button color="warn">
+          <mat-icon>close</mat-icon>
+        </button>
+      </td>
+      <td>
+        <img class="cart-thumbnail" [src]="item.item.image.url"></td>
+      <td>
+        <span>{{item.item.name}}</span></td>
+      <td>
+        <fa-icon class="width-4" [icon]="['fas', getItemTypeIcon(item)]"></fa-icon>
+      </td>
+      <td>
+        {{item.item.price_cents | formatCents}}
+      </td>
+      <td>
+        <app-edit-order-item [item]="item" ></app-edit-order-item>
+      </td>
+      <td>
+        {{item.item.price_cents * item.quantity | formatCents}}
+      </td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>
+

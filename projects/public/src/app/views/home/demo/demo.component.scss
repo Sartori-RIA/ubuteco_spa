@@ -1,0 +1,19 @@
+.mat-card {
+  text-align: center;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  &:active {
+    outline: 0;
+  }
+}
+:host ::ng-deep .mat-card-image {
+  vertical-align: bottom;
+}
+:host ::ng-deep .mat-ripple-element {
+  height: 0;
+}
+
+.demo-button-wrap {
+  margin: 40px 0;
+}

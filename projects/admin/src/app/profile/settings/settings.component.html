@@ -1,0 +1,31 @@
+<mat-card class="p-0">
+  <mat-tab-group>
+    <mat-tab label="Configurações da conta">
+      <mat-card-content class="mt-1">
+        <div [formGroup]="form">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Empresa</mat-label>
+            <input matInput formControlName="company_name">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>CNPJ</mat-label>
+            <input matInput formControlName="cnpj">
+          </mat-form-field>
+
+          <button mat-raised-button (click)="updateProfile()" color="primary">Salvar</button>
+        </div>
+      </mat-card-content>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
