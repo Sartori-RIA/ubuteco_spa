@@ -3,15 +3,15 @@ import * as fromBreweries from './makers.reducer';
 import {makersFeatureKey, MakerState} from './makers.reducer';
 import {compare} from '../../shared/util/util';
 
-export const selectAllMakersState = createFeatureSelector<MakerState>(makersFeatureKey);
+export const selectMakersState = createFeatureSelector<MakerState>(makersFeatureKey);
 
 export const selectAllMakers = createSelector(
-  selectAllMakersState,
+  selectMakersState,
   fromBreweries.selectAll
 );
 
 export const selectAllMakersLoaded = createSelector(
-  selectAllMakersState,
+  selectMakersState,
   (state) => state.loaded
 );
 
@@ -28,4 +28,9 @@ export const selectMakersOrderedById = (isAsc: boolean) => createSelector(
 export const selectMakersFilteredByName = (value: string) => createSelector(
   selectAllMakers,
   (makers) => makers.filter((v) => v.name.toLowerCase().indexOf(value.toLowerCase()) === 0)
+);
+
+export const selectMakersLoading = createSelector(
+  selectMakersState,
+  (state) => state.loading
 );
