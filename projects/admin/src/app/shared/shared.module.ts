@@ -8,7 +8,6 @@ import {FlexLayoutModule, FlexModule} from '@angular/flex-layout';
 import {FormatCentsPipe} from './pipes/format-cents.pipe';
 import {AppLoaderModule} from '../app-loader/app-loader.module';
 import {MaterialModule} from '../material/material.module';
-import {NgApexchartsModule} from 'ng-apexcharts';
 import {BreadcrumbComponent} from './components/breadcrumb/breadcrumb.component';
 import {ButtonLoadingComponent} from './components/button-loading/button-loading.component';
 import {BottomSheetShareComponent} from './components/bottom-sheet-share/bottom-sheet-share.component';
@@ -35,7 +34,6 @@ const LIBS_MODULES = [
   FontAwesomeModule,
   FlexModule,
   FlexLayoutModule,
-  NgApexchartsModule,
   CustomFormsModule,
   NgxCustomFormsModule,
   PerfectScrollbarModule
