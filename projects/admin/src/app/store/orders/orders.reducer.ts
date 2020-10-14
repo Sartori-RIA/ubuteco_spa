@@ -27,7 +27,7 @@ export const {
   selectAll,
 } = adapter.getSelectors();
 
-const orderReducer = createReducer(initialState,
+const ordersReducer = createReducer(initialState,
   on(REQUEST_ALL_ORDERS_DONE, (state, {orders}) => adapter.upsertMany(orders, state)),
   on(REQUEST_ORDER_DONE, (state, {order}) => adapter.upsertOne(order, state)),
   on(UPDATE_ORDER_DONE, (state, {order}) => adapter.upsertOne(order, state)),
@@ -39,5 +39,5 @@ const orderReducer = createReducer(initialState,
 );
 
 export function reducer(state: OrderState | undefined, action: Action) {
-  return orderReducer(state, action);
+  return ordersReducer(state, action);
 }

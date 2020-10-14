@@ -37,22 +37,24 @@ export class WinesEffects {
     ofType(REQUEST_ALL_WINES),
     withLatestFrom(this.store.pipe(select(selectAllWinesLoaded))),
     filter(([action, allWinesLoaded]) => !allWinesLoaded),
-    mergeMap(() => this.wineService.all()),
-    map((wines: Wine[]) => REQUEST_ALL_WINES_DONE({wines})),
-    catchError(() => {
-      this.feedbackService.errorAction('recuperar', true);
-      return of(REQUEST_ALL_WINES_FAILED());
-    })
+    mergeMap(() => this.wineService.all()).pipe(
+      map((wines) => REQUEST_ALL_WINES_DONE({wines})),
+      catchError(() => {
+        this.feedbackService.errorAction('recuperar', true);
+        return of(REQUEST_ALL_WINES_FAILED());
+      })
+    ),
   ));
 
   fetchWineById$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_WINE),
-    mergeMap((action) => this.wineService.show(action.id)),
-    map((wine: Wine) => REQUEST_WINE_DONE({wine})),
-    catchError(() => {
-      this.feedbackService.errorAction('recuperar', false);
-      return of(REQUEST_WINE_FAILED());
-    })
+    mergeMap((action) => this.wineService.show(action.id)).pipe(
+      map((wine) => REQUEST_WINE_DONE({wine})),
+      catchError(() => {
+        this.feedbackService.errorAction('recuperar', false);
+        return of(REQUEST_WINE_FAILED());
+      })
+    ),
   ));
 
   removeWine$ = createEffect(() => this.actions$.pipe(
@@ -73,28 +75,30 @@ export class WinesEffects {
 
   addWine$ = createEffect(() => this.actions$.pipe(
     ofType(CREATE_WINE),
-    mergeMap((action) => this.wineService.create(action.wine)),
-    map((wine) => {
-      this.feedbackService.createSuccess('Vinho', false);
-      return CREATE_WINE_DONE({wine});
-    }),
-    catchError(() => {
-      this.feedbackService.errorAction('criar');
-      return of(CREATE_WINE_FAILED());
-    })
+    mergeMap((action) => this.wineService.create(action.wine)).pipe(
+      map((wine) => {
+        this.feedbackService.createSuccess('Vinho', false);
+        return CREATE_WINE_DONE({wine});
+      }),
+      catchError(() => {
+        this.feedbackService.errorAction('criar');
+        return of(CREATE_WINE_FAILED());
+      })
+    ),
   ));
 
   updateWine$ = createEffect(() => this.actions$.pipe(
     ofType(UPDATE_WINE),
-    mergeMap((action) => this.wineService.update(action.wine)),
-    map((wine) => {
-      this.feedbackService.updateSuccess('Vinho', false);
-      return UPDATE_WINE_DONE({wine});
-    }),
-    catchError(() => {
-      this.feedbackService.errorAction('atualizar');
-      return of(UPDATE_WINE_FAILED());
-    })
+    mergeMap((action) => this.wineService.update(action.wine)).pipe(
+      map((wine) => {
+        this.feedbackService.updateSuccess('Vinho', false);
+        return UPDATE_WINE_DONE({wine});
+      }),
+      catchError(() => {
+        this.feedbackService.errorAction('atualizar');
+        return of(UPDATE_WINE_FAILED());
+      })
+    ),
   ));
 
   sendWineImage$ = createEffect(() => this.actions$.pipe(

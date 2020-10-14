@@ -33,22 +33,24 @@ export class BeerEffects {
     ofType(BeerActions.REQUEST_ALL_BEERS),
     withLatestFrom(this.store.pipe(select(selectAllBeersLoaded))),
     filter(([action, allBeersLoaded]) => !allBeersLoaded),
-    mergeMap(() => this.beerService.all()),
-    map((beers: Beer[]) => REQUEST_ALL_BEERS_DONE({beers})),
-    catchError(() => {
-      this.feedbackService.errorAction('recuperar', true);
-      return of(REQUEST_ALL_BEERS_FAILED());
-    })
+    mergeMap(() => this.beerService.all()).pipe(
+      map((beers) => REQUEST_ALL_BEERS_DONE({beers})),
+      catchError(() => {
+        this.feedbackService.errorAction('recuperar', true);
+        return of(REQUEST_ALL_BEERS_FAILED());
+      })
+    ),
   ));
 
   fetchBeerById$ = createEffect(() => this.actions$.pipe(
     ofType(BeerActions.REQUEST_BEER),
-    mergeMap((action) => this.beerService.show(action.id)),
-    map((beer: Beer) => REQUEST_BEER_DONE({beer})),
-    catchError(() => {
-      this.feedbackService.errorAction('recuperar', false);
-      return of(REQUEST_BEER_FAILED());
-    })
+    mergeMap((action) => this.beerService.show(action.id)).pipe(
+      map((beer) => REQUEST_BEER_DONE({beer})),
+      catchError(() => {
+        this.feedbackService.errorAction('recuperar', false);
+        return of(REQUEST_BEER_FAILED());
+      })
+    ),
   ));
 
   removeBeer$ = createEffect(() => this.actions$.pipe(
@@ -69,28 +71,30 @@ export class BeerEffects {
 
   addBeer$ = createEffect(() => this.actions$.pipe(
     ofType(BeerActions.CREATE_BEER),
-    mergeMap((action) => this.beerService.create(action.beer)),
-    map((beer) => {
-      this.feedbackService.createSuccess('Cerveja', false);
-      return CREATE_BEER_DONE({beer});
-    }),
-    catchError(() => {
-      this.feedbackService.errorAction('criar');
-      return of(CREATE_BEER_FAILED());
-    })
+    mergeMap((action) => this.beerService.create(action.beer)).pipe(
+      map((beer) => {
+        this.feedbackService.createSuccess('Cerveja', false);
+        return CREATE_BEER_DONE({beer});
+      }),
+      catchError(() => {
+        this.feedbackService.errorAction('criar');
+        return of(CREATE_BEER_FAILED());
+      })
+    ),
   ));
 
   updateBeer$ = createEffect(() => this.actions$.pipe(
     ofType(BeerActions.UPDATE_BEER),
-    mergeMap((action) => this.beerService.update(action.beer)),
-    map((beer) => {
-      this.feedbackService.updateSuccess('Cerveja', false);
-      return UPDATE_BEER_DONE({beer});
-    }),
-    catchError(() => {
-      this.feedbackService.errorAction('atualizar');
-      return of(UPDATE_BEER_FAILED());
-    })
+    mergeMap((action) => this.beerService.update(action.beer)).pipe(
+      map((beer) => {
+        this.feedbackService.updateSuccess('Cerveja', false);
+        return UPDATE_BEER_DONE({beer});
+      }),
+      catchError(() => {
+        this.feedbackService.errorAction('atualizar');
+        return of(UPDATE_BEER_FAILED());
+      })
+    ),
   ));
 
   sendBeerImage$ = createEffect(() => this.actions$.pipe(

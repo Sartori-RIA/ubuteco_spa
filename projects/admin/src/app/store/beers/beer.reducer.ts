@@ -2,7 +2,7 @@ import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {Beer} from '../../core/models/beer';
 import {Action, createReducer, on} from '@ngrx/store';
 import * as BeerActions from './beer.actions';
-import {UPDATE_BEER_IMAGE_PROGRESS} from "./beer.actions";
+import {UPDATE_BEER_IMAGE_PROGRESS} from './beer.actions';
 
 export const featureKey = 'beers';
 
@@ -41,11 +41,8 @@ const beerReducer = createReducer(initialState,
     loaded: true,
     currentBeer: beer
   })),
-  on(UPDATE_BEER_IMAGE_PROGRESS, (state, {progress}) => {
-    return {...state, progress};
-  })
-  )
-;
+  on(UPDATE_BEER_IMAGE_PROGRESS, (state, {progress}) => ({...state, progress}))
+);
 
 export function reducer(state: BeerState | undefined, action: Action): BeerState {
   return beerReducer(state, action);

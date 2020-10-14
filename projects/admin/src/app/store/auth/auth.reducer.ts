@@ -17,22 +17,14 @@ const initialState: AuthState = {
 };
 
 const authReducer = createReducer(initialState,
-  on(SIGN_IN_DONE, (state, {user}) => {
-    return {
-      ...state,
-      user,
-      errors: undefined
-    };
-  }),
-  on(SIGN_OUT, (state) => {
-    return {...state, user: undefined, token: undefined, errors: undefined};
-  }),
-  on(ALREADY_LOGGED_IN, (state, {token}) => {
-    return {...state, token};
-  }),
-  on(SIGN_IN_REFUSED, (state, {errors}) => {
-    return {...state, errors: errors.error};
-  })
+  on(SIGN_IN_DONE, (state, {user}) => ({
+    ...state,
+    user,
+    errors: undefined
+  })),
+  on(SIGN_OUT, (state) => ({...state, user: undefined, token: undefined, errors: undefined})),
+  on(ALREADY_LOGGED_IN, (state, {token}) => ({...state, token})),
+  on(SIGN_IN_REFUSED, (state, {errors}) => ({...state, errors: errors.error}))
 );
 
 export function reducer(state: AuthState | undefined, action: Action): AuthState {

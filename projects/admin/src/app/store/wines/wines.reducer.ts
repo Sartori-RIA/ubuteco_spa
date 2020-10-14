@@ -47,11 +47,8 @@ const winesReducer = createReducer(initialState,
     loaded: true,
     currentWine: wine
   })),
-  on(UPDATE_WINE_IMAGE_PROGRESS, (state, {progress}) => {
-    return {...state, progress};
-  })
-  )
-;
+  on(UPDATE_WINE_IMAGE_PROGRESS, (state, {progress}) => ({...state, progress}))
+);
 
 export function reducer(state: WineState | undefined, action: Action): WineState {
   return winesReducer(state, action);

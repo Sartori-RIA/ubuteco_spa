@@ -16,19 +16,17 @@ const profileInitialState: UserState = {
 };
 
 const userReducer = createReducer(profileInitialState,
-  on(LOAD_USER_DONE, UPDATE_USER_DONE, (state, {user}) => {
-    return {
+  on(LOAD_USER_DONE, UPDATE_USER_DONE, (state, {user}) => ({
       ...state,
       user,
       theme: user?.theme,
-    };
-  }),
-  on(THEME_LOADED, UPDATE_THEME_DONE, (state, {theme}) => {
-    return {
+    })
+  ),
+  on(THEME_LOADED, UPDATE_THEME_DONE, (state, {theme}) => ({
       ...state,
       theme,
-    };
-  }),
+    })
+  ),
 );
 
 export function reducer(state: UserState | undefined, action: Action): UserState {

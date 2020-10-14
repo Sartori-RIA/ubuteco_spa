@@ -34,22 +34,24 @@ export class FoodEffects {
     ofType(REQUEST_ALL_FOODS),
     withLatestFrom(this.store.pipe(select(selectAllFoodsLoaded))),
     filter(([action, allFoodsLoaded]) => !allFoodsLoaded),
-    mergeMap(() => this.foodService.all()),
-    map((foods: Food[]) => REQUEST_ALL_FOODS_DONE({foods})),
-    catchError(() => {
-      this.feedbackService.errorAction('recuperar', true);
-      return of(REQUEST_ALL_FOODS_FAILED());
-    })
+    mergeMap(() => this.foodService.all()).pipe(
+      map((foods: Food[]) => REQUEST_ALL_FOODS_DONE({foods})),
+      catchError(() => {
+        this.feedbackService.errorAction('recuperar', true);
+        return of(REQUEST_ALL_FOODS_FAILED());
+      })
+    ),
   ));
 
   fetchFoodById$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_FOOD),
-    mergeMap((action) => this.foodService.show(action.id)),
-    map((food: Food) => REQUEST_FOOD_DONE({food})),
-    catchError(() => {
-      this.feedbackService.errorAction('recuperar');
-      return of(REQUEST_FOOD_FAILED());
-    })
+    mergeMap((action) => this.foodService.show(action.id)).pipe(
+      map((food) => REQUEST_FOOD_DONE({food})),
+      catchError(() => {
+        this.feedbackService.errorAction('recuperar');
+        return of(REQUEST_FOOD_FAILED());
+      })
+    ),
   ));
 
   removeFood$ = createEffect(() => this.actions$.pipe(
@@ -70,28 +72,30 @@ export class FoodEffects {
 
   addFood$ = createEffect(() => this.actions$.pipe(
     ofType(CREATE_FOOD),
-    mergeMap((action) => this.foodService.create(action.food)),
-    map((food: Food) => {
-      this.feedbackService.createSuccess('Alimento');
-      return CREATE_FOOD_DONE({food});
-    }),
-    catchError(() => {
-      this.feedbackService.errorAction('criar');
-      return of(CREATE_FOOD_FAILED());
-    })
+    mergeMap((action) => this.foodService.create(action.food)).pipe(
+      map((food) => {
+        this.feedbackService.createSuccess('Alimento');
+        return CREATE_FOOD_DONE({food});
+      }),
+      catchError(() => {
+        this.feedbackService.errorAction('criar');
+        return of(CREATE_FOOD_FAILED());
+      })
+    ),
   ));
 
   updateFood$ = createEffect(() => this.actions$.pipe(
     ofType(UPDATE_FOOD),
-    mergeMap((action) => this.foodService.update(action.food)),
-    map((food: Food) => {
-      this.feedbackService.updateSuccess('Alimento');
-      return UPDATE_FOOD_DONE({food});
-    }),
-    catchError(() => {
-      this.feedbackService.errorAction('atualizar');
-      return of(UPDATE_FOOD_FAILED());
-    })
+    mergeMap((action) => this.foodService.update(action.food)).pipe(
+      map((food) => {
+        this.feedbackService.updateSuccess('Alimento');
+        return UPDATE_FOOD_DONE({food});
+      }),
+      catchError(() => {
+        this.feedbackService.errorAction('atualizar');
+        return of(UPDATE_FOOD_FAILED());
+      })
+    ),
   ));
 
   constructor(private store: Store<AppState>,

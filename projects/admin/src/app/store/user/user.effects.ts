@@ -25,36 +25,40 @@ export class UserEffects {
 
   loadUser$ = createEffect(() => this.actions$.pipe(
     ofType(LOAD_USER),
-    mergeMap(() => this.userService.me()),
-    map((user) => LOAD_USER_DONE({user})),
-    catchError(() => of(LOAD_USER_FAILED()))
+    mergeMap(() => this.userService.me()).pipe(
+      map((user) => LOAD_USER_DONE({user})),
+      catchError(() => of(LOAD_USER_FAILED()))
+    ),
   ));
 
   updateUser$ = createEffect(() => this.actions$.pipe(
     ofType(UPDATE_USER),
-    mergeMap((action) => this.userService.update(action.user)),
-    map((user) => {
-      this.feedbackService.success('Perfil atualizado com sucesso!');
-      return UPDATE_USER_DONE({user});
-    }),
-    catchError(() => {
-      this.feedbackService.error('Ops, algo de estranho aconteceu ao tentar atualizar o seu perfil');
-      return of(UPDATE_USER_FAILED());
-    })
+    mergeMap((action) => this.userService.update(action.user)).pipe(
+      map((user) => {
+        this.feedbackService.success('Perfil atualizado com sucesso!');
+        return UPDATE_USER_DONE({user});
+      }),
+      catchError(() => {
+        this.feedbackService.error('Ops, algo de estranho aconteceu ao tentar atualizar o seu perfil');
+        return of(UPDATE_USER_FAILED());
+      })
+    ),
   ));
 
   updateTheme$ = createEffect(() => this.actions$.pipe(
     ofType(UPDATE_THEME),
-    mergeMap((action) => this.themeService.update(action.theme, action.user)),
-    map((theme) => UPDATE_THEME_DONE({theme})),
-    catchError(() => of(UPDATE_THEME_FAILED()))
+    mergeMap((action) => this.themeService.update(action.theme, action.user)).pipe(
+      map((theme) => UPDATE_THEME_DONE({theme})),
+      catchError(() => of(UPDATE_THEME_FAILED()))
+    ),
   ));
 
   loadTheme$ = createEffect(() => this.actions$.pipe(
     ofType(THEME_REQUESTED),
-    mergeMap((action) => this.themeService.show(action.user.theme_id)),
-    map((theme) => THEME_LOADED({theme})),
-    catchError(() => of(THEME_FAILED()))
+    mergeMap((action) => this.themeService.show(action.user.theme_id)).pipe(
+      map((theme) => THEME_LOADED({theme})),
+      catchError(() => of(THEME_FAILED()))
+    ),
   ));
 
   constructor(private actions$: Actions,
