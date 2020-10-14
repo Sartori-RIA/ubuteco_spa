@@ -18,3 +18,8 @@ export const selectOrderItemTotalOfItems = createSelector(
   selectOrderItemState,
   fromReducer.selectTotal,
 );
+
+export const selectOrderItemLoading = createSelector(
+  selectOrderItemState,
+  (state) => state.loading
+);

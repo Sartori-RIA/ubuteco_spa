@@ -23,3 +23,8 @@ export const selectPreCreatedOrder = createSelector(
   selectOrderState,
   (state) => state.preCreatedOrder
 );
+
+export const selectOrderLoading = createSelector(
+  selectOrderState,
+  (state) => state.loading
+);
