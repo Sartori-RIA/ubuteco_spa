@@ -12,13 +12,15 @@ import {Action, createReducer, on} from '@ngrx/store';
 export const beerStyleFeatureKey = 'beer-styles';
 
 export interface BeerStyleState extends EntityState<BeerStyle> {
-  loaded?: boolean;
+  loaded: boolean;
+  loading: boolean;
 }
 
 const adapter: EntityAdapter<BeerStyle> = createEntityAdapter<BeerStyle>();
 
 const initialState: BeerStyleState = adapter.getInitialState({
-  loaded: false
+  loaded: false,
+  loading: false
 });
 
 export const {

@@ -28,3 +28,8 @@ export const selectSignInErrors = createSelector(
   authFeatureSelector,
   (state) => state.errors
 );
+
+export const selectAuthLoading = createSelector(
+  authFeatureSelector,
+  (state) => state.loading
+);
