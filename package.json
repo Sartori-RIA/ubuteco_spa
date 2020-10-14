@@ -64,7 +64,7 @@
     "npm": "^6.14.2",
     "perfect-scrollbar": "^1.5.0",
     "quill": "^1.3.7",
-    "rxjs": "~6.5.4",
+    "rxjs": "~6.6.3",
     "rxjs-compat": "^6.5.4",
     "tinycolor2": "^1.4.1",
     "tslib": "^1.10.0",
