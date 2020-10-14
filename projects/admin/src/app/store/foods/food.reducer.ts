@@ -1,12 +1,29 @@
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {Food} from '../../core/models/food';
 import {Action, createReducer, on} from '@ngrx/store';
-import * as FoodActions from './food.actions';
+import {
+  CREATE_FOOD,
+  CREATE_FOOD_DONE,
+  CREATE_FOOD_FAILED,
+  REMOVE_FOOD,
+  REMOVE_FOOD_DONE,
+  REMOVE_FOOD_FAILED,
+  REQUEST_ALL_FOODS,
+  REQUEST_ALL_FOODS_DONE,
+  REQUEST_ALL_FOODS_FAILED,
+  REQUEST_FOOD,
+  REQUEST_FOOD_DONE,
+  REQUEST_FOOD_FAILED,
+  UPDATE_FOOD,
+  UPDATE_FOOD_DONE,
+  UPDATE_FOOD_FAILED
+} from './food.actions';
 
 export const featureKey = 'food';
 
 export interface FoodState extends EntityState<Food> {
   loaded: boolean;
+  loading: boolean;
 }
 
 const adapter: EntityAdapter<Food> = createEntityAdapter<Food>();
@@ -16,23 +33,40 @@ export const {
 } = adapter.getSelectors();
 
 
-const initialState: FoodState = adapter.getInitialState({loaded: false});
+const initialState: FoodState = adapter.getInitialState({
+  loaded: false,
+  loading: false
+});
 
 export const foodReducer = createReducer(initialState,
-  on(FoodActions.REMOVE_FOOD_DONE, (state: FoodState, {id}) =>
-    adapter.removeOne(id.toString(), {...state, loaded: true})
+  on(REQUEST_ALL_FOODS,
+    REQUEST_FOOD,
+    REMOVE_FOOD,
+    UPDATE_FOOD,
+    CREATE_FOOD,
+    (state) => ({...state, loading: true})
   ),
-  on(FoodActions.REQUEST_ALL_FOODS_DONE, (state: FoodState, {foods}) =>
-    adapter.addAll(foods, {...state, loaded: true})
+  on(REQUEST_ALL_FOODS_FAILED,
+    REQUEST_FOOD_FAILED,
+    REMOVE_FOOD_FAILED,
+    UPDATE_FOOD_FAILED,
+    CREATE_FOOD_FAILED,
+    (state) => ({...state, loading: false})
   ),
-  on(FoodActions.REQUEST_FOOD_DONE, (state: FoodState, {food}) =>
-    adapter.addOne(food, {...state, loaded: true})
+  on(REMOVE_FOOD_DONE, (state: FoodState, {id}) =>
+    adapter.removeOne(id.toString(), {...state, loaded: true, loading: false})
   ),
-  on(FoodActions.UPDATE_FOOD_DONE, (state: FoodState, {food}) =>
-    adapter.upsertOne(food, {...state, loaded: true})
+  on(REQUEST_ALL_FOODS_DONE, (state: FoodState, {foods}) =>
+    adapter.addMany(foods, {...state, loaded: true, loading: false})
   ),
-  on(FoodActions.CREATE_FOOD_DONE, (state: FoodState, {food}) =>
-    adapter.addOne(food, {...state, loaded: true})
+  on(REQUEST_FOOD_DONE, (state: FoodState, {food}) =>
+    adapter.addOne(food, {...state, loaded: true, loading: false})
+  ),
+  on(UPDATE_FOOD_DONE, (state: FoodState, {food}) =>
+    adapter.upsertOne(food, {...state, loaded: true, loading: false})
+  ),
+  on(CREATE_FOOD_DONE, (state: FoodState, {food}) =>
+    adapter.addOne(food, {...state, loaded: true, loading: false})
   ),
 );
 

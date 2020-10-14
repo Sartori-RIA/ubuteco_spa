@@ -48,4 +48,4 @@ export const selectDrinksTotal = createSelector(
 export const selectDrinksLoading = createSelector(
   selectDrinkState,
   (state) => state.loading
-)
+);
