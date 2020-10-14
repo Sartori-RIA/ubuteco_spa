@@ -29,7 +29,7 @@ export const REMOVE_DRINK_DONE = createAction('[Drink/API] remove Drink by id do
   props<{ id: number }>()
 );
 
-export const UpdateDrink = createAction('[Drink/API] update Drink request',
+export const UPDATE_DRINK = createAction('[Drink/API] update Drink request',
   props<{ drink: Drink }>()
 );
 

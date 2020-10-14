@@ -9,7 +9,7 @@ import {AppState} from '../../store';
 import {REQUEST_ALL_MAKERS} from '../../store/makers/makers.actions';
 import {Drink} from '../../core/models/drink';
 import {DrinksService} from '../../core/services/api/drinks.service';
-import {CREATE_DRINK, UpdateDrink} from '../../store/drinks/drink.actions';
+import {CREATE_DRINK, UPDATE_DRINK} from '../../store/drinks/drink.actions';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MakersFormDialogComponent} from '../../makers/makers-form-dialog/makers-form-dialog.component';
 
@@ -50,7 +50,7 @@ export class FormComponent implements OnInit {
     if (this.form.valid) {
       const data = this.mountData();
       if (data.id) {
-        this.store.dispatch(UpdateDrink({drink: data}));
+        this.store.dispatch(UPDATE_DRINK({drink: data}));
       } else {
         this.store.dispatch(CREATE_DRINK({drink: data}));
       }

@@ -15,7 +15,7 @@ import {
   REQUEST_DRINK_FAILED,
   UPDATE_DRINK_DONE,
   UPDATE_DRINK_FAILED,
-  UpdateDrink
+  UPDATE_DRINK
 } from './drink.actions';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {DrinksService} from '../../core/services/api/drinks.service';
@@ -63,7 +63,7 @@ export class DrinkEffects {
   ));
 
   updateDrink$ = createEffect(() => this.actions$.pipe(
-    ofType(UpdateDrink),
+    ofType(UPDATE_DRINK),
     mergeMap((action) => this.drinkService.update(action.drink)).pipe(
       map((drink) => {
         this.feedbackService.updateSuccess('Bebida', false);
