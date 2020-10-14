@@ -8,3 +8,8 @@ export const selectAllDishesToMake = createSelector(
   selectKitchenState,
   fromKitchen.selectAll
 );
+
+export const selectKitchensLoading = createSelector(
+  selectKitchenState,
+  (state) => state.loading
+);
