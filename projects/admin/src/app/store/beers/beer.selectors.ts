@@ -1,17 +1,17 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import * as fromBeers from './beer.reducer';
-import {featureKey, BeerState} from './beer.reducer';
+import {BeerState, featureKey} from './beer.reducer';
 import {compare} from '../../shared/util/util';
 
-export const selectAllBeersState = createFeatureSelector<BeerState>(featureKey);
+export const selectBeersState = createFeatureSelector<BeerState>(featureKey);
 
 export const selectAllBeers = createSelector(
-  selectAllBeersState,
+  selectBeersState,
   fromBeers.selectAll
 );
 
 export const selectBeerById = (id: number) => createSelector(
-  selectAllBeersState,
+  selectBeersState,
   (beers: BeerState) => beers.entities[id]
 );
 
@@ -36,16 +36,21 @@ export const selectAllBeersOrderedByStyle = (isAsc: boolean) => createSelector(
 );
 
 export const selectAllBeersLoaded = createSelector(
-  selectAllBeersState,
+  selectBeersState,
   (state) => state.loaded
 );
 
 export const selectCurrentBeer = createSelector(
-  selectAllBeersState,
+  selectBeersState,
   (state) => state.currentBeer
 );
 
 export const selectCurrentProgress = createSelector(
-  selectAllBeersState,
+  selectBeersState,
   (state) => state.progress
+);
+
+export const selectBeerLoading = createSelector(
+  selectBeersState,
+  (state) => state.loading
 );
