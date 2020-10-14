@@ -1,8 +1,16 @@
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {
+  ADD_BEER_STYLE,
   ADD_BEER_STYLE_DONE,
+  ADD_BEER_STYLE_FAILED,
+  DELETE_BEER_STYLE,
   DELETE_BEER_STYLE_DONE,
-  REQUEST_ALL_BEER_STYLES_DONE, UPDATE_BEER_STYLE_DONE,
+  DELETE_BEER_STYLE_FAILED,
+  REQUEST_ALL_BEER_STYLES,
+  REQUEST_ALL_BEER_STYLES_DONE,
+  REQUEST_ALL_BEER_STYLES_FAILED,
+  UPDATE_BEER_STYLE,
+  UPDATE_BEER_STYLE_DONE,
   UPDATE_BEER_STYLE_FAILED
 } from './beer-styles.actions';
 
@@ -28,10 +36,25 @@ export const {
 } = adapter.getSelectors();
 
 const beerStyleReducer = createReducer(initialState,
-  on(REQUEST_ALL_BEER_STYLES_DONE, (state, {beerStyles}) => adapter.upsertMany(beerStyles, {...state, loaded: true})),
-  on(ADD_BEER_STYLE_DONE, (state, {style}) => adapter.addOne(style, {...state, loaded: true})),
-  on(DELETE_BEER_STYLE_DONE, (state, {id}) => adapter.removeOne(id, state)),
-  on(UPDATE_BEER_STYLE_DONE, (state, {style}) => adapter.upsertOne(style, state))
+  on(REQUEST_ALL_BEER_STYLES,
+    ADD_BEER_STYLE,
+    UPDATE_BEER_STYLE,
+    DELETE_BEER_STYLE,
+    (state) => ({
+      ...state,
+      loading: true
+    })),
+  on(REQUEST_ALL_BEER_STYLES_FAILED, ADD_BEER_STYLE_FAILED, UPDATE_BEER_STYLE_FAILED, DELETE_BEER_STYLE_FAILED,
+    (state) => ({...state, loading: false})
+  ),
+  on(REQUEST_ALL_BEER_STYLES_DONE, (state, {beerStyles}) => adapter.upsertMany(beerStyles, {
+    ...state,
+    loaded: true,
+    loading: false
+  })),
+  on(ADD_BEER_STYLE_DONE, (state, {style}) => adapter.addOne(style, {...state, loaded: true, loading: false})),
+  on(DELETE_BEER_STYLE_DONE, (state, {id}) => adapter.removeOne(id, {...state, loading: false})),
+  on(UPDATE_BEER_STYLE_DONE, (state, {style}) => adapter.upsertOne(style, {...state, loading: false}))
 );
 
 export function reducer(state: BeerStyleState | undefined, action: Action): BeerStyleState {

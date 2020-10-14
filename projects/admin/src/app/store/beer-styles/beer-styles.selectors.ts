@@ -3,20 +3,20 @@ import * as fromBeerStyles from './beer-styles.reducer';
 import {beerStyleFeatureKey, BeerStyleState} from './beer-styles.reducer';
 import {compare} from '../../shared/util/util';
 
-export const selectAllBeerStylesState = createFeatureSelector<BeerStyleState>(beerStyleFeatureKey);
+export const selectBeerStylesState = createFeatureSelector<BeerStyleState>(beerStyleFeatureKey);
 
 export const selectAllBeerStyles = createSelector(
-  selectAllBeerStylesState,
+  selectBeerStylesState,
   fromBeerStyles.selectAll
 );
 
 export const selectBeerStyleById = (id: number) => createSelector(
-  selectAllBeerStylesState,
+  selectBeerStylesState,
   (state) => state.entities[id]
 );
 
 export const selectAllBeerStylesLoaded = createSelector(
-  selectAllBeerStylesState,
+  selectBeerStylesState,
   (state) => state.loaded
 );
 
@@ -34,4 +34,9 @@ export const selectBeerStylesOrderedById = (isAsc: boolean) => createSelector(
 export const selectBeerStyleByName = (name: string) => createSelector(
   selectBeerStylesOrderedByName(true),
   (styles) => styles.filter((style) => style.name.toLocaleLowerCase().includes(name))
+);
+
+export const selectBeerStyleLoading = createSelector(
+  selectBeerStylesState,
+  (state) => state.loading
 );
