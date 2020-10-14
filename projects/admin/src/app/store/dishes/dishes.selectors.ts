@@ -35,3 +35,8 @@ export const selectAllDishesLoaded = createSelector(
   (state) => state.loaded
 );
 
+
+export const selectDishesLoading = createSelector(
+  selectDishesState,
+  (state) => state.loading
+);
