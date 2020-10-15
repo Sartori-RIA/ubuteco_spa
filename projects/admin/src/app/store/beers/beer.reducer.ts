@@ -2,6 +2,7 @@ import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {Beer} from '../../core/models/beer';
 import {Action, createReducer, on} from '@ngrx/store';
 import {
+  BEERS_ALREADY_LOADED,
   CREATE_BEER,
   CREATE_BEER_DONE,
   CREATE_BEER_FAILED,
@@ -14,6 +15,9 @@ import {
   REQUEST_BEER,
   REQUEST_BEER_DONE,
   REQUEST_BEER_FAILED,
+  SEARCH_BEERS,
+  SEARCH_BEERS_DONE,
+  SEARCH_BEERS_FAIL,
   UPDATE_BEER,
   UPDATE_BEER_DONE,
   UPDATE_BEER_FAILED
@@ -48,6 +52,7 @@ const beerReducer = createReducer(initialState,
     REMOVE_BEER,
     UPDATE_BEER,
     CREATE_BEER,
+    SEARCH_BEERS,
     (state) => ({...state, loading: false})
   ),
   on(REQUEST_ALL_BEERS_FAILED,
@@ -55,8 +60,10 @@ const beerReducer = createReducer(initialState,
     REMOVE_BEER_FAILED,
     UPDATE_BEER_FAILED,
     CREATE_BEER_FAILED,
+    SEARCH_BEERS_FAIL,
     (state) => ({...state, loading: false})
   ),
+  on(BEERS_ALREADY_LOADED, (state) => ({...state, loading: false})),
   on(REMOVE_BEER_DONE, (state, {id}) => adapter.removeOne(id.toString(), {...state, loaded: true, loading: false})),
   on(REQUEST_BEER_DONE, (state, {beer}) => adapter.addOne(beer, {...state, loaded: true, loading: false})),
   on(REQUEST_ALL_BEERS_DONE, (state, {beers}) => adapter.upsertMany(beers, {...state, loaded: true, loading: false})),
@@ -72,6 +79,11 @@ const beerReducer = createReducer(initialState,
     currentBeer: beer,
     loading: false
   })),
+  on(SEARCH_BEERS_DONE, (state, {data}) => adapter.setAll(data, {
+    ...state,
+    total: data.length,
+    loading: false
+  }))
 );
 
 export function reducer(state: BeerState | undefined, action: Action): BeerState {

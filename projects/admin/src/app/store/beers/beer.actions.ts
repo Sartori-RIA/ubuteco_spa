@@ -1,32 +1,53 @@
 import {createAction, props} from '@ngrx/store';
 import {Beer} from '../../core/models/beer';
 
-export const REQUEST_ALL_BEERS = createAction('[Beers/API] request all beers');
+export const REQUEST_ALL_BEERS = createAction('[Beers/API] find all', props<{
+  page: string,
+  force?: boolean
+}>());
 
-export const REQUEST_ALL_BEERS_FAILED = createAction('[Beers/API] request all beers failed');
+export const REQUEST_ALL_BEERS_FAILED = createAction('[Beers/API] find all failed');
 
-export const REQUEST_ALL_BEERS_DONE = createAction('[Beers/API] request all beers done', props<{ beers: Beer[] }>());
+export const REQUEST_ALL_BEERS_DONE = createAction('[Beers/API] find all done', props<{ beers: Beer[], total: number }>());
 
-export const REQUEST_BEER = createAction('[Beer/API] request beer by id', props<{ id: number }>());
+export const REQUEST_BEER = createAction('[Beer/API] find by id', props<{ id: number }>());
 
-export const REQUEST_BEER_FAILED = createAction('[Beer/API] request beer by id failed');
+export const REQUEST_BEER_FAILED = createAction('[Beer/API] find by id failed');
 
-export const REQUEST_BEER_DONE = createAction('[Beer/API] request beer by id done', props<{ beer: Beer }>());
+export const REQUEST_BEER_DONE = createAction('[Beer/API] find by id done', props<{ beer: Beer }>());
 
-export const REMOVE_BEER = createAction('[Beer/API] remove beer by id', props<{ id: number }>());
+export const REMOVE_BEER = createAction('[Beer/API] delete', props<{ id: number }>());
 
-export const REMOVE_BEER_FAILED = createAction('[Beer/API] remove beer by id failed');
+export const REMOVE_BEER_FAILED = createAction('[Beer/API] delete failed');
 
-export const REMOVE_BEER_DONE = createAction('[Beer/API] remove beer by id done', props<{ id: number }>());
+export const REMOVE_BEER_DONE = createAction('[Beer/API] delete done', props<{ id: number }>());
 
-export const UPDATE_BEER = createAction('[Beer/API] update beer request', props<{ beer: Beer }>());
+export const UPDATE_BEER = createAction('[Beer/API] update', props<{ beer: Beer }>());
 
-export const UPDATE_BEER_FAILED = createAction('[Beer/API] update beer request failed');
+export const UPDATE_BEER_FAILED = createAction('[Beer/API] update failed');
 
-export const UPDATE_BEER_DONE = createAction('[Beer/API] update beer request done', props<{ beer: Beer }>());
+export const UPDATE_BEER_DONE = createAction('[Beer/API] update done', props<{ beer: Beer }>());
 
-export const CREATE_BEER = createAction('[Beer/API] add new beer', props<{ beer: Beer }>());
+export const CREATE_BEER = createAction('[Beer/API] create', props<{ beer: Beer }>());
 
-export const CREATE_BEER_DONE = createAction('[Beer/API] add new beer done', props<{ beer: Beer }>());
+export const CREATE_BEER_DONE = createAction('[Beer/API] create done', props<{ beer: Beer }>());
 
-export const CREATE_BEER_FAILED = createAction('[Beer/API] add new beer failed');
+export const CREATE_BEER_FAILED = createAction('[Beer/API] create failed');
+
+export const SEARCH_BEERS = createAction(
+  '[BEERS/API] search',
+  props<{ search: string }>()
+);
+
+export const SEARCH_BEERS_DONE = createAction(
+  '[BEERS/API] search done',
+  props<{ data: Beer[] }>()
+);
+
+export const SEARCH_BEERS_FAIL = createAction(
+  '[BEERS/API] search fail',
+);
+
+export const BEERS_ALREADY_LOADED = createAction(
+  '[BEERS/API] already loaded'
+);

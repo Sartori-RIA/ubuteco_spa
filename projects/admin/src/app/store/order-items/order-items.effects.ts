@@ -27,16 +27,13 @@ export class OrderItemsEffects {
     mergeMap((action) => this.ordersService
       .allItems(action.order_id)
       .pipe(
-        map((response) => {
-          return {items: [...response], order_id: action.order_id};
-        })
+        map((response) => ({items: [...response], order_id: action.order_id})),
+        map((response) => REQUEST_ORDER_ITEMS_DONE({
+          items: response.items,
+          order_id: response.order_id
+        })),
+        catchError((err) => of(REQUEST_ORDER_ITEMS_FAILED()))
       )
-    ).pipe(
-      map((response) => REQUEST_ORDER_ITEMS_DONE({
-        items: response.items,
-        order_id: response.order_id
-      })),
-      catchError((err) => of(REQUEST_ORDER_ITEMS_FAILED()))
     ),
   ));
 
@@ -44,9 +41,9 @@ export class OrderItemsEffects {
   updateOrderItem$ = createEffect(() => this.actions$.pipe(
     ofType(UPDATE_ORDER_ITEM),
     mergeMap((action) => this.ordersService.updateItem({
-      orderId: action.order_id,
-      item: action.item
-    })).pipe(
+        orderId: action.order_id,
+        item: action.item
+      }).pipe(
       map((item) => {
         this.feedback.success('Item atualizado ao pedido com sucesso');
         return UPDATE_ORDER_ITEM_DONE({item});
@@ -55,7 +52,8 @@ export class OrderItemsEffects {
         this.feedback.error('Falhou ao atualizar o item ao pedido');
         return of(UPDATE_ORDER_ITEM_FAILED());
       })
-    ),
+      ),
+    )
   ));
 
   destroyOrderItem$ = createEffect(() => this.actions$.pipe(
@@ -78,9 +76,9 @@ export class OrderItemsEffects {
   addOrderItem$ = createEffect(() => this.actions$.pipe(
     ofType(ADD_ORDER_ITEM),
     mergeMap((action) => this.ordersService.addItem({
-      orderId: action.order_id,
-      data: action.data,
-    })).pipe(
+        orderId: action.order_id,
+        data: action.data,
+      }).pipe(
       map((item) => {
         this.feedback.createSuccess('Item no pedido', true);
         return ADD_ORDER_ITEM_DONE({item});
@@ -89,7 +87,8 @@ export class OrderItemsEffects {
         this.feedback.error('Falhou ao adicionar o item ao pedido');
         return of(ADD_ORDER_ITEM_FAILED());
       })
-    ),
+      ),
+    )
   ));
 
   constructor(private actions$: Actions,

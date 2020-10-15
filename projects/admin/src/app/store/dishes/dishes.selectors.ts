@@ -1,6 +1,6 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import * as fromSnacks from './dishes.reducer';
-import {featureKey, DishesState} from './dishes.reducer';
+import {DishesState, featureKey} from './dishes.reducer';
 import {compare} from '../../shared/util/util';
 
 export const selectDishesState = createFeatureSelector<DishesState>(featureKey);

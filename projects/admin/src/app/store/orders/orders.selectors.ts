@@ -1,6 +1,6 @@
 import * as fromOrders from './order.reducer';
-import { OrderState } from './order.reducer';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import {OrderState} from './order.reducer';
+import {createFeatureSelector, createSelector} from '@ngrx/store';
 
 export const selectOrderState = createFeatureSelector<OrderState>(fromOrders.featureKey);
 

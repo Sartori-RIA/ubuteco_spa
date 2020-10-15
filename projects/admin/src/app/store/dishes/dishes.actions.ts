@@ -1,50 +1,71 @@
 import {createAction, props} from '@ngrx/store';
 import {Dish} from '../../core/models/dish';
 
-export const REQUEST_ALL_DISHES = createAction('[RestaurantMenus/API] request all RestaurantMenus');
+export const REQUEST_ALL_DISHES = createAction('[DISH/API] find all', props<{
+  page: string,
+  force?: boolean
+}>());
 
-export const REQUEST_ALL_DISHES_FAILED = createAction('[RestaurantMenus/API] request all RestaurantMenus failed');
+export const REQUEST_ALL_DISHES_FAILED = createAction('[DISH/API] find all failed');
 
-export const REQUEST_ALL_DISHES_DONE = createAction('[RestaurantMenus/API] request all RestaurantMenus done',
+export const REQUEST_ALL_DISHES_DONE = createAction('[DISH/API] find all done',
   props<{ data: Dish[] }>()
 );
 
-export const REQUEST_DISH = createAction('[dishe/API] request dishe by id',
+export const REQUEST_DISH = createAction('[DISH/API] find by id',
   props<{ id: number }>()
 );
 
-export const REQUEST_DISH_FAILED = createAction('[dishe/API] request dishe by id failed');
+export const REQUEST_DISH_FAILED = createAction('[DISH/API] find by id failed');
 
-export const REQUEST_DISH_DONE = createAction('[dishe/API] request dishe by id done',
+export const REQUEST_DISH_DONE = createAction('[DISH/API] find by id done',
   props<{ data: Dish }>()
 );
 
-export const REMOVE_DISH = createAction('[dishe/API] remove dishe by id',
+export const REMOVE_DISH = createAction('[DISH/API] find by id',
   props<{ id: number }>()
 );
 
-export const REMOVE_DISH_FAILED = createAction('[dishe/API] remove dishe by id failed');
+export const REMOVE_DISH_FAILED = createAction('[DISH/API] find by id failed');
 
-export const REMOVE_DISH_DONE = createAction('[dishe/API] remove dishe by id done',
+export const REMOVE_DISH_DONE = createAction('[DISH/API] find by id done',
   props<{ id: number }>()
 );
 
-export const UPDATE_DISH = createAction('[dishe/API] update dishe request',
+export const UPDATE_DISH = createAction('[DISH/API] update',
   props<{ data: Dish }>()
 );
 
-export const UPDATE_DISH_FAILED = createAction('[dishe/API] update dishe request failed');
+export const UPDATE_DISH_FAILED = createAction('[DISH/API] update failed');
 
-export const UPDATE_DISH_DONE = createAction('[dishe/API] update dishe request done',
+export const UPDATE_DISH_DONE = createAction('[DISH/API] update done',
   props<{ data: Dish }>()
 );
 
-export const CREATE_DISH = createAction('[dishe/API] add new dishe',
+export const CREATE_DISH = createAction('[DISH/API] create',
   props<{ data: Dish }>()
 );
 
-export const CREATE_DISH_DONE = createAction('[dishe/API] add new dishe done',
+export const CREATE_DISH_DONE = createAction('[DISH/API] create done',
   props<{ data: Dish }>()
 );
 
-export const CREATE_DISH_FAILED = createAction('[dishe/API] add new dishe failed');
+export const CREATE_DISH_FAILED = createAction('[DISH/API] create failed');
+
+export const SEARCH_DISHES = createAction(
+  '[DISH/API] search',
+  props<{ search: string }>()
+);
+
+export const SEARCH_DISHES_DONE = createAction(
+  '[DISH/API] search done',
+  props<{ data: Dish[] }>()
+);
+
+export const SEARCH_DISHES_FAIL = createAction(
+  '[DISH/API] search fail',
+);
+
+export const DISH_ALREADY_LOADED = createAction(
+  '[DISH/API] already loaded'
+);

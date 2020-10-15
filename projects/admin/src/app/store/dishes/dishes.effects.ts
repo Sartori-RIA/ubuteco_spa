@@ -1,15 +1,23 @@
-import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, filter, map, mergeMap, withLatestFrom } from 'rxjs/operators';
-import { of } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Actions, createEffect, ofType} from '@ngrx/effects';
+import {catchError, filter, map, mergeMap, withLatestFrom} from 'rxjs/operators';
+import {of} from 'rxjs';
 import {
-  CREATE_DISH, CREATE_DISH_DONE, CREATE_DISH_FAILED,
-  REMOVE_DISH, REMOVE_DISH_DONE, REMOVE_DISH_FAILED,
+  CREATE_DISH,
+  CREATE_DISH_DONE,
+  CREATE_DISH_FAILED,
+  REMOVE_DISH,
+  REMOVE_DISH_DONE,
+  REMOVE_DISH_FAILED,
   REQUEST_ALL_DISHES,
   REQUEST_ALL_DISHES_DONE,
   REQUEST_ALL_DISHES_FAILED,
   REQUEST_DISH,
-  REQUEST_DISH_DONE, REQUEST_DISH_FAILED, UPDATE_DISH, UPDATE_DISH_DONE, UPDATE_DISH_FAILED
+  REQUEST_DISH_DONE,
+  REQUEST_DISH_FAILED,
+  UPDATE_DISH,
+  UPDATE_DISH_DONE,
+  UPDATE_DISH_FAILED
 } from './dishes.actions';
 import {select, Store} from '@ngrx/store';
 import {selectAllDishesLoaded} from './dishes.selectors';
@@ -25,24 +33,28 @@ export class DishesEffects {
     ofType(REQUEST_ALL_DISHES),
     withLatestFrom(this.store.pipe(select(selectAllDishesLoaded))),
     filter(([action, allRestaurantMenusLoaded]) => !allRestaurantMenusLoaded),
-    mergeMap(() => this.dishesService.all()).pipe(
-      map((data) => REQUEST_ALL_DISHES_DONE({data})),
-      catchError(() => {
-        this.feedbackService.errorAction('recuperar', true);
-        return of(REQUEST_ALL_DISHES_FAILED());
-      })
-    ),
+    mergeMap(() => this.dishesService.all()
+      .pipe(
+        map((data) => REQUEST_ALL_DISHES_DONE({data})),
+        catchError(() => {
+          this.feedbackService.errorAction('recuperar', true);
+          return of(REQUEST_ALL_DISHES_FAILED());
+        })
+      ),
+    )
   ));
 
 
   fetchDishById$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_DISH),
-    mergeMap(action => this.dishesService.show(action.id)).pipe(
-      map((data) => REQUEST_DISH_DONE({data})),
-      catchError(() => {
-        this.feedbackService.errorAction('recuperar');
-        return of(REQUEST_DISH_FAILED());
-      })
+    mergeMap(action => this.dishesService.show(action.id)
+      .pipe(
+        map((data) => REQUEST_DISH_DONE({data})),
+        catchError(() => {
+          this.feedbackService.errorAction('recuperar');
+          return of(REQUEST_DISH_FAILED());
+        })
+      )
     ),
   ));
 
@@ -64,33 +76,35 @@ export class DishesEffects {
 
   addDish$ = createEffect(() => this.actions$.pipe(
     ofType(CREATE_DISH),
-    mergeMap(action => this.dishesService.create(action.data)).pipe(
-      map(data => {
-        this.feedbackService.createSuccess('Item do Cardápio');
-        this.router.navigate(['/cardapio/list']);
-        return CREATE_DISH_DONE({data});
-      }),
-      catchError(() => {
-        this.feedbackService.errorAction('criar');
-        return of(CREATE_DISH_FAILED());
-      })
+    mergeMap(action => this.dishesService.create(action.data)
+      .pipe(
+        map(data => {
+          this.feedbackService.createSuccess('Item do Cardápio');
+          this.router.navigate(['/cardapio/list']);
+          return CREATE_DISH_DONE({data});
+        }),
+        catchError(() => {
+          this.feedbackService.errorAction('criar');
+          return of(CREATE_DISH_FAILED());
+        })
+      )
     ),
   ));
 
   updateDish$ = createEffect(() => this.actions$.pipe(
     ofType(UPDATE_DISH),
-    mergeMap(action =>
-      this.dishesService.update(action.data)
-    ).pipe(
-      map(data => {
-        this.feedbackService.updateSuccess('Item do Cardápio');
-        this.router.navigate(['/cardapio/list']);
-        return UPDATE_DISH_DONE({data});
-      }),
-      catchError(() => {
-        this.feedbackService.errorAction('remover');
-        return of(UPDATE_DISH_FAILED());
-      })
+    mergeMap(action => this.dishesService.update(action.data)
+      .pipe(
+        map(data => {
+          this.feedbackService.updateSuccess('Item do Cardápio');
+          this.router.navigate(['/cardapio/list']);
+          return UPDATE_DISH_DONE({data});
+        }),
+        catchError(() => {
+          this.feedbackService.errorAction('remover');
+          return of(UPDATE_DISH_FAILED());
+        })
+      )
     ),
   ));
 

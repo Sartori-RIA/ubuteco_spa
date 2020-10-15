@@ -1,6 +1,6 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import * as fromDrinks from './drink.reducer';
-import {featureKey, DrinkState} from './drink.reducer';
+import {DrinkState, featureKey} from './drink.reducer';
 import {compare} from '../../shared/util/util';
 
 export const selectDrinkState = createFeatureSelector<DrinkState>(featureKey);

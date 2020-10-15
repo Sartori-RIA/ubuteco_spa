@@ -12,9 +12,10 @@ export class AuthEffects {
 
   signIn$ = createEffect(() => this.actions$.pipe(
     ofType(SIGN_IN),
-    mergeMap((action) => this.authService.onSignIn(action.user).pipe(
-      map((user) => SIGN_IN_DONE({user})),
-      catchError((err) => of(SIGN_IN_REFUSED({errors: err.error})))
+    mergeMap((action) => this.authService.onSignIn(action.user)
+      .pipe(
+        map((user) => SIGN_IN_DONE({user})),
+        catchError((err) => of(SIGN_IN_REFUSED({errors: err.error})))
       )
     ),
   ));

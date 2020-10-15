@@ -1,4 +1,4 @@
-import {HttpClient, HttpEvent} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Logger} from '@ngrx/data';
 import {toFormData} from '../../../shared/util/util';
@@ -10,8 +10,8 @@ export abstract class BaseService<T extends BaseModel> {
   protected constructor(protected http: HttpClient, protected url: string, protected logger: Logger) {
   }
 
-  all(): Observable<T[]> {
-    return this.http.get<T[]>(this.url).pipe();
+  index(params?: { [key: string]: string | string[] }): Observable<HttpResponse<T[]>> {
+    return this.http.get<T[]>(this.url, {params, observe: 'response'}).pipe();
   }
 
   createWithPicture(data: T, fileName: string, file: File | Blob): Observable<HttpEvent<T>> {
@@ -25,7 +25,6 @@ export abstract class BaseService<T extends BaseModel> {
   }
 
   update(data: T): Observable<T> {
-    console.log('enviando request', data)
     return this.http.put<T>(`${this.url}/${data.id}`, data).pipe();
   }
 
@@ -40,8 +39,6 @@ export abstract class BaseService<T extends BaseModel> {
   }
 
   destroy(id: number): Observable<{ id: number }> {
-    return this.http.delete<{ id: number }>(`${this.url}/${id}`).pipe(map(() => {
-      return {id};
-    }));
+    return this.http.delete<{ id: number }>(`${this.url}/${id}`).pipe(map(() => ({id})));
   }
 }

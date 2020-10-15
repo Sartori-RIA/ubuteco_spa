@@ -13,9 +13,9 @@ import {
   REQUEST_DRINK,
   REQUEST_DRINK_DONE,
   REQUEST_DRINK_FAILED,
+  UPDATE_DRINK,
   UPDATE_DRINK_DONE,
-  UPDATE_DRINK_FAILED,
-  UPDATE_DRINK
+  UPDATE_DRINK_FAILED
 } from './drink.actions';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {DrinksService} from '../../core/services/api/drinks.service';
@@ -28,18 +28,19 @@ export class DrinkEffects {
 
   requestAllDrinks$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_ALL_DRINKS),
-    mergeMap(() => this.drinkService.all()).pipe(
+    mergeMap(() => this.drinkService.all().pipe(
       map((drinks) => REQUEST_ALL_DRINKS_DONE({drinks})),
       catchError(() => {
         this.feedbackService.errorAction('recuperar', true);
         return of(REQUEST_ALL_DRINKS_FAILED);
       })
-    ),
+      ),
+    )
   ));
 
   createDrink$ = createEffect(() => this.actions$.pipe(
     ofType(CREATE_DRINK),
-    mergeMap((action) => this.drinkService.create(action.drink)).pipe(
+    mergeMap((action) => this.drinkService.create(action.drink).pipe(
       map((drink) => {
         this.feedbackService.createSuccess('Bebida', false);
         return CREATE_DRINK_DONE({drink});
@@ -48,31 +49,36 @@ export class DrinkEffects {
         this.feedbackService.errorAction('criar');
         return of(CREATE_DRINK_FAILED);
       })
-    ),
+      ),
+    )
   ));
 
   requestBeerById$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_DRINK),
-    mergeMap((action) => this.drinkService.show(action.id)).pipe(
-      map((drink) => REQUEST_DRINK_DONE({drink})),
-      catchError(() => {
-        this.feedbackService.errorAction('recuperar');
-        return of(REQUEST_DRINK_FAILED);
-      })
-    ),
+    mergeMap((action) => this.drinkService.show(action.id)
+      .pipe(
+        map((drink) => REQUEST_DRINK_DONE({drink})),
+        catchError(() => {
+          this.feedbackService.errorAction('recuperar');
+          return of(REQUEST_DRINK_FAILED);
+        })
+      ),
+    )
   ));
 
   updateDrink$ = createEffect(() => this.actions$.pipe(
     ofType(UPDATE_DRINK),
-    mergeMap((action) => this.drinkService.update(action.drink)).pipe(
-      map((drink) => {
-        this.feedbackService.updateSuccess('Bebida', false);
-        return UPDATE_DRINK_DONE({drink});
-      }),
-      catchError(() => {
-        this.feedbackService.errorAction('atualizar');
-        return of(UPDATE_DRINK_FAILED);
-      })
+    mergeMap((action) => this.drinkService.update(action.drink)
+      .pipe(
+        map((drink) => {
+          this.feedbackService.updateSuccess('Bebida', false);
+          return UPDATE_DRINK_DONE({drink});
+        }),
+        catchError(() => {
+          this.feedbackService.errorAction('atualizar');
+          return of(UPDATE_DRINK_FAILED);
+        })
+      )
     ),
   ));
 

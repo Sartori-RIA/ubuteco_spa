@@ -8,7 +8,6 @@ import {select, Store} from '@ngrx/store';
 import {Router} from '@angular/router';
 import {TablesService} from '../../core/services/api/tables.service';
 import {AppState} from '../index';
-import {Table} from '../../core/models/table';
 import {
   CREATE_TABLE,
   CREATE_TABLE_DONE,
@@ -37,24 +36,28 @@ export class TableEffects {
     ofType(REQUEST_ALL_TABLES),
     withLatestFrom(this.store.pipe(select(selectAllTablesLoaded))),
     filter(([action, allTablesLoaded]) => !allTablesLoaded),
-    mergeMap(() => this.tableService.all()).pipe(
-      map((tables) => REQUEST_ALL_TABLES_DONE({tables})),
-      catchError(() => {
-        this.feedbackService.errorAction('recuperar', true);
-        return of(REQUEST_ALL_TABLES_FAILED());
-      })
-    ),
+    mergeMap(() => this.tableService.all()
+      .pipe(
+        map((tables) => REQUEST_ALL_TABLES_DONE({tables})),
+        catchError(() => {
+          this.feedbackService.errorAction('recuperar', true);
+          return of(REQUEST_ALL_TABLES_FAILED());
+        })
+      ),
+    )
   ));
 
   fetchTableById$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_TABLE),
-    mergeMap((action) => this.tableService.show(action.id)).pipe(
-      map((table) => REQUEST_TABLE_DONE({table})),
-      catchError(() => {
-        this.feedbackService.errorAction('recuperar');
-        return of(REQUEST_TABLE_FAILED());
-      })
-    ),
+    mergeMap((action) => this.tableService.show(action.id)
+      .pipe(
+        map((table) => REQUEST_TABLE_DONE({table})),
+        catchError(() => {
+          this.feedbackService.errorAction('recuperar');
+          return of(REQUEST_TABLE_FAILED());
+        })
+      ),
+    )
   ));
 
   removeTable$ = createEffect(() => this.actions$.pipe(
@@ -75,30 +78,34 @@ export class TableEffects {
 
   addTable$ = createEffect(() => this.actions$.pipe(
     ofType(CREATE_TABLE),
-    mergeMap((action) => this.tableService.create(action.table)).pipe(
-      map((table) => {
-        this.feedbackService.createSuccess('Mesa', false);
-        return CREATE_TABLE_DONE({table});
-      }),
-      catchError(() => {
-        this.feedbackService.errorAction('criar');
-        return of(CREATE_TABLE_FAILED());
-      })
-    ),
+    mergeMap((action) => this.tableService.create(action.table)
+      .pipe(
+        map((table) => {
+          this.feedbackService.createSuccess('Mesa', false);
+          return CREATE_TABLE_DONE({table});
+        }),
+        catchError(() => {
+          this.feedbackService.errorAction('criar');
+          return of(CREATE_TABLE_FAILED());
+        })
+      ),
+    )
   ));
 
   updateTable$ = createEffect(() => this.actions$.pipe(
     ofType(UPDATE_TABLE),
-    mergeMap((action) => this.tableService.update(action.table)).pipe(
-      map((table) => {
-        this.feedbackService.updateSuccess('Mesa', false);
-        return UPDATE_TABLE_DONE({table});
-      }),
-      catchError(() => {
-        this.feedbackService.errorAction('atualizar');
-        return of(UPDATE_TABLE_FAILED());
-      })
-    ),
+    mergeMap((action) => this.tableService.update(action.table)
+      .pipe(
+        map((table) => {
+          this.feedbackService.updateSuccess('Mesa', false);
+          return UPDATE_TABLE_DONE({table});
+        }),
+        catchError(() => {
+          this.feedbackService.errorAction('atualizar');
+          return of(UPDATE_TABLE_FAILED());
+        })
+      ),
+    )
   ));
 
   constructor(private actions$: Actions,

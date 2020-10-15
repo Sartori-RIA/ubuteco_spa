@@ -1,5 +1,5 @@
-import { createAction, props } from '@ngrx/store';
-import { ItemOrderSend, OrderItem } from '../../core/models/order';
+import {createAction, props} from '@ngrx/store';
+import {ItemOrderSend, OrderItem} from '../../core/models/order';
 
 export const REQUEST_ORDER_ITEMS = createAction('[OrderItems/API] order items requested',
   props<{ order_id: number }>()

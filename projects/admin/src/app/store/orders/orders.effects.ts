@@ -33,18 +33,22 @@ export class OrdersEffects {
     ofType(REQUEST_ALL_ORDERS),
     withLatestFrom(this.store.pipe(select(selectAllOrdersLoaded))),
     filter(([action, allLoaded]) => !allLoaded),
-    mergeMap(() => this.ordersService.all()).pipe(
-      map((orders) => REQUEST_ALL_ORDERS_DONE({orders})),
-      catchError(() => of(REQUEST_ALL_ORDERS_FAILED()))
-    ),
+    mergeMap(() => this.ordersService.all()
+      .pipe(
+        map((orders) => REQUEST_ALL_ORDERS_DONE({orders})),
+        catchError(() => of(REQUEST_ALL_ORDERS_FAILED()))
+      ),
+    )
   ));
 
   fetchOrderById$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_ORDER),
-    mergeMap((action) => this.ordersService.show(action.id)).pipe(
-      map((order) => REQUEST_ORDER_DONE({order})),
-      catchError(() => of(REQUEST_ORDER_FAILED()))
-    ),
+    mergeMap((action) => this.ordersService.show(action.id)
+      .pipe(
+        map((order) => REQUEST_ORDER_DONE({order})),
+        catchError(() => of(REQUEST_ORDER_FAILED()))
+      ),
+    )
   ));
 
   removeOrder$ = createEffect(() => this.actions$.pipe(
@@ -59,18 +63,22 @@ export class OrdersEffects {
 
   addOrder$ = createEffect(() => this.actions$.pipe(
     ofType(CREATE_ORDER),
-    mergeMap((action) => this.ordersService.create(action.order)).pipe(
-      map((order) => CREATE_ORDER_DONE({order})),
-      catchError(() => of(CREATE_ORDER_FAILED()))
-    ),
+    mergeMap((action) => this.ordersService.create(action.order)
+      .pipe(
+        map((order) => CREATE_ORDER_DONE({order})),
+        catchError(() => of(CREATE_ORDER_FAILED()))
+      ),
+    )
   ));
 
   updateOrder$ = createEffect(() => this.actions$.pipe(
     ofType(UPDATE_ORDER),
-    mergeMap((action) => this.ordersService.update(action.order)).pipe(
-      map((order) => UPDATE_ORDER_DONE({order})),
-      catchError(() => of(UPDATE_ORDER_FAILED()))
-    ),
+    mergeMap((action) => this.ordersService.update(action.order)
+      .pipe(
+        map((order) => UPDATE_ORDER_DONE({order})),
+        catchError(() => of(UPDATE_ORDER_FAILED()))
+      ),
+    )
   ));
 
   constructor(private actions$: Actions,

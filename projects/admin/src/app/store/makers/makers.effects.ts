@@ -29,54 +29,62 @@ export class MakersEffects {
     ofType(REQUEST_ALL_MAKERS),
     withLatestFrom(this.store.pipe(select(selectAllMakersLoaded))),
     filter(([action, allMakersLoaded]) => !allMakersLoaded),
-    mergeMap(() => this.makersService.all()).pipe(
-      map((makers) => REQUEST_ALL_MAKERS_DONE({makers})),
-      catchError(() => {
-        this.feedbackService.errorAction('recuperar', true);
-        return of(REQUEST_ALL_MAKERS_FAILED());
-      })
-    ),
+    mergeMap(() => this.makersService.all()
+      .pipe(
+        map((makers) => REQUEST_ALL_MAKERS_DONE({makers})),
+        catchError(() => {
+          this.feedbackService.errorAction('recuperar', true);
+          return of(REQUEST_ALL_MAKERS_FAILED());
+        })
+      ),
+    )
   ));
 
   newMaker$ = createEffect(() => this.actions$.pipe(
     ofType(ADD_MAKER),
-    mergeMap((action) => this.makersService.create(action.maker)).pipe(
-      map((maker) => {
-        this.feedbackService.createSuccess('Fabricante/Cervejaria');
-        return ADD_MAKER_DONE({maker});
-      }),
-      catchError((e) => {
-        this.feedbackService.errorAction('criar');
-        return of(ADD_MAKER_FAILED());
-      })
-    ),
+    mergeMap((action) => this.makersService.create(action.maker)
+      .pipe(
+        map((maker) => {
+          this.feedbackService.createSuccess('Fabricante/Cervejaria');
+          return ADD_MAKER_DONE({maker});
+        }),
+        catchError((e) => {
+          this.feedbackService.errorAction('criar');
+          return of(ADD_MAKER_FAILED());
+        })
+      ),
+    )
   ));
 
   deleteMaker$ = createEffect(() => this.actions$.pipe(
     ofType(DELETE_MAKER),
-    mergeMap((action) => this.makersService.destroy(action.id)).pipe(
-      map((res) => {
-        this.feedbackService.destroyItemSuccess('Fabricante/Cervejaria');
-        return DELETE_MAKER_DONE({id: res.id});
-      }),
-      catchError(() => {
-        this.feedbackService.errorAction('remover');
-        return of(DELETE_MAKER_FAILED());
-      })
+    mergeMap((action) => this.makersService.destroy(action.id)
+      .pipe(
+        map((res) => {
+          this.feedbackService.destroyItemSuccess('Fabricante/Cervejaria');
+          return DELETE_MAKER_DONE({id: res.id});
+        }),
+        catchError(() => {
+          this.feedbackService.errorAction('remover');
+          return of(DELETE_MAKER_FAILED());
+        })
+      )
     ),
   ));
 
   updateMaker$ = createEffect(() => this.actions$.pipe(
     ofType(UPDATE_MAKER),
-    mergeMap((action) => this.makersService.update(action.maker)).pipe(
-      map((res) => {
-        this.feedbackService.updateSuccess('Fabricante/Cervejaria');
-        return UPDATE_MAKER_DONE({maker: res});
-      }),
-      catchError(() => {
-        this.feedbackService.errorAction('atualizar');
-        return of(UPDATE_MAKER_FAILED());
-      })
+    mergeMap((action) => this.makersService.update(action.maker)
+      .pipe(
+        map((res) => {
+          this.feedbackService.updateSuccess('Fabricante/Cervejaria');
+          return UPDATE_MAKER_DONE({maker: res});
+        }),
+        catchError(() => {
+          this.feedbackService.errorAction('atualizar');
+          return of(UPDATE_MAKER_FAILED());
+        })
+      )
     ),
   ));
 

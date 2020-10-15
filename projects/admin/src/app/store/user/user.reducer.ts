@@ -1,11 +1,16 @@
 import {Action, createReducer, on} from '@ngrx/store';
 import {
   LOAD_USER,
-  LOAD_USER_DONE, LOAD_USER_FAILED,
-  THEME_LOADED, THEME_REQUESTED, UPDATE_THEME,
-  UPDATE_THEME_DONE, UPDATE_THEME_FAILED,
+  LOAD_USER_DONE,
+  LOAD_USER_FAILED,
+  THEME_LOADED,
+  THEME_REQUESTED,
+  UPDATE_THEME,
+  UPDATE_THEME_DONE,
+  UPDATE_THEME_FAILED,
   UPDATE_USER,
-  UPDATE_USER_DONE, UPDATE_USER_FAILED
+  UPDATE_USER_DONE,
+  UPDATE_USER_FAILED
 } from './user.actions';
 import {User} from '../../core/models/user';
 import {Theme} from '../../core/models/theme';

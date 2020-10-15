@@ -19,21 +19,25 @@ export class KitchenEffects {
 
   requestAllDishes$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_ORDERS_DISHES),
-    mergeMap(() => this.kitchenService.all()).pipe(
-      map((dishes) => REQUEST_ORDERS_DISHES_DONE({dishes})),
-      catchError(() => {
-        return of(REQUEST_ORDERS_DISHES_FAIL());
-      })
+    mergeMap(() => this.kitchenService.all()
+      .pipe(
+        map((dishes) => REQUEST_ORDERS_DISHES_DONE({dishes})),
+        catchError(() => {
+          return of(REQUEST_ORDERS_DISHES_FAIL());
+        })
+      )
     ),
   ));
 
   updateDish$ = createEffect(() => this.actions$.pipe(
     ofType(UPDATE_ORDER_DISH_STATUS),
-    mergeMap((action) => this.kitchenService.updateStatus(action.id, action.status)).pipe(
-      map((dish) => UPDATE_ORDER_DISH_STATUS_DONE({dish})),
-      catchError(() => {
-        return of(UPDATE_ORDER_DISH_STATUS_FAIL());
-      })
+    mergeMap((action) => this.kitchenService.updateStatus(action.id, action.status)
+      .pipe(
+        map((dish) => UPDATE_ORDER_DISH_STATUS_DONE({dish})),
+        catchError(() => {
+          return of(UPDATE_ORDER_DISH_STATUS_FAIL());
+        })
+      )
     ),
   ));
 

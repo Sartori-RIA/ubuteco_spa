@@ -1,40 +1,56 @@
 import {Injectable} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import * as BeerActions from './beer.actions';
 import {
+  BEERS_ALREADY_LOADED,
+  CREATE_BEER,
   CREATE_BEER_DONE,
   CREATE_BEER_FAILED,
+  REMOVE_BEER,
   REMOVE_BEER_DONE,
   REMOVE_BEER_FAILED,
+  REQUEST_ALL_BEERS,
   REQUEST_ALL_BEERS_DONE,
   REQUEST_ALL_BEERS_FAILED,
+  REQUEST_BEER,
   REQUEST_BEER_DONE,
   REQUEST_BEER_FAILED,
-  SEND_BEER_IMAGE,
+  SEARCH_BEERS,
+  SEARCH_BEERS_DONE,
+  SEARCH_BEERS_FAIL,
+  UPDATE_BEER,
   UPDATE_BEER_DONE,
-  UPDATE_BEER_FAILED,
-  UPDATE_BEER_IMAGE_PROGRESS
+  UPDATE_BEER_FAILED
 } from './beer.actions';
-import {catchError, filter, map, mergeMap, tap, withLatestFrom} from 'rxjs/operators';
-import {of} from 'rxjs';
+import {catchError, filter, map, mergeMap, withLatestFrom} from 'rxjs/operators';
 import {BeersService} from '../../core/services/api/beers.service';
-import {Beer} from '../../core/models/beer';
 import {Router} from '@angular/router';
 import {selectAllBeersLoaded} from './beer.selectors';
 import {AppState} from '../index';
-import {HttpEventType} from '@angular/common/http';
 import {FeedbackService} from '../../core/services/api/feedback.service';
+import {of} from 'rxjs';
 
 @Injectable()
 export class BeerEffects {
 
-  fetchAllBeers$ = createEffect(() => this.actions$.pipe(
-    ofType(BeerActions.REQUEST_ALL_BEERS),
+  requestAll$ = createEffect(() => this.actions$.pipe(
+    ofType(REQUEST_ALL_BEERS),
     withLatestFrom(this.store.pipe(select(selectAllBeersLoaded))),
-    filter(([action, allBeersLoaded]) => !allBeersLoaded),
-    mergeMap(() => this.beerService.all()).pipe(
-      map((beers) => REQUEST_ALL_BEERS_DONE({beers})),
+    filter(([action, loaded]) => {
+      if (action.force) {
+        return true;
+      }
+      if (loaded) {
+        this.store.dispatch(BEERS_ALREADY_LOADED());
+      }
+      return !loaded;
+    }),
+    mergeMap(([{page}]) => this.beerService.index({page})).pipe(
+      map(({body, headers}) => REQUEST_ALL_BEERS_DONE({
+          data: body,
+          total: Number(headers.get('total'))
+        })
+      ),
       catchError(() => {
         this.feedbackService.errorAction('recuperar', true);
         return of(REQUEST_ALL_BEERS_FAILED());
@@ -43,7 +59,7 @@ export class BeerEffects {
   ));
 
   fetchBeerById$ = createEffect(() => this.actions$.pipe(
-    ofType(BeerActions.REQUEST_BEER),
+    ofType(REQUEST_BEER),
     mergeMap((action) => this.beerService.show(action.id)).pipe(
       map((beer) => REQUEST_BEER_DONE({beer})),
       catchError(() => {
@@ -54,7 +70,7 @@ export class BeerEffects {
   ));
 
   removeBeer$ = createEffect(() => this.actions$.pipe(
-    ofType(BeerActions.REMOVE_BEER),
+    ofType(REMOVE_BEER),
     mergeMap((action) => this.beerService.destroy(action.id)
       .pipe(
         map(() => {
@@ -70,7 +86,7 @@ export class BeerEffects {
   ));
 
   addBeer$ = createEffect(() => this.actions$.pipe(
-    ofType(BeerActions.CREATE_BEER),
+    ofType(CREATE_BEER),
     mergeMap((action) => this.beerService.create(action.beer)).pipe(
       map((beer) => {
         this.feedbackService.createSuccess('Cerveja', false);
@@ -83,18 +99,27 @@ export class BeerEffects {
     ),
   ));
 
-  updateBeer$ = createEffect(() => this.actions$.pipe(
-    ofType(BeerActions.UPDATE_BEER),
-    mergeMap((action) => this.beerService.update(action.beer)).pipe(
-      map((beer) => {
-        this.feedbackService.updateSuccess('Cerveja', false);
-        return UPDATE_BEER_DONE({beer});
-      }),
-      catchError(() => {
-        this.feedbackService.errorAction('atualizar');
-        return of(UPDATE_BEER_FAILED());
-      })
-    ),
+  updateBeer$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UPDATE_BEER),
+      mergeMap((action) => this.beerService.update(action.beer)).pipe(
+        map((beer) => {
+          this.feedbackService.updateSuccess('Cerveja', false);
+          return UPDATE_BEER_DONE({beer});
+        }),
+        catchError(() => {
+          this.feedbackService.errorAction('atualizar');
+          return of(UPDATE_BEER_FAILED());
+        })
+      ),
+    ));
+
+  search$ = createEffect(() => this.actions$.pipe(
+    ofType(SEARCH_BEERS),
+    mergeMap(({search}) => this.beerService.search(search).pipe(
+      map((beers) => SEARCH_BEERS_DONE({data: beers})),
+      catchError(() => of(SEARCH_BEERS_FAIL()))
+    ))
   ));
 
   constructor(private actions$: Actions,
