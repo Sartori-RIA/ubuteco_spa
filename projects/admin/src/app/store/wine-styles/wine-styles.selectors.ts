@@ -1,23 +1,22 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import * as fromWineStyles from './wine-styles.reducer';
-import {compare} from '../../shared/util/util';
 import {WineStyleState} from './wine-styles.reducer';
-import {selectAllMakers} from "../makers/makers.selectors";
+import {compare} from '../../shared/util/util';
 
-export const selectAllWineStylesState = createFeatureSelector<WineStyleState>(fromWineStyles.featureKey);
+export const selectWineStylesState = createFeatureSelector<WineStyleState>(fromWineStyles.featureKey);
 
 export const selectAllWineStyles = createSelector(
-  selectAllWineStylesState,
+  selectWineStylesState,
   fromWineStyles.selectAll
 );
 
 export const selectWineStyleById = (id: number) => createSelector(
-  selectAllWineStylesState,
+  selectWineStylesState,
   (state) => state.entities[id]
 );
 
 export const selectAllWineStylesLoaded = createSelector(
-  selectAllWineStylesState,
+  selectWineStylesState,
   (state) => state.loaded
 );
 
@@ -40,4 +39,9 @@ export const selectWineStyleByName = (name: string) => createSelector(
 export const selectWineStylesFilteredByName = (value: string) => createSelector(
   selectAllWineStyles,
   (styles) => styles.filter((v) => v.name.toLowerCase().indexOf(value.toLowerCase()) === 0)
+);
+
+export const selectWineStylesLoading = createSelector(
+  selectWineStylesState,
+  (state) => state.loading
 );

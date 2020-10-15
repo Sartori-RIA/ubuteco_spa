@@ -21,7 +21,7 @@ const initialState: AuthState = {
 const authReducer = createReducer(initialState,
   on(SIGN_IN, (state) => ({...state, loading: true})),
   on(SIGN_IN_DONE, (state, {user}) => {
-    localStorage.setItem('dXNlcg==', btoa(JSON.stringify(credential)));
+    localStorage.setItem('dXNlcg==', btoa(JSON.stringify(user)));
     return {
       ...state,
       user,

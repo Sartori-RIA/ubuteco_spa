@@ -3,15 +3,15 @@ import * as fromWines from './wines.reducer';
 import {featureKey, WineState} from './wines.reducer';
 import {compare} from '../../shared/util/util';
 
-export const selectAllWinesState = createFeatureSelector<WineState>(featureKey);
+export const selectWinesState = createFeatureSelector<WineState>(featureKey);
 
 export const selectAllWines = createSelector(
-  selectAllWinesState,
+  selectWinesState,
   fromWines.selectAll
 );
 
 export const selectWineById = (id: number) => createSelector(
-  selectAllWinesState,
+  selectWinesState,
   (wines: WineState) => wines.entities[id]
 );
 
@@ -36,16 +36,21 @@ export const selectAllWinesOrderedByStyle = (isAsc: boolean) => createSelector(
 );
 
 export const selectAllWinesLoaded = createSelector(
-  selectAllWinesState,
+  selectWinesState,
   (state) => state.loaded
 );
 
 export const selectCurrentWine = createSelector(
-  selectAllWinesState,
+  selectWinesState,
   (state) => state.currentWine
 );
 
 export const selectCurrentProgress = createSelector(
-  selectAllWinesState,
+  selectWinesState,
   (state) => state.progress
+);
+
+export const selectWinesLoading = createSelector(
+  selectWinesState,
+  (state) => state.loading
 );

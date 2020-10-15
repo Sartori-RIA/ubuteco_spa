@@ -31,4 +31,7 @@ export const selectAllTablesOrderedById = (isAsc: boolean) => createSelector(
 );
 
 
-
+export const selectTablesLoading = createSelector(
+  selectTablesState,
+  (state) => state.loading
+);

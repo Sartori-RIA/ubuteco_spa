@@ -12,3 +12,8 @@ export const selectUserTheme = createSelector(
   userFeatureSelector,
   (state) => state.theme
 );
+
+export const selectUserLoading = createSelector(
+  userFeatureSelector,
+  (state) => state.loading
+);
