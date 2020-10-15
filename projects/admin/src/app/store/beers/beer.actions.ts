@@ -30,7 +30,3 @@ export const CREATE_BEER = createAction('[Beer/API] add new beer', props<{ beer:
 export const CREATE_BEER_DONE = createAction('[Beer/API] add new beer done', props<{ beer: Beer }>());
 
 export const CREATE_BEER_FAILED = createAction('[Beer/API] add new beer failed');
-
-export const SEND_BEER_IMAGE = createAction('[Beer/API] sending image', props<{ beer: Beer, file: File }>());
-
-export const UPDATE_BEER_IMAGE_PROGRESS = createAction('[Beer/API] progress to send image', props<{ progress: number }>());

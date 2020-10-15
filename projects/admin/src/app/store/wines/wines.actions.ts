@@ -31,6 +31,3 @@ export const CREATE_WINE_DONE = createAction('[WINE/API] add new WINE done', pro
 
 export const CREATE_WINE_FAILED = createAction('[WINE/API] add new WINE failed');
 
-export const SEND_WINE_IMAGE = createAction('[WINE/API] sending image', props<{ wine: Wine, file: File }>());
-
-export const UPDATE_WINE_IMAGE_PROGRESS = createAction('[WINE/API] progress to send image', props<{ progress: number }>());

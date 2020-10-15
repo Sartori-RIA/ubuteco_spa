@@ -45,11 +45,6 @@ export const selectCurrentBeer = createSelector(
   (state) => state.currentBeer
 );
 
-export const selectCurrentProgress = createSelector(
-  selectBeersState,
-  (state) => state.progress
-);
-
 export const selectBeerLoading = createSelector(
   selectBeersState,
   (state) => state.loading

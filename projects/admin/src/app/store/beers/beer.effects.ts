@@ -97,30 +97,6 @@ export class BeerEffects {
     ),
   ));
 
-  sendBeerImage$ = createEffect(() => this.actions$.pipe(
-    ofType(SEND_BEER_IMAGE),
-    tap((action) => {
-      this.beerService.sendImage(action.beer.id, action.file).subscribe((response) => {
-        switch (response.type) {
-          case HttpEventType.Sent:
-            break;
-          case HttpEventType.ResponseHeader:
-            break;
-          case HttpEventType.Response:
-            this.store.dispatch(UPDATE_BEER_DONE({beer: response.body}));
-            break;
-          case HttpEventType.DownloadProgress:
-            break;
-          case HttpEventType.UploadProgress:
-            this.store.dispatch(UPDATE_BEER_IMAGE_PROGRESS({progress: response.total}));
-            break;
-          case HttpEventType.User:
-            break;
-        }
-      });
-    })
-  ), {dispatch: false});
-
   constructor(private actions$: Actions,
               private store: Store<AppState>,
               private router: Router,

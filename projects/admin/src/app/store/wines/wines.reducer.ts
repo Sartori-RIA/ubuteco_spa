@@ -2,16 +2,20 @@ import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {Action, createReducer, on} from '@ngrx/store';
 import {
   CREATE_WINE,
-  CREATE_WINE_DONE, CREATE_WINE_FAILED,
+  CREATE_WINE_DONE,
+  CREATE_WINE_FAILED,
   REMOVE_WINE,
-  REMOVE_WINE_DONE, REMOVE_WINE_FAILED,
+  REMOVE_WINE_DONE,
+  REMOVE_WINE_FAILED,
   REQUEST_ALL_WINES,
-  REQUEST_ALL_WINES_DONE, REQUEST_ALL_WINES_FAILED,
+  REQUEST_ALL_WINES_DONE,
+  REQUEST_ALL_WINES_FAILED,
   REQUEST_WINE,
-  REQUEST_WINE_DONE, REQUEST_WINE_FAILED,
+  REQUEST_WINE_DONE,
+  REQUEST_WINE_FAILED,
   UPDATE_WINE,
-  UPDATE_WINE_DONE, UPDATE_WINE_FAILED,
-  UPDATE_WINE_IMAGE_PROGRESS
+  UPDATE_WINE_DONE,
+  UPDATE_WINE_FAILED
 } from './wines.actions';
 import {Wine} from '../../core/models/wine';
 
@@ -20,7 +24,6 @@ export const featureKey = 'wines';
 export interface WineState extends EntityState<Wine> {
   loaded: boolean;
   currentWine: Wine;
-  progress: number;
   loading: boolean;
 }
 
@@ -30,7 +33,6 @@ const initialState: WineState = adapter.getInitialState({
   loaded: false,
   currentWine: undefined,
   loading: false,
-  progress: undefined,
 });
 
 export const {
@@ -70,7 +72,6 @@ const winesReducer = createReducer(initialState,
     currentWine: wine,
     loading: false
   })),
-  on(UPDATE_WINE_IMAGE_PROGRESS, (state, {progress}) => ({...state, progress}))
 );
 
 export function reducer(state: WineState | undefined, action: Action): WineState {
