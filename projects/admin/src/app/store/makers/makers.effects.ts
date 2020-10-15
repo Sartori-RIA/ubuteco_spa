@@ -7,7 +7,7 @@ import {
   ADD_MAKER_FAILED,
   DELETE_MAKER,
   DELETE_MAKER_DONE,
-  DELETE_MAKER_FAILED,
+  DELETE_MAKER_FAILED, MAKERS_ALREADY_LOADED,
   REQUEST_ALL_MAKERS,
   REQUEST_ALL_MAKERS_DONE,
   REQUEST_ALL_MAKERS_FAILED, SEARCH_MAKERS, SEARCH_MAKERS_DONE, SEARCH_MAKERS_FAIL,
@@ -22,21 +22,39 @@ import {selectAllMakersLoaded} from './makers.selectors';
 import {AppState} from '../index';
 import {FeedbackService} from '../../core/services/api/feedback.service';
 import {SEARCH_DISHES, SEARCH_DISHES_DONE, SEARCH_DISHES_FAIL} from "../dishes/dishes.actions";
+import {
+  BEERS_ALREADY_LOADED,
+  REQUEST_ALL_BEERS,
+  REQUEST_ALL_BEERS_DONE,
+  REQUEST_ALL_BEERS_FAILED
+} from "../beers/beer.actions";
+import {selectAllBeersLoaded} from "../beers/beer.selectors";
 
 @Injectable()
 export class MakersEffects {
 
-  fetchAllBeers$ = createEffect(() => this.actions$.pipe(
+  requestAll$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_ALL_MAKERS),
     withLatestFrom(this.store.pipe(select(selectAllMakersLoaded))),
-    filter(([action, allMakersLoaded]) => !allMakersLoaded),
-    mergeMap(() => this.makersService.all()
-      .pipe(
-        map((makers) => REQUEST_ALL_MAKERS_DONE({makers})),
-        catchError(() => {
-          this.feedbackService.errorAction('recuperar', true);
-          return of(REQUEST_ALL_MAKERS_FAILED());
+    filter(([action, loaded]) => {
+      if (action.force) {
+        return true;
+      }
+      if (loaded) {
+        this.store.dispatch(MAKERS_ALREADY_LOADED());
+      }
+      return !loaded;
+    }),
+    mergeMap(([{page}]) => this.makersService.index({page}).pipe(
+      map(({body, headers}) => REQUEST_ALL_MAKERS_DONE({
+          data: body,
+          total: Number(headers.get('total'))
         })
+      ),
+      catchError(() => {
+        this.feedbackService.errorAction('recuperar', true);
+        return of(REQUEST_ALL_MAKERS_FAILED());
+      })
       ),
     )
   ));

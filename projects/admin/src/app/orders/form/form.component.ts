@@ -48,7 +48,7 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.actions.forEach((action) => this.store.dispatch(action()));
+    this.actions.forEach((action) => this.store.dispatch(action({page: '1'})));
 
     this.activatedRoute.params.pipe(take(1)).subscribe((params) => {
       if (params.id) {

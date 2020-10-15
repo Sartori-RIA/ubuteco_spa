@@ -8,7 +8,7 @@ export const REQUEST_ALL_WINES = createAction('[WINEs/API] find all', props<{
 
 export const REQUEST_ALL_WINES_FAILED = createAction('[WINEs/API] find all failed');
 
-export const REQUEST_ALL_WINES_DONE = createAction('[WINEs/API] find all done', props<{ wines: Wine[] }>());
+export const REQUEST_ALL_WINES_DONE = createAction('[WINEs/API] find all done', props<{ data: Wine[], total: number }>());
 
 export const REQUEST_WINE = createAction('[WINE/API] find by id', props<{ id: number }>());
 

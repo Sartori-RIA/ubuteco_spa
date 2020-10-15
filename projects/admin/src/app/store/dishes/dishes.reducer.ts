@@ -25,6 +25,7 @@ export const featureKey = 'dishes';
 export interface DishesState extends EntityState<Dish> {
   loaded: boolean;
   loading: boolean;
+  total: number
 }
 
 const adapter: EntityAdapter<Dish> = createEntityAdapter<Dish>();
@@ -35,7 +36,8 @@ export const {
 
 export const initialState: DishesState = adapter.getInitialState({
   loaded: false,
-  loading: false
+  loading: false,
+  total: 0
 });
 
 const dishesReducer = createReducer(
@@ -58,7 +60,7 @@ const dishesReducer = createReducer(
   ),
   on(CREATE_DISH_DONE, (state, {data}) => adapter.addOne(data, {...state, loaded: true, loading: false})),
   on(REMOVE_DISH_DONE, (state, {id}) => adapter.removeOne(id.toString(), {...state, loaded: true, loading: false})),
-  on(REQUEST_ALL_DISHES_DONE, (state, {data}) => adapter.addMany(data, {...state, loaded: true, loading: false})),
+  on(REQUEST_ALL_DISHES_DONE, (state, {data, total}) => adapter.addMany(data, {...state, total, loaded: true, loading: false})),
   on(REQUEST_DISH_DONE, (state, {data}) => adapter.upsertOne(data, {...state, loaded: true, loading: false})),
   on(UPDATE_DISH_DONE, (state, {data}) => adapter.upsertOne(data, {...state, loaded: true, loading: false})),
   on(SEARCH_DISHES_DONE, (state, {data}) => adapter.setAll(data, {

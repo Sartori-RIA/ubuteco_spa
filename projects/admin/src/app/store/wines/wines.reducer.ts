@@ -28,6 +28,7 @@ export interface WineState extends EntityState<Wine> {
   loaded: boolean;
   currentWine: Wine;
   loading: boolean;
+  total: number;
 }
 
 const adapter: EntityAdapter<Wine> = createEntityAdapter<Wine>();
@@ -36,6 +37,7 @@ const initialState: WineState = adapter.getInitialState({
   loaded: false,
   currentWine: undefined,
   loading: false,
+  total: 0
 });
 
 export const {
@@ -64,7 +66,12 @@ const winesReducer = createReducer(initialState,
   ),
   on(REMOVE_WINE_DONE, (state, {id}) => adapter.removeOne(id.toString(), {...state, loaded: true, loading: false})),
   on(REQUEST_WINE_DONE, (state, {wine}) => adapter.addOne(wine, {...state, loaded: true, loading: false})),
-  on(REQUEST_ALL_WINES_DONE, (state, {wines}) => adapter.upsertMany(wines, {...state, loaded: true, loading: false})),
+  on(REQUEST_ALL_WINES_DONE, (state, {data, total}) => adapter.upsertMany(data, {
+    ...state,
+    loaded: true,
+    loading: false,
+    total
+  })),
   on(UPDATE_WINE_DONE, (state, {wine}) => adapter.upsertOne(wine, {
     ...state,
     loaded: true,

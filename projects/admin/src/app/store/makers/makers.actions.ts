@@ -9,7 +9,7 @@ export const REQUEST_ALL_MAKERS = createAction('[Makers/API] find all', props<{
 export const REQUEST_ALL_MAKERS_FAILED = createAction('[Makers/API] find all failed');
 
 export const REQUEST_ALL_MAKERS_DONE = createAction('[Makers/API] find all done',
-  props<{ makers: Maker[] }>()
+  props<{ data: Maker[], total: number }>()
 );
 
 export const ADD_MAKER = createAction('[Makers/API] create', props<{ maker: Maker }>());

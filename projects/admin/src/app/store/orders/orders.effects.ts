@@ -9,15 +9,18 @@ import {
   CREATE_ORDER,
   CREATE_ORDER_DONE,
   CREATE_ORDER_FAILED,
+  ORDERS_ALREADY_LOADED,
   REMOVE_ORDER,
   REMOVE_ORDER_DONE,
   REMOVE_ORDER_FAILED,
-  REQUEST_ALL_ORDERS,
   REQUEST_ALL_ORDERS_DONE,
   REQUEST_ALL_ORDERS_FAILED,
   REQUEST_ORDER,
   REQUEST_ORDER_DONE,
-  REQUEST_ORDER_FAILED, SEARCH_ORDERS, SEARCH_ORDERS_DONE, SEARCH_ORDERS_FAIL,
+  REQUEST_ORDER_FAILED,
+  SEARCH_ORDERS,
+  SEARCH_ORDERS_DONE,
+  SEARCH_ORDERS_FAIL,
   UPDATE_ORDER,
   UPDATE_ORDER_DONE,
   UPDATE_ORDER_FAILED
@@ -25,19 +28,33 @@ import {
 import {AppState} from '../index';
 import {selectAllOrdersLoaded} from './orders.selectors';
 import {FeedbackService} from '../../core/services/api/feedback.service';
-import {SEARCH_DISHES, SEARCH_DISHES_DONE, SEARCH_DISHES_FAIL} from "../dishes/dishes.actions";
+import {REQUEST_ALL_BEERS} from "../beers/beer.actions";
 
 @Injectable()
 export class OrdersEffects {
 
-  fetchAllOrders$ = createEffect(() => this.actions$.pipe(
-    ofType(REQUEST_ALL_ORDERS),
+  requestAll$ = createEffect(() => this.actions$.pipe(
+    ofType(REQUEST_ALL_BEERS),
     withLatestFrom(this.store.pipe(select(selectAllOrdersLoaded))),
-    filter(([action, allLoaded]) => !allLoaded),
-    mergeMap(() => this.ordersService.all()
-      .pipe(
-        map((orders) => REQUEST_ALL_ORDERS_DONE({orders})),
-        catchError(() => of(REQUEST_ALL_ORDERS_FAILED()))
+    filter(([action, loaded]) => {
+      if (action.force) {
+        return true;
+      }
+      if (loaded) {
+        this.store.dispatch(ORDERS_ALREADY_LOADED());
+      }
+      return !loaded;
+    }),
+    mergeMap(([{page}]) => this.ordersService.index({page}).pipe(
+      map(({body, headers}) => REQUEST_ALL_ORDERS_DONE({
+          data: body,
+          total: Number(headers.get('total'))
+        })
+      ),
+      catchError(() => {
+        this.feedback.errorAction('recuperar', true);
+        return of(REQUEST_ALL_ORDERS_FAILED());
+      })
       ),
     )
   ));

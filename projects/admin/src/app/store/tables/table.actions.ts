@@ -8,7 +8,7 @@ export const REQUEST_ALL_TABLES = createAction('[Tables/API] request all', props
 
 export const REQUEST_ALL_TABLES_FAILED = createAction('[Tables/API] request all failed');
 
-export const REQUEST_ALL_TABLES_DONE = createAction('[Tables/API] request all done', props<{ tables: Table[] }>());
+export const REQUEST_ALL_TABLES_DONE = createAction('[Tables/API] request all done', props<{ data: Table[], total: number }>());
 
 export const REQUEST_TABLE = createAction('[Table/API] request by id', props<{ id: number }>());
 

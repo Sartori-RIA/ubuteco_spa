@@ -39,8 +39,8 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(REQUEST_ALL_MAKERS());
-    this.store.dispatch(REQUEST_ALL_WINE_STYLES());
+    this.store.dispatch(REQUEST_ALL_MAKERS({page: '1'}));
+    this.store.dispatch(REQUEST_ALL_WINE_STYLES({page: '1'}));
     this.updateForm();
     this.form.controls.maker.valueChanges.subscribe(((value) => {
       this.makers$ = this.store.pipe(select(selectMakersFilteredByName(value)));

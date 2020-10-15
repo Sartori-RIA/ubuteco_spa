@@ -9,7 +9,7 @@ export const REQUEST_ALL_DRINKS = createAction('[Drinks/API] find all', props<{
 export const REQUEST_ALL_DRINKS_FAILED = createAction('[Drinks/API] find all failed');
 
 export const REQUEST_ALL_DRINKS_DONE = createAction('[Drinks/API] find all done',
-  props<{ drinks: Drink[] }>()
+  props<{ data: Drink[], total: number }>()
 );
 
 export const REQUEST_DRINK = createAction('[Drink/API] find by id',

@@ -24,13 +24,15 @@ export const makersFeatureKey = 'makers';
 export interface MakerState extends EntityState<Maker> {
   loaded: boolean;
   loading: boolean;
+  total: number
 }
 
 const adapter: EntityAdapter<Maker> = createEntityAdapter<Maker>();
 
 const initialState: MakerState = adapter.getInitialState({
   loaded: false,
-  loading: false
+  loading: false,
+  total: 0
 });
 
 export const {
@@ -52,10 +54,11 @@ const makerReducer = createReducer(initialState,
     SEARCH_MAKERS_FAIL,
     (state) => ({...state, loading: false})
   ),
-  on(REQUEST_ALL_MAKERS_DONE, (state, {makers}) => adapter.upsertMany(makers, {
+  on(REQUEST_ALL_MAKERS_DONE, (state, {data, total}) => adapter.upsertMany(data, {
     ...state,
     loaded: true,
-    loading: false
+    loading: false,
+    total
   })),
   on(ADD_MAKER_DONE, (state, {maker}) => adapter.addOne(maker, {...state, loaded: true, loading: false})),
   on(DELETE_MAKER_DONE, (state, {id}) => adapter.removeOne(id, {...state, loading: false})),

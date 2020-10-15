@@ -22,13 +22,15 @@ export const beerStyleFeatureKey = 'beer-styles';
 export interface BeerStyleState extends EntityState<BeerStyle> {
   loaded: boolean;
   loading: boolean;
+  total: number;
 }
 
 const adapter: EntityAdapter<BeerStyle> = createEntityAdapter<BeerStyle>();
 
 const initialState: BeerStyleState = adapter.getInitialState({
   loaded: false,
-  loading: false
+  loading: false,
+  total: 0,
 });
 
 export const {
@@ -44,13 +46,17 @@ const beerStyleReducer = createReducer(initialState,
       ...state,
       loading: true
     })),
-  on(REQUEST_ALL_BEER_STYLES_FAILED, ADD_BEER_STYLE_FAILED, UPDATE_BEER_STYLE_FAILED, DELETE_BEER_STYLE_FAILED,
+  on(REQUEST_ALL_BEER_STYLES_FAILED,
+    ADD_BEER_STYLE_FAILED,
+    UPDATE_BEER_STYLE_FAILED,
+    DELETE_BEER_STYLE_FAILED,
     (state) => ({...state, loading: false})
   ),
-  on(REQUEST_ALL_BEER_STYLES_DONE, (state, {beerStyles}) => adapter.upsertMany(beerStyles, {
+  on(REQUEST_ALL_BEER_STYLES_DONE, (state, {data, total}) => adapter.upsertMany(data, {
     ...state,
     loaded: true,
-    loading: false
+    loading: false,
+    total
   })),
   on(ADD_BEER_STYLE_DONE, (state, {style}) => adapter.addOne(style, {...state, loaded: true, loading: false})),
   on(DELETE_BEER_STYLE_DONE, (state, {id}) => adapter.removeOne(id, {...state, loading: false})),

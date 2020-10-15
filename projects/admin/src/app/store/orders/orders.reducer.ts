@@ -30,6 +30,7 @@ export interface OrderState extends EntityState<Order> {
   loaded: boolean;
   loading: boolean;
   preCreatedOrder: Order;
+  total: number;
 }
 
 const adapter: EntityAdapter<Order> = createEntityAdapter<Order>();
@@ -38,6 +39,7 @@ const initialState: OrderState = adapter.getInitialState({
   loaded: false,
   preCreatedOrder: undefined,
   loading: false,
+  total: 0
 });
 
 export const {
@@ -63,7 +65,7 @@ const ordersReducer = createReducer(initialState,
     SEARCH_ORDERS_FAIL,
     (state) => ({...state, loading: true})
   ),
-  on(REQUEST_ALL_ORDERS_DONE, (state, {orders}) => adapter.upsertMany(orders, {...state, loading: false})),
+  on(REQUEST_ALL_ORDERS_DONE, (state, {data, total}) => adapter.upsertMany(data, {...state, loading: false, total})),
   on(REQUEST_ORDER_DONE, (state, {order}) => adapter.upsertOne(order, {...state, loading: false})),
   on(UPDATE_ORDER_DONE, (state, {order}) => adapter.upsertOne(order, {...state, loading: false})),
   on(REMOVE_ORDER_DONE, (state, {id}) => adapter.removeOne(id, {...state, loading: false})),

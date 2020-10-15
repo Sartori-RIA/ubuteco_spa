@@ -3,7 +3,7 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {
   CREATE_DRINK,
   CREATE_DRINK_DONE,
-  CREATE_DRINK_FAILED,
+  CREATE_DRINK_FAILED, DRINKS_ALREADY_LOADED,
   REMOVE_DRINK,
   REMOVE_DRINK_DONE,
   REMOVE_DRINK_FAILED,
@@ -20,22 +20,45 @@ import {
   UPDATE_DRINK_DONE,
   UPDATE_DRINK_FAILED
 } from './drink.actions';
-import {catchError, map, mergeMap} from 'rxjs/operators';
+import {catchError, filter, map, mergeMap, withLatestFrom} from 'rxjs/operators';
 import {DrinksService} from '../../core/services/api/drinks.service';
 import {of} from 'rxjs';
 import {Router} from '@angular/router';
 import {FeedbackService} from '../../core/services/api/feedback.service';
+import {
+  BEER_STYLES_ALREADY_LOADED,
+  REQUEST_ALL_BEER_STYLES,
+  REQUEST_ALL_BEER_STYLES_DONE, REQUEST_ALL_BEER_STYLES_FAILED
+} from "../beer-styles/beer-styles.actions";
+import {select, Store} from "@ngrx/store";
+import {selectAllBeersLoaded} from "../beers/beer.selectors";
+import { selectAllDrinksLoaded } from './drink.selectors';
+import {AppState} from "../index";
 
 @Injectable()
 export class DrinkEffects {
 
-  requestAllDrinks$ = createEffect(() => this.actions$.pipe(
+  requestAll$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_ALL_DRINKS),
-    mergeMap(() => this.drinkService.all().pipe(
-      map((drinks) => REQUEST_ALL_DRINKS_DONE({drinks})),
+    withLatestFrom(this.store.pipe(select(selectAllDrinksLoaded))),
+    filter(([action, loaded]) => {
+      if (action.force) {
+        return true;
+      }
+      if (loaded) {
+        this.store.dispatch(DRINKS_ALREADY_LOADED());
+      }
+      return !loaded;
+    }),
+    mergeMap(([{page}]) => this.drinkService.index({page}).pipe(
+      map(({body, headers}) => REQUEST_ALL_DRINKS_DONE({
+          data: body,
+          total: Number(headers.get('total'))
+        })
+      ),
       catchError(() => {
         this.feedbackService.errorAction('recuperar', true);
-        return of(REQUEST_ALL_DRINKS_FAILED);
+        return of(REQUEST_ALL_DRINKS_FAILED());
       })
       ),
     )
@@ -110,6 +133,7 @@ export class DrinkEffects {
 
   constructor(private actions$: Actions,
               private drinkService: DrinksService,
+              private store: Store<AppState>,
               private feedbackService: FeedbackService,
               private router: Router) {
   }

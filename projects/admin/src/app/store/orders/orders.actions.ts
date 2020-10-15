@@ -7,7 +7,7 @@ export const REQUEST_ALL_ORDERS = createAction('[Orders/API] find all', props<{
 }>());
 
 export const REQUEST_ALL_ORDERS_DONE = createAction('[Orders/API] find all done',
-  props<{ orders: Order[] }>()
+  props<{ data: Order[], total: number }>()
 );
 
 export const REQUEST_ALL_ORDERS_FAILED = createAction('[Orders/API] find all failed');

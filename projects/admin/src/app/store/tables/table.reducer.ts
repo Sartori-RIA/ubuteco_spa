@@ -27,6 +27,7 @@ export const featureKey = 'table';
 export interface TableState extends EntityState<Table> {
   loaded: boolean;
   loading: boolean;
+  total: number
 }
 
 const adapter: EntityAdapter<Table> = createEntityAdapter<Table>();
@@ -37,7 +38,8 @@ export const {
 
 export const initialState: TableState = adapter.getInitialState({
   loaded: false,
-  loading: false
+  loading: false,
+  total: 0
 });
 
 const tableReducer = createReducer(initialState,
@@ -59,7 +61,7 @@ const tableReducer = createReducer(initialState,
   on(CREATE_TABLE_DONE, (state, {table}) => adapter.addOne(table, {...state, loaded: true, loading: false})),
   on(REQUEST_TABLE_DONE, (state, {table}) => adapter.upsertOne(table, {...state, loaded: true, loading: false})),
   on(UPDATE_TABLE_DONE, (state, {table}) => adapter.upsertOne(table, {...state, loaded: true, loading: false})),
-  on(REQUEST_ALL_TABLES_DONE, (state, {tables}) => adapter.addMany(tables, {...state, loaded: true, loading: false})),
+  on(REQUEST_ALL_TABLES_DONE, (state, {data, total}) => adapter.addMany(data, {...state, loaded: true, loading: false, total})),
   on(REMOVE_TABLE_DONE, (state, {id}) => adapter.removeOne(id.toString(), {...state, loaded: true, loading: false})),
   on(SEARCH_TABLES_DONE, (state, {data}) => adapter.setAll(data, {
     ...state,

@@ -6,7 +6,7 @@ import { OrdersHomeComponent } from './orders-home.component';
 import { IndexComponent } from './index/index.component';
 import { FormComponent } from './form/form.component';
 import { StoreModule } from '@ngrx/store';
-import * as fromOrders from '../store/orders/order.reducer';
+import * as fromOrders from '../store/orders/orders.reducer';
 import * as fromOrderItems from '../store/order-items/order-items.reducer';
 import * as fromDrinks from '../store/drinks/drink.reducer';
 import * as fromBeers from '../store/beers/beer.reducer';
@@ -24,7 +24,7 @@ import { TableEffects } from '../store/tables/table.effects';
 import { OrderItemsEffects } from '../store/order-items/order-items.effects';
 import { FinishOrderCardComponent } from './finish-order-card/finish-order-card.component';
 import { EditOrderItemComponent } from './edit-order-item/edit-order-item.component';
-import {WinesEffects} from "../store/wines/wines.effects";
+import {WinesEffects} from '../store/wines/wines.effects';
 
 
 @NgModule({

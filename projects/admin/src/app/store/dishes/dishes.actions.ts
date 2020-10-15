@@ -9,7 +9,7 @@ export const REQUEST_ALL_DISHES = createAction('[DISH/API] find all', props<{
 export const REQUEST_ALL_DISHES_FAILED = createAction('[DISH/API] find all failed');
 
 export const REQUEST_ALL_DISHES_DONE = createAction('[DISH/API] find all done',
-  props<{ data: Dish[] }>()
+  props<{ data: Dish[], total: number }>()
 );
 
 export const REQUEST_DISH = createAction('[DISH/API] find by id',

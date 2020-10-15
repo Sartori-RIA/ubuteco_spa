@@ -9,7 +9,7 @@ export const REQUEST_ALL_BEER_STYLES = createAction('[BeerStyles/API] find all d
 export const REQUEST_ALL_BEER_STYLES_FAILED = createAction('[BeerStyles/API] find all done');
 
 export const REQUEST_ALL_BEER_STYLES_DONE = createAction('[BeerStyles/API] find all done',
-  props<{ beerStyles: BeerStyle[] }>()
+  props<{ data: BeerStyle[], total: number }>()
 );
 
 export const ADD_BEER_STYLE = createAction('[BeerStyles/API] create', props<{ style: BeerStyle }>());
@@ -30,6 +30,6 @@ export const DELETE_BEER_STYLE_DONE = createAction('[BeerStyles/API] delete done
 
 export const DELETE_BEER_STYLE_FAILED = createAction('[BeerStyles/API] delete failed');
 
-export const BEERS_ALREADY_LOADED = createAction(
-  '[BEERS/API] already loaded'
+export const BEER_STYLES_ALREADY_LOADED = createAction(
+  '[BeerStyles/API] already loaded'
 );

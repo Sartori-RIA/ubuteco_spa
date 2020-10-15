@@ -20,7 +20,7 @@ import {
   REQUEST_ALL_TABLES_FAILED,
   REQUEST_TABLE,
   REQUEST_TABLE_DONE,
-  REQUEST_TABLE_FAILED, SEARCH_TABLES, SEARCH_TABLES_DONE, SEARCH_TABLES_FAIL,
+  REQUEST_TABLE_FAILED, SEARCH_TABLES, SEARCH_TABLES_DONE, SEARCH_TABLES_FAIL, TABLES_ALREADY_LOADED,
   UPDATE_TABLE,
   UPDATE_TABLE_DONE,
   UPDATE_TABLE_FAILED
@@ -28,22 +28,40 @@ import {
 import {selectAllTablesLoaded} from './table.selectors';
 import {FeedbackService} from '../../core/services/api/feedback.service';
 import {SEARCH_DISHES, SEARCH_DISHES_DONE, SEARCH_DISHES_FAIL} from "../dishes/dishes.actions";
+import {
+  BEERS_ALREADY_LOADED,
+  REQUEST_ALL_BEERS,
+  REQUEST_ALL_BEERS_DONE,
+  REQUEST_ALL_BEERS_FAILED
+} from "../beers/beer.actions";
+import {selectAllBeersLoaded} from "../beers/beer.selectors";
 
 @Injectable()
 export class TableEffects {
 
 
-  fetchAllTables$ = createEffect(() => this.actions$.pipe(
+  requestAll$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_ALL_TABLES),
     withLatestFrom(this.store.pipe(select(selectAllTablesLoaded))),
-    filter(([action, allTablesLoaded]) => !allTablesLoaded),
-    mergeMap(() => this.tableService.all()
-      .pipe(
-        map((tables) => REQUEST_ALL_TABLES_DONE({tables})),
-        catchError(() => {
-          this.feedbackService.errorAction('recuperar', true);
-          return of(REQUEST_ALL_TABLES_FAILED());
+    filter(([action, loaded]) => {
+      if (action.force) {
+        return true;
+      }
+      if (loaded) {
+        this.store.dispatch(TABLES_ALREADY_LOADED());
+      }
+      return !loaded;
+    }),
+    mergeMap(([{page}]) => this.tableService.index({page}).pipe(
+      map(({body, headers}) => REQUEST_ALL_TABLES_DONE({
+          data: body,
+          total: Number(headers.get('total'))
         })
+      ),
+      catchError(() => {
+        this.feedbackService.errorAction('recuperar', true);
+        return of(REQUEST_ALL_TABLES_FAILED());
+      })
       ),
     )
   ));

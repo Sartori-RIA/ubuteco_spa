@@ -19,7 +19,8 @@ import {
   SEARCH_WINE_FAIL,
   UPDATE_WINE,
   UPDATE_WINE_DONE,
-  UPDATE_WINE_FAILED
+  UPDATE_WINE_FAILED,
+  WINE_ALREADY_LOADED
 } from './wines.actions';
 import {catchError, filter, map, mergeMap, withLatestFrom} from 'rxjs/operators';
 import {of} from 'rxjs';
@@ -32,17 +33,28 @@ import {WineService} from '../../core/services/api/wine.service';
 @Injectable()
 export class WinesEffects {
 
-  fetchAllWines$ = createEffect(() => this.actions$.pipe(
+  requestAll$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_ALL_WINES),
     withLatestFrom(this.store.pipe(select(selectAllWinesLoaded))),
-    filter(([action, allWinesLoaded]) => !allWinesLoaded),
-    mergeMap(() => this.wineService.all()
-      .pipe(
-        map((wines) => REQUEST_ALL_WINES_DONE({wines})),
-        catchError(() => {
-          this.feedbackService.errorAction('recuperar', true);
-          return of(REQUEST_ALL_WINES_FAILED());
+    filter(([action, loaded]) => {
+      if (action.force) {
+        return true;
+      }
+      if (loaded) {
+        this.store.dispatch(WINE_ALREADY_LOADED());
+      }
+      return !loaded;
+    }),
+    mergeMap(([{page}]) => this.wineService.index({page}).pipe(
+      map(({body, headers}) => REQUEST_ALL_WINES_DONE({
+          data: body,
+          total: Number(headers.get('total'))
         })
+      ),
+      catchError(() => {
+        this.feedbackService.errorAction('recuperar', true);
+        return of(REQUEST_ALL_WINES_FAILED());
+      })
       ),
     )
   ));

@@ -4,7 +4,7 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {
   ADD_BEER_STYLE,
   ADD_BEER_STYLE_DONE,
-  ADD_BEER_STYLE_FAILED,
+  ADD_BEER_STYLE_FAILED, BEER_STYLES_ALREADY_LOADED,
   DELETE_BEER_STYLE,
   DELETE_BEER_STYLE_DONE,
   DELETE_BEER_STYLE_FAILED,
@@ -21,23 +21,41 @@ import {BeerStylesService} from '../../core/services/api/beer-styles.service';
 import {selectAllBeerStylesLoaded} from './beer-styles.selectors';
 import {AppState} from '../index';
 import {FeedbackService} from '../../core/services/api/feedback.service';
+import {
+  BEERS_ALREADY_LOADED,
+  REQUEST_ALL_BEERS,
+  REQUEST_ALL_BEERS_DONE,
+  REQUEST_ALL_BEERS_FAILED
+} from "../beers/beer.actions";
+import {selectAllBeersLoaded} from "../beers/beer.selectors";
 
 @Injectable()
 export class BeerStylesEffects {
 
-  fetchAllBeers$ = createEffect(() => this.actions$.pipe(
+  requestAll$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_ALL_BEER_STYLES),
-    withLatestFrom(this.store.pipe(select(selectAllBeerStylesLoaded))),
-    filter(([action, allStylesLoaded]) => !allStylesLoaded),
-    mergeMap(() => this.beerStyleService.all()
-      .pipe(
-        map((beerStyles) => REQUEST_ALL_BEER_STYLES_DONE({beerStyles})),
-        catchError(() => {
-          this.feedbackService.errorAction('recuperar', true);
-          return of(REQUEST_ALL_BEER_STYLES_FAILED());
+    withLatestFrom(this.store.pipe(select(selectAllBeersLoaded))),
+    filter(([action, loaded]) => {
+      if (action.force) {
+        return true;
+      }
+      if (loaded) {
+        this.store.dispatch(BEER_STYLES_ALREADY_LOADED());
+      }
+      return !loaded;
+    }),
+    mergeMap(([{page}]) => this.beerStyleService.index({page}).pipe(
+      map(({body, headers}) => REQUEST_ALL_BEER_STYLES_DONE({
+          data: body,
+          total: Number(headers.get('total'))
         })
-      )
-    ),
+      ),
+      catchError(() => {
+        this.feedbackService.errorAction('recuperar', true);
+        return of(REQUEST_ALL_BEER_STYLES_FAILED());
+      })
+      ),
+    )
   ));
 
   newBeerStyle$ = createEffect(() => this.actions$.pipe(
