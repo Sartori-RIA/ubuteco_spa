@@ -13,6 +13,9 @@ import {
   REQUEST_WINE,
   REQUEST_WINE_DONE,
   REQUEST_WINE_FAILED,
+  SEARCH_WINE,
+  SEARCH_WINE_DONE,
+  SEARCH_WINE_FAIL,
   UPDATE_WINE,
   UPDATE_WINE_DONE,
   UPDATE_WINE_FAILED
@@ -48,6 +51,7 @@ const winesReducer = createReducer(initialState,
     REMOVE_WINE,
     UPDATE_WINE,
     CREATE_WINE,
+    SEARCH_WINE,
     (state) => ({...state, loading: true})
   ),
   on(REQUEST_ALL_WINES_FAILED,
@@ -55,6 +59,7 @@ const winesReducer = createReducer(initialState,
     REMOVE_WINE_FAILED,
     UPDATE_WINE_FAILED,
     CREATE_WINE_FAILED,
+    SEARCH_WINE_FAIL,
     (state) => ({...state, loading: false})
   ),
   on(REMOVE_WINE_DONE, (state, {id}) => adapter.removeOne(id.toString(), {...state, loaded: true, loading: false})),
@@ -72,6 +77,11 @@ const winesReducer = createReducer(initialState,
     currentWine: wine,
     loading: false
   })),
+  on(SEARCH_WINE_DONE, (state, {data}) => adapter.setAll(data, {
+    ...state,
+    total: data.length,
+    loading: false
+  }))
 );
 
 export function reducer(state: WineState | undefined, action: Action): WineState {

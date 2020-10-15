@@ -66,7 +66,7 @@ const beerReducer = createReducer(initialState,
   on(BEERS_ALREADY_LOADED, (state) => ({...state, loading: false})),
   on(REMOVE_BEER_DONE, (state, {id}) => adapter.removeOne(id.toString(), {...state, loaded: true, loading: false})),
   on(REQUEST_BEER_DONE, (state, {beer}) => adapter.addOne(beer, {...state, loaded: true, loading: false})),
-  on(REQUEST_ALL_BEERS_DONE, (state, {beers}) => adapter.upsertMany(beers, {...state, loaded: true, loading: false})),
+  on(REQUEST_ALL_BEERS_DONE, (state, {data}) => adapter.upsertMany(data, {...state, loaded: true, loading: false})),
   on(UPDATE_BEER_DONE, (state, {beer}) => adapter.upsertOne(beer, {
     ...state,
     loaded: true,

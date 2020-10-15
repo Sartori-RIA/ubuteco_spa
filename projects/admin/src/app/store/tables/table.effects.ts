@@ -20,13 +20,14 @@ import {
   REQUEST_ALL_TABLES_FAILED,
   REQUEST_TABLE,
   REQUEST_TABLE_DONE,
-  REQUEST_TABLE_FAILED,
+  REQUEST_TABLE_FAILED, SEARCH_TABLES, SEARCH_TABLES_DONE, SEARCH_TABLES_FAIL,
   UPDATE_TABLE,
   UPDATE_TABLE_DONE,
   UPDATE_TABLE_FAILED
 } from './table.actions';
 import {selectAllTablesLoaded} from './table.selectors';
 import {FeedbackService} from '../../core/services/api/feedback.service';
+import {SEARCH_DISHES, SEARCH_DISHES_DONE, SEARCH_DISHES_FAIL} from "../dishes/dishes.actions";
 
 @Injectable()
 export class TableEffects {
@@ -106,6 +107,14 @@ export class TableEffects {
         })
       ),
     )
+  ));
+
+  search$ = createEffect(() => this.actions$.pipe(
+    ofType(SEARCH_TABLES),
+    mergeMap(({search}) => this.tableService.search(search).pipe(
+      map((data) => SEARCH_TABLES_DONE({data})),
+      catchError(() => of(SEARCH_TABLES_FAIL()))
+    ))
   ));
 
   constructor(private actions$: Actions,

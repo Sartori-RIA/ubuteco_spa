@@ -45,7 +45,7 @@ export class BeerEffects {
       }
       return !loaded;
     }),
-    mergeMap(([{page}]) => this.beerService.index({page})).pipe(
+    mergeMap(([{page}]) => this.beerService.index({page}).pipe(
       map(({body, headers}) => REQUEST_ALL_BEERS_DONE({
           data: body,
           total: Number(headers.get('total'))
@@ -55,18 +55,20 @@ export class BeerEffects {
         this.feedbackService.errorAction('recuperar', true);
         return of(REQUEST_ALL_BEERS_FAILED());
       })
-    ),
+      ),
+    )
   ));
 
   fetchBeerById$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_BEER),
-    mergeMap((action) => this.beerService.show(action.id)).pipe(
+    mergeMap((action) => this.beerService.show(action.id).pipe(
       map((beer) => REQUEST_BEER_DONE({beer})),
       catchError(() => {
         this.feedbackService.errorAction('recuperar', false);
         return of(REQUEST_BEER_FAILED());
       })
-    ),
+      ),
+    )
   ));
 
   removeBeer$ = createEffect(() => this.actions$.pipe(
@@ -87,7 +89,7 @@ export class BeerEffects {
 
   addBeer$ = createEffect(() => this.actions$.pipe(
     ofType(CREATE_BEER),
-    mergeMap((action) => this.beerService.create(action.beer)).pipe(
+    mergeMap((action) => this.beerService.create(action.beer).pipe(
       map((beer) => {
         this.feedbackService.createSuccess('Cerveja', false);
         return CREATE_BEER_DONE({beer});
@@ -96,13 +98,14 @@ export class BeerEffects {
         this.feedbackService.errorAction('criar');
         return of(CREATE_BEER_FAILED());
       })
+      )
     ),
   ));
 
   updateBeer$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UPDATE_BEER),
-      mergeMap((action) => this.beerService.update(action.beer)).pipe(
+      mergeMap((action) => this.beerService.update(action.beer).pipe(
         map((beer) => {
           this.feedbackService.updateSuccess('Cerveja', false);
           return UPDATE_BEER_DONE({beer});
@@ -111,6 +114,7 @@ export class BeerEffects {
           this.feedbackService.errorAction('atualizar');
           return of(UPDATE_BEER_FAILED());
         })
+        )
       ),
     ));
 

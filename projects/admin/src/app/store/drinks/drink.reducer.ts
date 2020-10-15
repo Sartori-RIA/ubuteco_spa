@@ -13,11 +13,12 @@ import {
   REQUEST_ALL_DRINKS_FAILED,
   REQUEST_DRINK,
   REQUEST_DRINK_DONE,
-  REQUEST_DRINK_FAILED,
+  REQUEST_DRINK_FAILED, SEARCH_DRINKS, SEARCH_DRINKS_DONE, SEARCH_DRINKS_FAIL,
   UPDATE_DRINK,
   UPDATE_DRINK_DONE,
   UPDATE_DRINK_FAILED
 } from './drink.actions';
+import {SEARCH_BEERS_DONE} from "../beers/beer.actions";
 
 export const featureKey = 'drinks';
 
@@ -47,6 +48,7 @@ const drinkReducer = createReducer(initialState,
     REMOVE_DRINK,
     UPDATE_DRINK,
     CREATE_DRINK,
+    SEARCH_DRINKS,
     (state) => ({...state, loading: true})
   ),
   on(REQUEST_ALL_DRINKS_FAILED,
@@ -54,6 +56,7 @@ const drinkReducer = createReducer(initialState,
     REMOVE_DRINK_FAILED,
     UPDATE_DRINK_FAILED,
     CREATE_DRINK_FAILED,
+    SEARCH_DRINKS_FAIL,
     (state) => ({...state, loading: false})
   ),
   on(CREATE_DRINK_DONE, (state, {drink}) => adapter.addOne(drink, {...state, loading: false})),
@@ -61,6 +64,11 @@ const drinkReducer = createReducer(initialState,
   on(REQUEST_ALL_DRINKS_DONE, (state, {drinks}) => adapter.addMany(drinks, {...state, loading: false})),
   on(REQUEST_DRINK_DONE, (state, {drink}) => adapter.addOne(drink, {...state, loading: false})),
   on(UPDATE_DRINK_DONE, (state, {drink}) => adapter.upsertOne(drink, {...state, loading: false})),
+  on(SEARCH_DRINKS_DONE, (state, {data}) => adapter.setAll(data, {
+    ...state,
+    total: data.length,
+    loading: false
+  }))
 );
 
 export function reducer(state: DrinkState | undefined, action: Action) {

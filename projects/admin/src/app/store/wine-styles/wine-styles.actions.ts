@@ -30,20 +30,3 @@ export const DELETE_WINE_STYLE_DONE = createAction('[WineStyles/API] delete done
 
 export const DELETE_WINE_STYLE_FAILED = createAction('[WineStyles/API] delete failed');
 
-export const SEARCH_WINE_STYLES = createAction(
-  '[WINE_STYLES/API] search',
-  props<{ search: string }>()
-);
-
-export const SEARCH_WINE_STYLES_DONE = createAction(
-  '[WINE_STYLES/API] search done',
-  props<{ data: WineStyle[] }>()
-);
-
-export const SEARCH_WINE_STYLES_FAIL = createAction(
-  '[WINE_STYLES/API] search fail',
-);
-
-export const WINE_STYLES_ALREADY_LOADED = createAction(
-  '[WINE_STYLES/API] already loaded'
-);

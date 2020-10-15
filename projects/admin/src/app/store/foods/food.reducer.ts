@@ -13,11 +13,12 @@ import {
   REQUEST_ALL_FOODS_FAILED,
   REQUEST_FOOD,
   REQUEST_FOOD_DONE,
-  REQUEST_FOOD_FAILED,
+  REQUEST_FOOD_FAILED, SEARCH_FOODS, SEARCH_FOODS_DONE, SEARCH_FOODS_FAIL,
   UPDATE_FOOD,
   UPDATE_FOOD_DONE,
   UPDATE_FOOD_FAILED
 } from './food.actions';
+import {SEARCH_BEERS_DONE} from "../beers/beer.actions";
 
 export const featureKey = 'food';
 
@@ -44,6 +45,7 @@ export const foodReducer = createReducer(initialState,
     REMOVE_FOOD,
     UPDATE_FOOD,
     CREATE_FOOD,
+    SEARCH_FOODS,
     (state) => ({...state, loading: true})
   ),
   on(REQUEST_ALL_FOODS_FAILED,
@@ -51,6 +53,7 @@ export const foodReducer = createReducer(initialState,
     REMOVE_FOOD_FAILED,
     UPDATE_FOOD_FAILED,
     CREATE_FOOD_FAILED,
+    SEARCH_FOODS_FAIL,
     (state) => ({...state, loading: false})
   ),
   on(REMOVE_FOOD_DONE, (state: FoodState, {id}) =>
@@ -68,6 +71,11 @@ export const foodReducer = createReducer(initialState,
   on(CREATE_FOOD_DONE, (state: FoodState, {food}) =>
     adapter.addOne(food, {...state, loaded: true, loading: false})
   ),
+  on(SEARCH_FOODS_DONE, (state, {data}) => adapter.setAll(data, {
+    ...state,
+    total: data.length,
+    loading: false
+  }))
 );
 
 export function reducer(state: FoodState | undefined, action: Action): FoodState {

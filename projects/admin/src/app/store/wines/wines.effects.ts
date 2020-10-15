@@ -14,6 +14,9 @@ import {
   REQUEST_WINE,
   REQUEST_WINE_DONE,
   REQUEST_WINE_FAILED,
+  SEARCH_WINE,
+  SEARCH_WINE_DONE,
+  SEARCH_WINE_FAIL,
   UPDATE_WINE,
   UPDATE_WINE_DONE,
   UPDATE_WINE_FAILED
@@ -91,7 +94,7 @@ export class WinesEffects {
 
   updateWine$ = createEffect(() => this.actions$.pipe(
     ofType(UPDATE_WINE),
-    mergeMap((action) => this.wineService.update(action.wine)).pipe(
+    mergeMap((action) => this.wineService.update(action.wine).pipe(
       map((wine) => {
         this.feedbackService.updateSuccess('Vinho', false);
         return UPDATE_WINE_DONE({wine});
@@ -100,7 +103,16 @@ export class WinesEffects {
         this.feedbackService.errorAction('atualizar');
         return of(UPDATE_WINE_FAILED());
       })
-    ),
+      ),
+    )
+  ));
+
+  search$ = createEffect(() => this.actions$.pipe(
+    ofType(SEARCH_WINE),
+    mergeMap(({search}) => this.wineService.search(search).pipe(
+      map((data) => SEARCH_WINE_DONE({data})),
+      catchError(() => of(SEARCH_WINE_FAIL()))
+    ))
   ));
 
   constructor(private actions$: Actions,

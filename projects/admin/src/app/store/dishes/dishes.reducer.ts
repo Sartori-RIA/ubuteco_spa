@@ -13,11 +13,12 @@ import {
   REQUEST_ALL_DISHES_FAILED,
   REQUEST_DISH,
   REQUEST_DISH_DONE,
-  REQUEST_DISH_FAILED,
+  REQUEST_DISH_FAILED, SEARCH_DISHES, SEARCH_DISHES_DONE, SEARCH_DISHES_FAIL,
   UPDATE_DISH,
   UPDATE_DISH_DONE,
   UPDATE_DISH_FAILED
 } from './dishes.actions';
+import {SEARCH_BEERS_DONE} from "../beers/beer.actions";
 
 export const featureKey = 'dishes';
 
@@ -44,6 +45,7 @@ const dishesReducer = createReducer(
     REMOVE_DISH,
     UPDATE_DISH,
     CREATE_DISH,
+    SEARCH_DISHES,
     (state) => ({...state, loading: true})
   ),
   on(REQUEST_ALL_DISHES_FAILED,
@@ -51,6 +53,7 @@ const dishesReducer = createReducer(
     REMOVE_DISH_FAILED,
     UPDATE_DISH_FAILED,
     CREATE_DISH_FAILED,
+    SEARCH_DISHES_FAIL,
     (state) => ({...state, loading: false})
   ),
   on(CREATE_DISH_DONE, (state, {data}) => adapter.addOne(data, {...state, loaded: true, loading: false})),
@@ -58,6 +61,11 @@ const dishesReducer = createReducer(
   on(REQUEST_ALL_DISHES_DONE, (state, {data}) => adapter.addMany(data, {...state, loaded: true, loading: false})),
   on(REQUEST_DISH_DONE, (state, {data}) => adapter.upsertOne(data, {...state, loaded: true, loading: false})),
   on(UPDATE_DISH_DONE, (state, {data}) => adapter.upsertOne(data, {...state, loaded: true, loading: false})),
+  on(SEARCH_DISHES_DONE, (state, {data}) => adapter.setAll(data, {
+    ...state,
+    total: data.length,
+    loading: false
+  }))
 );
 
 export function reducer(state: DishesState | undefined, action: Action) {

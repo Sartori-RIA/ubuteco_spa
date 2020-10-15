@@ -18,7 +18,7 @@ import {
   REQUEST_ALL_FOODS_FAILED,
   REQUEST_FOOD,
   REQUEST_FOOD_DONE,
-  REQUEST_FOOD_FAILED,
+  REQUEST_FOOD_FAILED, SEARCH_FOODS, SEARCH_FOODS_DONE, SEARCH_FOODS_FAIL,
   UPDATE_FOOD,
   UPDATE_FOOD_DONE,
   UPDATE_FOOD_FAILED
@@ -26,6 +26,7 @@ import {
 import {selectAllFoodsLoaded} from './food.selectors';
 import {Food} from '../../core/models/food';
 import {FeedbackService} from '../../core/services/api/feedback.service';
+import {SEARCH_DISHES, SEARCH_DISHES_DONE, SEARCH_DISHES_FAIL} from "../dishes/dishes.actions";
 
 @Injectable()
 export class FoodEffects {
@@ -103,6 +104,14 @@ export class FoodEffects {
         })
       ),
     )
+  ));
+
+  search$ = createEffect(() => this.actions$.pipe(
+    ofType(SEARCH_FOODS),
+    mergeMap(({search}) => this.foodService.search(search).pipe(
+      map((data) => SEARCH_FOODS_DONE({data})),
+      catchError(() => of(SEARCH_FOODS_FAIL()))
+    ))
   ));
 
   constructor(private store: Store<AppState>,

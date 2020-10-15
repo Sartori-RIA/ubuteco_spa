@@ -9,6 +9,9 @@ import {
   REQUEST_ALL_MAKERS,
   REQUEST_ALL_MAKERS_DONE,
   REQUEST_ALL_MAKERS_FAILED,
+  SEARCH_MAKERS,
+  SEARCH_MAKERS_DONE,
+  SEARCH_MAKERS_FAIL,
   UPDATE_MAKER,
   UPDATE_MAKER_DONE,
   UPDATE_MAKER_FAILED
@@ -39,12 +42,14 @@ const makerReducer = createReducer(initialState,
     ADD_MAKER,
     UPDATE_MAKER,
     DELETE_MAKER,
+    SEARCH_MAKERS,
     (state) => ({...state, loading: true})
   ),
   on(REQUEST_ALL_MAKERS_FAILED,
     ADD_MAKER_FAILED,
     UPDATE_MAKER_FAILED,
     DELETE_MAKER_FAILED,
+    SEARCH_MAKERS_FAIL,
     (state) => ({...state, loading: false})
   ),
   on(REQUEST_ALL_MAKERS_DONE, (state, {makers}) => adapter.upsertMany(makers, {
@@ -54,7 +59,12 @@ const makerReducer = createReducer(initialState,
   })),
   on(ADD_MAKER_DONE, (state, {maker}) => adapter.addOne(maker, {...state, loaded: true, loading: false})),
   on(DELETE_MAKER_DONE, (state, {id}) => adapter.removeOne(id, {...state, loading: false})),
-  on(UPDATE_MAKER_DONE, (state, {maker}) => adapter.upsertOne(maker, {...state, loading: false}))
+  on(UPDATE_MAKER_DONE, (state, {maker}) => adapter.upsertOne(maker, {...state, loading: false})),
+  on(SEARCH_MAKERS_DONE, (state, {data}) => adapter.setAll(data, {
+    ...state,
+    total: data.length,
+    loading: false
+  }))
 );
 
 export function reducer(state: MakerState | undefined, action: Action) {

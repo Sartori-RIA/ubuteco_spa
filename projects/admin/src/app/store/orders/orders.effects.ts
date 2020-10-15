@@ -17,7 +17,7 @@ import {
   REQUEST_ALL_ORDERS_FAILED,
   REQUEST_ORDER,
   REQUEST_ORDER_DONE,
-  REQUEST_ORDER_FAILED,
+  REQUEST_ORDER_FAILED, SEARCH_ORDERS, SEARCH_ORDERS_DONE, SEARCH_ORDERS_FAIL,
   UPDATE_ORDER,
   UPDATE_ORDER_DONE,
   UPDATE_ORDER_FAILED
@@ -25,6 +25,7 @@ import {
 import {AppState} from '../index';
 import {selectAllOrdersLoaded} from './orders.selectors';
 import {FeedbackService} from '../../core/services/api/feedback.service';
+import {SEARCH_DISHES, SEARCH_DISHES_DONE, SEARCH_DISHES_FAIL} from "../dishes/dishes.actions";
 
 @Injectable()
 export class OrdersEffects {
@@ -79,6 +80,14 @@ export class OrdersEffects {
         catchError(() => of(UPDATE_ORDER_FAILED()))
       ),
     )
+  ));
+
+  search$ = createEffect(() => this.actions$.pipe(
+    ofType(SEARCH_ORDERS),
+    mergeMap(({search}) => this.ordersService.search(search).pipe(
+      map((data) => SEARCH_ORDERS_DONE({data})),
+      catchError(() => of(SEARCH_ORDERS_FAIL()))
+    ))
   ));
 
   constructor(private actions$: Actions,

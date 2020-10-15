@@ -11,6 +11,9 @@ import {
   REQUEST_TABLE,
   REQUEST_TABLE_DONE,
   REQUEST_TABLE_FAILED,
+  SEARCH_TABLES,
+  SEARCH_TABLES_DONE,
+  SEARCH_TABLES_FAIL,
   UPDATE_TABLE,
   UPDATE_TABLE_DONE,
   UPDATE_TABLE_FAILED
@@ -43,19 +46,26 @@ const tableReducer = createReducer(initialState,
     REMOVE_TABLE,
     UPDATE_TABLE,
     CREATE_TABLE,
+    SEARCH_TABLES,
     (state) => ({...state, loading: true})),
   on(REQUEST_ALL_TABLES_FAILED,
     REQUEST_TABLE_FAILED,
     REMOVE_TABLE_FAILED,
     UPDATE_TABLE_FAILED,
     CREATE_TABLE_FAILED,
+    SEARCH_TABLES_FAIL,
     (state) => ({...state, loading: false})
   ),
   on(CREATE_TABLE_DONE, (state, {table}) => adapter.addOne(table, {...state, loaded: true, loading: false})),
   on(REQUEST_TABLE_DONE, (state, {table}) => adapter.upsertOne(table, {...state, loaded: true, loading: false})),
   on(UPDATE_TABLE_DONE, (state, {table}) => adapter.upsertOne(table, {...state, loaded: true, loading: false})),
   on(REQUEST_ALL_TABLES_DONE, (state, {tables}) => adapter.addMany(tables, {...state, loaded: true, loading: false})),
-  on(REMOVE_TABLE_DONE, (state, {id}) => adapter.removeOne(id.toString(), {...state, loaded: true, loading: false}))
+  on(REMOVE_TABLE_DONE, (state, {id}) => adapter.removeOne(id.toString(), {...state, loaded: true, loading: false})),
+  on(SEARCH_TABLES_DONE, (state, {data}) => adapter.setAll(data, {
+    ...state,
+    total: data.length,
+    loading: false
+  }))
 );
 
 export function reducer(state: TableState | undefined, action: Action): TableState {

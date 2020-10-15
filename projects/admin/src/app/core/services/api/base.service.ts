@@ -14,6 +14,10 @@ export abstract class BaseService<T extends BaseModel> {
     return this.http.get<T[]>(this.url, {params, observe: 'response'}).pipe();
   }
 
+  search(search: string): Observable<T[]> {
+    return this.http.get<T[]>(this.url + '/search', {params: {q: search}}).pipe();
+  }
+
   createWithPicture(data: T, fileName: string, file: File | Blob): Observable<HttpEvent<T>> {
     const form = toFormData<T>(data);
     form.append(fileName, file);

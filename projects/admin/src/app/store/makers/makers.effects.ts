@@ -10,7 +10,7 @@ import {
   DELETE_MAKER_FAILED,
   REQUEST_ALL_MAKERS,
   REQUEST_ALL_MAKERS_DONE,
-  REQUEST_ALL_MAKERS_FAILED,
+  REQUEST_ALL_MAKERS_FAILED, SEARCH_MAKERS, SEARCH_MAKERS_DONE, SEARCH_MAKERS_FAIL,
   UPDATE_MAKER,
   UPDATE_MAKER_DONE,
   UPDATE_MAKER_FAILED
@@ -21,6 +21,7 @@ import {MakerService} from '../../core/services/api/maker.service';
 import {selectAllMakersLoaded} from './makers.selectors';
 import {AppState} from '../index';
 import {FeedbackService} from '../../core/services/api/feedback.service';
+import {SEARCH_DISHES, SEARCH_DISHES_DONE, SEARCH_DISHES_FAIL} from "../dishes/dishes.actions";
 
 @Injectable()
 export class MakersEffects {
@@ -86,6 +87,14 @@ export class MakersEffects {
         })
       )
     ),
+  ));
+
+  search$ = createEffect(() => this.actions$.pipe(
+    ofType(SEARCH_MAKERS),
+    mergeMap(({search}) => this.makersService.search(search).pipe(
+      map((data) => SEARCH_MAKERS_DONE({data})),
+      catchError(() => of(SEARCH_MAKERS_FAIL()))
+    ))
   ));
 
   constructor(private actions$: Actions,

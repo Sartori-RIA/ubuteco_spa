@@ -16,6 +16,9 @@ import {
   REQUEST_ORDER,
   REQUEST_ORDER_DONE,
   REQUEST_ORDER_FAILED,
+  SEARCH_ORDERS,
+  SEARCH_ORDERS_DONE,
+  SEARCH_ORDERS_FAIL,
   UPDATE_ORDER,
   UPDATE_ORDER_DONE,
   UPDATE_ORDER_FAILED
@@ -48,6 +51,7 @@ const ordersReducer = createReducer(initialState,
     REMOVE_ORDER,
     CREATE_ORDER,
     FINISH_ORDER,
+    SEARCH_ORDERS,
     (state) => ({...state, loading: true})
   ),
   on(REQUEST_ALL_ORDERS_FAILED,
@@ -56,6 +60,7 @@ const ordersReducer = createReducer(initialState,
     REMOVE_ORDER_FAILED,
     CREATE_ORDER_FAILED,
     FINISH_ORDER_FAILED,
+    SEARCH_ORDERS_FAIL,
     (state) => ({...state, loading: true})
   ),
   on(REQUEST_ALL_ORDERS_DONE, (state, {orders}) => adapter.upsertMany(orders, {...state, loading: false})),
@@ -65,7 +70,12 @@ const ordersReducer = createReducer(initialState,
   on(CREATE_ORDER_DONE, (state, {order}) => {
     const newState: OrderState = {...state, preCreatedOrder: order};
     return adapter.addOne(order, {...newState, loading: false});
-  })
+  }),
+  on(SEARCH_ORDERS_DONE, (state, {data}) => adapter.setAll(data, {
+    ...state,
+    total: data.length,
+    loading: false
+  }))
 );
 
 export function reducer(state: OrderState | undefined, action: Action) {

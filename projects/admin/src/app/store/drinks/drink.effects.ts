@@ -13,6 +13,9 @@ import {
   REQUEST_DRINK,
   REQUEST_DRINK_DONE,
   REQUEST_DRINK_FAILED,
+  SEARCH_DRINKS,
+  SEARCH_DRINKS_DONE,
+  SEARCH_DRINKS_FAIL,
   UPDATE_DRINK,
   UPDATE_DRINK_DONE,
   UPDATE_DRINK_FAILED
@@ -95,6 +98,14 @@ export class DrinkEffects {
           return of(REMOVE_DRINK_FAILED);
         })
       ))
+  ));
+
+  search$ = createEffect(() => this.actions$.pipe(
+    ofType(SEARCH_DRINKS),
+    mergeMap(({search}) => this.drinkService.search(search).pipe(
+      map((data) => SEARCH_DRINKS_DONE({data})),
+      catchError(() => of(SEARCH_DRINKS_FAIL()))
+    ))
   ));
 
   constructor(private actions$: Actions,

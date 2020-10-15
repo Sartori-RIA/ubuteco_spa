@@ -14,7 +14,7 @@ import {
   REQUEST_ALL_DISHES_FAILED,
   REQUEST_DISH,
   REQUEST_DISH_DONE,
-  REQUEST_DISH_FAILED,
+  REQUEST_DISH_FAILED, SEARCH_DISHES, SEARCH_DISHES_DONE, SEARCH_DISHES_FAIL,
   UPDATE_DISH,
   UPDATE_DISH_DONE,
   UPDATE_DISH_FAILED
@@ -25,6 +25,7 @@ import {FeedbackService} from '../../core/services/api/feedback.service';
 import {DishesService} from '../../core/services/api/dishes.service';
 import {AppState} from '../index';
 import {Router} from '@angular/router';
+import {SEARCH_BEERS, SEARCH_BEERS_DONE, SEARCH_BEERS_FAIL} from "../beers/beer.actions";
 
 @Injectable()
 export class DishesEffects {
@@ -106,6 +107,14 @@ export class DishesEffects {
         })
       )
     ),
+  ));
+
+  search$ = createEffect(() => this.actions$.pipe(
+    ofType(SEARCH_DISHES),
+    mergeMap(({search}) => this.dishesService.search(search).pipe(
+      map((data) => SEARCH_DISHES_DONE({data})),
+      catchError(() => of(SEARCH_DISHES_FAIL()))
+    ))
   ));
 
   constructor(private actions$: Actions,
