@@ -1,0 +1,16 @@
+<div fxLayout="row">
+  <span fxFlex></span>
+  <button (click)="loadMore.emit()"
+          [disabled]="loading"
+          [matTooltip]="tooltip"
+          mat-flat-button
+          color="primary">
+    <span *ngIf="!loading; else showLoading">Carregar mais</span>
+    <ng-template #showLoading>
+      <span fxFlex></span>
+      <mat-spinner diameter="35"></mat-spinner>
+      <span fxFlex></span>
+    </ng-template>
+  </button>
+  <span fxFlex></span>
+</div>

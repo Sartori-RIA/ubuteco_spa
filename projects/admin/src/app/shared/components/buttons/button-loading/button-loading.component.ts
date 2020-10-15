@@ -7,12 +7,12 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ButtonLoadingComponent implements OnInit {
 
-  @Input('loading') loading: boolean;
-  @Input('btnClass') btnClass: string;
-  @Input('raised') raised: boolean = true;
-  @Input('loadingText') loadingText = 'Please wait';
-  @Input('type') type: 'button' | 'submit' = 'submit';
-  @Input('color') color: 'primary' | 'accent' | 'warn';
+  @Input() loading: boolean;
+  @Input() btnClass: string;
+  @Input() raised = true;
+  @Input() loadingText = 'Please wait';
+  @Input() type: 'button' | 'submit' = 'submit';
+  @Input() color: 'primary' | 'accent' | 'warn';
 
   constructor() {
   }

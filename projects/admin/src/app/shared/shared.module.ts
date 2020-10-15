@@ -9,7 +9,7 @@ import {FormatCentsPipe} from './pipes/format-cents.pipe';
 import {AppLoaderModule} from '../app-loader/app-loader.module';
 import {MaterialModule} from '../material/material.module';
 import {BreadcrumbComponent} from './components/breadcrumb/breadcrumb.component';
-import {ButtonLoadingComponent} from './components/button-loading/button-loading.component';
+import {ButtonLoadingComponent} from './components/buttons/button-loading/button-loading.component';
 import {BottomSheetShareComponent} from './components/bottom-sheet-share/bottom-sheet-share.component';
 import {AppLoaderComponent} from '../../../../public/src/app/shared/components/app-loader/app-loader.component';
 import {CookieCodeToolsModule} from '../../../../tools/src/lib/cookie-code-tools.module';
@@ -19,6 +19,17 @@ import {RouterModule} from '@angular/router';
 import {CustomFormsModule} from 'ng2-validation';
 import {CustomFormsModule as NgxCustomFormsModule} from 'ngx-custom-validators';
 import {ContainerComponent} from './components/container/container.component';
+import {ConfirmDialogComponent} from "./components/dialogs/confirm-dialog/confirm-dialog.component";
+import {BackButtonComponent} from "./components/buttons/back-button/back-button.component";
+import {CancelButtonComponent} from "./components/buttons/cancel-button/cancel-button.component";
+import {CloseButtonComponent} from "./components/buttons/close-button/close-button.component";
+import {ConfirmButtonComponent} from "./components/buttons/confirm-button/confirm-button.component";
+import {EditButtonComponent} from "./components/buttons/edit-button/edit-button.component";
+import {FloatActionButtonComponent} from "./components/buttons/float-action-button/float-action-button.component";
+import {LoadMoreButtonComponent} from "./components/buttons/load-more-button/load-more-button.component";
+import {NextButtonComponent} from "./components/buttons/next-button/next-button.component";
+import {ShowButtonComponent} from "./components/buttons/show-button/show-button.component";
+import {TrashButtonComponent} from "./components/buttons/trash-button/trash-button.component";
 
 const NG_MODULES = [
   CommonModule,
@@ -46,9 +57,20 @@ const IBUTECO_LIBS = [
 const COMPONENTS = [
   BreadcrumbComponent,
   AppLoaderComponent,
-  ButtonLoadingComponent,
   BottomSheetShareComponent,
-  ContainerComponent
+  ContainerComponent,
+  ConfirmDialogComponent,
+  BackButtonComponent,
+  ButtonLoadingComponent,
+  CancelButtonComponent,
+  CloseButtonComponent,
+  ConfirmButtonComponent,
+  EditButtonComponent,
+  FloatActionButtonComponent,
+  LoadMoreButtonComponent,
+  NextButtonComponent,
+  ShowButtonComponent,
+  TrashButtonComponent,
 ];
 
 const PIPES = [

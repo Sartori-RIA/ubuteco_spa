@@ -1,0 +1,20 @@
+<div mat-dialog-title>
+
+  <div fxLayout="row" fxLayoutAlign="center">
+    <h2 class="text-uppercase text-info text-danger">
+      <strong>AVISO</strong>
+    </h2>
+  </div>
+</div>
+<div mat-dialog-content>
+  <h3 class="text-center">Deseja prosseguir com esta ação?</h3>
+</div>
+
+<div mat-dialog-actions>
+  <app-cancel-button mat-dialog-close></app-cancel-button>
+  <span fxFlex></span>
+  <button mat-raised-button
+          (click)="onConfirm()"
+          color="primary"
+  >Confirmar</button>
+</div>

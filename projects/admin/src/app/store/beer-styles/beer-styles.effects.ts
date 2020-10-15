@@ -18,7 +18,6 @@ import {
 import {catchError, filter, map, mergeMap, withLatestFrom} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {BeerStylesService} from '../../core/services/api/beer-styles.service';
-import {BeerStyle} from '../../core/models/beer-style';
 import {selectAllBeerStylesLoaded} from './beer-styles.selectors';
 import {AppState} from '../index';
 import {FeedbackService} from '../../core/services/api/feedback.service';
