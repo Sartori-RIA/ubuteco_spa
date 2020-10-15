@@ -13,18 +13,21 @@ import {
   REQUEST_ALL_FOODS_FAILED,
   REQUEST_FOOD,
   REQUEST_FOOD_DONE,
-  REQUEST_FOOD_FAILED, SEARCH_FOODS, SEARCH_FOODS_DONE, SEARCH_FOODS_FAIL,
+  REQUEST_FOOD_FAILED,
+  SEARCH_FOODS,
+  SEARCH_FOODS_DONE,
+  SEARCH_FOODS_FAIL,
   UPDATE_FOOD,
   UPDATE_FOOD_DONE,
   UPDATE_FOOD_FAILED
 } from './food.actions';
-import {SEARCH_BEERS_DONE} from "../beers/beer.actions";
 
 export const featureKey = 'food';
 
 export interface FoodState extends EntityState<Food> {
   loaded: boolean;
   loading: boolean;
+  total: number;
 }
 
 const adapter: EntityAdapter<Food> = createEntityAdapter<Food>();
@@ -36,7 +39,8 @@ export const {
 
 const initialState: FoodState = adapter.getInitialState({
   loaded: false,
-  loading: false
+  loading: false,
+  total: 0
 });
 
 export const foodReducer = createReducer(initialState,
@@ -59,8 +63,8 @@ export const foodReducer = createReducer(initialState,
   on(REMOVE_FOOD_DONE, (state: FoodState, {id}) =>
     adapter.removeOne(id.toString(), {...state, loaded: true, loading: false})
   ),
-  on(REQUEST_ALL_FOODS_DONE, (state: FoodState, {foods}) =>
-    adapter.addMany(foods, {...state, loaded: true, loading: false})
+  on(REQUEST_ALL_FOODS_DONE, (state: FoodState, {data, total}) =>
+    adapter.addMany(data, {...state, loaded: true, loading: false, total})
   ),
   on(REQUEST_FOOD_DONE, (state: FoodState, {food}) =>
     adapter.addOne(food, {...state, loaded: true, loading: false})

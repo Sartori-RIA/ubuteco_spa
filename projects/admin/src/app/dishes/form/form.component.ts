@@ -36,7 +36,7 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(REQUEST_ALL_FOODS());
+    this.store.dispatch(REQUEST_ALL_FOODS({page: '1'}));
     this.mountForm();
     this.updateForm();
   }

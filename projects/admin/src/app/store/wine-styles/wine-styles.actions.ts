@@ -9,7 +9,7 @@ export const REQUEST_ALL_WINE_STYLES = createAction('[WineStyles/API] find all',
 export const REQUEST_ALL_WINE_STYLES_FAILED = createAction('[WineStyles/API] find all failed');
 
 export const REQUEST_ALL_WINE_STYLES_DONE = createAction('[WineStyles/API] find all done',
-  props<{ styles: WineStyle[] }>()
+  props<{ data: WineStyle[], total: number }>()
 );
 
 export const ADD_WINE_STYLE = createAction('[WineStyles/API] create new', props<{ style: WineStyle }>());
@@ -30,3 +30,6 @@ export const DELETE_WINE_STYLE_DONE = createAction('[WineStyles/API] delete done
 
 export const DELETE_WINE_STYLE_FAILED = createAction('[WineStyles/API] delete failed');
 
+export const WINE_STYLE_ALREADY_LOADED = createAction(
+  '[WineStyles/API] already loaded'
+);

@@ -34,7 +34,7 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(REQUEST_ALL_MAKERS());
+    this.store.dispatch(REQUEST_ALL_MAKERS({page: '1'}));
     this.updateForm();
   }
 

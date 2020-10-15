@@ -62,7 +62,7 @@ export class IndexComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   ngOnInit() {
-    this.store.dispatch(REQUEST_ALL_DRINKS());
+    this.store.dispatch(REQUEST_ALL_DRINKS({page: '1'}));
     this.updateBeerList();
   }
 

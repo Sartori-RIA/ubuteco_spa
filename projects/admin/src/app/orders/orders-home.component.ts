@@ -16,7 +16,7 @@ export class OrdersHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(REQUEST_ALL_TABLES());
+    this.store.dispatch(REQUEST_ALL_TABLES({page: '1'}));
   }
 
 }

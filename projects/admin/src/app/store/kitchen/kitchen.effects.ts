@@ -19,9 +19,9 @@ export class KitchenEffects {
 
   requestAllDishes$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_ORDERS_DISHES),
-    mergeMap(() => this.kitchenService.all()
+    mergeMap(() => this.kitchenService.index()
       .pipe(
-        map((dishes) => REQUEST_ORDERS_DISHES_DONE({dishes})),
+        map(({body: data}) => REQUEST_ORDERS_DISHES_DONE({data})),
         catchError(() => {
           return of(REQUEST_ORDERS_DISHES_FAIL());
         })

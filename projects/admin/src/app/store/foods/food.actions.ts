@@ -8,7 +8,7 @@ export const REQUEST_ALL_FOODS = createAction('[Foods/API] find all', props<{
 
 export const REQUEST_ALL_FOODS_FAILED = createAction('[Foods/API] find all failed');
 
-export const REQUEST_ALL_FOODS_DONE = createAction('[Foods/API] find all done', props<{ foods: Food[] }>());
+export const REQUEST_ALL_FOODS_DONE = createAction('[Foods/API] find all done', props<{ data: Food[], total: number }>());
 
 export const REQUEST_FOOD = createAction('[Food/API] find by id', props<{ id: number }>());
 

@@ -30,7 +30,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.store.dispatch(REQUEST_ALL_ORDERS());
+    this.store.dispatch(REQUEST_ALL_ORDERS({page: '1'}));
     this.updateOrderList();
   }
 

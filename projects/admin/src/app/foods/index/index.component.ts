@@ -44,7 +44,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
-    this.store.dispatch(REQUEST_ALL_FOODS());
+    this.store.dispatch(REQUEST_ALL_FOODS({page: '1'}));
     this.updateFoodList();
   }
 

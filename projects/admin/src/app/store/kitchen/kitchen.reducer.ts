@@ -36,7 +36,7 @@ const kitchenReducer = createReducer(initialState,
     UPDATE_ORDER_DISH_STATUS_FAIL,
     (state) => ({...state, loading: false})
   ),
-  on(REQUEST_ORDERS_DISHES_DONE, (state, {dishes}) => adapter.addMany(dishes, {...state, loading: false})),
+  on(REQUEST_ORDERS_DISHES_DONE, (state, {data}) => adapter.addMany(data, {...state, loading: false})),
   on(NEW_ORDER_DISH_RECEIVED, (state, {dish}) => adapter.addOne(dish, {...state, loading: false})),
   on(UPDATE_ORDER_DISH_STATUS_DONE, (state, {dish}) => adapter.upsertOne(dish, {...state, loading: false}))
 );

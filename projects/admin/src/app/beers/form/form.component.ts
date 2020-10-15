@@ -8,7 +8,7 @@ import {Maker} from '../../core/models/maker';
 import {selectAllMakers} from '../../store/makers/makers.selectors';
 import {AppState} from '../../store';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {CREATE_BEER, REMOVE_BEER, UPDATE_BEER} from '../../store/beers/beer.actions';
+import {CREATE_BEER, UPDATE_BEER} from '../../store/beers/beer.actions';
 import {BeerStylesFormDialogComponent} from '../../beer-styles/beer-styles-form-dialog/beer-styles-form-dialog.component';
 import {REQUEST_ALL_BEER_STYLES} from '../../store/beer-styles/beer-styles.actions';
 import {MakerDialogData, MakersFormDialogComponent} from '../../makers/makers-form-dialog/makers-form-dialog.component';
@@ -35,8 +35,8 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(REQUEST_ALL_MAKERS());
-    this.store.dispatch(REQUEST_ALL_BEER_STYLES());
+    this.store.dispatch(REQUEST_ALL_MAKERS({page: '1'}));
+    this.store.dispatch(REQUEST_ALL_BEER_STYLES({page: '1'}));
     this.updateForm();
   }
 

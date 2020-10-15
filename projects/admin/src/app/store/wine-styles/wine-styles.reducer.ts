@@ -22,13 +22,15 @@ export const featureKey = 'wine-styles';
 export interface WineStyleState extends EntityState<WineStyle> {
   loaded: boolean;
   loading: boolean;
+  total: number;
 }
 
 const adapter: EntityAdapter<WineStyle> = createEntityAdapter<WineStyle>();
 
 const initialState: WineStyleState = adapter.getInitialState({
   loaded: false,
-  loading: false
+  loading: false,
+  total: 0
 });
 
 export const {
@@ -45,10 +47,11 @@ const WINEStyleReducer = createReducer(initialState,
     UPDATE_WINE_STYLE_FAILED,
     DELETE_WINE_STYLE_FAILED,
     (state) => ({...state, loading: false})),
-  on(REQUEST_ALL_WINE_STYLES_DONE, (state, {styles}) => adapter.upsertMany(styles, {
+  on(REQUEST_ALL_WINE_STYLES_DONE, (state, {data, total}) => adapter.upsertMany(data, {
     ...state,
     loaded: true,
-    loading: false
+    loading: false,
+    total
   })),
   on(ADD_WINE_STYLE_DONE, (state, {style}) => adapter.addOne(style, {...state, loaded: true, loading: false})),
   on(DELETE_WINE_STYLE_DONE, (state, {id}) => adapter.removeOne(id, {...state, loading: false})),

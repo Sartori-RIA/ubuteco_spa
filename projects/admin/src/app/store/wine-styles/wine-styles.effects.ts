@@ -17,7 +17,8 @@ import {
   REQUEST_ALL_WINE_STYLES_FAILED,
   UPDATE_WINE_STYLE,
   UPDATE_WINE_STYLE_DONE,
-  UPDATE_WINE_STYLE_FAILED
+  UPDATE_WINE_STYLE_FAILED,
+  WINE_STYLE_ALREADY_LOADED
 } from './wine-styles.actions';
 import {selectAllWineStylesLoaded} from './wine-styles.selectors';
 import {WineStyleService} from '../../core/services/api/wine-style.service';
@@ -25,17 +26,28 @@ import {WineStyleService} from '../../core/services/api/wine-style.service';
 @Injectable()
 export class WineStylesEffects {
 
-  fetchAllWines$ = createEffect(() => this.actions$.pipe(
+  requestAll$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_ALL_WINE_STYLES),
     withLatestFrom(this.store.pipe(select(selectAllWineStylesLoaded))),
-    filter(([action, allStylesLoaded]) => !allStylesLoaded),
-    mergeMap(() => this.wineStyleService.all()
-      .pipe(
-        map((styles) => REQUEST_ALL_WINE_STYLES_DONE({styles})),
-        catchError(() => {
-          this.feedbackService.errorAction('recuperar', true);
-          return of(REQUEST_ALL_WINE_STYLES_FAILED());
+    filter(([action, loaded]) => {
+      if (action.force) {
+        return true;
+      }
+      if (loaded) {
+        this.store.dispatch(WINE_STYLE_ALREADY_LOADED());
+      }
+      return !loaded;
+    }),
+    mergeMap(([{page}]) => this.wineStyleService.index({page}).pipe(
+      map(({body, headers}) => REQUEST_ALL_WINE_STYLES_DONE({
+          data: body,
+          total: Number(headers.get('total'))
         })
+      ),
+      catchError(() => {
+        this.feedbackService.errorAction('recuperar', true);
+        return of(REQUEST_ALL_WINE_STYLES_FAILED());
+      })
       ),
     )
   ));

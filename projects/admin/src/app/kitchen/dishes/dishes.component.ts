@@ -28,7 +28,7 @@ export class DishesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.store.dispatch(REQUEST_ORDERS_DISHES());
+    this.store.dispatch(REQUEST_ORDERS_DISHES({page: '1'}));
     this.updateDishesList();
     this.kitchenSocketService.joinInRoom('admin@cookiecode.com.br');
   }

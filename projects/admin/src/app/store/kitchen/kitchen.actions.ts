@@ -8,7 +8,7 @@ export const REQUEST_ORDERS_DISHES = createAction('[KITCHEN/API] find all dishes
 }>());
 
 export const REQUEST_ORDERS_DISHES_DONE = createAction('[KITCHEN/API] find all dishes done',
-  props<{ dishes: KitchenDish[] }>()
+  props<{ data: KitchenDish[] }>()
 );
 
 export const REQUEST_ORDERS_DISHES_FAIL = createAction('[KITCHEN/API] find all dishes fail');

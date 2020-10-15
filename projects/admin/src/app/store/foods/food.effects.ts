@@ -10,6 +10,7 @@ import {
   CREATE_FOOD,
   CREATE_FOOD_DONE,
   CREATE_FOOD_FAILED,
+  FOODS_ALREADY_LOADED,
   REMOVE_FOOD,
   REMOVE_FOOD_DONE,
   REMOVE_FOOD_FAILED,
@@ -18,32 +19,44 @@ import {
   REQUEST_ALL_FOODS_FAILED,
   REQUEST_FOOD,
   REQUEST_FOOD_DONE,
-  REQUEST_FOOD_FAILED, SEARCH_FOODS, SEARCH_FOODS_DONE, SEARCH_FOODS_FAIL,
+  REQUEST_FOOD_FAILED,
+  SEARCH_FOODS,
+  SEARCH_FOODS_DONE,
+  SEARCH_FOODS_FAIL,
   UPDATE_FOOD,
   UPDATE_FOOD_DONE,
   UPDATE_FOOD_FAILED
 } from './food.actions';
 import {selectAllFoodsLoaded} from './food.selectors';
-import {Food} from '../../core/models/food';
 import {FeedbackService} from '../../core/services/api/feedback.service';
-import {SEARCH_DISHES, SEARCH_DISHES_DONE, SEARCH_DISHES_FAIL} from "../dishes/dishes.actions";
 
 @Injectable()
 export class FoodEffects {
 
-  fetchAllFoods$ = createEffect(() => this.actions$.pipe(
+  requestAll$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_ALL_FOODS),
     withLatestFrom(this.store.pipe(select(selectAllFoodsLoaded))),
-    filter(([action, allFoodsLoaded]) => !allFoodsLoaded),
-    mergeMap(() => this.foodService.all()
-      .pipe(
-        map((foods: Food[]) => REQUEST_ALL_FOODS_DONE({foods})),
-        catchError(() => {
-          this.feedbackService.errorAction('recuperar', true);
-          return of(REQUEST_ALL_FOODS_FAILED());
+    filter(([action, loaded]) => {
+      if (action.force) {
+        return true;
+      }
+      if (loaded) {
+        this.store.dispatch(FOODS_ALREADY_LOADED());
+      }
+      return !loaded;
+    }),
+    mergeMap(([{page}]) => this.foodService.index({page}).pipe(
+      map(({body, headers}) => REQUEST_ALL_FOODS_DONE({
+          data: body,
+          total: Number(headers.get('total'))
         })
-      )
-    ),
+      ),
+      catchError(() => {
+        this.feedbackService.errorAction('recuperar', true);
+        return of(REQUEST_ALL_FOODS_FAILED());
+      })
+      ),
+    )
   ));
 
   fetchFoodById$ = createEffect(() => this.actions$.pipe(

@@ -9,7 +9,8 @@ import {AppState} from '../../store';
 import {
   selectAllDishes,
   selectAllDishesOrderedById,
-  selectAllDishesOrderedByName, selectAllDishesOrderedByPrice
+  selectAllDishesOrderedByName,
+  selectAllDishesOrderedByPrice
 } from '../../store/dishes/dishes.selectors';
 import {REMOVE_DISH, REQUEST_ALL_DISHES} from '../../store/dishes/dishes.actions';
 
@@ -22,16 +23,16 @@ import {REMOVE_DISH, REQUEST_ALL_DISHES} from '../../store/dishes/dishes.actions
 export class IndexComponent implements OnInit, OnDestroy {
 
 
+  menu$: Observable<Dish[]> = this.store.pipe(select(selectAllDishes));
+  displayedColumns: string[] = ['id', 'image', 'name', 'price', 'action'];
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  private data: Dish[] = [];
+  dataSource = new MatTableDataSource(this.data);
+  private subscription: Subscription;
+
   constructor(private store: Store<AppState>,
               private changeDetectorRefs: ChangeDetectorRef) {
   }
-
-  menu$: Observable<Dish[]> = this.store.pipe(select(selectAllDishes));
-  private data: Dish[] = [];
-  dataSource = new MatTableDataSource(this.data);
-  displayedColumns: string[] = ['id', 'image', 'name', 'price', 'action'];
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  private subscription: Subscription;
 
   ngOnDestroy(): void {
     if (this.subscription) {
@@ -41,8 +42,8 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
-    this.store.dispatch(REQUEST_ALL_DISHES());
-    this.store.dispatch(REQUEST_ALL_FOODS());
+    this.store.dispatch(REQUEST_ALL_DISHES({page: '1'}));
+    this.store.dispatch(REQUEST_ALL_FOODS({page: '1'}));
     this.updateRestaurantMenuList();
   }
 

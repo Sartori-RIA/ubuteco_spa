@@ -7,8 +7,7 @@ import {selectAllMakers, selectMakersOrderedById, selectMakersOrderedByName} fro
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
-import {take} from 'rxjs/operators';
-import {ADD_MAKER, DELETE_MAKER, REQUEST_ALL_MAKERS, UPDATE_MAKER} from '../../store/makers/makers.actions';
+import {DELETE_MAKER, REQUEST_ALL_MAKERS} from '../../store/makers/makers.actions';
 import {MakerDialogData, MakersFormDialogComponent} from '../makers-form-dialog/makers-form-dialog.component';
 
 @Component({
@@ -33,7 +32,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
-    this.store.dispatch(REQUEST_ALL_MAKERS());
+    this.store.dispatch(REQUEST_ALL_MAKERS({page: '1'}));
     this.updateList();
   }
 
