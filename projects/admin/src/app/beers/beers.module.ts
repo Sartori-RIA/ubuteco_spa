@@ -4,10 +4,10 @@ import {BeersRoutingModule} from './beers-routing.module';
 import {BeersHomeComponent} from './beers-home.component';
 import {SharedModule} from '../shared/shared.module';
 import {EffectsModule} from '@ngrx/effects';
-import {BeerEffects} from '../store/beers/beer.effects';
+import {BeersEffects} from '../store/beers/beers.effects';
 import {StoreModule} from '@ngrx/store';
 import {IndexComponent} from './index/index.component';
-import * as fromBeers from '../store/beers/beer.reducer';
+import * as fromBeers from '../store/beers/beers.reducer';
 import * as fromBeerStyles from '../store/beer-styles/beer-styles.reducer';
 import * as fromMakers from '../store/makers/makers.reducer';
 import {BeerStylesEffects} from '../store/beer-styles/beer-styles.effects';
@@ -32,7 +32,7 @@ import { ShowComponent } from './show/show.component';
     StoreModule.forFeature(fromBeers.featureKey, fromBeers.reducer),
     StoreModule.forFeature(fromBeerStyles.beerStyleFeatureKey, fromBeerStyles.reducer),
     StoreModule.forFeature(fromMakers.makersFeatureKey, fromMakers.reducer),
-    EffectsModule.forFeature([BeerEffects, BeerStylesEffects, MakersEffects]),
+    EffectsModule.forFeature([BeersEffects, BeerStylesEffects, MakersEffects]),
   ]
 })
 export class BeersModule {

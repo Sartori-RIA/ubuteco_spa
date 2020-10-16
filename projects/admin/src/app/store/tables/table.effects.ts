@@ -20,21 +20,17 @@ import {
   REQUEST_ALL_TABLES_FAILED,
   REQUEST_TABLE,
   REQUEST_TABLE_DONE,
-  REQUEST_TABLE_FAILED, SEARCH_TABLES, SEARCH_TABLES_DONE, SEARCH_TABLES_FAIL, TABLES_ALREADY_LOADED,
+  REQUEST_TABLE_FAILED,
+  SEARCH_TABLES,
+  SEARCH_TABLES_DONE,
+  SEARCH_TABLES_FAIL,
+  TABLES_ALREADY_LOADED,
   UPDATE_TABLE,
   UPDATE_TABLE_DONE,
   UPDATE_TABLE_FAILED
 } from './table.actions';
 import {selectAllTablesLoaded} from './table.selectors';
 import {FeedbackService} from '../../core/services/api/feedback.service';
-import {SEARCH_DISHES, SEARCH_DISHES_DONE, SEARCH_DISHES_FAIL} from "../dishes/dishes.actions";
-import {
-  BEERS_ALREADY_LOADED,
-  REQUEST_ALL_BEERS,
-  REQUEST_ALL_BEERS_DONE,
-  REQUEST_ALL_BEERS_FAILED
-} from "../beers/beer.actions";
-import {selectAllBeersLoaded} from "../beers/beer.selectors";
 
 @Injectable()
 export class TableEffects {

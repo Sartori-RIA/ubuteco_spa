@@ -3,7 +3,8 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {
   CREATE_DRINK,
   CREATE_DRINK_DONE,
-  CREATE_DRINK_FAILED, DRINKS_ALREADY_LOADED,
+  CREATE_DRINK_FAILED,
+  DRINKS_ALREADY_LOADED,
   REMOVE_DRINK,
   REMOVE_DRINK_DONE,
   REMOVE_DRINK_FAILED,
@@ -25,15 +26,9 @@ import {DrinksService} from '../../core/services/api/drinks.service';
 import {of} from 'rxjs';
 import {Router} from '@angular/router';
 import {FeedbackService} from '../../core/services/api/feedback.service';
-import {
-  BEER_STYLES_ALREADY_LOADED,
-  REQUEST_ALL_BEER_STYLES,
-  REQUEST_ALL_BEER_STYLES_DONE, REQUEST_ALL_BEER_STYLES_FAILED
-} from "../beer-styles/beer-styles.actions";
-import {select, Store} from "@ngrx/store";
-import {selectAllBeersLoaded} from "../beers/beer.selectors";
-import { selectAllDrinksLoaded } from './drink.selectors';
-import {AppState} from "../index";
+import {select, Store} from '@ngrx/store';
+import {selectAllDrinksLoaded} from './drink.selectors';
+import {AppState} from '../index';
 
 @Injectable()
 export class DrinkEffects {

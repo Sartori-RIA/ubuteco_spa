@@ -34,7 +34,13 @@
             "styles": [
               "projects/admin/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "babel-runtime",
+              "highlight.js",
+              "ngx-socket-io",
+              "ng2-validation"
+            ]
           },
           "configurations": {
             "production": {

@@ -13,19 +13,21 @@ import {
   REQUEST_ALL_DISHES_FAILED,
   REQUEST_DISH,
   REQUEST_DISH_DONE,
-  REQUEST_DISH_FAILED, SEARCH_DISHES, SEARCH_DISHES_DONE, SEARCH_DISHES_FAIL,
+  REQUEST_DISH_FAILED,
+  SEARCH_DISHES,
+  SEARCH_DISHES_DONE,
+  SEARCH_DISHES_FAIL,
   UPDATE_DISH,
   UPDATE_DISH_DONE,
   UPDATE_DISH_FAILED
 } from './dishes.actions';
-import {SEARCH_BEERS_DONE} from "../beers/beer.actions";
 
 export const featureKey = 'dishes';
 
 export interface DishesState extends EntityState<Dish> {
   loaded: boolean;
   loading: boolean;
-  total: number
+  total: number;
 }
 
 const adapter: EntityAdapter<Dish> = createEntityAdapter<Dish>();
@@ -60,7 +62,12 @@ const dishesReducer = createReducer(
   ),
   on(CREATE_DISH_DONE, (state, {data}) => adapter.addOne(data, {...state, loaded: true, loading: false})),
   on(REMOVE_DISH_DONE, (state, {id}) => adapter.removeOne(id.toString(), {...state, loaded: true, loading: false})),
-  on(REQUEST_ALL_DISHES_DONE, (state, {data, total}) => adapter.addMany(data, {...state, total, loaded: true, loading: false})),
+  on(REQUEST_ALL_DISHES_DONE, (state, {data, total}) => adapter.addMany(data, {
+    ...state,
+    total,
+    loaded: true,
+    loading: false
+  })),
   on(REQUEST_DISH_DONE, (state, {data}) => adapter.upsertOne(data, {...state, loaded: true, loading: false})),
   on(UPDATE_DISH_DONE, (state, {data}) => adapter.upsertOne(data, {...state, loaded: true, loading: false})),
   on(SEARCH_DISHES_DONE, (state, {data}) => adapter.setAll(data, {

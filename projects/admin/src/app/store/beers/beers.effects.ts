@@ -21,17 +21,17 @@ import {
   UPDATE_BEER,
   UPDATE_BEER_DONE,
   UPDATE_BEER_FAILED
-} from './beer.actions';
+} from './beers.actions';
 import {catchError, filter, map, mergeMap, withLatestFrom} from 'rxjs/operators';
 import {BeersService} from '../../core/services/api/beers.service';
 import {Router} from '@angular/router';
-import {selectAllBeersLoaded} from './beer.selectors';
+import {selectAllBeersLoaded} from './beers.selectors';
 import {AppState} from '../index';
 import {FeedbackService} from '../../core/services/api/feedback.service';
 import {of} from 'rxjs';
 
 @Injectable()
-export class BeerEffects {
+export class BeersEffects {
 
   requestAll$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_ALL_BEERS),

@@ -9,14 +9,14 @@ import { StoreModule } from '@ngrx/store';
 import * as fromOrders from '../store/orders/orders.reducer';
 import * as fromOrderItems from '../store/order-items/order-items.reducer';
 import * as fromDrinks from '../store/drinks/drink.reducer';
-import * as fromBeers from '../store/beers/beer.reducer';
+import * as fromBeers from '../store/beers/beers.reducer';
 import * as fromTables from '../store/tables/table.reducer';
 import * as fromDishes from '../store/dishes/dishes.reducer';
 import * as fromWines from '../store/wines/wines.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { OrdersEffects } from '../store/orders/orders.effects';
 import { DrinkEffects } from '../store/drinks/drink.effects';
-import { BeerEffects } from '../store/beers/beer.effects';
+import { BeersEffects } from '../store/beers/beers.effects';
 import { DishesEffects } from '../store/dishes/dishes.effects';
 import { AddItemDialogComponent } from './add-item-dialog/add-item-dialog.component';
 import { OrderItemsComponent } from './order-items/order-items.component';
@@ -51,7 +51,7 @@ import {WinesEffects} from '../store/wines/wines.effects';
       OrdersEffects,
       OrderItemsEffects,
       DrinkEffects,
-      BeerEffects,
+      BeersEffects,
       TableEffects,
       DishesEffects,
       WinesEffects

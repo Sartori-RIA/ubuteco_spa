@@ -21,7 +21,7 @@ import {
   UPDATE_BEER,
   UPDATE_BEER_DONE,
   UPDATE_BEER_FAILED
-} from './beer.actions';
+} from './beers.actions';
 
 export const featureKey = 'beers';
 
@@ -46,7 +46,7 @@ export const {
   selectTotal
 } = adapter.getSelectors();
 
-const beerReducer = createReducer(initialState,
+const beersReducer = createReducer(initialState,
   on(REQUEST_ALL_BEERS,
     REQUEST_BEER,
     REMOVE_BEER,
@@ -87,5 +87,5 @@ const beerReducer = createReducer(initialState,
 );
 
 export function reducer(state: BeerState | undefined, action: Action): BeerState {
-  return beerReducer(state, action);
+  return beersReducer(state, action);
 }

@@ -7,6 +7,7 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import * as moment from 'moment';
 import {take, tap} from 'rxjs/operators';
 import {LOAD_USER} from './user/user.actions';
+import {LocalStorage} from '../shared/util/storage';
 
 @Injectable()
 export class AppEffects {
@@ -16,7 +17,7 @@ export class AppEffects {
     ofType(ROOT_EFFECTS_INIT),
     take(1),
     tap(() => {
-      const token = localStorage.getItem('token');
+      const token = LocalStorage.jwt();
       if (!token) {
         return;
       }

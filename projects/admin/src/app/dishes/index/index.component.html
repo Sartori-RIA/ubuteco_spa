@@ -43,9 +43,7 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Ação</th>
       <td mat-cell *matCellDef="let element">
-        <button (click)="deleteDish(element)" mat-button color="warn">
-          <fa-icon [icon]="['fas', 'trash']"></fa-icon>
-        </button>
+        <app-trash-button (deleteElement)="deleteDish(element)"></app-trash-button>
         <button routerLink="/cardapio/{{element.id}}" mat-button>
           <fa-icon [icon]="['far', 'eye']"></fa-icon>
         </button>

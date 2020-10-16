@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 import {Drink} from '../../core/models/drink';
 import {Beer} from '../../core/models/beer';
 import {Dish} from '../../core/models/dish';
-import {selectAllBeers} from '../../store/beers/beer.selectors';
+import {selectAllBeers} from '../../store/beers/beers.selectors';
 import {selectAllDrinks} from '../../store/drinks/drink.selectors';
 import {ItemOrderSend, OrderItemType} from '../../core/models/order';
 import {ADD_ORDER_ITEM} from '../../store/order-items/order-items.actions';

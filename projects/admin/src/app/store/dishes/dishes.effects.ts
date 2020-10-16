@@ -28,14 +28,14 @@ import {FeedbackService} from '../../core/services/api/feedback.service';
 import {DishesService} from '../../core/services/api/dishes.service';
 import {AppState} from '../index';
 import {Router} from '@angular/router';
-import {selectAllBeersLoaded} from "../beers/beer.selectors";
+import {selectAllDishesLoaded} from "./dishes.selectors";
 
 @Injectable()
 export class DishesEffects {
 
   requestAll$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_ALL_DISHES),
-    withLatestFrom(this.store.pipe(select(selectAllBeersLoaded))),
+    withLatestFrom(this.store.pipe(select(selectAllDishesLoaded))),
     filter(([action, loaded]) => {
       if (action.force) {
         return true;

@@ -8,13 +8,10 @@
 
 <div class="mat-elevation-z8">
 
-  <div class="fab-container">
-    <button matTooltip="Adicionar Vinho" class="fab-toggler"
-            (click)="openCreateDialog()"
-            mat-fab>
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
+  <app-float-action-button
+    tooltip="Adicionar Vinho"
+    (fabClick)="openCreateDialog()"
+  ></app-float-action-button>
 
   <table mat-table [dataSource]="dataSource"
          matSort matSortDisableClear matSortDirection="desc"
@@ -50,9 +47,7 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Ação</th>
       <td mat-cell *matCellDef="let element">
-        <button (click)="delete(element)" mat-button color="warn">
-          <fa-icon [icon]="['fas', 'trash']"></fa-icon>
-        </button>
+        <app-trash-button (deleteElement)="delete(element)"></app-trash-button>
         <button (click)="show(element)" mat-button>
           <fa-icon [icon]="['far', 'eye']"></fa-icon>
         </button>

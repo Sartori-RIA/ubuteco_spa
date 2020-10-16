@@ -17,7 +17,7 @@ import {REQUEST_ORDER_ITEMS} from '../../store/order-items/order-items.actions';
 import {selectAllOrderItems} from '../../store/order-items/order-items.selectors';
 import {REQUEST_ALL_DISHES} from '../../store/dishes/dishes.actions';
 import {REQUEST_ALL_DRINKS} from '../../store/drinks/drink.actions';
-import {REQUEST_ALL_BEERS} from '../../store/beers/beer.actions';
+import {REQUEST_ALL_BEERS} from '../../store/beers/beers.actions';
 import {MatSelectChange} from '@angular/material/select/select';
 import {REQUEST_ALL_WINES} from '../../store/wines/wines.actions';
 

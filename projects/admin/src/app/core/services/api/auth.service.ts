@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {User} from '../../models/user';
 import {environment} from '../../../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
+import {LocalStorage} from "../../../shared/util/storage";
 
 @Injectable({
   providedIn: 'root'
@@ -16,19 +17,18 @@ export class AuthService {
 
   onSignIn(data: User): Observable<User> {
     return this.http.post<User>(`${this.url}sign_in`, {user: data}, {observe: 'response'}).pipe(map((response) => {
-      console.log(response);
       const token = response.headers.get('Authorization');
-      console.log(token);
-      localStorage.setItem('token', token);
+      LocalStorage.setJwt(token);
+      LocalStorage.setUser(response.body);
       return response.body;
     }));
   }
 
   onSignOut(): Observable<any> {
     return this.http.delete(`${this.url}sign_out`).pipe(tap(() => {
-      localStorage.removeItem('token');
+      LocalStorage.reset();
     }), catchError((e) => {
-      localStorage.removeItem('token');
+      LocalStorage.reset();
       return of(e);
     }));
   }

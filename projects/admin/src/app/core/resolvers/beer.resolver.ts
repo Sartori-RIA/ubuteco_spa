@@ -5,8 +5,8 @@ import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store';
 import {filter, first, tap} from 'rxjs/operators';
-import {selectBeerById} from '../../store/beers/beer.selectors';
-import {REQUEST_BEER} from '../../store/beers/beer.actions';
+import {selectBeerById} from '../../store/beers/beers.selectors';
+import {REQUEST_BEER} from '../../store/beers/beers.actions';
 
 @Injectable({
   providedIn: 'root'

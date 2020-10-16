@@ -4,7 +4,8 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {
   ADD_BEER_STYLE,
   ADD_BEER_STYLE_DONE,
-  ADD_BEER_STYLE_FAILED, BEER_STYLES_ALREADY_LOADED,
+  ADD_BEER_STYLE_FAILED,
+  BEER_STYLES_ALREADY_LOADED,
   DELETE_BEER_STYLE,
   DELETE_BEER_STYLE_DONE,
   DELETE_BEER_STYLE_FAILED,
@@ -21,20 +22,13 @@ import {BeerStylesService} from '../../core/services/api/beer-styles.service';
 import {selectAllBeerStylesLoaded} from './beer-styles.selectors';
 import {AppState} from '../index';
 import {FeedbackService} from '../../core/services/api/feedback.service';
-import {
-  BEERS_ALREADY_LOADED,
-  REQUEST_ALL_BEERS,
-  REQUEST_ALL_BEERS_DONE,
-  REQUEST_ALL_BEERS_FAILED
-} from "../beers/beer.actions";
-import {selectAllBeersLoaded} from "../beers/beer.selectors";
 
 @Injectable()
 export class BeerStylesEffects {
 
   requestAll$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_ALL_BEER_STYLES),
-    withLatestFrom(this.store.pipe(select(selectAllBeersLoaded))),
+    withLatestFrom(this.store.pipe(select(selectAllBeerStylesLoaded))),
     filter(([action, loaded]) => {
       if (action.force) {
         return true;

@@ -8,10 +8,10 @@ import {
   selectAllBeersOrderedByName,
   selectAllBeersOrderedByPrice,
   selectAllBeersOrderedByStyle
-} from '../../store/beers/beer.selectors';
+} from '../../store/beers/beers.selectors';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort, Sort} from '@angular/material/sort';
-import {REMOVE_BEER, REQUEST_ALL_BEERS} from '../../store/beers/beer.actions';
+import {REMOVE_BEER, REQUEST_ALL_BEERS} from '../../store/beers/beers.actions';
 import {AppState} from '../../store';
 
 @Component({

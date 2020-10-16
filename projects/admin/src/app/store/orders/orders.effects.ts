@@ -13,6 +13,7 @@ import {
   REMOVE_ORDER,
   REMOVE_ORDER_DONE,
   REMOVE_ORDER_FAILED,
+  REQUEST_ALL_ORDERS,
   REQUEST_ALL_ORDERS_DONE,
   REQUEST_ALL_ORDERS_FAILED,
   REQUEST_ORDER,
@@ -28,13 +29,12 @@ import {
 import {AppState} from '../index';
 import {selectAllOrdersLoaded} from './orders.selectors';
 import {FeedbackService} from '../../core/services/api/feedback.service';
-import {REQUEST_ALL_BEERS} from "../beers/beer.actions";
 
 @Injectable()
 export class OrdersEffects {
 
   requestAll$ = createEffect(() => this.actions$.pipe(
-    ofType(REQUEST_ALL_BEERS),
+    ofType(REQUEST_ALL_ORDERS),
     withLatestFrom(this.store.pipe(select(selectAllOrdersLoaded))),
     filter(([action, loaded]) => {
       if (action.force) {

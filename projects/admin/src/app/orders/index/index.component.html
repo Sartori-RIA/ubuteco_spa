@@ -7,11 +7,7 @@
 </div>
 <div class="mat-elevation-z8">
 
-  <div class="fab-container">
-    <button matTooltip="Novo Pedido" class="fab-toggler" routerLink="/pedidos/add" mat-fab>
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
+  <app-float-action-button tooltip="Novo Pedido"></app-float-action-button>
 
   <table mat-table [dataSource]="dataSource"
   >
@@ -22,7 +18,7 @@
     </ng-container>
 
     <ng-container matColumnDef="client">
-      <th mat-header-cell  *matHeaderCellDef>Cliente</th>
+      <th mat-header-cell *matHeaderCellDef>Cliente</th>
       <td mat-cell *matCellDef="let element"> {{element?.customer?.name}} </td>
     </ng-container>
 
@@ -39,9 +35,7 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Ação</th>
       <td mat-cell *matCellDef="let element">
-        <button (click)="cancelOrder(element)" mat-button color="warn">
-          <fa-icon [icon]="['fas', 'trash']"></fa-icon>
-        </button>
+        <app-trash-button (deleteElement)="cancelOrder(element)"></app-trash-button>
         <button routerLink="/pedidos/{{element.id}}" mat-button>
           <fa-icon [icon]="['far', 'eye']"></fa-icon>
         </button>

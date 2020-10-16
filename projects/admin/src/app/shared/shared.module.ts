@@ -19,17 +19,17 @@ import {RouterModule} from '@angular/router';
 import {CustomFormsModule} from 'ng2-validation';
 import {CustomFormsModule as NgxCustomFormsModule} from 'ngx-custom-validators';
 import {ContainerComponent} from './components/container/container.component';
-import {ConfirmDialogComponent} from "./components/dialogs/confirm-dialog/confirm-dialog.component";
-import {BackButtonComponent} from "./components/buttons/back-button/back-button.component";
-import {CancelButtonComponent} from "./components/buttons/cancel-button/cancel-button.component";
-import {CloseButtonComponent} from "./components/buttons/close-button/close-button.component";
-import {ConfirmButtonComponent} from "./components/buttons/confirm-button/confirm-button.component";
-import {EditButtonComponent} from "./components/buttons/edit-button/edit-button.component";
-import {FloatActionButtonComponent} from "./components/buttons/float-action-button/float-action-button.component";
-import {LoadMoreButtonComponent} from "./components/buttons/load-more-button/load-more-button.component";
-import {NextButtonComponent} from "./components/buttons/next-button/next-button.component";
-import {ShowButtonComponent} from "./components/buttons/show-button/show-button.component";
-import {TrashButtonComponent} from "./components/buttons/trash-button/trash-button.component";
+import {ConfirmDialogComponent} from './components/dialogs/confirm-dialog/confirm-dialog.component';
+import {BackButtonComponent} from './components/buttons/back-button/back-button.component';
+import {CancelButtonComponent} from './components/buttons/cancel-button/cancel-button.component';
+import {CloseButtonComponent} from './components/buttons/close-button/close-button.component';
+import {ConfirmButtonComponent} from './components/buttons/confirm-button/confirm-button.component';
+import {EditButtonComponent} from './components/buttons/edit-button/edit-button.component';
+import {FloatActionButtonComponent} from './components/buttons/float-action-button/float-action-button.component';
+import {LoadMoreButtonComponent} from './components/buttons/load-more-button/load-more-button.component';
+import {NextButtonComponent} from './components/buttons/next-button/next-button.component';
+import {ShowButtonComponent} from './components/buttons/show-button/show-button.component';
+import {TrashButtonComponent} from './components/buttons/trash-button/trash-button.component';
 
 const NG_MODULES = [
   CommonModule,
