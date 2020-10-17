@@ -15,12 +15,6 @@ export const selectBeerStyleById = (id: number) => createSelector(
   (state) => state.entities[id]
 );
 
-export const selectAllBeerStylesLoaded = createSelector(
-  selectBeerStylesState,
-  (state) => state.loaded
-);
-
-
 export const selectBeerStylesOrderedByName = (isAsc: boolean) => createSelector(
   selectAllBeerStyles,
   (styles) => styles.sort((a, b) => compare(a.name, b.name, isAsc))
@@ -36,7 +30,34 @@ export const selectBeerStyleByName = (name: string) => createSelector(
   (styles) => styles.filter((style) => style.name.toLocaleLowerCase().includes(name))
 );
 
+export const selectBeerStylesTotalLoaded = createSelector(
+  selectBeerStylesState,
+  fromBeerStyles.selectTotal
+);
+
 export const selectBeerStyleLoading = createSelector(
   selectBeerStylesState,
   (state) => state.loading
+);
+
+export const selectBeerStylesTotal = createSelector(
+  selectBeerStylesState,
+  (state) => state.total
+);
+
+export const selectBeerStylesAllLoaded = createSelector(
+  selectBeerStylesTotalLoaded,
+  selectBeerStylesTotal,
+  (loaded, total) => loaded >= total && total > 0
+);
+
+export const selectBeerStylesTotalOfPages = createSelector(
+  selectBeerStylesTotalLoaded,
+  selectBeerStylesTotal,
+  (loaded, total) => total / loaded
+);
+
+export const selectBeersStylesCurrentPage = createSelector(
+  selectBeerStylesTotalLoaded,
+  (loaded) => loaded / 25
 );

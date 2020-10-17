@@ -31,13 +31,13 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<AppState>,
               private changeDetectorRefs: ChangeDetectorRef,
-              private dialog: MatDialog,) {
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
-    this.store.dispatch(REQUEST_ALL_BEER_STYLES({page: '1'}));
     this.updateList();
+    this.store.dispatch(REQUEST_ALL_BEER_STYLES({page: '1'}));
   }
 
   ngOnDestroy(): void {

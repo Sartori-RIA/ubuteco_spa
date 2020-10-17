@@ -35,6 +35,7 @@ const initialState: BeerStyleState = adapter.getInitialState({
 
 export const {
   selectAll,
+  selectTotal
 } = adapter.getSelectors();
 
 const beerStyleReducer = createReducer(initialState,

@@ -14,6 +14,7 @@ export class KitchenSocketService extends Socket {
   constructor(private store: Store<AppState>) {
     super({url: environment.socket_url, options: {}});
 
+
     this.on('dish_received', (dishToMake: KitchenDish) => {
       this.store.dispatch(NEW_ORDER_DISH_RECEIVED({dish: dishToMake}));
     });

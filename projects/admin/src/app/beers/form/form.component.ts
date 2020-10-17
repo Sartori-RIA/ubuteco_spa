@@ -36,6 +36,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(REQUEST_ALL_MAKERS({page: '1'}));
+    console.log('bacon')
     this.store.dispatch(REQUEST_ALL_BEER_STYLES({page: '1'}));
     this.updateForm();
   }

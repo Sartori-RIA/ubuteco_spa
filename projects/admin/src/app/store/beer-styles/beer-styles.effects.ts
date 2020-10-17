@@ -19,16 +19,24 @@ import {
 import {catchError, filter, map, mergeMap, withLatestFrom} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {BeerStylesService} from '../../core/services/api/beer-styles.service';
-import {selectAllBeerStylesLoaded} from './beer-styles.selectors';
+import {selectBeerStylesAllLoaded} from './beer-styles.selectors';
 import {AppState} from '../index';
 import {FeedbackService} from '../../core/services/api/feedback.service';
+import {
+  DRINKS_ALREADY_LOADED,
+  REQUEST_ALL_DRINKS,
+  REQUEST_ALL_DRINKS_DONE,
+  REQUEST_ALL_DRINKS_FAILED
+} from "../drinks/drink.actions";
+import {selectAllDrinksLoaded} from "../drinks/drink.selectors";
 
 @Injectable()
 export class BeerStylesEffects {
 
+
   requestAll$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_ALL_BEER_STYLES),
-    withLatestFrom(this.store.pipe(select(selectAllBeerStylesLoaded))),
+    withLatestFrom(this.store.pipe(select(selectBeerStylesAllLoaded))),
     filter(([action, loaded]) => {
       if (action.force) {
         return true;
