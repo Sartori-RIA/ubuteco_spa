@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { BeerStylesFormDialogComponent } from './beer-styles-form-dialog.component';
 
@@ -6,7 +6,7 @@ describe('BeerStylesFormDialogComponent', () => {
   let component: BeerStylesFormDialogComponent;
   let fixture: ComponentFixture<BeerStylesFormDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ BeerStylesFormDialogComponent ]
     })

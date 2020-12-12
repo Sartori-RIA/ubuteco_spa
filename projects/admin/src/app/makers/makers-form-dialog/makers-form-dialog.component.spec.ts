@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MakersFormDialogComponent } from './makers-form-dialog.component';
 
@@ -6,7 +6,7 @@ describe('MakersFormDialogComponent', () => {
   let component: MakersFormDialogComponent;
   let fixture: ComponentFixture<MakersFormDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MakersFormDialogComponent ]
     })

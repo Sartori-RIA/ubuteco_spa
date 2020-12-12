@@ -125,12 +125,23 @@ const routes: Routes = [
 ];
 
 const config: ExtraOptions = {
-  preloadingStrategy: PreloadAllModules,
-  anchorScrolling: 'enabled',
-  onSameUrlNavigation: 'ignore',
-  scrollPositionRestoration: 'enabled',
-  useHash: true,
-  enableTracing: false // TODO never enable this in production, only to test
+    preloadingStrategy: PreloadAllModules,
+    anchorScrolling: 'enabled',
+    onSameUrlNavigation: 'ignore',
+    scrollPositionRestoration: 'enabled',
+    useHash: true,
+    enableTracing: false // TODO never enable this in production, only to test
+    ,
+    relativeLinkResolution: 'legacy'
+}{
+    preloadingStrategy: PreloadAllModules,
+    anchorScrolling: 'enabled',
+    onSameUrlNavigation: 'ignore',
+    scrollPositionRestoration: 'enabled',
+    useHash: true,
+    enableTracing: false // TODO never enable this in production, only to test
+    ,
+    relativeLinkResolution: 'legacy'
 };
 
 @NgModule({

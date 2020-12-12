@@ -18,9 +18,15 @@ const routes: Routes = [
 ];
 
 const config: ExtraOptions = {
-  useHash: true,
-  anchorScrolling: 'enabled',
-  scrollPositionRestoration: 'enabled'
+    useHash: true,
+    anchorScrolling: 'enabled',
+    scrollPositionRestoration: 'enabled',
+    relativeLinkResolution: 'legacy'
+}{
+    useHash: true,
+    anchorScrolling: 'enabled',
+    scrollPositionRestoration: 'enabled',
+    relativeLinkResolution: 'legacy'
 };
 
 @NgModule({
