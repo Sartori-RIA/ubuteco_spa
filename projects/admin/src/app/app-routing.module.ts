@@ -130,18 +130,8 @@ const config: ExtraOptions = {
     onSameUrlNavigation: 'ignore',
     scrollPositionRestoration: 'enabled',
     useHash: true,
-    enableTracing: false // TODO never enable this in production, only to test
-    ,
-    relativeLinkResolution: 'legacy'
-}{
-    preloadingStrategy: PreloadAllModules,
-    anchorScrolling: 'enabled',
-    onSameUrlNavigation: 'ignore',
-    scrollPositionRestoration: 'enabled',
-    useHash: true,
-    enableTracing: false // TODO never enable this in production, only to test
-    ,
-    relativeLinkResolution: 'legacy'
+    enableTracing: false, // TODO never enable this in production, only to test
+    relativeLinkResolution: 'corrected'
 };
 
 @NgModule({
