@@ -10,7 +10,7 @@ import {selectUserTheme} from '../../../store/user/user.selectors';
   providedIn: 'root'
 })
 export class LayoutService {
-  layoutConf: ILayoutConf;
+  layoutConf: ILayoutConf = {};
   layoutConfSubject = new BehaviorSubject<ILayoutConf>(this.layoutConf);
   layoutConf$ = this.layoutConfSubject.asObservable();
   isMobile: boolean;

@@ -19,35 +19,28 @@ import {
 import {catchError, filter, map, mergeMap, withLatestFrom} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {BeerStylesService} from '../../core/services/api/beer-styles.service';
-import {selectBeerStylesAllLoaded} from './beer-styles.selectors';
 import {AppState} from '../index';
 import {FeedbackService} from '../../core/services/api/feedback.service';
-import {
-  DRINKS_ALREADY_LOADED,
-  REQUEST_ALL_DRINKS,
-  REQUEST_ALL_DRINKS_DONE,
-  REQUEST_ALL_DRINKS_FAILED
-} from "../drinks/drink.actions";
-import {selectAllDrinksLoaded} from "../drinks/drink.selectors";
+import {selectBeerStylesAllLoaded} from './beer-styles.selectors';
 
 @Injectable()
 export class BeerStylesEffects {
 
-
   requestAll$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_ALL_BEER_STYLES),
     withLatestFrom(this.store.pipe(select(selectBeerStylesAllLoaded))),
-    filter(([action, loaded]) => {
-      if (action.force) {
+    filter(([{page, force}], loaded) => {
+      if (force) {
         return true;
       }
       if (loaded) {
         this.store.dispatch(BEER_STYLES_ALREADY_LOADED());
       }
-      return !loaded;
+      return false;
     }),
     mergeMap(([{page}]) => this.beerStyleService.index({page}).pipe(
-      map(({body, headers}) => REQUEST_ALL_BEER_STYLES_DONE({
+      map(({body, headers}) =>
+        REQUEST_ALL_BEER_STYLES_DONE({
           data: body,
           total: Number(headers.get('total'))
         })
@@ -57,8 +50,8 @@ export class BeerStylesEffects {
         return of(REQUEST_ALL_BEER_STYLES_FAILED());
       })
       ),
-    )
-  ));
+    )),
+  );
 
   newBeerStyle$ = createEffect(() => this.actions$.pipe(
     ofType(ADD_BEER_STYLE),

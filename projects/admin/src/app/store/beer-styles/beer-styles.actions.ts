@@ -1,12 +1,9 @@
 import {createAction, props} from '@ngrx/store';
 import {BeerStyle} from '../../core/models/beer-style';
 
-export const REQUEST_ALL_BEER_STYLES = createAction('[BeerStyles/API] find all done', props<{
-  page: string,
-  force?: boolean
-}>());
+export const REQUEST_ALL_BEER_STYLES = createAction('[BeerStyles/API] find all', props<{ page: string, force?: boolean}>());
 
-export const REQUEST_ALL_BEER_STYLES_FAILED = createAction('[BeerStyles/API] find all done');
+export const REQUEST_ALL_BEER_STYLES_FAILED = createAction('[BeerStyles/API] find all fail');
 
 export const REQUEST_ALL_BEER_STYLES_DONE = createAction('[BeerStyles/API] find all done',
   props<{ data: BeerStyle[], total: number }>()

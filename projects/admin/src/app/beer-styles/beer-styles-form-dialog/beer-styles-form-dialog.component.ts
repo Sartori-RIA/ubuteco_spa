@@ -41,6 +41,7 @@ export class BeerStylesFormDialogComponent implements OnInit {
       } else {
         this.store.dispatch(ADD_BEER_STYLE({style}));
       }
+      this.dialogRef.close();
     } else {
       this.beerStyleControl.markAllAsTouched();
     }

@@ -37,7 +37,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
     this.updateList();
-    this.store.dispatch(REQUEST_ALL_BEER_STYLES({page: '1'}));
+    this.store.dispatch(REQUEST_ALL_BEER_STYLES({page: '1', force: true}));
   }
 
   ngOnDestroy(): void {
@@ -77,6 +77,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   private updateList() {
     this.subscription = this.beerStyles$.subscribe((tables) => {
+      console.log('atualizando')
       this.dataSource = new MatTableDataSource(tables);
       this.changeDetectorRefs.detectChanges();
     });

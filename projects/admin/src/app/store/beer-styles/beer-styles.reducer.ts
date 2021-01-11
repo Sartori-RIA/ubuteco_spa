@@ -17,7 +17,7 @@ import {
 import {BeerStyle} from '../../core/models/beer-style';
 import {Action, createReducer, on} from '@ngrx/store';
 
-export const beerStyleFeatureKey = 'beer-styles';
+export const beerStyleFeatureKey = 'beer_styles';
 
 export interface BeerStyleState extends EntityState<BeerStyle> {
   loaded: boolean;
@@ -53,15 +53,18 @@ const beerStyleReducer = createReducer(initialState,
     DELETE_BEER_STYLE_FAILED,
     (state) => ({...state, loading: false})
   ),
-  on(REQUEST_ALL_BEER_STYLES_DONE, (state, {data, total}) => adapter.upsertMany(data, {
-    ...state,
-    loaded: true,
-    loading: false,
-    total
-  })),
-  on(ADD_BEER_STYLE_DONE, (state, {style}) => adapter.addOne(style, {...state, loaded: true, loading: false})),
-  on(DELETE_BEER_STYLE_DONE, (state, {id}) => adapter.removeOne(id, {...state, loading: false})),
-  on(UPDATE_BEER_STYLE_DONE, (state, {style}) => adapter.upsertOne(style, {...state, loading: false}))
+  on(REQUEST_ALL_BEER_STYLES_DONE, (state, {data, total}) =>
+    adapter.addMany(data, {...state, loaded: true, loading: false, total})
+  ),
+  on(ADD_BEER_STYLE_DONE, (state, {style}) =>
+    adapter.addOne(style, {...state, loaded: true, loading: false})
+  ),
+  on(DELETE_BEER_STYLE_DONE, (state, {id}) =>
+    adapter.removeOne(id, {...state, loading: false})
+  ),
+  on(UPDATE_BEER_STYLE_DONE, (state, {style}) =>
+    adapter.upsertOne(style, {...state, loading: false})
+  )
 );
 
 export function reducer(state: BeerStyleState | undefined, action: Action): BeerStyleState {
