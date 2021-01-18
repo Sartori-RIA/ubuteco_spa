@@ -11,7 +11,6 @@ export abstract class BaseService<T extends BaseModel> {
   }
 
   index(params?: { [key: string]: string | string[] }): Observable<HttpResponse<T[]>> {
-    console.log(params)
     return this.http.get<T[]>(this.url, {params, observe: 'response'}).pipe();
   }
 

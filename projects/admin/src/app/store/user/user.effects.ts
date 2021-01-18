@@ -61,7 +61,7 @@ export class UserEffects {
 
   loadTheme$ = createEffect(() => this.actions$.pipe(
     ofType(THEME_REQUESTED),
-    mergeMap((action) => this.themeService.show(action.user.theme_id)
+    mergeMap((action) => this.themeService.show(action.user.organization.theme_id)
       .pipe(
         map((theme) => THEME_LOADED({theme})),
         catchError(() => of(THEME_FAILED()))

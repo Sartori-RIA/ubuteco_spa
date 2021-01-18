@@ -43,7 +43,7 @@ const userReducer = createReducer(profileInitialState,
     UPDATE_USER_DONE, (state, {user}) => ({
       ...state,
       user,
-      theme: user?.theme,
+      theme: user?.organization?.theme,
       loading: false
     })
   ),

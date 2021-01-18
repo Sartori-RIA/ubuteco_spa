@@ -8,6 +8,8 @@ import {selectAllDishesToMake} from '../../store/kitchen/kitchen.selectors';
 import {KitchenDish} from '../../core/models/kitchen-dish';
 import {FormBuilder} from '@angular/forms';
 import {KitchenSocketService} from '../../core/sockets/kitchen-socket.service';
+import {Organization} from '../../core/models/organization';
+import {selectCurrentOrganization} from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-dishes',
@@ -16,10 +18,11 @@ import {KitchenSocketService} from '../../core/sockets/kitchen-socket.service';
 })
 export class DishesComponent implements OnInit, OnDestroy {
   readonly dishes$: Observable<KitchenDish[]> = this.store.pipe(select(selectAllDishesToMake));
+  readonly organization$: Observable<Organization> = this.store.pipe(select(selectCurrentOrganization));
   readonly displayedColumns: string[] = ['order_id', 'table', 'client', 'dish', 'quantity', 'action'];
   private data: KitchenDish[] = [];
   dataSource = new MatTableDataSource(this.data);
-  private subscription: Subscription;
+  private subscriptions: Subscription[] = [];
 
   constructor(private store: Store<AppState>,
               private fb: FormBuilder,
@@ -30,11 +33,17 @@ export class DishesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.store.dispatch(REQUEST_ORDERS_DISHES({page: '1'}));
     this.updateDishesList();
-    this.kitchenSocketService.joinInRoom('admin@cookiecode.com.br');
+    this.subscriptions.push(this.organization$.subscribe((organization) => {
+      console.log('org', organization);
+      this.kitchenSocketService.joinInRoom(organization.cnpj);
+      this.kitchenSocketService.channel.messages.subscribe((messages) => {
+        console.log('mensagens', messages);
+      })
+    }));
   }
 
   ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
+    this.subscriptions?.forEach((v) => v.unsubscribe());
   }
 
   applyFilter(word: string) {
@@ -42,9 +51,9 @@ export class DishesComponent implements OnInit, OnDestroy {
   }
 
   private updateDishesList() {
-    this.subscription = this.dishes$.subscribe((dishes) => {
+    this.subscriptions.push(this.dishes$.subscribe((dishes) => {
       this.dataSource = new MatTableDataSource(dishes);
       this.changeDetectorRefs.detectChanges();
-    });
+    }));
   }
 }

@@ -5,9 +5,11 @@ import {Beer} from './beer';
 import {Dish} from './dish';
 import {Drink} from './drink';
 import {Wine} from './wine';
+import {Organization} from './organization';
 
 export interface Order extends BaseModel {
-  customer?: Customer;
+  user?: Customer;
+  organization?: Organization;
   table?: Table;
   table_id?: number;
   order_items?: OrderItem[];

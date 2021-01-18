@@ -49,8 +49,8 @@ export class SettingsComponent implements AfterViewInit {
     this.form.patchValue({
       name: this.user?.name,
       email: this.user?.email,
-      company_name: this.user?.company_name,
-      cnpj: this.user?.cnpj
+      company_name: this.user?.organization?.name,
+      cnpj: this.user?.organization?.cnpj
     });
   }
 }
