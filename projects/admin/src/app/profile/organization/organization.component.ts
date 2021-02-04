@@ -11,7 +11,7 @@ import {UPDATE_USER} from '../../store/auth/auth.actions';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
-export class SettingsComponent implements AfterViewInit {
+export class OrganizationComponent implements AfterViewInit {
 
   form: FormGroup = this.mountForm();
   user: User = this.activatedRoute.snapshot.data.user;
@@ -26,7 +26,7 @@ export class SettingsComponent implements AfterViewInit {
     this.updateForm();
   }
 
-  updateProfile() {
+  onSubmit() {
     if (this.form.valid) {
       const user: User = this.form.value;
       this.store.dispatch(UPDATE_USER({user}));

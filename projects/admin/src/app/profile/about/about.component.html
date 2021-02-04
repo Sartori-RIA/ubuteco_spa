@@ -1,0 +1,10 @@
+<div [formGroup]="form">
+  <h3 class="text-center p-1">Olá {{(user$ | async)?.name}}</h3>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Nome</mat-label>
+    <input matInput formControlName="name">
+  </mat-form-field>
+
+  <app-confirm-button [loading]="loading$ | async" (confirmed)="onSubmit()"></app-confirm-button>
+</div>

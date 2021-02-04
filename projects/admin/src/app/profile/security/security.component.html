@@ -1,0 +1,21 @@
+<div [formGroup]="form">
+  <h3 class="text-center p-1">Informações de acesso</h3>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email">
+    <mat-error *ngIf="form.controls.email.hasError('emailInUse')">E-mail em uso</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Senha</mat-label>
+    <input matInput formControlName="password">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Confirmar senha</mat-label>
+    <input matInput formControlName="confirm_password">
+  </mat-form-field>
+
+  <app-confirm-button (confirmed)="onSubmit()"></app-confirm-button>
+</div>

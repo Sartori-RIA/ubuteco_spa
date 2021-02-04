@@ -7,11 +7,19 @@ import {AuthEffects} from '../store/auth/auth.effects';
 import * as fromAuth from '../store/auth/auth.reducer';
 import {StoreModule} from '@ngrx/store';
 import {ProfileRoutingModule} from './profile-routing.module';
-import { SettingsComponent } from './settings/settings.component';
 import { ThemeCustomizerComponent } from './theme-customizer/theme-customizer.component';
+import {OrganizationComponent} from './organization/organization.component';
+import {AboutComponent} from './about/about.component';
+import {SecurityComponent} from './security/security.component';
 
 @NgModule({
-  declarations: [ProfileComponent, SettingsComponent, ThemeCustomizerComponent],
+  declarations: [
+    AboutComponent,
+    ProfileComponent,
+    ThemeCustomizerComponent,
+    OrganizationComponent,
+    SecurityComponent
+  ],
   imports: [
     SharedModule,
     ProfileRoutingModule,

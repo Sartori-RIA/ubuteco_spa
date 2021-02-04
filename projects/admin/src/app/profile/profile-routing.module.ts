@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ProfileComponent} from './profile/profile.component';
-import {SettingsComponent} from './settings/settings.component';
+import {OrganizationComponent} from './organization/settings.component';
 import {ThemeCustomizerComponent} from './theme-customizer/theme-customizer.component';
 import {UserResolver} from '../core/resolvers/user.resolver';
 
@@ -15,7 +15,7 @@ const routes: Routes = [
     children: [
       {
         path: 'configuracoes',
-        component: SettingsComponent,
+        component: OrganizationComponent,
         runGuardsAndResolvers: 'always',
         resolve: {
           user: UserResolver
