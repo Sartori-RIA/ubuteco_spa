@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ibuteco-ce9c3": {
+      "hosting": {
+        "admin": [
+          "ibuteco-ce9c3"
+        ]
+      }
+    }
+  }
+}
