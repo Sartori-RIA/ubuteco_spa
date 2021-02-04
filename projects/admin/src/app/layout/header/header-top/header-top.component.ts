@@ -30,7 +30,6 @@ export class HeaderTopComponent implements OnInit, OnDestroy {
     this.egretThemes = this.themeService.egretThemes;
     this.menuItemSub = this.navService.menuItems$
       .subscribe(res => {
-        res = res.filter(item => item.type !== 'icon' && item.type !== 'separator');
         const limit = 4;
         const mainItems: any[] = res.slice(0, limit);
         if (res.length <= limit) {

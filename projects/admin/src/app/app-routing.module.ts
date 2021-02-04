@@ -92,7 +92,8 @@ const routes: Routes = [
         path: 'cozinha',
         loadChildren: () => import('./kitchen/kitchen.module').then((m) => m.KitchenModule),
         data: {title: 'Cozinha'},
-        canActivate: [AuthenticatedGuard]
+        canActivate: [AuthenticatedGuard],
+        canLoad: [AuthenticatedGuard]
       },
       {
         path: 'perfil',

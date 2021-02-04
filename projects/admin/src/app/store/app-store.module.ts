@@ -9,6 +9,7 @@ import {NavigationActionTiming, RouterStateSerializer, StoreRouterConnectingModu
 import {CustomSerializer} from './custom-router-serializer';
 import {EntityDataModule} from '@ngrx/data';
 import {AuthEffects} from './auth/auth.effects';
+import {KitchenEffects} from './kitchen/kitchen.effects';
 
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import {AuthEffects} from './auth/auth.effects';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([AppEffects, AuthEffects]),
+    EffectsModule.forRoot([AppEffects, AuthEffects, KitchenEffects]),
     StoreRouterConnectingModule.forRoot({
       serializer: CustomSerializer,
       navigationActionTiming: NavigationActionTiming.PostActivation

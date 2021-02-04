@@ -6,7 +6,7 @@ import {AppState} from './index';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import * as moment from 'moment';
 import {take, tap} from 'rxjs/operators';
-import {LOAD_USER} from './user/user.actions';
+import {LOAD_USER} from './auth/auth.actions';
 import {LocalStorage} from '../shared/util/storage';
 
 @Injectable()

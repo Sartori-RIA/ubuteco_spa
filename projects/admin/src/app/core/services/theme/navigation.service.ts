@@ -3,7 +3,6 @@ import {BehaviorSubject} from 'rxjs';
 import {IconName} from '@fortawesome/fontawesome-svg-core';
 
 export interface IMenuItem {
-  type: string; // Possible values: link/dropDown/icon/separator/extLink
   name?: string; // Used as display text for item and title for separator type
   state?: string; // Router state
   icon?: string | IconName; // Material icon name
@@ -35,7 +34,6 @@ export class NavigationService {
   iconMenu: IMenuItem[] = [
     {
       name: 'Fabricantes',
-      type: 'link',
       tooltip: 'Blank',
       icon: 'dashboard',
       state: 'fabricantes',
@@ -43,14 +41,12 @@ export class NavigationService {
     },
     {
       name: 'Estilos de Cervejas',
-      type: 'link',
       tooltip: 'Blank',
       icon: 'dashboard',
       state: 'estilos-cervejas',
       iconType: 'material-design',
     }, {
       name: 'Estilos de Vinhos',
-      type: 'link',
       tooltip: 'Blank',
       icon: 'dashboard',
       state: 'estilos-vinhos',
@@ -58,7 +54,6 @@ export class NavigationService {
     },
     {
       name: 'Bebidas',
-      type: 'link',
       tooltip: 'Blank',
       icon: 'local_bar',
       state: 'bebidas',
@@ -66,7 +61,6 @@ export class NavigationService {
     },
     {
       name: 'Cervejas',
-      type: 'link',
       tooltip: 'Blank',
       icon: 'fa-beer',
       state: 'cervejas',
@@ -75,7 +69,6 @@ export class NavigationService {
     },
     {
       name: 'Vinhos',
-      type: 'link',
       tooltip: 'Blank',
       icon: 'wine-bottle',
       state: 'vinhos',
@@ -84,35 +77,30 @@ export class NavigationService {
     },
     {
       name: 'Estoque de Alimentos',
-      type: 'link',
       tooltip: 'Blank',
       icon: 'dashboard',
       state: 'alimentos',
       iconType: 'material-design',
     }, {
       name: 'Cardápio',
-      type: 'link',
       tooltip: 'Blank',
       icon: 'restaurant_menu',
       state: 'cardapio',
       iconType: 'material-design',
     }, {
       name: 'Cozinha',
-      type: 'link',
       tooltip: 'Blank',
       icon: 'restaurant',
       state: 'cozinha',
       iconType: 'material-design',
     }, {
       name: 'Mesas',
-      type: 'link',
       tooltip: 'Blank',
       icon: 'event_seat',
       state: 'mesas',
       iconType: 'material-design',
     }, {
       name: 'Pedidos',
-      type: 'link',
       tooltip: 'Blank',
       icon: 'shopping_cart',
       state: 'pedidos/list',

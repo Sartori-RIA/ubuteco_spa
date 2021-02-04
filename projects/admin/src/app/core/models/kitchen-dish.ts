@@ -8,3 +8,8 @@ export interface KitchenDish extends BaseModel {
   order_item: OrderItem;
   dish: Dish;
 }
+
+export class ActionCableDish {
+  obj?: KitchenDish;
+  action?: 'create' | 'update'
+}

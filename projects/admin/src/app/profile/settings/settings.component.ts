@@ -4,7 +4,7 @@ import {User} from '../../core/models/user';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../store';
 import {ActivatedRoute} from '@angular/router';
-import {UPDATE_USER} from '../../store/user/user.actions';
+import {UPDATE_USER} from '../../store/auth/auth.actions';
 
 @Component({
   selector: 'app-settings',

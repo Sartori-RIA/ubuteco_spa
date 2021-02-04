@@ -8,8 +8,8 @@ import {AppState} from '../../../store';
 import {MatDialog} from '@angular/material/dialog';
 import {SignOutComponent} from '../../../auth/sign-out/sign-out.component';
 import {User} from '../../../core/models/user';
-import {selectUser} from '../../../store/user/user.selectors';
-import {LOAD_USER} from '../../../store/user/user.actions';
+import {selectCurrentUser} from '../../../store/auth/auth.selectors';
+import {LOAD_USER} from '../../../store/auth/auth.actions';
 
 @Component({
   selector: 'app-sidebar-side',
@@ -20,7 +20,7 @@ export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
   hasIconTypeMenuItem: boolean;
   iconTypeMenuTitle: string;
   layoutConf: ILayoutConf;
-  user$: Observable<User> = this.store.pipe(select(selectUser));
+  user$: Observable<User> = this.store.pipe(select(selectCurrentUser));
   private menuItemsSub: Subscription;
 
   constructor(private navService: NavigationService,

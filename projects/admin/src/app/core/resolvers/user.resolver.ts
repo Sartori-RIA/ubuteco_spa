@@ -3,9 +3,9 @@ import {User} from '../models/user';
 import {Injectable} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {selectUser} from '../../store/user/user.selectors';
+import {selectCurrentUser} from '../../store/auth/auth.selectors';
 import {filter, first, tap} from 'rxjs/operators';
-import {LOAD_USER} from '../../store/user/user.actions';
+import {LOAD_USER} from '../../store/auth/auth.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class UserResolver implements Resolve<User> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User> | Promise<User> | User {
-    return this.store.pipe(select(selectUser),
+    return this.store.pipe(select(selectCurrentUser),
       tap((user) => {
         if (!user) {
           this.store.dispatch(LOAD_USER());

@@ -4,9 +4,9 @@ import {LayoutService} from './layout.service';
 import {Colors, CustomizerColors, Theme} from '../../models/theme';
 import {Observable, of, zip} from 'rxjs';
 import {select, Store} from '@ngrx/store';
-import {selectUser, selectUserTheme} from '../../../store/user/user.selectors';
+import {selectCurrentUser, selectUserTheme} from '../../../store/auth/auth.selectors';
 import {AppState} from '../../../store';
-import {UPDATE_THEME} from '../../../store/user/user.actions';
+import {UPDATE_THEME} from '../../../store/auth/auth.actions';
 import {map, take} from 'rxjs/operators';
 import {User} from '../../models/user';
 
@@ -14,8 +14,6 @@ import {User} from '../../models/user';
   providedIn: 'root'
 })
 export class CustomizerService {
-  private readonly theme$: Observable<Theme> = this.store.pipe(select(selectUserTheme));
-  private readonly user$: Observable<User> = this.store.pipe(select(selectUser));
   readonly colors$: Observable<CustomizerColors[]> = of([
     {
       class: 'black',
@@ -91,6 +89,8 @@ export class CustomizerService {
     'yellow',
     'green'
   ];
+  private readonly theme$: Observable<Theme> = this.store.pipe(select(selectUserTheme));
+  private readonly user$: Observable<User> = this.store.pipe(select(selectCurrentUser));
 
   constructor(private router: Router,
               private layout: LayoutService,
@@ -206,7 +206,7 @@ export class CustomizerService {
   }
 
   toggleClass(el, className): void {
-    console.log('setando cor', className)
+    console.log('setando cor', className);
     if (!el) {
       return;
     }

@@ -29,6 +29,8 @@ import {
 import {AppState} from '../index';
 import {selectAllOrdersLoaded} from './orders.selectors';
 import {FeedbackService} from '../../core/services/api/feedback.service';
+import {selectCurrentOrganization} from '../auth/auth.selectors';
+import {Organization} from '../../core/models/organization';
 
 @Injectable()
 export class OrdersEffects {
@@ -81,11 +83,16 @@ export class OrdersEffects {
 
   addOrder$ = createEffect(() => this.actions$.pipe(
     ofType(CREATE_ORDER),
-    mergeMap((action) => this.ordersService.create(action.order)
-      .pipe(
-        map((order) => CREATE_ORDER_DONE({order})),
-        catchError(() => of(CREATE_ORDER_FAILED()))
-      ),
+    withLatestFrom(this.store.pipe(select(selectCurrentOrganization))),
+    mergeMap(([action, organization]) => this.ordersService.create({
+        ...action.order,
+        organization_id: organization.id,
+        organization: organization as Organization
+      })
+        .pipe(
+          map((order) => CREATE_ORDER_DONE({order})),
+          catchError(() => of(CREATE_ORDER_FAILED()))
+        )
     )
   ));
 

@@ -40,18 +40,20 @@ export class OrderItemsEffects {
 
   updateOrderItem$ = createEffect(() => this.actions$.pipe(
     ofType(UPDATE_ORDER_ITEM),
-    mergeMap((action) => this.ordersService.updateItem({
+    mergeMap((action) => this.ordersService
+      .updateItem({
         orderId: action.order_id,
         item: action.item
-      }).pipe(
-      map((item) => {
-        this.feedback.success('Item atualizado ao pedido com sucesso');
-        return UPDATE_ORDER_ITEM_DONE({item});
-      }),
-      catchError((err) => {
-        this.feedback.error('Falhou ao atualizar o item ao pedido');
-        return of(UPDATE_ORDER_ITEM_FAILED());
       })
+      .pipe(
+        map((item) => {
+          this.feedback.success('Item atualizado ao pedido com sucesso');
+          return UPDATE_ORDER_ITEM_DONE({item});
+        }),
+        catchError((err) => {
+          this.feedback.error('Falhou ao atualizar o item ao pedido');
+          return of(UPDATE_ORDER_ITEM_FAILED());
+        })
       ),
     )
   ));
@@ -75,18 +77,21 @@ export class OrderItemsEffects {
 
   addOrderItem$ = createEffect(() => this.actions$.pipe(
     ofType(ADD_ORDER_ITEM),
-    mergeMap((action) => this.ordersService.addItem({
+    mergeMap((action) => this.ordersService
+      .addItem({
         orderId: action.order_id,
         data: action.data,
-      }).pipe(
-      map((item) => {
-        this.feedback.createSuccess('Item no pedido', true);
-        return ADD_ORDER_ITEM_DONE({item});
-      }),
-      catchError((err) => {
-        this.feedback.error('Falhou ao adicionar o item ao pedido');
-        return of(ADD_ORDER_ITEM_FAILED());
       })
+      .pipe(
+        map((item) => {
+          this.feedback.createSuccess('Item no pedido', true);
+          return ADD_ORDER_ITEM_DONE({item});
+        }),
+        catchError((err) => {
+          console.log(err);
+          this.feedback.error('Falhou ao adicionar o item ao pedido');
+          return of(ADD_ORDER_ITEM_FAILED());
+        })
       ),
     )
   ));

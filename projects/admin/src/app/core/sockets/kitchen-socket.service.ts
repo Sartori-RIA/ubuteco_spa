@@ -1,28 +1,46 @@
-import {Injectable} from '@angular/core';
+import {Injectable, NgZone} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../store';
-import {ActionCableService, Channel} from "angular2-actioncable";
-import {environment} from "../../../environments/environment";
+import {environment} from '../../../environments/environment';
+import * as ActionCable from 'actioncable';
+import {LocalStorage} from '../../shared/util/storage';
+import {NEW_ORDER_DISH_RECEIVED, UPDATE_ORDER_DISH_STATUS_DONE} from '../../store/kitchen/kitchen.actions';
+import {ActionCableDish} from '../models/kitchen-dish';
 
 @Injectable({
   providedIn: 'root'
 })
 export class KitchenSocketService {
 
-  channel: Channel;
+  private consumer: any;
 
-  constructor(private store: Store<AppState>, private cableService: ActionCableService) {
 
-    // this.on('dish_received', (dishToMake: KitchenDish) => {
-    // this.store.dispatch(NEW_ORDER_DISH_RECEIVED({dish: dishToMake}));
-    // });
-
-    // this.on('dish_updated', (dishToMake: KitchenDish) => {
-    // this.store.dispatch(UPDATE_ORDER_DISH_STATUS_DONE({dish: dishToMake}));
-    // });
+  constructor(private store: Store<AppState>,
+              private ngZone: NgZone) {
   }
 
-  joinInRoom(cnpj: string) {
-    this.channel = this.cableService.cable(environment.cable_url).channel(`kitchens_${cnpj}`)
+  joinInRoom(cnpj: string): void {
+    const store = this.store;
+    const ngZone = this.ngZone;
+    this.consumer = ActionCable.createConsumer(`${environment.cable_url}?token=${LocalStorage.jwt()}`);
+    console.log('Trying connection');
+    this.consumer.subscriptions.create({channel: `KitchenChannel`, room: `kitchens_${cnpj}`}, {
+      connected() {
+        console.log('Subscription is ready for use');
+      },
+      disconnected() {
+        console.log('Service terminated by WB server');
+      },
+      received(data) {
+        ngZone.run(() => {
+          const dish: ActionCableDish = JSON.parse(data);
+          if (dish.action === 'create') {
+            store.dispatch(NEW_ORDER_DISH_RECEIVED({dish: dish.obj}));
+          } else {
+            store.dispatch(UPDATE_ORDER_DISH_STATUS_DONE({dish: dish.obj}));
+          }
+        });
+      }
+    });
   }
 }

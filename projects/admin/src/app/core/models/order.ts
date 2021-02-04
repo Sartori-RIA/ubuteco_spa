@@ -10,6 +10,7 @@ import {Organization} from './organization';
 export interface Order extends BaseModel {
   user?: Customer;
   organization?: Organization;
+  organization_id?: number;
   table?: Table;
   table_id?: number;
   order_items?: OrderItem[];

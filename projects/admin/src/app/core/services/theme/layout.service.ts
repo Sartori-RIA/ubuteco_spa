@@ -4,7 +4,7 @@ import {ThemeService} from './theme.service';
 import {IAdjustScreenOptions, ILayoutChangeOptions, ILayoutConf, Theme} from '../../models/theme';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../store';
-import {selectUserTheme} from '../../../store/user/user.selectors';
+import {selectUserTheme} from '../../../store/auth/auth.selectors';
 
 @Injectable({
   providedIn: 'root'

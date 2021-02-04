@@ -6,7 +6,7 @@ import {Order} from '../../core/models/order';
 import {Observable, Subscription} from 'rxjs';
 import {selectAllOrders} from '../../store/orders/orders.selectors';
 import {MatTableDataSource} from '@angular/material/table';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-index',

@@ -2,9 +2,9 @@ import {NgModule} from '@angular/core';
 import {ProfileComponent} from './profile/profile.component';
 import {SharedModule} from '../shared/shared.module';
 import {EffectsModule} from '@ngrx/effects';
-import {UserEffects} from '../store/user/user.effects';
+import {AuthEffects} from '../store/auth/auth.effects';
 
-import * as fromUser from '../store/user/user.reducer';
+import * as fromAuth from '../store/auth/auth.reducer';
 import {StoreModule} from '@ngrx/store';
 import {ProfileRoutingModule} from './profile-routing.module';
 import { SettingsComponent } from './settings/settings.component';
@@ -15,8 +15,8 @@ import { ThemeCustomizerComponent } from './theme-customizer/theme-customizer.co
   imports: [
     SharedModule,
     ProfileRoutingModule,
-    StoreModule.forFeature(fromUser.featureKey, fromUser.reducer),
-    EffectsModule.forFeature([UserEffects])
+    StoreModule.forFeature(fromAuth.featureKey, fromAuth.reducer),
+    EffectsModule.forFeature([AuthEffects])
   ]
 })
 export class ProfileModule {

@@ -26,9 +26,9 @@ import {SidebarComponent} from './layout/navigation/sidebar/sidebar.component';
 import {FooterComponent} from './layout/footer/footer.component';
 import {AuthModule} from './auth/auth.module';
 import {StoreModule} from '@ngrx/store';
-import * as fromUser from './store/user/user.reducer';
+import * as fromAuth from './store/auth/auth.reducer';
 import {EffectsModule} from '@ngrx/effects';
-import {UserEffects} from './store/user/user.effects';
+import {AuthEffects} from './store/auth/auth.effects';
 import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 
@@ -60,8 +60,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CoreModule,
     AppStoreModule,
     AuthModule,
-    StoreModule.forFeature(fromUser.featureKey, fromUser.reducer),
-    EffectsModule.forFeature([UserEffects])
+    StoreModule.forFeature(fromAuth.featureKey, fromAuth.reducer),
+    EffectsModule.forFeature([AuthEffects])
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {float: 'always'}},

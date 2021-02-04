@@ -8,6 +8,11 @@ export const selectCurrentUser = createSelector(
   (state) => state.user
 );
 
+export const selectUserTheme = createSelector(
+  authFeatureSelector,
+  (state) => state.theme
+);
+
 export const selectCurrentOrganization = createSelector(
   selectCurrentUser,
   (user) => user.organization

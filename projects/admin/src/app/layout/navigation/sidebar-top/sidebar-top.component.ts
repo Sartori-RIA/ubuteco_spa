@@ -16,7 +16,7 @@ export class SidebarTopComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.menuItemsSub = this.navService.menuItems$.subscribe(menuItem => {
-      this.menuItems = menuItem.filter(item => item.type !== 'icon' && item.type !== 'separator');
+      this.menuItems = menuItem;
     });
   }
 
