@@ -31,6 +31,7 @@ import {NextButtonComponent} from './components/buttons/next-button/next-button.
 import {ShowButtonComponent} from './components/buttons/show-button/show-button.component';
 import {TrashButtonComponent} from './components/buttons/trash-button/trash-button.component';
 import {AvatarModule} from 'ngx-avatar';
+import {TranslateModule} from '@ngx-translate/core';
 
 const NG_MODULES = [
   CommonModule,
@@ -49,7 +50,8 @@ const LIBS_MODULES = [
   CustomFormsModule,
   NgxCustomFormsModule,
   PerfectScrollbarModule,
-  AvatarModule
+  AvatarModule,
+  TranslateModule
 ];
 
 const IBUTECO_LIBS = [

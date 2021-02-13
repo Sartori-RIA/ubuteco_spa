@@ -1,0 +1,13 @@
+{
+  "pages": {
+    "auth": {
+      "titles": {
+        "sign_in": "Entre em sua conta"
+      },
+      "buttons": {
+        "sign_in": "Entrar",
+        "sign_up": "Criar conta"
+      }
+    }
+  }
+}
