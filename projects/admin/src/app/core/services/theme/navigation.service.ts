@@ -73,11 +73,9 @@ export class NavigationService {
     {
       name: 'Vinhos',
       tooltip: 'Blank',
-      icon: 'fa-wine-bottle',
+      icon: 'wine_bar',
       state: 'vinhos',
-      iconType: 'font-awesome',
-      fontSet: 'fas',
-      faIcon: faWineBottle
+      iconType: 'material-design',
     },
     {
       name: 'Estoque de Alimentos',
