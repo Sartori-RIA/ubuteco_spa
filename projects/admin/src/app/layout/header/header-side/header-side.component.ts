@@ -4,6 +4,9 @@ import {LayoutService} from '../../../core/services/theme/layout.service';
 import {ILayoutConf} from '../../../core/models/theme';
 import {MatDialog} from '@angular/material/dialog';
 import {SignOutComponent} from '../../../auth/sign-out/sign-out.component';
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../../../store';
+import {selectCurrentUser} from '../../../store/auth/auth.selectors';
 
 export interface Langs {
   name: string;
@@ -17,12 +20,13 @@ export interface Langs {
 })
 export class HeaderSideComponent implements OnInit {
   @Input() notificPanel;
-
+  user$ = this.store.pipe(select(selectCurrentUser));
   public egretThemes;
   public layoutConf: ILayoutConf;
 
   constructor(private themeService: ThemeService,
               private layout: LayoutService,
+              private store: Store<AppState>,
               private dialog: MatDialog,
               private renderer: Renderer2) {
   }

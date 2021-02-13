@@ -2,7 +2,9 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {IconName} from '@fortawesome/fontawesome-svg-core';
 import {IconDefinition} from '@fortawesome/fontawesome-common-types';
-import {faBeer, faWineBottle} from "@fortawesome/free-solid-svg-icons";
+import {faBeer, faWineBottle} from '@fortawesome/free-solid-svg-icons';
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../../../store';
 
 export interface IMenuItem {
   name?: string; // Used as display text for item and title for separator type

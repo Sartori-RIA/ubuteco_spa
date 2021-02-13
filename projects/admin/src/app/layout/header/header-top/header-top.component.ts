@@ -3,9 +3,9 @@ import {Subscription} from 'rxjs';
 import {LayoutService} from '../../../core/services/theme/layout.service';
 import {NavigationService} from '../../../core/services/theme/navigation.service';
 import {ThemeService} from '../../../core/services/theme/theme.service';
-import {ILayoutConf} from "../../../core/models/theme";
-import {MatDialog} from "@angular/material/dialog";
-import {SignOutComponent} from "../../../auth/sign-out/sign-out.component";
+import {ILayoutConf} from '../../../core/models/theme';
+import {MatDialog} from '@angular/material/dialog';
+import {SignOutComponent} from '../../../auth/sign-out/sign-out.component';
 
 @Component({
   selector: 'app-header-top',

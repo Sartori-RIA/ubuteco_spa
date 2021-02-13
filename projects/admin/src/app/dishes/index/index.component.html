@@ -8,11 +8,7 @@
 
 <div class="mat-elevation-z8">
 
-  <div class="fab-container">
-    <button matTooltip="Adicionar Item ao Cardápio" class="fab-toggler" routerLink="/cardapio/add" mat-fab>
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
+  <app-float-action-button tooltip="Adicionar Item ao Cardápio" (fabClick)="openForm()"></app-float-action-button>
 
   <table mat-table [dataSource]="dataSource"
          matSort matSortDisableClear matSortDirection="desc"

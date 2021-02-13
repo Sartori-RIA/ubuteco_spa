@@ -42,7 +42,11 @@
     [matMenuTriggerFor]="accountMenu"
     class="topbar-button-right img-button"
   >
-    <img src="assets/images/face-7.jpg" alt=""/>
+      <ngx-avatar *ngIf="user$ | async; let user"
+                  class="my-avatar"
+                  [size]="40"
+                  [name]="user?.name"
+                  [src]="user?.picture?.url"></ngx-avatar>
   </button>
 
   <mat-menu #accountMenu="matMenu">

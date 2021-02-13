@@ -13,6 +13,8 @@ import {
   selectAllDishesOrderedByPrice
 } from '../../store/dishes/dishes.selectors';
 import {REMOVE_DISH, REQUEST_ALL_DISHES} from '../../store/dishes/dishes.actions';
+import {MatDialog} from "@angular/material/dialog";
+import {FormComponent} from "../form/form.component";
 
 @Component({
   selector: 'app-index',
@@ -31,6 +33,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(private store: Store<AppState>,
+              private dialog: MatDialog,
               private changeDetectorRefs: ChangeDetectorRef) {
   }
 
@@ -41,6 +44,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    console.log('ASD')
     this.dataSource.sort = this.sort;
     this.store.dispatch(REQUEST_ALL_DISHES({page: '1'}));
     this.store.dispatch(REQUEST_ALL_FOODS({page: '1'}));
@@ -80,6 +84,12 @@ export class IndexComponent implements OnInit, OnDestroy {
     this.subscription = this.menu$.subscribe((items) => {
       this.dataSource = new MatTableDataSource(items);
       this.changeDetectorRefs.detectChanges();
+    });
+  }
+
+  openForm() {
+    this.dialog.open(FormComponent, {
+
     });
   }
 }

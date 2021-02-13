@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Order} from "../../core/models/order";
+import {Order} from '../../core/models/order';
 
 @Component({
   selector: 'app-finish-order-card',

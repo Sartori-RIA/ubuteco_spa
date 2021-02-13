@@ -1,5 +1,6 @@
 import {BaseModel, PictureFromS3} from './base.model';
 import {Organization} from './organization';
+import {Role} from './role';
 
 export interface User extends BaseModel {
   email?: string;
@@ -8,6 +9,7 @@ export interface User extends BaseModel {
   organization_id?: number;
   organization?: Organization;
   picture?: PictureFromS3;
+  role?: Role;
 }
 
 export interface SignUpPayload {

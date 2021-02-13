@@ -8,20 +8,7 @@ import {DishResolver} from '../core/resolvers/dish.resolver';
 
 const routes: Routes = [
   {
-    path: '', component: DishesHomeComponent, children: [
-      {path: 'list', component: IndexComponent},
-      {
-        path: 'add', component: FormComponent
-      },
-      {
-        path: ':id', component: FormComponent,
-        runGuardsAndResolvers: 'always',
-        resolve: {
-          item: DishResolver
-        }
-      },
-
-    ]
+    path: '', component: IndexComponent
   }
 ];
 

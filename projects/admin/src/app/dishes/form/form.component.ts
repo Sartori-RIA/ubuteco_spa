@@ -1,5 +1,5 @@
 import {FeedbackService} from '../../core/services/api/feedback.service';
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
@@ -10,7 +10,7 @@ import {Food} from '../../core/models/food';
 import {selectAllFoodsOrderedByName} from '../../store/foods/food.selectors';
 import {Maker} from '../../core/models/maker';
 import {REQUEST_ALL_FOODS} from '../../store/foods/food.actions';
-import {MatDialog} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CREATE_DISH, REMOVE_DISH, UPDATE_DISH} from '../../store/dishes/dishes.actions';
 
 @Component({
@@ -29,6 +29,8 @@ export class FormComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private store: Store<AppState>,
+              private dialogRef: MatDialogRef<FormComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: Dish,
               private dialog: MatDialog,
               private router: Router,
               private feedbackService: FeedbackService,
@@ -74,8 +76,10 @@ export class FormComponent implements OnInit {
       const data = this.mountData();
       if (data.id) {
         this.store.dispatch(UPDATE_DISH({data}));
+        this.dialogRef.close();
       } else {
         this.store.dispatch(CREATE_DISH({data}));
+        this.dialogRef.close();
       }
     } else {
       this.form.markAllAsTouched();
