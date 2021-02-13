@@ -32,6 +32,7 @@
 
       a,
       .sidenav-hold .sidenav li.open a .mat-icon:not(.menu-caret),
+      .sidenav-hold .sidenav li.open a .fa-icon:not(.menu-caret),
       .sidenav li.open > div > a > span:not(.menuitem-badge),
       .sidenav li.open > a > span,
       .icon-menu .mat-raised-button,
@@ -43,7 +44,8 @@
         background: rgba(darken($color500, 20), .2) !important;
       }
       .app-user .app-user-photo,
-      .sidenav-hold .sidenav li.open a .mat-icon:not(.menu-caret) {
+      .sidenav-hold .sidenav li.open a .mat-icon:not(.menu-caret),
+      .sidenav-hold .sidenav li.open a .fa-icon:not(.menu-caret) {
         border-color: $foreground500 !important;
       }
       .icon-menu .mat-raised-button,
@@ -79,13 +81,13 @@
       color: $foreground500 !important;
     }
   }
-  
+
 
   // Generate classes for each color shades
   $contrastMap: map-get($matColor, contrast);
   @each $shade, $value in $matColor {
     @if $shade == contrast {
-      
+
 
     } @else {
       .#{''+$colorName+''}-#{$shade} {

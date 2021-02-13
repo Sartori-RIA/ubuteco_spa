@@ -8,7 +8,7 @@ import {
   SIGN_IN,
   SIGN_IN_DONE,
   SIGN_IN_REFUSED,
-  SIGN_OUT,
+  SIGN_OUT, SIGN_UP, SIGN_UP_DONE, SIGN_UP_REFUSED,
   THEME_LOADED,
   THEME_REQUESTED,
   UPDATE_THEME,
@@ -40,12 +40,12 @@ const initialState: AuthState = {
 };
 
 const authReducer = createReducer(initialState,
-  on(SIGN_IN, (state) => ({...state, loading: true})),
-  on(SIGN_IN_DONE, (state, {user}) => ({...state, user, errors: undefined, loading: false})),
+  on(SIGN_IN, SIGN_UP, (state) => ({...state, loading: true})),
+  on(SIGN_IN_DONE, SIGN_UP_DONE, (state, {user}) => ({...state, user, errors: undefined, loading: false})),
   on(SIGN_OUT, () => initialState),
   on(ALREADY_LOGGED_IN, (state, {token}) =>
     ({...state, token, loading: false, user: LocalStorage.user()})),
-  on(SIGN_IN_REFUSED, (state, {errors}) =>
+  on(SIGN_IN_REFUSED, SIGN_UP_REFUSED, (state, {errors}) =>
     ({...state, errors: errors.error, loading: false})),
   on(LOAD_USER,
     UPDATE_USER,

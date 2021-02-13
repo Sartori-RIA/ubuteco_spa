@@ -21,22 +21,27 @@ h1,
 .h1 {
   font-size: $font-size-h1;
 }
+
 h2,
 .h2 {
   font-size: $font-size-h2;
 }
+
 h3,
 .h3 {
   font-size: $font-size-h3;
 }
+
 h4,
 .h4 {
   font-size: $font-size-h4;
 }
+
 h5,
 .h5 {
   font-size: $font-size-h5;
 }
+
 h6,
 .h6 {
   font-size: $font-size-h6;
@@ -67,9 +72,11 @@ b {
 .strikethrough {
   text-decoration: line-through;
 }
+
 .text-uppercase {
   text-transform: uppercase;
 }
+
 .text-capitalize {
   text-transform: capitalize;
 }
@@ -78,7 +85,14 @@ b {
 @for $i from 10 through 78 {
   .text-#{$i} {
     font-size: #{$i}px;
+
     &.mat-icon {
+      width: #{$i}px !important;
+      height: #{$i}px !important;
+      line-height: #{$i}px !important;
+    }
+
+    &.fa-icon {
       width: #{$i}px !important;
       height: #{$i}px !important;
       line-height: #{$i}px !important;
@@ -89,15 +103,19 @@ b {
 .font-weight-light {
   font-weight: 300;
 }
+
 .font-weight-normal {
   font-weight: 400;
 }
+
 .font-weight-bold {
   font-weight: bold;
 }
+
 .font-weight-inherit {
   font-weight: inherit;
 }
+
 .line-height-1 {
   line-height: 1 !important;
 }

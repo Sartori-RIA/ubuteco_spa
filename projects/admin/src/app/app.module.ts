@@ -15,7 +15,6 @@ import {DashComponent} from './dash/dash.component';
 import {MaterialModule} from './material/material.module';
 import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 import {AdminLayoutComponent} from './layout/admin-layout/admin-layout.component';
-import {AuthLayoutComponent} from './layout/auth-layout/auth-layout.component';
 import {HeaderTopComponent} from './layout/header/header-top/header-top.component';
 import {SidebarTopComponent} from './layout/navigation/sidebar-top/sidebar-top.component';
 import {SidenavComponent} from './layout/navigation/sidenav/sidenav.component';
@@ -41,7 +40,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AppComponent,
     DashComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent,
     HeaderTopComponent,
     SidebarTopComponent,
     SidenavComponent,

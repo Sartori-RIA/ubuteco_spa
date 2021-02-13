@@ -14,6 +14,7 @@ import {AuthEffects} from '../store/auth/auth.effects';
 import { AuthHomeComponent } from './auth-home.component';
 import { SignOutComponent } from './sign-out/sign-out.component';
 import {MaterialModule} from '../material/material.module';
+import {ConfirmationComponent} from './confirmation/confirmation.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {MaterialModule} from '../material/material.module';
     SignUpComponent,
     PasswordUpdateComponent,
     EmailRecoverComponent,
-    SignOutComponent
+    SignOutComponent,
+    ConfirmationComponent
   ],
   imports: [
     SharedModule,

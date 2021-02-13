@@ -62,6 +62,7 @@ $primary-dark: darken(map-get($mat-primary, 500), 8%);
   .mat-color-primary,
   .list-item-active,
   .sidenav-hold .sidenav li.open a .mat-icon:not(.menu-caret),
+  .sidenav-hold .sidenav li.open a .fa-icon:not(.menu-caret),
   .sidenav-hold .sidenav li.open > div > a > span:not(.menuitem-badge),
   .sidenav-hold .sidenav li.open > a > span {
     color: map-get($mat-primary, 500) !important;
@@ -73,6 +74,7 @@ $primary-dark: darken(map-get($mat-primary, 500), 8%);
   .topnav ul.menu > li > div.open > a,
   .sidebar-panel .sidebar-list-item.open > .mat-list-item-content > .sub-menu,
   .sidenav-hold .sidenav li.open a .mat-icon:not(.menu-caret),
+  .sidenav-hold .sidenav li.open a .fa-icon:not(.menu-caret),
   .list-item-active {
     border-color: map-get($mat-primary, 500) !important;
   }
@@ -85,6 +87,7 @@ $primary-dark: darken(map-get($mat-primary, 500), 8%);
   .topnav ul ul,
   .app-user .app-user-name,
   .sidebar-panel .sidebar-list-item mat-icon:not(.menu-caret),
+  .sidebar-panel .sidebar-list-item fa-icon:not(.menu-caret),
   .ngx-datatable.material *,
   .ql-snow .ql-picker,
   .mat-option,

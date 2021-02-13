@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {BaseService} from './base.service';
 import {User} from '../../models/user';
 import {Logger} from '@ngrx/data';
@@ -20,5 +20,9 @@ export class UserService extends BaseService<User> {
   me(): Observable<User> {
     const user = LocalStorage.user();
     return this.http.get(`${this.url}/${user.id}`).pipe(tap((data) => LocalStorage.setUser(data)));
+  }
+
+  checkEmail(email: string): Observable<HttpResponse<any>> {
+    return this.http.get<any>(`${this.url}/check/email`, {observe: 'response', params: {q: email}});
   }
 }

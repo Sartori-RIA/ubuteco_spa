@@ -2,12 +2,12 @@
   <div fxFlex="100" fxFlex.gt-md="300px" fxFlex.gt-sm="50">
     <mat-card class="profile-sidebar mb-1 pb-0">
       <mat-card-content>
-        <div fxLayout="row" fxLayoutAlign="center" *ngIf="picture$ | async; let picture">
+        <div fxLayout="row" fxLayoutAlign="center" *ngIf="user$ | async; let user">
           <ngx-avatar (clickOnAvatar)="openImageDialog()"
                       class="my-avatar"
                       [size]="200"
-                      [name]="(user$ | async)?.name"
-                      [src]="picture.url"></ngx-avatar>
+                      [name]="user?.name"
+                      [src]="user?.picture?.url"></ngx-avatar>
         </div>
 
         <div class="profile-title text-center mb-1">
@@ -17,7 +17,7 @@
 
         <div class="profile-nav">
           <mat-nav-list>
-            <mat-list-item routerLink="/perfil/about" [routerLinkActiveOptions]="{exact: true}"
+            <mat-list-item routerLink="/perfil/dados" [routerLinkActiveOptions]="{exact: true}"
                            routerLinkActive="list-item-active">
               <mat-icon>settings</mat-icon>
               Meus dados

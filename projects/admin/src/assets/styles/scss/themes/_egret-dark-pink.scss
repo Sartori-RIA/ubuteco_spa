@@ -27,6 +27,7 @@ $primary-dark: darken( map-get($mat-primary, 500), 8% );
     .mat-color-primary,
     .list-item-active,
     .sidenav-hold .sidenav li.open a .mat-icon:not(.menu-caret),
+    .sidenav-hold .sidenav li.open a .fa-icon:not(.menu-caret),
     .sidenav-hold .sidenav li.open > div > a > span:not(.menuitem-badge),
     .sidenav-hold .sidenav li.open > a > span {
         color: map-get($mat-primary, 500) !important;
@@ -38,6 +39,7 @@ $primary-dark: darken( map-get($mat-primary, 500), 8% );
     .topnav ul.menu > li > div.open > a,
     .sidebar-panel .sidebar-list-item.open > .mat-list-item-content > .sub-menu,
     .sidenav-hold .sidenav li.open a .mat-icon:not(.menu-caret),
+    .sidenav-hold .sidenav li.open a .fa-icon:not(.menu-caret),
     .list-item-active {
         border-color: map-get($mat-primary, 500) !important;
     }
@@ -52,6 +54,7 @@ $primary-dark: darken( map-get($mat-primary, 500), 8% );
     .topnav ul ul,
     .app-user .app-user-name,
     .sidebar-panel .sidebar-list-item mat-icon:not(.menu-caret),
+    .sidebar-panel .sidebar-list-item fa-icon:not(.menu-caret),
     .ngx-datatable.material *,
     .ql-snow .ql-picker,
     .ngx-pagination a, .ngx-pagination button {
@@ -71,7 +74,7 @@ $primary-dark: darken( map-get($mat-primary, 500), 8% );
     .ql-toolbar.ql-snow + .ql-container.ql-snow {
         border-color: rgba(255, 255, 255, 0.12) !important;
     }
-    
+
     // .sidebar-panel .navigation-hold,
     .message-item.open .message-head,
     .ngx-datatable.material .datatable-header,
@@ -85,23 +88,23 @@ $primary-dark: darken( map-get($mat-primary, 500), 8% );
         background: rgba(66, 66, 66, 0.92) !important;
     }
     .sidebar-compact ul.submenu,
-    .topnav ul li ul li:hover, 
+    .topnav ul li ul li:hover,
     .topnav ul li ul li.open,
     .default-bg,
     .default-light-bg {
         background: #424242;
         color: #ffffff;
     }
-    
+
     .header-topnav,
     .topnav ul ul,
-    .ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover, 
+    .ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover,
     .ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover .datatable-row-group,
-    .cal-month-view .cal-cell-row .cal-cell:hover, 
+    .cal-month-view .cal-cell-row .cal-cell:hover,
     .cal-month-view .cal-cell.cal-has-events.cal-open,
-    .cal-week-view .cal-day-headers .cal-header:hover, 
+    .cal-week-view .cal-day-headers .cal-header:hover,
     .cal-week-view .cal-day-headers .cal-drag-over,
-    .cal-day-view .cal-hour-segment:hover, 
+    .cal-day-view .cal-hour-segment:hover,
     .cal-day-view .cal-drag-over .cal-hour-segment {
         background: #333 !important;
     }
@@ -110,12 +113,12 @@ $primary-dark: darken( map-get($mat-primary, 500), 8% );
     .cal-week-view .cal-day-headers .cal-header:not(:last-child),
     .cal-week-view .cal-day-headers,
     .cal-month-view .cal-days .cal-cell-row,
-    .cal-day-view .cal-hour:not(:last-child) .cal-hour-segment, 
+    .cal-day-view .cal-hour:not(:last-child) .cal-hour-segment,
     .cal-day-view .cal-hour:last-child :not(:last-child) .cal-hour-segment {
         border-color: #000 !important;
     }
 
-    /* Hopscotch Tour */ 
+    /* Hopscotch Tour */
     div.hopscotch-bubble {
         border-color: $primary-dark;
     }
@@ -183,7 +186,7 @@ $primary-dark: darken( map-get($mat-primary, 500), 8% );
     @media (max-width: 959px) {
       .default-bg-mobile {
         background: #424242;
-        color: #ffffff;  
+        color: #ffffff;
       }
     }
 }

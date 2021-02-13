@@ -4,12 +4,11 @@
   class="form-holder height-100vh mat-elevation-z4"
   [perfectScrollbar]="{}"
 >
-  <form
+  <div
     [formGroup]="form"
     class="signup-form"
     fxLayout="column"
     fxLayoutAlign="start"
-    (ngSubmit)="onSubmit()"
   >
     <!-- headline -->
     <div class="form-headline text-center mb-16">
@@ -19,37 +18,14 @@
     <div class="mb-32" fxLayout="row wrap" fxLayoutAlign="center center">
       <img width="200px" src="assets/images/illustrations/posting_photo.svg" alt="">
     </div>
-    <div fxLayout="row wrap" fxLayoutGap.md="16px" fxLayoutGap.lg="16px">
-      <mat-form-field fxFlex="1 1 0%" appearance="outline">
-        <mat-label>First name</mat-label>
-        <input
-          formControlName="firstName"
-          matInput
-          type="text"
-          name="first_name"
-          placeholder="First name"
-        />
-      </mat-form-field>
-      <mat-form-field fxFlex="1 1 0%" appearance="outline">
-        <mat-label>Last name</mat-label>
-        <input
-          formControlName="lastName"
-          matInput
-          type="text"
-          name="Last_name"
-          placeholder="Last name"
-        />
-      </mat-form-field>
-    </div>
 
-    <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Username</mat-label>
+    <mat-form-field fxFill appearance="outline">
+      <mat-label>Nome</mat-label>
       <input
+        formControlName="name"
         matInput
-        formControlName="username"
         type="text"
-        name="username"
-        placeholder="Username"
+        placeholder="Nome"
       />
     </mat-form-field>
 
@@ -82,17 +58,50 @@
         type="password"
         name="confirm_password"
         placeholder="********"
-        formControlName="confirmPassword"
+        formControlName="confirm_password"
       />
       <mat-error>
         Password didn't match
       </mat-error>
     </mat-form-field>
 
+
+
+    <mat-form-field fxFill appearance="outline">
+      <mat-label>CNPJ</mat-label>
+      <input
+        formControlName="cnpj"
+        matInput
+        placeholder="CNPJ"
+
+      />
+    </mat-form-field>
+
+    <mat-form-field fxFill appearance="outline">
+      <mat-label>Nome da empresa</mat-label>
+      <input
+        formControlName="organization_name"
+        matInput
+        type="text"
+        placeholder="Nome da empresa"
+      />
+    </mat-form-field>
+
+    <mat-form-field fxFill appearance="outline">
+      <mat-label>Telefone da empresa</mat-label>
+      <input
+        formControlName="organization_phone"
+        matInput
+        type="text"
+        placeholder="Telefone da empresa"
+      />
+    </mat-form-field>
+
     <mat-checkbox class="mb-24" formControlName="agreed"
-    >I agree with terms and condtions</mat-checkbox
+    >I agree with terms and condtions
+    </mat-checkbox
     >
-    <button  mat-raised-button color="primary">Signup</button>
+    <button (click)="onSubmit()" mat-raised-button color="primary">Signup</button>
     <mat-divider class="my-32"></mat-divider>
 
 
@@ -103,5 +112,5 @@
       >Sign in with an existing account</a
       >
     </div>
-  </form>
+  </div>
 </div>

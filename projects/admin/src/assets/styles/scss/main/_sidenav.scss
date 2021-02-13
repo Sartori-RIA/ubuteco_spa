@@ -44,7 +44,7 @@
         overflow: hidden;
         // transition: all $sidebarTrnTime $transitionTiming;
         opacity: 1;
-        &.lvl2 a, 
+        &.lvl2 a,
         &.lvl3 a {
           height: 44px;
         }
@@ -68,6 +68,16 @@
       -webkit-box-orient: horizontal;
       -webkit-box-direction: normal;
       text-decoration: none;
+      .fa-icon:not(.menu-caret) {
+        text-align: center;
+        margin-right: 3px;
+        height: 48px;
+        width: 48px;
+        font-size: $sidebar-navigation-icon-size;
+        line-height: 48px;
+        border-left: 3px solid;
+        border-color: transparent;
+      }
       .mat-icon:not(.menu-caret) {
         text-align: center;
         margin-right: 3px;
@@ -91,14 +101,14 @@
 
 
 .sidebar-full .sidenav-hold {
-  
+
   li {
     ul {
       position: relative;
       max-height: 0;
       overflow: hidden;
       transition: max-height .4s cubic-bezier(.35,0,.25,1);
-      &::after, 
+      &::after,
       &::before {
         content: "";
         left: 0;
@@ -116,12 +126,12 @@
         top: 0;
       }
     }
-    
+
     &.open,
     &.open li.open {
       background: rgba(0,0,0,.02);
     }
-    &.open > div > ul, 
+    &.open > div > ul,
     &.open > ul {
       max-height: 1000px;
       background: rgba(0,0,0,.005);
@@ -158,10 +168,11 @@
     position: relative;
     z-index: 10001;
     .lvl1 > a > .mat-icon.menu-caret,
+    .lvl1 > a > .fa-icon.menu-caret,
     .menuitem-badge {
       display: none;
     }
-    &:hover > div > ul.submenu, 
+    &:hover > div > ul.submenu,
     &:hover > ul.submenu {
       max-height: 1000px;
       visibility: visible;
@@ -181,7 +192,7 @@
       transform: translateY(10px);
       box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
       // a {
-        
+
       // }
       &.lvl2 > li > a,
       &.lvl3 > li > a {
@@ -209,6 +220,7 @@
   }
 
   .sidenav-hold {
+    .sidenav .fa-icon:not(.menu-caret),
     .sidenav .mat-icon:not(.menu-caret) {
       margin: 0 !important;
       width: $compact-sidebar-width !important;
@@ -230,6 +242,13 @@
       }
     }
     .mat-icon:not(.menu-caret) {
+      height: 36px;
+      width: 150px;
+      font-size: 24px;
+      line-height: 36px;
+      margin: 0;
+    }
+    .fa-icon:not(.menu-caret), {
       height: 36px;
       width: 150px;
       font-size: 24px;
@@ -273,6 +292,12 @@
       a {
         padding: 0 0 0 16px;
         .mat-icon:not(.menu-caret) {
+          border-left: none;
+          border-right: 3px solid;
+          margin-right: 1px;
+          border-color: transparent;
+        }
+        .fa-icon:not(.menu-caret) {
           border-left: none;
           border-right: 3px solid;
           margin-right: 1px;

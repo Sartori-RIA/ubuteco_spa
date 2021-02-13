@@ -1,9 +1,9 @@
 import {AbstractControl, AsyncValidatorFn, ValidationErrors} from '@angular/forms';
 import {cnpj as cnpjValidators, cpf as cpfValidator} from 'cpf-cnpj-validator';
-import {CredentialsService} from '../../core/services/api/credentials.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {PharmaciesService} from '../../core/services/api/pharmacies.service';
+import {OrganizationsService} from '../../core/services/api/organizations.service';
+import {UserService} from '../../core/services/api/user.service';
 
 export namespace CookieCodeValidators {
   export function cpf(control: AbstractControl): { [key: string]: boolean } | null {
@@ -20,7 +20,7 @@ export namespace CookieCodeValidators {
     return {cnpj: true};
   }
 
-  export function uniqueEmail(service: CredentialsService, oldEmail?: string): AsyncValidatorFn {
+  export function uniqueEmail(service: UserService, oldEmail?: string): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors> => {
       if (control.value == null) {
         return null;
@@ -32,7 +32,7 @@ export namespace CookieCodeValidators {
     };
   }
 
-  export function uniqueCNPJ(service: PharmaciesService, oldCnpj?: string): AsyncValidatorFn {
+  export function uniqueCNPJ(service: OrganizationsService, oldCnpj?: string): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors> => {
       if (control.value == null) {
         return null;

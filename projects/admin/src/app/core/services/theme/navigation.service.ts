@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {IconName} from '@fortawesome/fontawesome-svg-core';
+import {IconDefinition} from '@fortawesome/fontawesome-common-types';
+import {faBeer, faWineBottle} from "@fortawesome/free-solid-svg-icons";
 
 export interface IMenuItem {
   name?: string; // Used as display text for item and title for separator type
@@ -12,6 +14,7 @@ export interface IMenuItem {
   badges?: IBadge[];
   iconType: 'font-awesome' | 'material-design';
   fontSet?: 'fab' | 'fas' | 'far'; // optional, only to font awesome icons
+  faIcon?: IconDefinition; // optional, only to font awesome icons
 }
 
 export interface IChildItem {
@@ -45,7 +48,8 @@ export class NavigationService {
       icon: 'dashboard',
       state: 'estilos-cervejas',
       iconType: 'material-design',
-    }, {
+    },
+    {
       name: 'Estilos de Vinhos',
       tooltip: 'Blank',
       icon: 'dashboard',
@@ -62,18 +66,18 @@ export class NavigationService {
     {
       name: 'Cervejas',
       tooltip: 'Blank',
-      icon: 'fa-beer',
+      icon: 'sports_bar',
       state: 'cervejas',
       iconType: 'font-awesome',
-      fontSet: 'fas',
     },
     {
       name: 'Vinhos',
       tooltip: 'Blank',
-      icon: 'wine-bottle',
+      icon: 'fa-wine-bottle',
       state: 'vinhos',
       iconType: 'font-awesome',
       fontSet: 'fas',
+      faIcon: faWineBottle
     },
     {
       name: 'Estoque de Alimentos',
@@ -81,25 +85,29 @@ export class NavigationService {
       icon: 'dashboard',
       state: 'alimentos',
       iconType: 'material-design',
-    }, {
+    },
+    {
       name: 'Cardápio',
       tooltip: 'Blank',
       icon: 'restaurant_menu',
       state: 'cardapio',
       iconType: 'material-design',
-    }, {
+    },
+    {
       name: 'Cozinha',
       tooltip: 'Blank',
       icon: 'restaurant',
       state: 'cozinha',
       iconType: 'material-design',
-    }, {
+    },
+    {
       name: 'Mesas',
       tooltip: 'Blank',
       icon: 'event_seat',
       state: 'mesas',
       iconType: 'material-design',
-    }, {
+    },
+    {
       name: 'Pedidos',
       tooltip: 'Blank',
       icon: 'shopping_cart',

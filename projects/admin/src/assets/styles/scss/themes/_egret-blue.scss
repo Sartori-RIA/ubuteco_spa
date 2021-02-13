@@ -28,6 +28,7 @@ $primary-dark: darken( map-get($mat-primary, 500), 8% );
     .mat-color-primary,
     .list-item-active,
     .sidenav-hold .sidenav li.open a .mat-icon:not(.menu-caret),
+    .sidenav-hold .sidenav li.open a .fa-icon:not(.menu-caret),
     .sidenav-hold .sidenav li.open > div > a > span:not(.menuitem-badge),
     .sidenav-hold .sidenav li.open > a > span {
         color: map-get($mat-primary, 500) !important;
@@ -36,6 +37,7 @@ $primary-dark: darken( map-get($mat-primary, 500), 8% );
     .topnav ul.menu > li > div.open > div,
     .sidebar-panel .sidebar-list-item.open > .mat-list-item-content > .sub-menu,
     .sidenav-hold .sidenav li.open a .mat-icon:not(.menu-caret),
+    .sidenav-hold .sidenav li.open a .fa-icon:not(.menu-caret),
     .list-item-active {
         border-color: map-get($mat-primary, 500) !important;
     }

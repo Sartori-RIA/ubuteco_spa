@@ -3,13 +3,16 @@ import {ExtraOptions, PreloadAllModules, RouterModule, Routes} from '@angular/ro
 import {AuthenticatedGuard} from './core/guards/authenticated.guard';
 import {DashComponent} from './dash/dash.component';
 import {AdminLayoutComponent} from './layout/admin-layout/admin-layout.component';
-import {AuthLayoutComponent} from './layout/auth-layout/auth-layout.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
     redirectTo: '/dash'
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: '',
@@ -107,16 +110,6 @@ const routes: Routes = [
         data: {title: 'Vinhos'},
         canActivate: [AuthenticatedGuard]
       }
-    ]
-  },
-  {
-    path: '',
-    component: AuthLayoutComponent,
-    children: [
-      {
-        path: 'auth',
-        loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-      },
     ]
   },
   {

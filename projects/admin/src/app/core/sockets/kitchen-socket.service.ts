@@ -6,13 +6,14 @@ import * as ActionCable from 'actioncable';
 import {LocalStorage} from '../../shared/util/storage';
 import {NEW_ORDER_DISH_RECEIVED, UPDATE_ORDER_DISH_STATUS_DONE} from '../../store/kitchen/kitchen.actions';
 import {ActionCableDish} from '../models/kitchen-dish';
+import {Cable, ChannelNameWithParams} from 'actioncable';
 
 @Injectable({
   providedIn: 'root'
 })
 export class KitchenSocketService {
 
-  private consumer: any;
+  private consumer: Cable;
 
 
   constructor(private store: Store<AppState>,
@@ -23,8 +24,11 @@ export class KitchenSocketService {
     const store = this.store;
     const ngZone = this.ngZone;
     this.consumer = ActionCable.createConsumer(`${environment.cable_url}?token=${LocalStorage.jwt()}`);
-    console.log('Trying connection');
-    this.consumer.subscriptions.create({channel: `KitchenChannel`, room: `kitchens_${cnpj}`}, {
+    const channelOptions: ChannelNameWithParams = {
+      channel: `KitchenChannel`,
+      room: `kitchens_${cnpj}`
+    };
+    this.consumer.subscriptions.create(channelOptions, {
       connected() {
         console.log('Subscription is ready for use');
       },

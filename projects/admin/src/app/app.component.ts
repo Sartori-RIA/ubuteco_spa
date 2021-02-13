@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
               public title: Title,
               private router: Router,
               private activeRoute: ActivatedRoute,
-              private matIconRegistry: MatIconRegistry,
               private routePartsService: RoutePartsService) {
   }
 

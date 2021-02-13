@@ -1,9 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ProfileComponent} from './profile/profile.component';
-import {OrganizationComponent} from './organization/settings.component';
+import {OrganizationComponent} from './organization/organization.component';
 import {ThemeCustomizerComponent} from './theme-customizer/theme-customizer.component';
 import {UserResolver} from '../core/resolvers/user.resolver';
+import {AboutComponent} from "./about/about.component";
+import {SecurityComponent} from "./security/security.component";
 
 const routes: Routes = [
   {
@@ -14,8 +16,24 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'configuracoes',
+        path: 'organizacao',
         component: OrganizationComponent,
+        runGuardsAndResolvers: 'always',
+        resolve: {
+          user: UserResolver
+        },
+      },
+      {
+        path: 'dados',
+        component: AboutComponent,
+        runGuardsAndResolvers: 'always',
+        resolve: {
+          user: UserResolver
+        },
+      },
+      {
+        path: 'seguranca',
+        component: SecurityComponent,
         runGuardsAndResolvers: 'always',
         resolve: {
           user: UserResolver

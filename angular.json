@@ -41,7 +41,8 @@
               "ngx-socket-io",
               "ngx-socket-io.js",
               "socket.io-client",
-              "ng2-validation"
+              "ng2-validation",
+              "actioncable"
             ]
           },
           "configurations": {

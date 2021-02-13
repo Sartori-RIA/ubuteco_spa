@@ -11,6 +11,7 @@ import { ThemeCustomizerComponent } from './theme-customizer/theme-customizer.co
 import {OrganizationComponent} from './organization/organization.component';
 import {AboutComponent} from './about/about.component';
 import {SecurityComponent} from './security/security.component';
+import {UploadFileModule} from '../upload-file/upload-file.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {SecurityComponent} from './security/security.component';
   ],
   imports: [
     SharedModule,
+    UploadFileModule,
     ProfileRoutingModule,
     StoreModule.forFeature(fromAuth.featureKey, fromAuth.reducer),
     EffectsModule.forFeature([AuthEffects])

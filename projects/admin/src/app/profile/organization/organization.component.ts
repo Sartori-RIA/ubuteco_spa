@@ -7,9 +7,9 @@ import {ActivatedRoute} from '@angular/router';
 import {UPDATE_USER} from '../../store/auth/auth.actions';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+  selector: 'app-organization',
+  templateUrl: './organization.component.html',
+  styleUrls: ['./organization.component.scss']
 })
 export class OrganizationComponent implements AfterViewInit {
 

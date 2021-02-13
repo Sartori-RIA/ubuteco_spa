@@ -8,7 +8,7 @@ import {
   SIGN_IN,
   SIGN_IN_DONE,
   SIGN_IN_REFUSED,
-  SIGN_OUT,
+  SIGN_OUT, SIGN_UP, SIGN_UP_DONE, SIGN_UP_REFUSED,
   THEME_FAILED,
   THEME_LOADED,
   THEME_REQUESTED,
@@ -25,7 +25,7 @@ import {Router} from '@angular/router';
 import {FeedbackService} from '../../core/services/api/feedback.service';
 import {ThemeService} from '../../core/services/api/theme.service';
 import {UserService} from '../../core/services/api/user.service';
-import {KitchenSocketService} from "../../core/sockets/kitchen-socket.service";
+import {KitchenSocketService} from '../../core/sockets/kitchen-socket.service';
 
 @Injectable()
 export class AuthEffects {
@@ -36,6 +36,16 @@ export class AuthEffects {
       .pipe(
         map((user) => SIGN_IN_DONE({user})),
         catchError((err) => of(SIGN_IN_REFUSED({errors: err.error})))
+      )
+    ),
+  ));
+
+  signUp$ = createEffect(() => this.actions$.pipe(
+    ofType(SIGN_UP),
+    mergeMap((action) => this.authService.onSignUp(action.payload)
+      .pipe(
+        map((user) => SIGN_UP_DONE({user})),
+        catchError((err) => of(SIGN_UP_REFUSED({errors: err.error})))
       )
     ),
   ));
@@ -52,6 +62,14 @@ export class AuthEffects {
     ofType(SIGN_IN_DONE),
     tap((action) => {
       this.feedbackService.success(`Seja bem vindo de volta ${action.user.name}`);
+      this.router.navigate(['/dash']);
+    })
+  ), {dispatch: false});
+
+  navigateAfterSignUp$ = createEffect(() => this.actions$.pipe(
+    ofType(SIGN_UP_DONE),
+    tap((action) => {
+      this.feedbackService.success(`Seja bem vindo ${action.user.name}`);
       this.router.navigate(['/dash']);
     })
   ), {dispatch: false});

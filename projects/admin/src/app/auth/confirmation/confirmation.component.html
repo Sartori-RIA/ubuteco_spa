@@ -1,0 +1,37 @@
+<div fxLayout="row column"
+     gdAlignColumns="center"
+     gdAlignRows="center"
+     fxFlexFill
+>
+  <mat-card fxFlex.lt-md="90" class="text-center">
+    <mat-card-header>
+      <mat-card-title>
+        <img mat-card-image
+             style="width: 350px"
+             src="https://s3.us-east-2.amazonaws.com/uploads.alertamed.com.br/defaults/Alerta+med+logo+principal.png"
+             alt="Alerta Med">
+        <h2>Confirmação de conta</h2>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content style="padding-top: 2em">
+      <div *ngIf="!!user">
+        <h4>Olá {{user?.name}}. Obrigado por confirmar a sua conta!</h4>
+      </div>
+      <div [ngSwitch]="error">
+        <ng-container *ngSwitchCase="422">
+          <h3 *ngIf="alreadyConfirmed; else invalidToken">Sua conta ja foi confirmada!</h3>
+          <ng-template #invalidToken>
+            <h3>Token inválido</h3>
+          </ng-template>
+        </ng-container>
+      </div>
+      <mat-progress-spinner *ngIf="loading" color="primary" mode="indeterminate"></mat-progress-spinner>
+    </mat-card-content>
+    <mat-card-actions>
+      <button *ngIf="error == 422 && !alreadyConfirmed" mat-flat-button color="primary">Pedir novo email de
+        confirmação
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
