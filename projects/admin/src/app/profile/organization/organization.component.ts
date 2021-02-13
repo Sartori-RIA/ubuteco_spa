@@ -5,6 +5,9 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../../store';
 import {ActivatedRoute} from '@angular/router';
 import {UPDATE_USER} from '../../store/auth/auth.actions';
+import {Organization} from "../../core/models/organization";
+import {CookieCodeValidators} from "../../shared/validators/cookie-code.validators";
+import {OrganizationsService} from "../../core/services/api/organizations.service";
 
 @Component({
   selector: 'app-organization',
@@ -14,22 +17,23 @@ import {UPDATE_USER} from '../../store/auth/auth.actions';
 export class OrganizationComponent implements AfterViewInit {
 
   form: FormGroup = this.mountForm();
-  user: User = this.activatedRoute.snapshot.data.user;
+  organization: Organization = this.activatedRoute.snapshot.data.organization;
 
   constructor(private fb: FormBuilder,
               private activatedRoute: ActivatedRoute,
+              private organizationService: OrganizationsService,
               private store: Store<AppState>) {
   }
 
   ngAfterViewInit(): void {
-    this.user = this.activatedRoute.snapshot.data.user;
+    this.organization = this.activatedRoute.snapshot.data.organization;
     this.updateForm();
   }
 
   onSubmit() {
     if (this.form.valid) {
-      const user: User = this.form.value;
-      this.store.dispatch(UPDATE_USER({user}));
+      const organization: Organization = this.form.value;
+      // this.store.dispatch(UPDATE_USER({user}));
     } else {
       this.form.markAllAsTouched();
     }
@@ -38,19 +42,17 @@ export class OrganizationComponent implements AfterViewInit {
   private mountForm(): FormGroup {
     return this.fb.group({
       name: [null, Validators.required],
-      email: [null, Validators.required],
-      company_name: [null, Validators.required],
-      cnpj: [null, Validators.required],
+      phone: [null, Validators.required],
+      cnpj: [null, [Validators.required, CookieCodeValidators.cnpj], [CookieCodeValidators.uniqueCNPJ(this.organizationService)]],
     });
   }
 
   private updateForm() {
     console.log(this.activatedRoute.snapshot.data);
     this.form.patchValue({
-      name: this.user?.name,
-      email: this.user?.email,
-      company_name: this.user?.organization?.name,
-      cnpj: this.user?.organization?.cnpj
+      phone: this.organization?.phone,
+      name: this.organization?.name,
+      cnpj: this.organization?.cnpj
     });
   }
 }

@@ -6,6 +6,7 @@ import {ThemeCustomizerComponent} from './theme-customizer/theme-customizer.comp
 import {UserResolver} from '../core/resolvers/user.resolver';
 import {AboutComponent} from "./about/about.component";
 import {SecurityComponent} from "./security/security.component";
+import {OrganizationResolver} from "../core/resolvers/organization.resolver";
 
 const routes: Routes = [
   {
@@ -20,7 +21,7 @@ const routes: Routes = [
         component: OrganizationComponent,
         runGuardsAndResolvers: 'always',
         resolve: {
-          user: UserResolver
+          organization: OrganizationResolver
         },
       },
       {

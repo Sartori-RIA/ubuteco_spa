@@ -45,14 +45,14 @@ export class NavigationService {
     {
       name: 'Estilos de Cervejas',
       tooltip: 'Blank',
-      icon: 'dashboard',
+      icon: 'style',
       state: 'estilos-cervejas',
       iconType: 'material-design',
     },
     {
       name: 'Estilos de Vinhos',
       tooltip: 'Blank',
-      icon: 'dashboard',
+      icon: 'style',
       state: 'estilos-vinhos',
       iconType: 'material-design',
     },
@@ -68,7 +68,7 @@ export class NavigationService {
       tooltip: 'Blank',
       icon: 'sports_bar',
       state: 'cervejas',
-      iconType: 'font-awesome',
+      iconType: 'material-design',
     },
     {
       name: 'Vinhos',
@@ -80,7 +80,7 @@ export class NavigationService {
     {
       name: 'Estoque de Alimentos',
       tooltip: 'Blank',
-      icon: 'dashboard',
+      icon: 'inventory',
       state: 'alimentos',
       iconType: 'material-design',
     },
