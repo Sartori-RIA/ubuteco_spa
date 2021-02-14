@@ -8,6 +8,46 @@
         "sign_in": "Entrar",
         "sign_up": "Criar conta"
       }
+    },
+    "beers": {},
+    "beer_styles": {},
+    "wines": {},
+    "wine_styles": {},
+    "drinks": {},
+    "tables":  {},
+    "orders": {},
+    "makers": {},
+    "organizations": {},
+    "profile": {},
+    "foods": {},
+    "dishes": {},
+    "uploader": {}
+  },
+  "attributes": {
+    "base": {},
+    "user": {},
+    "beer": {},
+    "beer_style": {},
+    "wine": {},
+    "wine_style": {},
+    "drink": {},
+    "maker": {},
+    "food": {},
+    "dish": {},
+    "table": {},
+    "organization": {}
+  },
+  "commons": {
+    "messages": {
+      "success": "",
+      "error": "",
+      "warning": ""
+    },
+    "buttons": {
+      "confirm": "",
+      "ok": "",
+      "cancel": "",
+      "save": ""
     }
   }
 }
