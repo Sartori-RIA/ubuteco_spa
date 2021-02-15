@@ -1,8 +1,8 @@
 <div class="seciton-left">
   <div class="section-left-content">
-<!--    <h1 class="text-36 font-weight-light">Don't have an account?</h1>-->
-<!--    <p class="mb-24 text-small">Stop wasting time and money. It's free!</p>-->
-<!--    <button mat-flat-button color="accent" [routerLink]="'/auth/cadastre-se'">Sign Up</button>-->
+    <!--    <h1 class="text-36 font-weight-light">Don't have an account?</h1>-->
+    <!--    <p class="mb-24 text-small">Stop wasting time and money. It's free!</p>-->
+    <!--    <button mat-flat-button color="accent" [routerLink]="'/auth/cadastre-se'">Sign Up</button>-->
   </div>
 </div>
 
@@ -20,7 +20,7 @@
 
     <!-- headline -->
     <div class="form-headline text-center mb-32">
-      <h1 class="font-weight-light">Sign in to your account</h1>
+      <h1 class="font-weight-light">{{ 'pages.auth.sign_in.title' |translate}}</h1>
     </div>
     <div class="mb-48" fxLayout="row wrap" fxLayoutAlign="center center">
       <img
@@ -32,18 +32,18 @@
 
     {{errors$ | async | json}}
     <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Email</mat-label>
+      <mat-label>{{'attributes.user.email'| translate}}</mat-label>
       <input
         matInput
         formControlName="email"
         type="email"
         name="email"
-        placeholder="Email"
+        [placeholder]="'attributes.user.email' | translate"
       />
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Password</mat-label>
+      <mat-label>{{'attributes.user.password' | translate}}</mat-label>
       <input
         matInput
         formControlName="password"
@@ -57,7 +57,8 @@
     <button (click)="onSubmit()" mat-flat-button color="primary">{{'pages.auth.buttons.sign_in' | translate }}</button>
 
     <div style="padding-top: 20px">
-      <button fxFill  routerLink="/auth/cadastre-se" mat-flat-button color="basic">{{'pages.auth.buttons.sign_up' | translate }}</button>
+      <button fxFill routerLink="/auth/cadastre-se" mat-flat-button
+              color="basic">{{'pages.auth.buttons.sign_up' | translate }}</button>
     </div>
 
   </div>

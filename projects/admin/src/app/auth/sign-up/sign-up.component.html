@@ -12,36 +12,36 @@
   >
     <!-- headline -->
     <div class="form-headline text-center mb-16">
-      <h1 class="font-weight-bold">Lets get started!</h1>
-      <p class="text-muted">Create an account get unlimited access</p>
+      <h1 class="font-weight-bold">{{'pages.auth.sign_up.title'| translate}}</h1>
+      <p class="text-muted">{{'pages.auth.sign_up.text'| translate}}</p>
     </div>
     <div class="mb-32" fxLayout="row wrap" fxLayoutAlign="center center">
       <img width="200px" src="assets/images/illustrations/posting_photo.svg" alt="">
     </div>
 
     <mat-form-field fxFill appearance="outline">
-      <mat-label>Nome</mat-label>
+      <mat-label>{{'attributes.base.name' | translate}}</mat-label>
       <input
         formControlName="name"
         matInput
         type="text"
-        placeholder="Nome"
+        [placeholder]="'attributes.organization.name' | translate"
       />
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Email</mat-label>
+      <mat-label>{{'attributes.user.email' | translate}}</mat-label>
       <input
         matInput
         formControlName="email"
         type="email"
         name="email"
-        placeholder="Email"
+        [placeholder]="'attributes.user.email' | translate"
       />
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Password</mat-label>
+      <mat-label>{{'attributes.user.password' | translate}}</mat-label>
       <input
         matInput
         formControlName="password"
@@ -52,7 +52,7 @@
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Confirm password</mat-label>
+      <mat-label>{{'attributes.user.confirm_password' | translate}}</mat-label>
       <input
         matInput
         type="password"
@@ -66,42 +66,42 @@
     </mat-form-field>
 
 
-
     <mat-form-field fxFill appearance="outline">
-      <mat-label>CNPJ</mat-label>
+      <mat-label>{{'attributes.organization.cnpj' | translate}}</mat-label>
       <input
         formControlName="cnpj"
         matInput
-        placeholder="CNPJ"
-
+        [placeholder]="'attributes.organization.cnpj' |translate"
       />
     </mat-form-field>
 
     <mat-form-field fxFill appearance="outline">
-      <mat-label>Nome da empresa</mat-label>
+      <mat-label>{{'attributes.organization.to_human'}}</mat-label>
       <input
         formControlName="organization_name"
         matInput
         type="text"
-        placeholder="Nome da empresa"
+        [placeholder]="'attributes.organization.to_human' | translate"
       />
     </mat-form-field>
 
     <mat-form-field fxFill appearance="outline">
-      <mat-label>Telefone da empresa</mat-label>
+      <mat-label>{{'attributes.organization.phone'|translate}}</mat-label>
       <input
         formControlName="organization_phone"
         matInput
         type="text"
-        placeholder="Telefone da empresa"
+        [placeholder]="'Telefone da empresa' | translate"
       />
     </mat-form-field>
 
     <mat-checkbox class="mb-24" formControlName="agreed"
-    >I agree with terms and condtions
+    >{{'pages.auth.sign_up.accept_terms' | translate}}
     </mat-checkbox
     >
-    <button (click)="onSubmit()" mat-raised-button color="primary">Signup</button>
+    <button (click)="onSubmit()" mat-raised-button color="primary"
+    >{{'pages.auth.buttons.sign_up' |translate}}
+    </button>
     <mat-divider class="my-32"></mat-divider>
 
 
@@ -109,8 +109,7 @@
       <a
         [routerLink]="'/auth/entrar'"
         class="mat-color-primary text-center full-width"
-      >Sign in with an existing account</a
-      >
+      >{{'pages.auth.buttons.enter_with_account' | translate}}</a>
     </div>
   </div>
 </div>

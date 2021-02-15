@@ -1,41 +1,51 @@
-import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {Injectable} from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {TranslateService} from '@ngx-translate/core';
+import {take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeedbackService {
 
-  constructor(private snackBar: MatSnackBar) {
-
+  constructor(private snackBar: MatSnackBar,
+              private translate: TranslateService) {
   }
 
 
-  info(msg: string, action: string = 'Ok') {
-    this.snackBar.open(msg, action, {
-      duration: 2000,
-      panelClass: 'snack-info'
+  info(msg: string, action: string = 'commons.buttons.ok') {
+    this.translate.get(action).pipe(take(1)).subscribe((data) => {
+      this.snackBar.open(msg, data, {
+        duration: 2000,
+        panelClass: 'snack-info'
+      });
     });
   }
 
-  success(msg: string, action: string = 'Ok') {
-    this.snackBar.open(msg, action, {
-      duration: 2000,
-      panelClass: 'snack-success'
+  success(msg: string, action: string = 'commons.buttons.ok') {
+    this.translate.get(action).pipe(take(1)).subscribe((data) => {
+      this.snackBar.open(msg, data, {
+        duration: 2000,
+        panelClass: 'snack-success'
+      });
     });
   }
 
-  warning(msg: string, action: string = 'Ok') {
-    this.snackBar.open(msg, action, {
-      duration: 2000,
-      panelClass: 'snack-warn'
+  warning(msg: string, action: string = 'commons.buttons.ok') {
+    this.translate.get(action).pipe(take(1)).subscribe((data) => {
+      this.snackBar.open(msg, data, {
+        duration: 2000,
+        panelClass: 'snack-warn'
+      });
     });
   }
 
-  error(msg: string, action: string = 'Ok') {
-    this.snackBar.open(msg, action, {
-      duration: 2000,
-      panelClass: 'snack-error'
+  error(msg: string, action: string = 'commons.buttons.ok') {
+    this.translate.get(action).pipe(take(1)).subscribe((data) => {
+      this.snackBar.open(msg, data, {
+        duration: 2000,
+        panelClass: 'snack-error'
+      });
     });
   }
 
@@ -43,33 +53,37 @@ export class FeedbackService {
                      male: boolean = true,
                      action: string = 'Ok') {
 
-    const maleOrFemale = male ? 'removido' : 'removida';
-    const msg = `${registerType} ${maleOrFemale} com sucesso`;
-    this.success(msg, action);
+    const maleOrFemale = male ? 'success_m' : 'success_f';
+    this.translate.get(`commons.messages.destroy.${maleOrFemale}`, {register: registerType}).subscribe((msg) => {
+      this.success(msg, action);
+    });
   }
 
   updateSuccess(registerType: RegisterType,
                 male: boolean = true,
                 action: string = 'Ok') {
-    const maleOrFemale = male ? 'atualizado' : 'atualizada';
-    const msg = `${registerType} ${maleOrFemale} com sucesso`;
-    this.success(msg, action);
+    const maleOrFemale = male ? 'success_m' : 'success_f';
+    this.translate.get(`commons.messages.update.${maleOrFemale}`, {register: registerType}).subscribe((msg) => {
+      this.success(msg, action);
+    });
   }
 
   createSuccess(registerType: RegisterType,
                 male: boolean = true,
                 action: string = 'Ok') {
-    const maleOrFemale = male ? 'adicionado' : 'adicionada';
-    const msg = `${registerType} ${maleOrFemale} com sucesso`;
-    this.success(msg, action);
+    const maleOrFemale = male ? 'success_m' : 'success_f';
+    this.translate.get(`commons.messages.create.${maleOrFemale}`, {register: registerType}).subscribe((msg) => {
+      this.success(msg, action);
+    });
   }
 
-  errorAction(actionType: 'remover' | 'criar' | 'atualizar' | 'recuperar',
+  errorAction(actionType: 'destroy' | 'create' | 'update' | 'fetch',
               plural: boolean = false,
               action: string = 'Ok') {
-    const singleOrPlural = plural ? 'os registros' : 'o registro';
-    const msg = `Ops, sinto muito, aconteceu algo inesperado ao tentar ${actionType} ${singleOrPlural}, por favor tente novamente`;
-    this.error(msg, action);
+    const singleOrPlural = plural ? 'error_n' : 'error';
+    this.translate.get(`commons.messages.${actionType}.${singleOrPlural}`).subscribe((msg) => {
+      this.error(msg, action);
+    });
   }
 }
 

@@ -1,5 +1,6 @@
-<h1 mat-dialog-title>Tem certeza que deseja sair do sistema?</h1>
+<h1 mat-dialog-title>{{'pages.auth.sign_out.title'}}</h1>
 <div mat-dialog-actions>
-  <button color="warn" mat-button (click)="onNoClick()">Cancelar</button>
-  <button color="primary" mat-button (click)="onLogout()" cdkFocusInitial>Sair</button>
+  <button color="warn" mat-button (click)="onNoClick()">{{'commons.buttons.cancel'|translate}}</button>
+  <button color="primary" mat-button (click)="onLogout()"
+          cdkFocusInitial>{{'commons.buttons.exit' | translate}}</button>
 </div>

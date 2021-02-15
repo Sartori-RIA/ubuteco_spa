@@ -2,12 +2,12 @@
 
   <div fxLayout="row" fxLayoutAlign="center">
     <h2 class="text-uppercase text-info text-danger">
-      <strong>AVISO</strong>
+      <strong>{{'commons.dialogs.confirm.title' | translate}}</strong>
     </h2>
   </div>
 </div>
 <div mat-dialog-content>
-  <h3 class="text-center">Deseja prosseguir com esta ação?</h3>
+  <h3 class="text-center">{{'commons.dialogs.confirm.text' | translate}}</h3>
 </div>
 
 <div mat-dialog-actions>
@@ -16,5 +16,5 @@
   <button mat-raised-button
           (click)="onConfirm()"
           color="primary"
-  >Confirmar</button>
+  >{{'commons.buttons.confirm' | translate}}</button>
 </div>
