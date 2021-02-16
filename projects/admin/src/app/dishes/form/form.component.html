@@ -1,8 +1,8 @@
 <div mat-dialog-title>
   <div fxFlex="100" class="text-center">
-    <h2 *ngIf="dish; else newItem">Atualizando item do Cardápio: {{dish?.name}} #{{dish?.id}}</h2>
+    <h2 *ngIf="dish; else newItem">{{'pages.dishes.dialog.update.title'|translate:{id: data.id}}</h2>
     <ng-template #newItem>
-      <h2>Novo Item do Cardápio</h2>
+      <h2>{{'pages.dishes.dialog.new.title'|translate}}</h2>
     </ng-template>
   </div>
 </div>
@@ -14,19 +14,19 @@
 
       <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
                       fxFlex.xs="100">
-        <mat-label>Nome</mat-label>
+        <mat-label>{{'attributes.base.name'|translate}}</mat-label>
         <input formControlName="name" matInput>
       </mat-form-field>
 
       <mat-form-field appearance="outline" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
                       fxFlex.xs="100">
-        <mat-label>Preço</mat-label>
+        <mat-label>{{'attributes.product.price'|translate}}</mat-label>
         <input formControlName="price" matInput type="number">
         <mat-icon matPrefix>attach_money</mat-icon>
       </mat-form-field>
 
       <div fxFlex="100">
-        <h3>Ingredientes:</h3>
+        <h3>{{'pages.dishes.labels.ingredients'|translate}}</h3>
       </div>
 
       <div class="pt-05" formArrayName="ingredients" *ngFor="let item of ingredientsForm().controls; let i=index">
@@ -35,7 +35,7 @@
 
           <mat-form-field appearance="outline" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
                           fxFlex.xs="100">
-            <mat-label>Ingrediente</mat-label>
+            <mat-label>{{'pages.dishes.labels.ingredient'|translate}}</mat-label>
             <mat-select [compareWith]="compareSelectValues" formControlName="food">
               <mat-option *ngFor="let food of foods$ | async" [value]="food">
                 <div fxFlex="100">
@@ -49,7 +49,7 @@
           <div fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100" fxFlex.xs="100">
 
             <mat-form-field appearance="outline" fxFlex="80">
-              <mat-label>Quantidade</mat-label>
+              <mat-label>{{'attributes.product.quantity'|translate}}</mat-label>
               <input formControlName="quantity" matInput>
             </mat-form-field>
 
@@ -65,12 +65,12 @@
 </div>
 
 <div mat-dialog-actions>
-  <button (click)="onSubmit()" mat-raised-button color="primary">Salvar</button>
-  <button (click)="addIngredient()" matTooltip="Mais Ingrediente" mat-raised-button
+  <button (click)="onSubmit()" mat-raised-button color="primary">{{'commons.buttons.save'|translate}}</button>
+  <button (click)="addIngredient()" [matTooltip]="'pages.dishes.labels.more_ingredient'|translate" mat-raised-button
           color="primary">
     <mat-icon>add</mat-icon>
   </button>
-  <button (click)="toTrash()" matTooltip="Remover item do cardápio" mat-raised-button color="warn" *ngIf="dish">
+  <button (click)="toTrash()" [matTooltip]="'pages.dishes.labels.remove_ingredient'|translate" mat-raised-button color="warn" *ngIf="dish">
     <mat-icon>delete_outline</mat-icon>
   </button>
 </div>

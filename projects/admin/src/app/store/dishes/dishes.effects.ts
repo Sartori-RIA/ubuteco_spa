@@ -28,7 +28,7 @@ import {FeedbackService} from '../../core/services/api/feedback.service';
 import {DishesService} from '../../core/services/api/dishes.service';
 import {AppState} from '../index';
 import {Router} from '@angular/router';
-import {selectAllDishesLoaded} from "./dishes.selectors";
+import {selectAllDishesLoaded} from './dishes.selectors';
 
 @Injectable()
 export class DishesEffects {
@@ -52,7 +52,7 @@ export class DishesEffects {
         })
       ),
       catchError(() => {
-        this.feedbackService.errorAction('recuperar', true);
+        this.feedbackService.errorAction('fetch', true);
         return of(REQUEST_ALL_DISHES_FAILED());
       })
       ),
@@ -66,7 +66,7 @@ export class DishesEffects {
       .pipe(
         map((data) => REQUEST_DISH_DONE({data})),
         catchError(() => {
-          this.feedbackService.errorAction('recuperar');
+          this.feedbackService.errorAction('fetch');
           return of(REQUEST_DISH_FAILED());
         })
       )
@@ -78,11 +78,11 @@ export class DishesEffects {
     mergeMap(action =>
       this.dishesService.destroy(action.id).pipe(
         map(() => {
-          this.feedbackService.destroyItemSuccess('Item do Cardápio');
+          this.feedbackService.destroyItemSuccess('dish');
           return REMOVE_DISH_DONE({id: action.id});
         }),
         catchError(() => {
-          this.feedbackService.errorAction('remover');
+          this.feedbackService.errorAction('destroy');
           return of(REMOVE_DISH_FAILED());
         })
       )
@@ -94,12 +94,12 @@ export class DishesEffects {
     mergeMap(action => this.dishesService.create(action.data)
       .pipe(
         map(data => {
-          this.feedbackService.createSuccess('Item do Cardápio');
+          this.feedbackService.createSuccess('dish');
           this.router.navigate(['/cardapio/list']);
           return CREATE_DISH_DONE({data});
         }),
         catchError(() => {
-          this.feedbackService.errorAction('criar');
+          this.feedbackService.errorAction('create');
           return of(CREATE_DISH_FAILED());
         })
       )
@@ -111,12 +111,12 @@ export class DishesEffects {
     mergeMap(action => this.dishesService.update(action.data)
       .pipe(
         map(data => {
-          this.feedbackService.updateSuccess('Item do Cardápio');
+          this.feedbackService.updateSuccess('dish');
           this.router.navigate(['/cardapio/list']);
           return UPDATE_DISH_DONE({data});
         }),
         catchError(() => {
-          this.feedbackService.errorAction('remover');
+          this.feedbackService.errorAction('destroy');
           return of(UPDATE_DISH_FAILED());
         })
       )

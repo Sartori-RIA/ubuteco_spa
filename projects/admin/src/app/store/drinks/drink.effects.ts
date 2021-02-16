@@ -52,7 +52,7 @@ export class DrinkEffects {
         })
       ),
       catchError(() => {
-        this.feedbackService.errorAction('recuperar', true);
+        this.feedbackService.errorAction('fetch', true);
         return of(REQUEST_ALL_DRINKS_FAILED());
       })
       ),
@@ -63,11 +63,11 @@ export class DrinkEffects {
     ofType(CREATE_DRINK),
     mergeMap((action) => this.drinkService.create(action.drink).pipe(
       map((drink) => {
-        this.feedbackService.createSuccess('Bebida', false);
+        this.feedbackService.createSuccess('drink', false);
         return CREATE_DRINK_DONE({drink});
       }),
       catchError(() => {
-        this.feedbackService.errorAction('criar');
+        this.feedbackService.errorAction('create');
         return of(CREATE_DRINK_FAILED);
       })
       ),
@@ -80,7 +80,7 @@ export class DrinkEffects {
       .pipe(
         map((drink) => REQUEST_DRINK_DONE({drink})),
         catchError(() => {
-          this.feedbackService.errorAction('recuperar');
+          this.feedbackService.errorAction('fetch');
           return of(REQUEST_DRINK_FAILED);
         })
       ),
@@ -92,11 +92,11 @@ export class DrinkEffects {
     mergeMap((action) => this.drinkService.update(action.drink)
       .pipe(
         map((drink) => {
-          this.feedbackService.updateSuccess('Bebida', false);
+          this.feedbackService.updateSuccess('drink', false);
           return UPDATE_DRINK_DONE({drink});
         }),
         catchError(() => {
-          this.feedbackService.errorAction('atualizar');
+          this.feedbackService.errorAction('update');
           return of(UPDATE_DRINK_FAILED);
         })
       )
@@ -108,11 +108,11 @@ export class DrinkEffects {
     mergeMap((action) => this.drinkService.destroy(action.id)
       .pipe(
         map(() => {
-          this.feedbackService.destroyItemSuccess('Bebida', false);
+          this.feedbackService.destroyItemSuccess('drink', false);
           return REMOVE_DRINK_DONE({id: action.id});
         }),
         catchError(() => {
-          this.feedbackService.errorAction('remover');
+          this.feedbackService.errorAction('destroy');
           return of(REMOVE_DRINK_FAILED);
         })
       ))

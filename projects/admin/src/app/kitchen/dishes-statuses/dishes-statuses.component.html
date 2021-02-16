@@ -1,7 +1,7 @@
 <div [formGroup]="form">
   <mat-select (selectionChange)="onStatusChange($event)"  [compareWith]="compareSelectValues" formControlName="status">
     <mat-option *ngFor="let status of statuses" [value]="status">
-      {{translateStatus(status)}}
+      {{'pages.kitchen.status.'+status |translate}}
     </mat-option>
   </mat-select>
 </div>

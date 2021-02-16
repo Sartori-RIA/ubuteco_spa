@@ -52,7 +52,7 @@ export class FoodEffects {
         })
       ),
       catchError(() => {
-        this.feedbackService.errorAction('recuperar', true);
+        this.feedbackService.errorAction('fetch', true);
         return of(REQUEST_ALL_FOODS_FAILED());
       })
       ),
@@ -64,7 +64,7 @@ export class FoodEffects {
     mergeMap((action) => this.foodService.show(action.id).pipe(
       map((food) => REQUEST_FOOD_DONE({food})),
       catchError(() => {
-        this.feedbackService.errorAction('recuperar');
+        this.feedbackService.errorAction('fetch');
         return of(REQUEST_FOOD_FAILED());
       })
       )
@@ -76,11 +76,11 @@ export class FoodEffects {
     mergeMap((action) => this.foodService.destroy(action.id)
       .pipe(
         map(() => {
-          this.feedbackService.destroyItemSuccess('Alimento');
+          this.feedbackService.destroyItemSuccess('food');
           return REMOVE_FOOD_DONE({id: action.id});
         }),
         catchError(() => {
-          this.feedbackService.errorAction('remover');
+          this.feedbackService.errorAction('destroy');
           return of(REMOVE_FOOD_FAILED());
         })
       )
@@ -92,11 +92,11 @@ export class FoodEffects {
     mergeMap((action) => this.foodService.create(action.food)
       .pipe(
         map((food) => {
-          this.feedbackService.createSuccess('Alimento');
+          this.feedbackService.createSuccess('food');
           return CREATE_FOOD_DONE({food});
         }),
         catchError(() => {
-          this.feedbackService.errorAction('criar');
+          this.feedbackService.errorAction('create');
           return of(CREATE_FOOD_FAILED());
         })
       ),
@@ -108,11 +108,11 @@ export class FoodEffects {
     mergeMap((action) => this.foodService.update(action.food)
       .pipe(
         map((food) => {
-          this.feedbackService.updateSuccess('Alimento');
+          this.feedbackService.updateSuccess('food');
           return UPDATE_FOOD_DONE({food});
         }),
         catchError(() => {
-          this.feedbackService.errorAction('atualizar');
+          this.feedbackService.errorAction('update');
           return of(UPDATE_FOOD_FAILED());
         })
       ),

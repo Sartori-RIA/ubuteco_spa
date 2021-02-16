@@ -1,7 +1,7 @@
 <mat-card class="form-card-8 content-center" *ngIf="order$ | async; let order">
   <mat-card-header>
     <mat-card-title>
-      Pedido #{{order?.id}}
+      {{'pages.orders.form.order_n'|translate:{id: order?.id} }}
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
@@ -9,13 +9,13 @@
     <div [formGroup]="form" fxLayout="row wrap" fxLayoutAlign="space-between">
       <div fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxFlex.xs="100">
         <mat-form-field appearance="outline">
-          <mat-label>Mesa</mat-label>
+          <mat-label>{{'attributes.order.table'|translate}}</mat-label>
           <mat-select (selectionChange)="onSelectTable($event)" formControlName="table"
                       [compareWith]="compareSelectedTable">
             <mat-option *ngFor="let table of tables$ | async"
                         [value]="table"
             >
-              {{table?.name}} - Lugares: {{table?.chairs}}
+              {{'pages.orders.form.table_select_item'|translate: {name: table.name, chairs: table.chairs} }}
             </mat-option>
           </mat-select>
         </mat-form-field>

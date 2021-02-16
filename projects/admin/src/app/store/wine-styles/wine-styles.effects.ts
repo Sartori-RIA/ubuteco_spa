@@ -45,7 +45,7 @@ export class WineStylesEffects {
         })
       ),
       catchError(() => {
-        this.feedbackService.errorAction('recuperar', true);
+        this.feedbackService.errorAction('fetch', true);
         return of(REQUEST_ALL_WINE_STYLES_FAILED());
       })
       ),
@@ -57,11 +57,11 @@ export class WineStylesEffects {
     mergeMap((action) => this.wineStyleService.create(action.style)
       .pipe(
         map((style) => {
-          this.feedbackService.createSuccess('Estilo de Vinho');
+          this.feedbackService.createSuccess('wine_style');
           return ADD_WINE_STYLE_DONE({style});
         }),
         catchError((e) => {
-          this.feedbackService.errorAction('criar');
+          this.feedbackService.errorAction('create');
           return of(ADD_WINE_STYLE_FAILED);
         })
       ),
@@ -73,11 +73,11 @@ export class WineStylesEffects {
     mergeMap((action) => this.wineStyleService.destroy(action.id)
       .pipe(
         map((res) => {
-          this.feedbackService.destroyItemSuccess('Estilo de Vinho');
+          this.feedbackService.destroyItemSuccess('wine_style');
           return DELETE_WINE_STYLE_DONE({id: res.id});
         }),
         catchError((err) => {
-          this.feedbackService.errorAction('remover');
+          this.feedbackService.errorAction('destroy');
           return of(DELETE_WINE_STYLE_FAILED());
         })
       ),
@@ -89,11 +89,11 @@ export class WineStylesEffects {
     mergeMap((action) => this.wineStyleService.update(action.style)
       .pipe(
         map((beerStyle) => {
-          this.feedbackService.updateSuccess('Estilo de Vinho');
+          this.feedbackService.updateSuccess('wine_style');
           return UPDATE_WINE_STYLE_DONE({style: beerStyle});
         }),
         catchError((e) => {
-          this.feedbackService.errorAction('atualizar');
+          this.feedbackService.errorAction('update');
           return of(UPDATE_WINE_STYLE_FAILED());
         })
       ),

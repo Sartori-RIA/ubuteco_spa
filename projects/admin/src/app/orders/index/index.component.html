@@ -1,39 +1,39 @@
 <div fxLayout="row">
 
   <mat-form-field fxFill appearance="outline">
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar: ">
+    <input matInput (keyup)="applyFilter($event.target.value)" [placeholder]="'commons.labels.search'|translate">
   </mat-form-field>
 
 </div>
 <div class="mat-elevation-z8">
 
-  <app-float-action-button routerLink="/pedidos/add" tooltip="Novo Pedido"></app-float-action-button>
+  <app-float-action-button routerLink="/pedidos/add" [tooltip]="'pages.orders.fab' |translate"></app-float-action-button>
 
   <table mat-table [dataSource]="dataSource"
   >
 
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <th mat-header-cell *matHeaderCellDef>{{'attributes.base.id'|translate|uppercase}}</th>
       <td mat-cell *matCellDef="let element"> {{element?.id}} </td>
     </ng-container>
 
     <ng-container matColumnDef="client">
-      <th mat-header-cell *matHeaderCellDef>Cliente</th>
+      <th mat-header-cell *matHeaderCellDef>{{'attributes.order.customer'|translate}}</th>
       <td mat-cell *matCellDef="let element"> {{element?.user?.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="table">
-      <th mat-header-cell *matHeaderCellDef>Mesa</th>
+      <th mat-header-cell *matHeaderCellDef>{{'attributes.order.table'|translate}}</th>
       <td mat-cell *matCellDef="let element"> {{element?.table?.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="total">
-      <th mat-header-cell *matHeaderCellDef>Total</th>
+      <th mat-header-cell *matHeaderCellDef>{{'attributes.order.total'|translate}}</th>
       <td mat-cell *matCellDef="let element"> {{element?.total | currency}} </td>
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef>Ação</th>
+      <th mat-header-cell *matHeaderCellDef>{{'commons.labels.action'|translate}}</th>
       <td mat-cell *matCellDef="let element">
         <app-trash-button (deleteElement)="cancelOrder(element)"></app-trash-button>
         <button routerLink="/pedidos/{{element.id}}" mat-button>

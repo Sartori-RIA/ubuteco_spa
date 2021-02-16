@@ -6,7 +6,7 @@ import {Maker} from '../../core/models/maker';
 import {selectAllMakers, selectMakersFilteredByName} from '../../store/makers/makers.selectors';
 import {AppState} from '../../store';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {MakerDialogData, MakersFormDialogComponent} from '../../makers/makers-form-dialog/makers-form-dialog.component';
+import {MakersFormDialogComponent} from '../../makers/makers-form-dialog/makers-form-dialog.component';
 import {REQUEST_ALL_MAKERS} from '../../store/makers/makers.actions';
 import {Wine} from '../../core/models/wine';
 import {WineStyle} from '../../core/models/wine-style';
@@ -80,13 +80,7 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   openDialogAddMaker() {
-    const dialogData: MakerDialogData = {
-      title: 'Adicionar Vinicola',
-      isBrewery: true
-    };
-    this.dialog.open(MakersFormDialogComponent, {
-      data: dialogData,
-    });
+    this.dialog.open(MakersFormDialogComponent);
   }
 
   compareSelectValues(val1: WineStyle | Maker, val2: WineStyle | Maker) {

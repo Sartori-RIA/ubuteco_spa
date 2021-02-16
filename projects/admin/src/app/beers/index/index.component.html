@@ -1,14 +1,14 @@
 <div fxLayout="row">
 
   <mat-form-field fxFill appearance="outline">
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar: ">
+    <input matInput (keyup)="applyFilter($event.target.value)" [placeholder]="'commons.labels.search'|translate">
   </mat-form-field>
 
 </div>
 
 <div class="mat-elevation-z8">
 
-  <app-float-action-button tooltip="Adicionar Cerveja"></app-float-action-button>
+  <app-float-action-button [tooltip]="'pages.beers.fab' |translate"></app-float-action-button>
 
   <table mat-table [dataSource]="dataSource"
          matSort matSortDisableClear matSortDirection="desc"
@@ -17,32 +17,32 @@
 
 
     <ng-container matColumnDef="id">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef>ID</th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'attributes.base.id'|translate|uppercase}}</th>
       <td mat-cell *matCellDef="let element"> {{element?.id}} </td>
     </ng-container>
 
     <ng-container matColumnDef="image">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef>Foto</th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'attributes.product.picture'|translate}}</th>
       <td mat-cell *matCellDef="let element"><img height="100px" [src]="element?.image?.url"></td>
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef>Nome</th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'attributes.base.name'|translate}}</th>
       <td mat-cell *matCellDef="let element"> {{element?.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="style">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef>Estilo</th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'attributes.beer_style.to_human'|translate}}</th>
       <td mat-cell *matCellDef="let element"> {{element.beer_style.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="price">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef>Valor</th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'attributes.product.price'|translate}}</th>
       <td mat-cell *matCellDef="let element">{{element?.price_cents | formatCents}} </td>
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef>Ação</th>
+      <th mat-header-cell *matHeaderCellDef>{{'commons.labels.action'|translate}}</th>
       <td mat-cell *matCellDef="let element">
         <app-trash-button (deleteElement)="deleteBeer(element)"></app-trash-button>
         <button routerLink="/cervejas/{{element.id}}" mat-button>

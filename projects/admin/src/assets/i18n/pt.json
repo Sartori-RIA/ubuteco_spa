@@ -25,19 +25,159 @@
         "send_new_confirm_email": "Pedir novo email de confirmação"
       }
     },
-    "beers": {},
-    "beer_styles": {},
-    "wines": {},
-    "wine_styles": {},
-    "drinks": {},
-    "tables": {},
-    "orders": {},
-    "makers": {},
+    "beers": {
+      "fab": "Nova Cerveja",
+      "dialog": {
+        "update": {
+          "title": "Atualizando Cerveja: #{id}"
+        },
+        "new": {
+          "title": "Nova Cerveja"
+        }
+      }
+    },
+    "beer_styles": {
+      "fab": "Novo Estilo de Cerveja",
+      "dialog": {
+        "update": {
+          "title": "Atualizando o Estilo #{id}"
+        },
+        "new": {
+          "title": "Qual o novo estilo de cerveja?"
+        }
+      }
+    },
+    "dishes": {
+      "fab": "Novo Item ao cardápio",
+      "dialog": {
+        "update": {
+          "title": "Atualizando item do Cardápio: #{id}"
+        },
+        "new": {
+          "title": "Novo Item do Cardápio"
+        }
+      },
+      "labels": {
+        "ingredients": "Ingredientes:",
+        "ingredient": "Ingrediente:",
+        "more_ingredient": "Mais ingredientes",
+        "remove_ingredient": "Remover item do cardápio"
+      }
+    },
+    "drinks": {
+      "fab": "Nova Bebida",
+      "dialog": {
+        "update": {
+          "title": "Atualizando Bebida: #{id}"
+        },
+        "new": {
+          "title": "Nova Bebida"
+        }
+      }
+    },
+    "foods": {
+      "fab": "Novo Alimento",
+      "dialog": {
+        "update": {
+          "title": "Atualizando Alimento: #{id}"
+        },
+        "new": {
+          "title": "Novo Alimento"
+        }
+      }
+    },
+    "kitchen": {
+      "table": {
+        "order":"Pedido",
+        "table": "Mesa",
+        "customer": "Cliente",
+        "dish": "Prato",
+        "quantity": "Quantidade"
+      },
+      "status": {
+        "awaiting": "Aguardando",
+        "canceled": "Cancelado",
+        "cooking": "Preparando",
+        "with_the_client": "Entregue",
+        "ready": "Pronto",
+        "empty_stock": "Sem estoque"
+      },
+      "flash": {
+        "dish_received": "NOVO PEDIDO RECEBIDO",
+        "dish_updated": "PEDIDO ATUALIZADO"
+      }
+    },
+    "makers": {
+      "fab": "Novo Fabricante",
+      "dialog": {
+        "update": {
+          "title": "Atualizando Fabricante: #{id}"
+        },
+        "new": {
+          "title": "Novo Fabricante"
+        }
+      }
+    },
+    "orders": {
+      "fab": "Novo Pedido",
+      "dialog": {
+        "item_select": "Selecione o item",
+        "item_select_option": "{name} - R${price} - Dísponíveis: {quantity}"
+      },
+      "form": {
+        "order_n": "Pedido #{id}",
+        "table_select_item": "{name} - Lugares: {chairs}"
+      },
+      "labels": {
+        "close_order": "Fechar Pedido",
+        "remove": "Remover"
+      },
+      "flash": {
+        "items": {
+          "success": {
+            "updated": "Item atualizado ao pedido com sucesso",
+            "destroy": "Item removido do pedido com sucesso"
+          },
+          "fail": {
+            "updated": "Falhou ao atualizar o item ao pedido",
+            "destroy": "Falhou ao remover o item do pedido",
+            "create": "Falhou ao adicionar o item ao pedido"
+          }
+        }
+      }
+    },
     "organizations": {},
-    "profile": {},
-    "foods": {},
-    "dishes": {},
-    "uploader": {}
+    "profile": {
+    },
+    "tables": {
+      "fab": "Nova Mesa",
+      "dialog": {
+        "update": {
+          "title": "Atualizando Mesa: #{id}"
+        },
+        "new": {
+          "title": "Nova mesa"
+        }
+      }
+    },
+    "uploader": {
+      "title": "Escolha uma imagem para enviar",
+      "text": "Arraste uma imagem ou clique para escolher"
+    },
+    "wine_styles": {
+      "fab": "Novo Estilo de Vinho",
+      "dialog": {
+        "update": {
+          "title": "Atualizando o Estilo #{id}"
+        },
+        "new": {
+          "title": "Novo estilo de vinho"
+        }
+      }
+    },
+    "wines": {
+      "fab": "Novo Vinho"
+    }
   },
   "attributes": {
     "base": {
@@ -47,12 +187,14 @@
       "updated_at": "Atualziado em:"
     },
     "product": {
+      "to_human": "Produto",
+      "category": "Categoria",
       "price": "Valor",
       "description": "Descrição",
       "quantity_stock": "Quantidade em estoque",
       "price_cents": "Valor em centavos",
       "price_currency": "Moeda",
-      "image": "Foto do produto"
+      "image": "Foto"
     },
     "user": {
       "email": "E-mail",
@@ -100,6 +242,15 @@
       "to_human": "Mesa",
       "chairs": "Lugares"
     },
+    "order": {
+      "to_human": "Pedido",
+      "table": "Mesa",
+      "customer": "Cliente",
+      "quantity": "Quantidade",
+      "subtotal": "Subtotal",
+      "discount": "Desconto",
+      "total": "Total"
+    },
     "organization": {
       "to_human": "Empresa",
       "cnpj": "CNPJ",
@@ -118,6 +269,8 @@
   },
   "commons": {
     "messages": {
+      "welcome": "Seja bem vindo {name}",
+      "welcome_back": "Seja bem vindo de volta {name}",
       "create": {
         "success_f": "{register} adicionada com sucesso",
         "success_m": "{register} adicionado com sucesso",
@@ -149,13 +302,18 @@
       "close": "Fechar",
       "load_more": "Carregar mais",
       "next": "Avançar",
-      "exit": "Sair"
+      "exit": "Sair",
+      "save": "Salvar"
     },
     "dialogs": {
-      "confirm":{
+      "confirm": {
         "title": "Aviso",
         "text": "Deseja prosseguir com esta ação?"
       }
+    },
+    "labels": {
+      "search": "Buscar:",
+      "action": "Ação"
     }
   }
 }

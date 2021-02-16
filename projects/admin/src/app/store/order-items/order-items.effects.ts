@@ -15,9 +15,10 @@ import {
   UPDATE_ORDER_ITEM_DONE,
   UPDATE_ORDER_ITEM_FAILED
 } from './order-items.actions';
-import {catchError, map, mergeMap} from 'rxjs/operators';
+import {catchError, map, mergeMap, take} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {FeedbackService} from '../../core/services/api/feedback.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable()
 export class OrderItemsEffects {
@@ -47,11 +48,15 @@ export class OrderItemsEffects {
       })
       .pipe(
         map((item) => {
-          this.feedback.success('Item atualizado ao pedido com sucesso');
+          this.translate.get('pages.orders.flash.items.success.update')
+            .pipe(take(1))
+            .subscribe((message) => this.feedback.success(message));
           return UPDATE_ORDER_ITEM_DONE({item});
         }),
         catchError((err) => {
-          this.feedback.error('Falhou ao atualizar o item ao pedido');
+          this.translate.get('pages.orders.flash.items.fail.update')
+            .pipe(take(1))
+            .subscribe((message) => this.feedback.error(message));
           return of(UPDATE_ORDER_ITEM_FAILED());
         })
       ),
@@ -65,11 +70,15 @@ export class OrderItemsEffects {
       orderItemId: action.id,
     }).pipe(
       map(() => {
-        this.feedback.success('Item removido do pedido com sucesso');
+        this.translate.get('pages.orders.flash.items.success.update')
+          .pipe(take(1))
+          .subscribe((message) => this.feedback.success(message));
         return DELETE_ORDER_ITEM_DONE(action);
       }),
       catchError((err) => {
-        this.feedback.error('Falhou ao remover o item do pedido');
+        this.translate.get('pages.orders.flash.items.fail.destroy')
+          .pipe(take(1))
+          .subscribe((message) => this.feedback.error(message));
         return of(DELETE_ORDER_ITEM_FAILED());
       })
     ))),
@@ -84,12 +93,13 @@ export class OrderItemsEffects {
       })
       .pipe(
         map((item) => {
-          this.feedback.createSuccess('Item no pedido', true);
+          this.feedback.createSuccess('order_item', true);
           return ADD_ORDER_ITEM_DONE({item});
         }),
         catchError((err) => {
-          console.log(err);
-          this.feedback.error('Falhou ao adicionar o item ao pedido');
+          this.translate.get('pages.orders.flash.items.fail.create')
+            .pipe(take(1))
+            .subscribe((message) => this.feedback.success(message));
           return of(ADD_ORDER_ITEM_FAILED());
         })
       ),
@@ -97,6 +107,7 @@ export class OrderItemsEffects {
   ));
 
   constructor(private actions$: Actions,
+              private translate: TranslateService,
               private feedback: FeedbackService,
               private ordersService: OrdersService) {
   }

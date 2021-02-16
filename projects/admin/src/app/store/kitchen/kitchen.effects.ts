@@ -11,8 +11,9 @@ import {
   UPDATE_ORDER_DISH_STATUS_DONE,
   UPDATE_ORDER_DISH_STATUS_FAIL,
 } from './kitchen.actions';
-import {catchError, map, mergeMap, tap} from 'rxjs/operators';
+import {catchError, map, mergeMap, take, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable()
 export class KitchenEffects {
@@ -43,20 +44,25 @@ export class KitchenEffects {
 
   dishReceived$ = createEffect(() => this.actions$.pipe(
     ofType(NEW_ORDER_DISH_RECEIVED),
-    tap((action) => {
-      this.feedbackService.success('NOVO PEDIDO RECEBIDO');
+    tap(() => {
+      this.translate.get('pages.kitchen.flash.dish_received')
+        .pipe(take(1))
+        .subscribe((message) => this.feedbackService.success(message));
     })
   ), {dispatch: false});
 
   dishUpdated$ = createEffect(() => this.actions$.pipe(
     ofType(UPDATE_ORDER_DISH_STATUS_DONE),
-    tap((action) => {
-      this.feedbackService.success('PEDIDO ATUALIZADO');
+    tap(() => {
+      this.translate.get('pages.kitchen.flash.dish_updated')
+        .pipe(take(1))
+        .subscribe((message) => this.feedbackService.success(message));
     })
   ), {dispatch: false});
 
   constructor(private kitchenService: KitchenService,
               private feedbackService: FeedbackService,
+              private translate: TranslateService,
               private actions$: Actions) {
   }
 }

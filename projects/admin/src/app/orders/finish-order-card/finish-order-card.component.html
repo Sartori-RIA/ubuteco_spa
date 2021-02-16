@@ -4,24 +4,24 @@
   <div fxFlex="25">
     <mat-card class="m-0">
       <div class="line mb-1">
-        <span class="fw-500">Subtotal:</span>
+        <span class="fw-500">{{'attributes.orders.subtotal'|translate}}</span>
         <span fxFlex></span>
         <span class="text-muted"><mat-icon>attach_money</mat-icon>{{order.total}}</span>
       </div>
       <div class="line mb-1">
-        <span class="fw-500">Desconto:</span>
+        <span class="fw-500">{{'attributes.orders.discount'|translate}}</span>
         <span fxFlex></span>
         <span class="text-muted"><mat-icon>attach_money</mat-icon>{{order.discount}}</span>
       </div>
       <mat-divider class=""></mat-divider>
       <div class="line mb-1 pt-1">
-        <span class="fw-500">Total:</span>
+        <span class="fw-500">{{'attributes.orders.total'|translate}}</span>
         <span fxFlex></span>
         <span class="text-muted"><mat-icon>attach_money</mat-icon>{{order.total_with_discount}}</span>
       </div>
       <mat-card-actions>
         <span fxFlex></span>
-        <button mat-raised-button color="warn">Fechar Pedido</button>
+        <button mat-raised-button color="warn">{{'pages.orders.labels.close_order'|translate}}</button>
       </mat-card-actions>
     </mat-card>
   </div>

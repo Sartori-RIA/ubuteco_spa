@@ -1,24 +1,24 @@
 <div *ngIf="data?.id; else newStyle">
   <h1 mat-dialog-title>
-    Atualizando o Estilo #{{data.id}}
+    {{'pages.beer_styles.dialog.update.title'|translate:{id: data.id} }}
   </h1>
 </div>
 
 <ng-template #newStyle>
   <h1 mat-dialog-title>
-    Qual o novo estilo de cerveja?
+    {{'pages.beer_styles.dialog.new.title'|translate }}
   </h1>
 </ng-template>
 
 <div mat-dialog-content>
 
   <mat-form-field appearance="outline" fxFlex="100">
-    <input [formControl]="beerStyleControl" matInput placeholder="Nome">
+    <input [formControl]="beerStyleControl" matInput [placeholder]="'attributes.base.name' | translate">
   </mat-form-field>
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button color="warn" (click)="onNoClick()">Cancelar</button>
+  <button mat-button color="warn" (click)="onNoClick()">{{'commons.buttons.cancel'|translate}}</button>
   <span fxFlex></span>
-  <button mat-raised-button color="primary" (click)="onAddBeerStyle()">Salvar</button>
+  <button mat-raised-button color="primary" (click)="onAddBeerStyle()">{{'commons.buttons.save'|translate}}</button>
 </div>

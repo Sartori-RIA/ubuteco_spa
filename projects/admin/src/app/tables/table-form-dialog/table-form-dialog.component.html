@@ -1,9 +1,9 @@
 <div *ngIf="data; else newTable">
-  <h1 mat-dialog-title>Atualizando Mesa: {{data?.name}} #{{data?.id}}</h1>
+  <h1 mat-dialog-title>{{'pages.tables.dialog.update.title'|translate: {id: data.id} }}</h1>
 </div>
 
 <ng-template #newTable>
-  <h1 mat-dialog-title>Nova Mesa</h1>
+  <h1 mat-dialog-title>{{'pages.tables.dialog.new.title'|translate}}</h1>
 </ng-template>
 
 
@@ -12,18 +12,20 @@
   <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="text-center">
 
     <mat-form-field appearance="outline" fxFlex="100">
-      <input formControlName="name" matInput placeholder="Nome">
+      <mat-label>{{'attributes.base.name'|translate}}</mat-label>
+      <input formControlName="name" matInput>
     </mat-form-field>
 
     <mat-form-field appearance="outline" fxFlex="100">
-      <input formControlName="chairs" type="number" matInput placeholder="Lugares">
+      <mat-label>{{'attributes.table.chairs'|translate}}</mat-label>
+      <input formControlName="chairs" type="number" matInput>
     </mat-form-field>
 
   </div>
 </div>
 
 <div mat-dialog-actions>
-  <button (click)="onNoClick()" mat-button color="warn">Cancelar</button>
+  <app-cancel-button (cancel)="onNoClick()"></app-cancel-button>
   <span fxFlex></span>
-  <button (click)="onSubmit()"  mat-raised-button color="primary">Salvar</button>
+  <button (click)="onSubmit()" mat-raised-button color="primary">{{'commons.base.save'|translate}}</button>
 </div>

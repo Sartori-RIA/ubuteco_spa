@@ -1,19 +1,9 @@
-<div *ngIf="data?.maker; else newData">
-  <div *ngIf="data?.isBrewery; else isMaker">
-    <h1 mat-dialog-title> Editando a Cervejaria #{{data?.maker.id}}</h1>
-  </div>
-  <ng-template #isMaker>
-    <h1 mat-dialog-title> Editando o Fabricante #{{data?.maker.id}}</h1>
-  </ng-template>
+<div *ngIf="data?.id; else newData">
+  <h1 mat-dialog-title>{{'pages.makers.dialog.update.title'|translate: {id: data.id} }}</h1>
 </div>
 
 <ng-template #newData>
-  <div *ngIf="data?.isBrewery; else isMaker">
-    <h1 mat-dialog-title> Qual a Cervejaria?</h1>
-  </div>
-  <ng-template #isMaker>
-    <h1 mat-dialog-title> Qual o Fabricante</h1>
-  </ng-template>
+  <h1 mat-dialog-title>{{'pages.makers.dialog.new.title'|translate}}</h1>
 </ng-template>
 
 
@@ -21,18 +11,20 @@
 
   <div [formGroup]="form" fxLayout="row wrap" fxLayoutAlign="space-between center">
     <mat-form-field appearance="outline" fxFlex="100">
-      <input formControlName="name" matInput placeholder="Nome">
+      <mat-label>{{'attributes.base.name'|translate}}</mat-label>
+      <input formControlName="name" matInput>
     </mat-form-field>
 
     <mat-form-field appearance="outline" fxFlex="100">
-      <input formControlName="country" matInput placeholder="País">
+      <mat-label>{{'attributes.maker.country'|translate}}</mat-label>
+      <input formControlName="country" matInput>
     </mat-form-field>
 
   </div>
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button color="warn" (click)="onNoClick()">Cancelar</button>
+  <app-cancel-button (cancel)="onNoClick()"></app-cancel-button>
   <span fxFlex></span>
-  <button mat-raised-button color="primary" (click)="onAddMaker()">Salvar</button>
+  <button mat-raised-button color="primary" (click)="onAddMaker()">{{'commons.buttons.save'|translate}}</button>
 </div>

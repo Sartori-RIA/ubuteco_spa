@@ -1,5 +1,6 @@
 <button (click)="cancel.emit()"
         [matTooltip]="tooltip"
+        (keydown.escape)="cancel.emit()"
         color="warn"
         mat-button
 >{{'commons.buttons.cancel' | translate}}

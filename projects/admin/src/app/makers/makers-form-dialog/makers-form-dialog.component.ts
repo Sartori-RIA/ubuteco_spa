@@ -2,9 +2,9 @@ import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core'
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Maker} from '../../core/models/maker';
-import {ADD_MAKER, UPDATE_MAKER} from "../../store/makers/makers.actions";
-import {Store} from "@ngrx/store";
-import {AppState} from "../../store";
+import {ADD_MAKER, UPDATE_MAKER} from '../../store/makers/makers.actions';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../store';
 
 @Component({
   selector: 'app-makers-form-dialog',
@@ -19,7 +19,7 @@ export class MakersFormDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<MakersFormDialogComponent>,
               private fb: FormBuilder,
               private store: Store<AppState>,
-              @Inject(MAT_DIALOG_DATA) public data: MakerDialogData) {
+              @Inject(MAT_DIALOG_DATA) public data: Maker) {
   }
 
   ngOnInit() {
@@ -54,7 +54,7 @@ export class MakersFormDialogComponent implements OnInit {
   private mountMaker(): Maker {
     const value = this.form.value;
     return {
-      ...this.data.maker,
+      ...this.data,
       name: value.name,
       country: value.country,
     };
@@ -62,14 +62,8 @@ export class MakersFormDialogComponent implements OnInit {
 
   private updateForm() {
     this.form.patchValue({
-      name: this.data?.maker?.name,
-      country: this.data?.maker?.country,
+      name: this.data?.name,
+      country: this.data?.country,
     });
   }
-}
-
-export interface MakerDialogData {
-  title: string;
-  isBrewery?: boolean;
-  maker?: Maker;
 }

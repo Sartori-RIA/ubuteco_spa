@@ -48,7 +48,7 @@ export class MakersEffects {
         })
       ),
       catchError(() => {
-        this.feedbackService.errorAction('recuperar', true);
+        this.feedbackService.errorAction('fetch', true);
         return of(REQUEST_ALL_MAKERS_FAILED());
       })
       ),
@@ -60,11 +60,11 @@ export class MakersEffects {
     mergeMap((action) => this.makersService.create(action.maker)
       .pipe(
         map((maker) => {
-          this.feedbackService.createSuccess('Fabricante/Cervejaria');
+          this.feedbackService.createSuccess('maker');
           return ADD_MAKER_DONE({maker});
         }),
         catchError((e) => {
-          this.feedbackService.errorAction('criar');
+          this.feedbackService.errorAction('create');
           return of(ADD_MAKER_FAILED());
         })
       ),
@@ -76,11 +76,11 @@ export class MakersEffects {
     mergeMap((action) => this.makersService.destroy(action.id)
       .pipe(
         map((res) => {
-          this.feedbackService.destroyItemSuccess('Fabricante/Cervejaria');
+          this.feedbackService.destroyItemSuccess('maker');
           return DELETE_MAKER_DONE({id: res.id});
         }),
         catchError(() => {
-          this.feedbackService.errorAction('remover');
+          this.feedbackService.errorAction('destroy');
           return of(DELETE_MAKER_FAILED());
         })
       )
@@ -92,11 +92,11 @@ export class MakersEffects {
     mergeMap((action) => this.makersService.update(action.maker)
       .pipe(
         map((res) => {
-          this.feedbackService.updateSuccess('Fabricante/Cervejaria');
+          this.feedbackService.updateSuccess('maker');
           return UPDATE_MAKER_DONE({maker: res});
         }),
         catchError(() => {
-          this.feedbackService.errorAction('atualizar');
+          this.feedbackService.errorAction('update');
           return of(UPDATE_MAKER_FAILED());
         })
       )

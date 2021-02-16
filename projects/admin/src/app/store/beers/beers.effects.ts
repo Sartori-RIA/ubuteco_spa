@@ -52,7 +52,7 @@ export class BeersEffects {
         })
       ),
       catchError(() => {
-        this.feedbackService.errorAction('recuperar', true);
+        this.feedbackService.errorAction('fetch', true);
         return of(REQUEST_ALL_BEERS_FAILED());
       })
       ),
@@ -64,7 +64,7 @@ export class BeersEffects {
     mergeMap((action) => this.beerService.show(action.id).pipe(
       map((beer) => REQUEST_BEER_DONE({beer})),
       catchError(() => {
-        this.feedbackService.errorAction('recuperar', false);
+        this.feedbackService.errorAction('fetch', false);
         return of(REQUEST_BEER_FAILED());
       })
       ),
@@ -76,11 +76,11 @@ export class BeersEffects {
     mergeMap((action) => this.beerService.destroy(action.id)
       .pipe(
         map(() => {
-          this.feedbackService.destroyItemSuccess('Cerveja', false);
+          this.feedbackService.destroyItemSuccess('beer', false);
           return REMOVE_BEER_DONE({id: action.id});
         }),
         catchError(() => {
-          this.feedbackService.errorAction('remover');
+          this.feedbackService.errorAction('destroy');
           return of(REMOVE_BEER_FAILED());
         })
       )
@@ -91,11 +91,11 @@ export class BeersEffects {
     ofType(CREATE_BEER),
     mergeMap((action) => this.beerService.create(action.beer).pipe(
       map((beer) => {
-        this.feedbackService.createSuccess('Cerveja', false);
+        this.feedbackService.createSuccess('beer', false);
         return CREATE_BEER_DONE({beer});
       }),
       catchError(() => {
-        this.feedbackService.errorAction('criar');
+        this.feedbackService.errorAction('create');
         return of(CREATE_BEER_FAILED());
       })
       )
@@ -107,11 +107,11 @@ export class BeersEffects {
       ofType(UPDATE_BEER),
       mergeMap((action) => this.beerService.update(action.beer).pipe(
         map((beer) => {
-          this.feedbackService.updateSuccess('Cerveja', false);
+          this.feedbackService.updateSuccess('beer', false);
           return UPDATE_BEER_DONE({beer});
         }),
         catchError(() => {
-          this.feedbackService.errorAction('atualizar');
+          this.feedbackService.errorAction('update');
           return of(UPDATE_BEER_FAILED());
         })
         )

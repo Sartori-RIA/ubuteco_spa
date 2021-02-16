@@ -55,7 +55,7 @@ export class TableEffects {
         })
       ),
       catchError(() => {
-        this.feedbackService.errorAction('recuperar', true);
+        this.feedbackService.errorAction('fetch', true);
         return of(REQUEST_ALL_TABLES_FAILED());
       })
       ),
@@ -68,7 +68,7 @@ export class TableEffects {
       .pipe(
         map((table) => REQUEST_TABLE_DONE({table})),
         catchError(() => {
-          this.feedbackService.errorAction('recuperar');
+          this.feedbackService.errorAction('fetch');
           return of(REQUEST_TABLE_FAILED());
         })
       ),
@@ -80,11 +80,11 @@ export class TableEffects {
     mergeMap((action) => this.tableService.destroy(action.id)
       .pipe(
         map(() => {
-          this.feedbackService.destroyItemSuccess('Mesa', false);
+          this.feedbackService.destroyItemSuccess('table', false);
           return REMOVE_TABLE_DONE({id: action.id});
         }),
         catchError(() => {
-          this.feedbackService.errorAction('remover');
+          this.feedbackService.errorAction('destroy');
           return of(REMOVE_TABLE_FAILED());
         })
       )
@@ -96,11 +96,11 @@ export class TableEffects {
     mergeMap((action) => this.tableService.create(action.table)
       .pipe(
         map((table) => {
-          this.feedbackService.createSuccess('Mesa', false);
+          this.feedbackService.createSuccess('table', false);
           return CREATE_TABLE_DONE({table});
         }),
         catchError(() => {
-          this.feedbackService.errorAction('criar');
+          this.feedbackService.errorAction('create');
           return of(CREATE_TABLE_FAILED());
         })
       ),
@@ -112,11 +112,11 @@ export class TableEffects {
     mergeMap((action) => this.tableService.update(action.table)
       .pipe(
         map((table) => {
-          this.feedbackService.updateSuccess('Mesa', false);
+          this.feedbackService.updateSuccess('table', false);
           return UPDATE_TABLE_DONE({table});
         }),
         catchError(() => {
-          this.feedbackService.errorAction('atualizar');
+          this.feedbackService.errorAction('update');
           return of(UPDATE_TABLE_FAILED());
         })
       ),

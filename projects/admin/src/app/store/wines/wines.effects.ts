@@ -52,7 +52,7 @@ export class WinesEffects {
         })
       ),
       catchError(() => {
-        this.feedbackService.errorAction('recuperar', true);
+        this.feedbackService.errorAction('fetch', true);
         return of(REQUEST_ALL_WINES_FAILED());
       })
       ),
@@ -65,7 +65,7 @@ export class WinesEffects {
       .pipe(
         map((wine) => REQUEST_WINE_DONE({wine})),
         catchError(() => {
-          this.feedbackService.errorAction('recuperar', false);
+          this.feedbackService.errorAction('fetch', false);
           return of(REQUEST_WINE_FAILED());
         })
       ),
@@ -77,11 +77,11 @@ export class WinesEffects {
     mergeMap((action) => this.wineService.destroy(action.id)
       .pipe(
         map(() => {
-          this.feedbackService.destroyItemSuccess('Vinho', false);
+          this.feedbackService.destroyItemSuccess('wine', false);
           return REMOVE_WINE_DONE({id: action.id});
         }),
         catchError(() => {
-          this.feedbackService.errorAction('remover');
+          this.feedbackService.errorAction('destroy');
           return of(REMOVE_WINE_FAILED());
         })
       )
@@ -93,11 +93,11 @@ export class WinesEffects {
     mergeMap((action) => this.wineService.create(action.wine)
       .pipe(
         map((wine) => {
-          this.feedbackService.createSuccess('Vinho', false);
+          this.feedbackService.createSuccess('wine', false);
           return CREATE_WINE_DONE({wine});
         }),
         catchError(() => {
-          this.feedbackService.errorAction('criar');
+          this.feedbackService.errorAction('create');
           return of(CREATE_WINE_FAILED());
         })
       ),
@@ -108,11 +108,11 @@ export class WinesEffects {
     ofType(UPDATE_WINE),
     mergeMap((action) => this.wineService.update(action.wine).pipe(
       map((wine) => {
-        this.feedbackService.updateSuccess('Vinho', false);
+        this.feedbackService.updateSuccess('wine', false);
         return UPDATE_WINE_DONE({wine});
       }),
       catchError(() => {
-        this.feedbackService.errorAction('atualizar');
+        this.feedbackService.errorAction('update');
         return of(UPDATE_WINE_FAILED());
       })
       ),

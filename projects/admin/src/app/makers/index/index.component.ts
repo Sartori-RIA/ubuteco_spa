@@ -8,7 +8,7 @@ import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import {DELETE_MAKER, REQUEST_ALL_MAKERS} from '../../store/makers/makers.actions';
-import {MakerDialogData, MakersFormDialogComponent} from '../makers-form-dialog/makers-form-dialog.component';
+import {MakersFormDialogComponent} from '../makers-form-dialog/makers-form-dialog.component';
 
 @Component({
   selector: 'app-index',
@@ -66,12 +66,8 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   openFormDialog(element?: Maker) {
-    const data: MakerDialogData = {
-      title: element ? `Atualizando o fabricante ${element.id}` : 'Novo Fabricante',
-      maker: element
-    };
     this.dialog.open(MakersFormDialogComponent, {
-      data
+      data: element
     });
   }
 

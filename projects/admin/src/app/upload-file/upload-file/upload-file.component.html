@@ -1,10 +1,10 @@
 <div mat-dialog-title class="text-center">
-  <h3>Escolha uma imagem para enviar </h3>
+  <h3>{{'pages.uploader.title'|translate}}</h3>
 </div>
 
 <div mat-dialog-content>
   <ngx-dropzone [accept]="'image/*'" [multiple]="false" (change)="onSelect($event)">
-    <ngx-dropzone-label>Arraste uma imagem ou clique para escolher</ngx-dropzone-label>
+    <ngx-dropzone-label>{{'pages.uploader.text'|translate}}</ngx-dropzone-label>
     <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
       <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
     </ngx-dropzone-preview>
@@ -19,7 +19,7 @@
 <div mat-dialog-actions>
   <app-cancel-button (cancel)="cancelUpload()"></app-cancel-button>
   <span fxFlex></span>
-  <app-confirm-button  [loading]="started$ | async"
+  <app-confirm-button [loading]="started$ | async"
                       (confirmed)="uploadFile()"></app-confirm-button>
 </div>
 

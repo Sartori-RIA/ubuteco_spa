@@ -8,7 +8,10 @@ import {
   SIGN_IN,
   SIGN_IN_DONE,
   SIGN_IN_REFUSED,
-  SIGN_OUT, SIGN_UP, SIGN_UP_DONE, SIGN_UP_REFUSED,
+  SIGN_OUT,
+  SIGN_UP,
+  SIGN_UP_DONE,
+  SIGN_UP_REFUSED,
   THEME_FAILED,
   THEME_LOADED,
   THEME_REQUESTED,
@@ -19,13 +22,14 @@ import {
   UPDATE_USER_DONE,
   UPDATE_USER_FAILED
 } from './auth.actions';
-import {catchError, map, mergeMap, tap} from 'rxjs/operators';
+import {catchError, map, mergeMap, take, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {Router} from '@angular/router';
 import {FeedbackService} from '../../core/services/api/feedback.service';
 import {ThemeService} from '../../core/services/api/theme.service';
 import {UserService} from '../../core/services/api/user.service';
 import {KitchenSocketService} from '../../core/sockets/kitchen-socket.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable()
 export class AuthEffects {
@@ -60,16 +64,20 @@ export class AuthEffects {
 
   navigateAfterSignIn$ = createEffect(() => this.actions$.pipe(
     ofType(SIGN_IN_DONE),
-    tap((action) => {
-      this.feedbackService.success(`Seja bem vindo de volta ${action.user.name}`);
+    tap(({user}) => {
+      this.translate.get('commons.messages.welcome_back', {name: user.name})
+        .pipe(take(1))
+        .subscribe((message) => this.feedbackService.success(message));
       this.router.navigate(['/dash']);
     })
   ), {dispatch: false});
 
   navigateAfterSignUp$ = createEffect(() => this.actions$.pipe(
     ofType(SIGN_UP_DONE),
-    tap((action) => {
-      this.feedbackService.success(`Seja bem vindo ${action.user.name}`);
+    tap(({user}) => {
+      this.translate.get('commons.messages.welcome', {name: user.name})
+        .pipe(take(1))
+        .subscribe((message) => this.feedbackService.success(message));
       this.router.navigate(['/dash']);
     })
   ), {dispatch: false});
@@ -92,11 +100,11 @@ export class AuthEffects {
     mergeMap((action) => this.userService.update(action.user)
       .pipe(
         map((user) => {
-          this.feedbackService.success('Perfil atualizado com sucesso!');
+          this.feedbackService.updateSuccess('profile');
           return UPDATE_USER_DONE({user});
         }),
         catchError(() => {
-          this.feedbackService.error('Ops, algo de estranho aconteceu ao tentar atualizar o seu perfil');
+          this.feedbackService.errorAction('update');
           return of(UPDATE_USER_FAILED());
         })
       ),
@@ -127,6 +135,7 @@ export class AuthEffects {
               private authService: AuthService,
               private feedbackService: FeedbackService,
               private router: Router,
+              private translate: TranslateService,
               private kitchenSocket: KitchenSocketService,
               private themeService: ThemeService,
               private userService: UserService) {

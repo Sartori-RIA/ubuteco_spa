@@ -47,23 +47,6 @@ export class DishesStatusesComponent implements OnInit {
     }
   }
 
-  translateStatus(status: OrderItemStatus): string {
-    switch (status) {
-      case 'awaiting':
-        return 'Aguardando';
-      case 'canceled':
-        return 'Cancelado';
-      case 'cooking':
-        return 'Cozinhando';
-      case 'with_the_client':
-        return 'Com o cliente';
-      case 'ready':
-        return 'Pedido Pronto';
-      case 'empty_stock':
-        return 'Sem estoque';
-    }
-  }
-
   private updateForm() {
     this.form.patchValue({
       status: this.dish.order_item.status

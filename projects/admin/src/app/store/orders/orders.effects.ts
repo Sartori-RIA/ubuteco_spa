@@ -54,7 +54,7 @@ export class OrdersEffects {
         })
       ),
       catchError(() => {
-        this.feedback.errorAction('recuperar', true);
+        this.feedback.errorAction('fetch', true);
         return of(REQUEST_ALL_ORDERS_FAILED());
       })
       ),

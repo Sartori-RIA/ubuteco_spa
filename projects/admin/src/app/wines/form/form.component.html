@@ -15,23 +15,23 @@
       <div>
 
         <mat-form-field appearance="outline">
-          <mat-label>Nome</mat-label>
+          <mat-label>{{'attributes.base.name'|translate}}</mat-label>
           <input formControlName="name" matInput>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Descrição</mat-label>
+          <mat-label>{{'attributes.product.description'|translate}}</mat-label>
           <textarea rows="5" formControlName="description" matInput></textarea>
         </mat-form-field>
 
 
         <mat-form-field appearance="outline">
-          <mat-label>Quantidade em estoque</mat-label>
+          <mat-label>{{'attributes.product.quantity_stock'|translate}}</mat-label>
           <input formControlName="quantity_stock" type="number" matInput>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Preço</mat-label>
+          <mat-label>{{'attributes.product.price'|translate}}</mat-label>
           <input formControlName="price" matInput type="number">
           <mat-icon matPrefix>attach_money</mat-icon>
         </mat-form-field>
@@ -39,7 +39,7 @@
 
         <div>
           <mat-form-field appearance="outline">
-            <mat-label>Estilo de vinho</mat-label>
+            <mat-label>{{'attributes.wine_style.to_human'|translate}}</mat-label>
             <input matInput
                    formControlName="wine_style"
                    [matAutocomplete]="styleAuto">
@@ -54,14 +54,16 @@
             </mat-option>
           </mat-autocomplete>
 
-          <button matTooltip="Adicionar Estilo de vinho" (click)="openDialogWineStyle()" mat-mini-fab>+
+          <button [matTooltip]="'pages.wine_styles.fab'|translate"
+                  (click)="openDialogWineStyle()"
+                  mat-mini-fab
+          >+
           </button>
         </div>
 
-
         <div>
           <mat-form-field appearance="outline" fxFlex="80">
-            <mat-label>Vinicola</mat-label>
+            <mat-label>{{'attributes.maker.to_human'|translate}}</mat-label>
             <input matInput
                    formControlName="maker"
                    [matAutocomplete]="makerAuto">
@@ -76,44 +78,46 @@
             </mat-option>
           </mat-autocomplete>
 
-          <button matTooltip="Adicionar Vinicola" (click)="openDialogAddMaker()" mat-mini-fab>+
+          <button [matTooltip]="'pages.maker.to_human'|translate"
+                  (click)="openDialogAddMaker()"
+                  mat-mini-fab
+          >+
           </button>
         </div>
 
         <mat-form-field appearance="outline">
-          <mat-label>ABV</mat-label>
+          <mat-label>{{'attributes.wine.abv'|translate}}</mat-label>
           <input formControlName="abv" matInput type="number">
           <fa-icon matSuffix [icon]="['fas','percentage']"></fa-icon>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>vintage_wine</mat-label>
+          <mat-label>{{'attributes.wine.vintage_wine'|translate}}</mat-label>
           <input formControlName="vintage_wine" matInput>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>visual</mat-label>
+          <mat-label>{{'attributes.wine.visual'|translate}}</mat-label>
           <input formControlName="visual" matInput>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>ripening</mat-label>
+          <mat-label>{{'attributes.wine.ripening'|translate}}</mat-label>
           <input formControlName="ripening" matInput>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>grapes</mat-label>
+          <mat-label>{{'attributes.wine.grapes'|translate}}</mat-label>
           <input formControlName="grapes" matInput>
         </mat-form-field>
-
       </div>
     </div>
   </div>
 </div>
 
 <div mat-dialog-actions>
-  <button (click)="onCancel()" mat-button color="warn">Cancelar</button>
+  <app-cancel-button (cancel)="onCancel()"></app-cancel-button>
   <span fxFlex></span>
-  <button (click)="onSubmit()" mat-raised-button color="primary">Salvar</button>
+  <button (click)="onSubmit()" mat-raised-button color="primary">{{'commons.base.save'|translate}}</button>
 </div>
 

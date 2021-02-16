@@ -88,13 +88,15 @@ export class FeedbackService {
 }
 
 export type RegisterType =
-  'Bebida'
-  | 'Cerveja'
-  | 'Vinho'
-  | 'Alimento'
-  | 'Item do Cardápio'
-  | 'Mesa'
-  | 'Estilo de Cerveja'
-  | 'Estilo de Vinho'
-  | 'Fabricante/Cervejaria'
-  | 'Item no pedido';
+  'drink'
+  | 'beer'
+  | 'wine'
+  | 'food'
+  | 'dish'
+  | 'table'
+  | 'beer_style'
+  | 'wine_style'
+  | 'maker'
+  | 'order_item'
+  | 'profile'
+  | 'theme';

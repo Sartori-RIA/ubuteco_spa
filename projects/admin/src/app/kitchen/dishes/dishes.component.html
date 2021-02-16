@@ -1,7 +1,7 @@
 <div fxLayout="row">
 
   <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar: ">
+    <input matInput (keyup)="applyFilter($event.target.value)" [placeholder]="'commons.labels.search'|translate">
   </mat-form-field>
 
 </div>
@@ -11,32 +11,32 @@
   >
 
     <ng-container matColumnDef="order_id">
-      <th mat-header-cell *matHeaderCellDef>Pedido</th>
+      <th mat-header-cell *matHeaderCellDef>{{'pages.kitchen.table.order'|translate}}</th>
       <td mat-cell *matCellDef="let element"> {{element?.order_item?.order_id}} </td>
     </ng-container>
 
     <ng-container matColumnDef="table">
-      <th mat-header-cell *matHeaderCellDef>Mesa</th>
+      <th mat-header-cell *matHeaderCellDef>{{'pages.kitchen.table.table'|translate}}</th>
       <td mat-cell *matCellDef="let element"> {{element?.table?.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="client">
-      <th mat-header-cell *matHeaderCellDef>Cliente</th>
+      <th mat-header-cell *matHeaderCellDef>{{'pages.kitchen.table.customer'|translate}}</th>
       <td mat-cell *matCellDef="let element"> cliente</td>
     </ng-container>
 
     <ng-container matColumnDef="dish">
-      <th mat-header-cell *matHeaderCellDef>Prato</th>
+      <th mat-header-cell *matHeaderCellDef>{{'pages.kitchen.table.dish'|translate}}</th>
       <td mat-cell *matCellDef="let element"> {{element?.dish?.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+      <th mat-header-cell *matHeaderCellDef>{{'pages.kitchen.table.quantity'|translate}}</th>
       <td mat-cell *matCellDef="let element"> {{element?.order_item?.quantity}} </td>
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef>Ação</th>
+      <th mat-header-cell *matHeaderCellDef>{{'commons.labels.action'|translate}}</th>
       <td mat-cell *matCellDef="let element">
         <app-dishes-statuses [dish]="element"></app-dishes-statuses>
       </td>
