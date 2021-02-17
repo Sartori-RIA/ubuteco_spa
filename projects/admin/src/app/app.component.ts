@@ -8,6 +8,7 @@ import {RoutePartsService} from './core/services/theme/route-parts.service';
 import {Title} from '@angular/platform-browser';
 import {filter, take} from 'rxjs/operators';
 import {TranslateService} from '@ngx-translate/core';
+import Bugsnag from "@bugsnag/js";
 
 @Component({
   selector: 'app-root',
