@@ -1,7 +1,7 @@
-<div class="seciton-left">
+<div class="seciton-left egret-platform">
 </div>
 <div
-  class="form-holder height-100vh mat-elevation-z4"
+  class="form-holder height-100vh mat-elevation-z4 egret-platform"
   [perfectScrollbar]="{}"
 >
   <div
@@ -37,7 +37,7 @@
         name="email"
       />
       <mat-error>
-        {{'validations.in_use.email'|translate}}
+        {{!!form.controls.email?.errors?.required ? '' : ('validations.in_use.email'|translate)}}
       </mat-error>
     </mat-form-field>
 
@@ -57,11 +57,12 @@
       <input
         matInput
         type="password"
-        name="confirm_password"
+        formControlName="confirm_password"
         placeholder="********"
       />
       <mat-error>
-        {{'validations.mach.password'|translate}}
+        {{'validations.match.password'|translate}}
+
       </mat-error>
     </mat-form-field>
 
@@ -70,10 +71,11 @@
       <mat-label>{{'attributes.organization.cnpj' | translate}}</mat-label>
       <input
         formControlName="cnpj"
+        mask="00.000.000/0000-00"
         matInput
       />
       <mat-error>
-        {{'validations.in_use.cnpj'|translate}}
+        {{!!form.controls.cnpj?.errors?.required ? '' : ('validations.in_use.cnpj'|translate)}}
       </mat-error>
     </mat-form-field>
 

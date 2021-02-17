@@ -31,6 +31,7 @@ export class SignUpComponent implements OnInit {
     this.form.markAllAsTouched();
     if (this.form.valid) {
       const value = this.form.value;
+      console.log(value)
       this.store.dispatch(SIGN_UP({
         payload: {
           user: {

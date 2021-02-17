@@ -11,7 +11,7 @@ $egret-theme: mat-light-theme($egret-primary, $egret-accent);
 $primary-dark: darken( map-get($mat-primary, 500), 8% );
 
 // Material theme is wrapped by a parent class
-.egret-green {
+.egret-platform {
     @include angular-material-theme($egret-theme);
 
     .mat-bg-primary,
