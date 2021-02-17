@@ -5,7 +5,6 @@ import {HeaderInterceptorService} from './interceptors/header-interceptor.servic
 import {ErrorInterceptorService} from './interceptors/error-interceptor.service';
 import {environment} from '../../environments/environment';
 import {ServiceWorkerModule} from '@angular/service-worker';
-import * as Sentry from '@sentry/angular';
 import {Router} from '@angular/router';
 
 @NgModule({
@@ -17,22 +16,6 @@ import {Router} from '@angular/router';
     {provide: LOCALE_ID, useValue: 'pt-BR'},
     {provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptorService, multi: true},
     {provide: ErrorHandler, useClass: ErrorInterceptorService},
-    {
-      provide: ErrorHandler,
-      useValue: Sentry.createErrorHandler({
-        showDialog: true,
-      }),
-    },
-    {
-      provide: Sentry.TraceService,
-      deps: [Router],
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: () => () => {},
-      deps: [Sentry.TraceService],
-      multi: true,
-    },
   ]
 })
 export class CoreModule {
