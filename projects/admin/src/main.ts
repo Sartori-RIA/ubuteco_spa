@@ -6,22 +6,23 @@ import {environment} from './environments/environment';
 import * as Sentry from '@sentry/angular';
 import {Integrations} from '@sentry/tracing';
 
-Sentry.init({
-  dsn: 'https://779b7145fe884e63bca2a3e3372ec003@o524728.ingest.sentry.io/5637967',
-  integrations: [
-    new Integrations.BrowserTracing({
-      tracingOrigins: ['localhost', environment.api_url, environment.auth_url, environment.cable_url],
-      routingInstrumentation: Sentry.routingInstrumentation,
-    }),
-  ],
-
-  // We recommend adjusting this value in production, or using tracesSampler
-  // for finer control
-  tracesSampleRate: 1.0,
-});
 
 if (environment.production) {
   enableProdMode();
+  Sentry.init({
+    dsn: environment.sentry_dsn,
+    integrations: [
+      new Integrations.BrowserTracing({
+        tracingOrigins: environment.sentry_urls,
+        routingInstrumentation: Sentry.routingInstrumentation,
+      }),
+    ],
+
+    // We recommend adjusting this value in production, or using tracesSampler
+    // for finer control
+    tracesSampleRate: 1.0,
+  });
+
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)

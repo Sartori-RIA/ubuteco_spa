@@ -5,52 +5,52 @@ export const authFeatureSelector = createFeatureSelector<AuthState>(featureKey);
 
 export const selectCurrentUser = createSelector(
   authFeatureSelector,
-  (state) => state.user
+  (state) => state?.user
 );
 
 export const selectIsSuperAdmin = createSelector(
   selectCurrentUser,
-  (user) => user.role.name === 'SUPER_ADMIN'
+  (user) => user?.role?.name === 'SUPER_ADMIN'
 );
 
 export const selectIsAdmin = createSelector(
   selectCurrentUser,
-  (user) => user.role.name === 'ADMIN'
+  (user) => user?.role?.name === 'ADMIN'
 );
 
 export const selectIsCashRegister = createSelector(
   selectCurrentUser,
-  (user) => user.role.name === 'CASH_REGISTER'
+  (user) => user?.role?.name === 'CASH_REGISTER'
 );
 
 export const selectIsCustomer = createSelector(
   selectCurrentUser,
-  (user) => user.role.name === 'CUSTOMER'
+  (user) => user?.role?.name === 'CUSTOMER'
 );
 
 export const selectIsKitchen = createSelector(
   selectCurrentUser,
-  (user) => user.role.name === 'KITCHEN'
+  (user) => user?.role?.name === 'KITCHEN'
 );
 
 export const selectIsWaiter = createSelector(
   selectCurrentUser,
-  (user) => user.role.name === 'WAITER'
+  (user) => user?.role?.name === 'WAITER'
 );
 
 export const selectUserTheme = createSelector(
   authFeatureSelector,
-  (state) => state.theme
+  (state) => state?.theme
 );
 
 export const selectCurrentOrganization = createSelector(
   selectCurrentUser,
-  (user) => user.organization
+  (user) => user?.organization
 );
 
 export const selectCurrentToken = createSelector(
   authFeatureSelector,
-  (state) => state.token
+  (state) => state?.token
 );
 
 export const selectIsLoggedIn = createSelector(
@@ -66,10 +66,10 @@ export const selectIsLoggedOut = createSelector(
 
 export const selectSignInErrors = createSelector(
   authFeatureSelector,
-  (state) => state.errors
+  (state) => state?.errors
 );
 
 export const selectAuthLoading = createSelector(
   authFeatureSelector,
-  (state) => state.loading
+  (state) => state?.loading
 );

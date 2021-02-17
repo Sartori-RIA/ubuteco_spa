@@ -1,4 +1,27 @@
 {
+  "routes": {
+    "auth": {
+      "sign_in": "Entrar",
+      "sign_up": "Criar conta",
+      "forgot_password": "Esqueci a senha",
+      "change_password": "Atualizar a senha",
+      "confirm": "Confirmar conta"
+    },
+    "beer_styles": "Estilos de Cervejas",
+    "beers": "Cervejas",
+    "dashboard": "Dashboard",
+    "dishes": "Cardápio",
+    "drinks": "Bebidas",
+    "foods": "Alimentos",
+    "kitchen": "Cozinha",
+    "makers": "Fabricantes",
+    "orders": "Pedidos",
+    "profile": "Perfil",
+    "reports": "Relatórios",
+    "tables": "Mesas",
+    "wine_styles": "Estilo de vINHOS",
+    "wines": "Vinhos"
+  },
   "pages": {
     "auth": {
       "sign_in": {
@@ -88,7 +111,7 @@
     },
     "kitchen": {
       "table": {
-        "order":"Pedido",
+        "order": "Pedido",
         "table": "Mesa",
         "customer": "Cliente",
         "dish": "Prato",
@@ -254,6 +277,7 @@
     "organization": {
       "to_human": "Empresa",
       "cnpj": "CNPJ",
+      "name": "Nome da empresa",
       "phone": "Telefone da empresa",
       "logo": "Logo da empresa"
     },

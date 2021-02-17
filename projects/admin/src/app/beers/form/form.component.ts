@@ -11,7 +11,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 import {CREATE_BEER, UPDATE_BEER} from '../../store/beers/beers.actions';
 import {BeerStylesFormDialogComponent} from '../../beer-styles/beer-styles-form-dialog/beer-styles-form-dialog.component';
 import {REQUEST_ALL_BEER_STYLES} from '../../store/beer-styles/beer-styles.actions';
-import {MakerDialogData, MakersFormDialogComponent} from '../../makers/makers-form-dialog/makers-form-dialog.component';
+import {MakersFormDialogComponent} from '../../makers/makers-form-dialog/makers-form-dialog.component';
 import {REQUEST_ALL_MAKERS} from '../../store/makers/makers.actions';
 import {Beer} from '../../core/models/beer';
 
@@ -36,7 +36,6 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(REQUEST_ALL_MAKERS({page: '1'}));
-    console.log('bacon')
     this.store.dispatch(REQUEST_ALL_BEER_STYLES({page: '1'}));
     this.updateForm();
   }
@@ -60,13 +59,7 @@ export class FormComponent implements OnInit {
   }
 
   openDialogAddMaker() {
-    const dialogData: MakerDialogData = {
-      title: 'Adicionar Cervejaria',
-      isBrewery: true
-    };
-    this.dialog.open(MakersFormDialogComponent, {
-      data: dialogData,
-    });
+    this.dialog.open(MakersFormDialogComponent);
   }
 
   onCancel() {

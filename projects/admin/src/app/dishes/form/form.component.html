@@ -1,6 +1,6 @@
 <div mat-dialog-title>
   <div fxFlex="100" class="text-center">
-    <h2 *ngIf="dish; else newItem">{{'pages.dishes.dialog.update.title'|translate:{id: data.id}}</h2>
+    <h2 *ngIf="dish; else newItem">{{'pages.dishes.dialog.update.title'|translate:{id: data.id} }}</h2>
     <ng-template #newItem>
       <h2>{{'pages.dishes.dialog.new.title'|translate}}</h2>
     </ng-template>
@@ -70,7 +70,8 @@
           color="primary">
     <mat-icon>add</mat-icon>
   </button>
-  <button (click)="toTrash()" [matTooltip]="'pages.dishes.labels.remove_ingredient'|translate" mat-raised-button color="warn" *ngIf="dish">
+  <button (click)="toTrash()" [matTooltip]="'pages.dishes.labels.remove_ingredient'|translate" mat-raised-button
+          color="warn" *ngIf="dish">
     <mat-icon>delete_outline</mat-icon>
   </button>
 </div>

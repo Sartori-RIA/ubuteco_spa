@@ -11,27 +11,27 @@ const routes: Routes = [
   {
     path: 'entrar',
     component: SignInComponent,
-    data: {title: 'Entrar'}
+    data: {title: 'routes.auth.sign_in'}
   },
   {
     path: 'cadastre-se',
     component: SignUpComponent,
-    data: {title: 'Cadastre-se'}
+    data: {title: 'routes.auth.sign_up'}
   },
   {
     path: 'esqueci-minha-senha',
     component: EmailRecoverComponent,
-    data: {title: 'Esqueci minha senha'}
+    data: {title: 'routes.auth.forgot_password'}
   },
   {
     path: 'atualizar-senha',
     component: PasswordUpdateComponent,
-    data: {title: 'Esqueci minha senha'}
+    data: {title: 'routes.auth.change_password'}
   },
   {
     path: 'confirmations',
     component: ConfirmationComponent,
-    data: {title: 'Confirme sua conta'}
+    data: {title: 'routes.auth.confirm'}
   }
 ];
 

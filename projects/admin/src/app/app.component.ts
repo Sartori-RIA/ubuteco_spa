@@ -6,8 +6,8 @@ import {selectIsLoggedIn} from './store/auth/auth.selectors';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {RoutePartsService} from './core/services/theme/route-parts.service';
 import {Title} from '@angular/platform-browser';
-import {filter} from 'rxjs/operators';
-import {MatIconRegistry} from "@angular/material/icon";
+import {filter, take} from 'rxjs/operators';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +17,11 @@ import {MatIconRegistry} from "@angular/material/icon";
 export class AppComponent implements OnInit {
   appTitle = 'iButeco';
   pageTitle = '';
-  isAuthenticated$: Observable<boolean> = this.store.pipe(select(selectIsLoggedIn));
 
   constructor(private store: Store<AppState>,
               public title: Title,
               private router: Router,
+              private translate: TranslateService,
               private activeRoute: ActivatedRoute,
               private routePartsService: RoutePartsService) {
   }
@@ -39,12 +39,16 @@ export class AppComponent implements OnInit {
           return this.title.setTitle(this.appTitle);
         }
         // Extract title from parts;
-        this.pageTitle = routeParts
+        const parts = routeParts
           .reverse()
           .map((part) => part.title)
           .reduce((partA, partI) => `${partA} > ${partI}`);
-        this.pageTitle += ` | ${this.appTitle}`;
-        this.title.setTitle(this.pageTitle);
+        this.translate.get(parts)
+          .pipe(take(1))
+          .subscribe((message) => {
+            this.pageTitle = `${message} | ${this.appTitle}`;
+            this.title.setTitle(this.pageTitle);
+          });
       });
   }
 

@@ -51,6 +51,7 @@ export class SignUpComponent implements OnInit {
   private mountForm(): FormGroup {
     return this.fb.group(
       {
+        agreed: [false, Validators.requiredTrue],
         email: [null, [Validators.required, Validators.email], [CookieCodeValidators.uniqueEmail(this.userService)]],
         password: [null, [Validators.required, Validators.minLength(8)]],
         confirm_password: [],

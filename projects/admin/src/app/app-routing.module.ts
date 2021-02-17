@@ -22,92 +22,86 @@ const routes: Routes = [
       {
         path: 'dash',
         component: DashComponent,
-        data: {title: 'Dashboard'},
+        data: {title: 'routes.dashboard'},
         canActivate: [AuthenticatedGuard]
       },
       {
         path: 'bebidas',
         loadChildren: () => import('./drinks/drinks.module').then((m) => m.DrinksModule),
-        data: {title: 'Bebidas'},
+        data: {title: 'routes.drinks'},
         canActivate: [AuthenticatedGuard]
       },
       {
         path: 'cardapio',
         loadChildren: () => import('./dishes/dishes.module').then((m) => m.DishesModule),
-        data: {title: 'Cardápio'},
+        data: {title: 'routes.dishes'},
         canActivate: [AuthenticatedGuard]
       },
       {
         path: 'cervejas',
         loadChildren: () => import('./beers/beers.module').then((m) => m.BeersModule),
-        data: {title: 'Cervejas'},
-        canActivate: [AuthenticatedGuard]
-      },
-      {
-        path: 'pratos',
-        loadChildren: () => import('./foods/foods.module').then((m) => m.FoodsModule),
-        data: {title: 'Pratos'},
+        data: {title: 'routes.beers'},
         canActivate: [AuthenticatedGuard]
       },
       {
         path: 'alimentos',
         loadChildren: () => import('./foods/foods.module').then((m) => m.FoodsModule),
-        data: {title: 'Alimentos'},
+        data: {title: 'routes.foods'},
         canActivate: [AuthenticatedGuard]
       },
       {
         path: 'mesas',
         loadChildren: () => import('./tables/tables.module').then((m) => m.TablesModule),
-        data: {title: 'Mesas'},
+        data: {title: 'routes.tables'},
         canActivate: [AuthenticatedGuard]
       },
       {
         path: 'pedidos',
         loadChildren: () => import('./orders/orders.module').then((m) => m.OrdersModule),
-        data: {title: 'Pedidos'},
+        data: {title: 'routes.orders'},
         canActivate: [AuthenticatedGuard]
       },
       {
         path: 'relatorios',
         loadChildren: () => import('./reports/reports.module').then((m) => m.ReportsModule),
-        data: {title: 'Relatórios'},
+        data: {title: 'routes.reports'},
         canActivate: [AuthenticatedGuard]
       },
       {
         path: 'estilos-cervejas',
         loadChildren: () => import('./beer-styles/beer-styles.module').then((m) => m.BeerStylesModule),
-        data: {title: 'Estilos de Cervejas'},
+        data: {title: 'routes.beer_styles'},
         canActivate: [AuthenticatedGuard]
       },
       {
         path: 'estilos-vinhos',
         loadChildren: () => import('./wine-styles/wine-styles.module').then((m) => m.WineStylesModule),
-        data: {title: 'Estilos de Vinhos'},
+        data: {title: 'routes.wine_styles'},
         canActivate: [AuthenticatedGuard]
       },
       {
         path: 'fabricantes',
         loadChildren: () => import('./makers/makers.module').then((m) => m.MakersModule),
-        data: {title: 'Fabricantes/Cervejarias'},
+        data: {title: 'routes.makers'},
         canActivate: [AuthenticatedGuard]
       },
       {
         path: 'cozinha',
         loadChildren: () => import('./kitchen/kitchen.module').then((m) => m.KitchenModule),
-        data: {title: 'Cozinha'},
+        data: {title: 'routes.kitchen'},
         canActivate: [AuthenticatedGuard],
         canLoad: [AuthenticatedGuard]
       },
       {
         path: 'perfil',
         loadChildren: () => import('./profile/profile.module').then((m) => m.ProfileModule),
-        data: {title: 'Perfil'},
+        data: {title: 'routes.profile'},
         canActivate: [AuthenticatedGuard]
       },
       {
         path: 'vinhos',
         loadChildren: () => import('./wines/wines.module').then((m) => m.WinesModule),
-        data: {title: 'Vinhos'},
+        data: {title: 'routes.wines'},
         canActivate: [AuthenticatedGuard]
       }
     ]

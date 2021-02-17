@@ -25,7 +25,6 @@
         formControlName="name"
         matInput
         type="text"
-        [placeholder]="'attributes.organization.name' | translate"
       />
     </mat-form-field>
 
@@ -36,7 +35,6 @@
         formControlName="email"
         type="email"
         name="email"
-        [placeholder]="'attributes.user.email' | translate"
       />
     </mat-form-field>
 
@@ -58,7 +56,6 @@
         type="password"
         name="confirm_password"
         placeholder="********"
-        formControlName="confirm_password"
       />
       <mat-error>
         Password didn't match
@@ -71,17 +68,15 @@
       <input
         formControlName="cnpj"
         matInput
-        [placeholder]="'attributes.organization.cnpj' |translate"
       />
     </mat-form-field>
 
     <mat-form-field fxFill appearance="outline">
-      <mat-label>{{'attributes.organization.to_human'}}</mat-label>
+      <mat-label>{{'attributes.organization.name'|translate}}</mat-label>
       <input
         formControlName="organization_name"
         matInput
         type="text"
-        [placeholder]="'attributes.organization.to_human' | translate"
       />
     </mat-form-field>
 
@@ -91,7 +86,6 @@
         formControlName="organization_phone"
         matInput
         type="text"
-        [placeholder]="'Telefone da empresa' | translate"
       />
     </mat-form-field>
 
