@@ -22,7 +22,6 @@ if (environment.production) {
     // for finer control
     tracesSampleRate: 1.0,
   });
-
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)
