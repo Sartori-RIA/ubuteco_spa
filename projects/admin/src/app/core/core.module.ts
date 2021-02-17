@@ -1,11 +1,14 @@
-import {APP_INITIALIZER, ErrorHandler, LOCALE_ID, NgModule, Optional, SkipSelf} from '@angular/core';
+import {ErrorHandler, LOCALE_ID, NgModule, Optional, SkipSelf} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HeaderInterceptorService} from './interceptors/header-interceptor.service';
-import {ErrorInterceptorService} from './interceptors/error-interceptor.service';
 import {environment} from '../../environments/environment';
 import {ServiceWorkerModule} from '@angular/service-worker';
-import {Router} from '@angular/router';
+import {BugsnagErrorHandler} from '@bugsnag/plugin-angular';
+
+export function errorHandlerFactory() {
+  return new BugsnagErrorHandler();
+}
 
 @NgModule({
   declarations: [],
@@ -15,7 +18,7 @@ import {Router} from '@angular/router';
   ], providers: [
     {provide: LOCALE_ID, useValue: 'pt-BR'},
     {provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptorService, multi: true},
-    {provide: ErrorHandler, useClass: ErrorInterceptorService},
+    {provide: ErrorHandler, useFactory: errorHandlerFactory}
   ]
 })
 export class CoreModule {
