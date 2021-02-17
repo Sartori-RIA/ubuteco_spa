@@ -1,4 +1,14 @@
 {
+  "validations": {
+    "match": {
+      "password": "As senhas não conferem"
+    },
+    "in_use": {
+      "email": "E-mail já em uso",
+      "phone": "Telefone já em uso",
+      "cnpj": "CNPJ já em uso"
+    }
+  },
   "routes": {
     "auth": {
       "sign_in": "Entrar",

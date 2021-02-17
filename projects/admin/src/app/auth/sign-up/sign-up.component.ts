@@ -1,12 +1,12 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CookieCodeValidators} from "../../shared/validators/cookie-code.validators";
-import {UserService} from "../../core/services/api/user.service";
-import {OrganizationsService} from "../../core/services/api/organizations.service";
-import {Store} from "@ngrx/store";
-import {AppState} from "../../store";
-import {SIGN_UP} from "../../store/auth/auth.actions";
-import {PasswordValidators} from "ngx-validators";
+import {CookieCodeValidators} from '../../shared/validators/cookie-code.validators';
+import {UserService} from '../../core/services/api/user.service';
+import {OrganizationsService} from '../../core/services/api/organizations.service';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../store';
+import {SIGN_UP} from '../../store/auth/auth.actions';
+import {PasswordValidators} from 'ngx-validators';
 
 @Component({
   selector: 'app-sign-up',

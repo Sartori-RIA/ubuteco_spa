@@ -36,6 +36,9 @@
         type="email"
         name="email"
       />
+      <mat-error>
+        {{'validations.in_use.email'|translate}}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="outline">
@@ -58,7 +61,7 @@
         placeholder="********"
       />
       <mat-error>
-        Password didn't match
+        {{'validations.mach.password'|translate}}
       </mat-error>
     </mat-form-field>
 
@@ -69,6 +72,9 @@
         formControlName="cnpj"
         matInput
       />
+      <mat-error>
+        {{'validations.in_use.cnpj'|translate}}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field fxFill appearance="outline">
