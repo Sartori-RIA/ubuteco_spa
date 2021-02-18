@@ -4,10 +4,13 @@ import {Observable, Subscription} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort, Sort} from '@angular/material/sort';
 import {TableState} from '../../store/tables/table.reducer';
-import {selectAllTables, selectAllTablesOrderedById, selectAllTablesOrderedByName} from '../../store/tables/table.selectors';
+import {
+  selectAllTables,
+  selectAllTablesOrderedById,
+  selectAllTablesOrderedByName
+} from '../../store/tables/table.selectors';
 import {Table} from '../../core/models/table';
-import {CREATE_TABLE, REMOVE_TABLE, REQUEST_ALL_TABLES, UPDATE_TABLE} from '../../store/tables/table.actions';
-import {take} from 'rxjs/operators';
+import {REMOVE_TABLE, REQUEST_ALL_TABLES} from '../../store/tables/table.actions';
 import {MatDialog} from '@angular/material/dialog';
 import {TableFormDialogComponent} from '../table-form-dialog/table-form-dialog.component';
 
@@ -62,16 +65,8 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   openFormDialog(element?: Table) {
-    const dialogRef = this.dialog.open(TableFormDialogComponent, {
-      data: element ? element : {},
-    });
-
-    dialogRef.afterClosed().pipe(take(1)).subscribe((table: Table) => {
-      if (table.id) {
-        this.store.dispatch(UPDATE_TABLE({table}));
-      } else {
-        this.store.dispatch(CREATE_TABLE({table}));
-      }
+    this.dialog.open(TableFormDialogComponent, {
+      data: !!element ? element : null,
     });
   }
 

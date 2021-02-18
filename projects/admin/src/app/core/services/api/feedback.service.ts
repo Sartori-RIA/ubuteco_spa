@@ -23,6 +23,7 @@ export class FeedbackService {
   }
 
   success(msg: string, action: string = 'commons.buttons.ok') {
+    console.log(msg);
     this.translate.get(action).pipe(take(1)).subscribe((data) => {
       this.snackBar.open(msg, data, {
         duration: 2000,

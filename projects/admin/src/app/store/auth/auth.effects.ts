@@ -75,6 +75,7 @@ export class AuthEffects {
   navigateAfterSignUp$ = createEffect(() => this.actions$.pipe(
     ofType(SIGN_UP_DONE),
     tap(({user}) => {
+      console.log(user)
       this.translate.get('commons.messages.welcome', {name: user.name})
         .pipe(take(1))
         .subscribe((message) => this.feedbackService.success(message));

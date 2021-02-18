@@ -76,7 +76,7 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   displayFn(data: Maker | WineStyle): string {
-    return data.name || '';
+    return data?.name || '';
   }
 
   openDialogAddMaker() {

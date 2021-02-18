@@ -3,7 +3,5 @@ export const environment = {
   cable_url: 'ws://localhost:3000/api/cable',
   api_url: 'http://localhost:3000/api/',
   auth_url: 'http://localhost:3000/auth/',
-  bugsnag: '',
-  sentry_dsn: '',
-  sentry_urls: ['']
+  bugsnag: '2f316a60d85fe821282d7a315fe977b5',
 };

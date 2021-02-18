@@ -71,7 +71,7 @@ export class FormComponent implements OnInit {
       return false;
     }
 
-    return val1.id === val2.id;
+    return val1?.id === val2?.id;
   }
 
   private filterBeerStyle(value: string): Observable<BeerStyle[]> {

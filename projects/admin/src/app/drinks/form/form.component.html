@@ -1,8 +1,8 @@
 <div mat-dialog-title>
   <div fxFlex="100" class="text-center">
-    <h1 *ngIf="data; else newDrink">{{'pages.drinks.update.title'|translate:{id: data.id} }}</h1>
+    <h1 *ngIf="data; else newDrink">{{'pages.drinks.dialog.update.title'|translate:{id: data.id} }}</h1>
     <ng-template #newDrink>
-      <h1>{{'pages.drinks.new.title'|translate}}</h1>
+      <h1>{{'pages.drinks.dialog.new.title'|translate}}</h1>
     </ng-template>
   </div>
 </div>
