@@ -10,7 +10,7 @@ if (environment.production) {
   enableProdMode();
 }
 
-Bugsnag.start({apiKey: environment.bugsnag});
+Bugsnag.start({apiKey: environment.bugsnag, enabledReleaseStages: ['production']});
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
