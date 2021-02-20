@@ -10,14 +10,14 @@ export namespace CookieCodeValidators {
     if (cpfValidator.isValid(control.value)) {
       return null;
     }
-    return {cpf: true};
+    return {cpf_invalid: true};
   }
 
   export function cnpj(control: AbstractControl): { [key: string]: boolean } | null {
     if (cnpjValidators.isValid(control.value)) {
       return null;
     }
-    return {cnpj: true};
+    return {cnpj_invalid: true};
   }
 
   export function uniqueEmail(service: UserService, oldEmail?: string): AsyncValidatorFn {
@@ -27,7 +27,7 @@ export namespace CookieCodeValidators {
       }
       return service.checkEmail(control.value).pipe(
         map((response) =>
-          response.status === 200 && oldEmail !== control.value ? {emailInUse: true} : null)
+          response.status === 200 && oldEmail !== control.value ? {email_in_use: true} : null)
       );
     };
   }
@@ -39,7 +39,19 @@ export namespace CookieCodeValidators {
       }
       return service.checkCNPJ(control.value.replace(/\D+/g, '')).pipe(
         map((response) =>
-          response.status === 200 && oldCnpj !== control.value ? {cnpjInUse: true} : null)
+          response.status === 200 && oldCnpj !== control.value ? {cnpj_in_use: true} : null)
+      );
+    };
+  }
+
+  export function uniquePhone(service: OrganizationsService, oldPhone?: string): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors> => {
+      if (control.value == null) {
+        return null;
+      }
+      return service.checkPhone(control.value.replace(/\D+/g, '')).pipe(
+        map((response) =>
+          response.status === 200 && oldPhone !== control.value ? {phone_in_use: true} : null)
       );
     };
   }

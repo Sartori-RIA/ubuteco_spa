@@ -7,6 +7,12 @@
       "email": "E-mail já em uso",
       "phone": "Telefone já em uso",
       "cnpj": "CNPJ já em uso"
+    },
+    "invalid": {
+      "cnpj": "Informe um CNPJ válido"
+    },
+    "min_length": {
+      "password": "Tamanho mínimo de {{minLength}} digitos"
     }
   },
   "routes": {

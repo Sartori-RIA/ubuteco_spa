@@ -43,7 +43,7 @@ export class SignInComponent implements OnInit {
   private mountForm(): FormGroup {
     return this.fb.group({
       email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.min(8)]]
+      password: [null, [Validators.required, Validators.min(8)]]
     });
   }
 
