@@ -4,7 +4,7 @@ import {Logger} from '@ngrx/data';
 import {environment} from '../../../../environments/environment';
 import {BaseService} from './base.service';
 import {Organization} from '../../models/organization';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +17,9 @@ export class OrganizationsService extends BaseService<Organization> {
 
   checkCNPJ(cnpj: string): Observable<HttpResponse<any>> {
     return this.http.get<any>(`${this.url}/check/cnpj`, {observe: 'response', params: {q: cnpj}});
+  }
+
+  checkPhone(phone: string): Observable<HttpResponse<any>> {
+    return this.http.get<any>(`${this.url}/check/phone`, {observe: 'response', params: {q: phone}});
   }
 }

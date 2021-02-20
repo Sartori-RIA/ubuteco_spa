@@ -31,7 +31,6 @@ export class SignUpComponent implements OnInit {
     this.form.markAllAsTouched();
     if (this.form.valid) {
       const value = this.form.value;
-      console.log(value)
       this.store.dispatch(SIGN_UP({
         payload: {
           user: {
@@ -55,10 +54,10 @@ export class SignUpComponent implements OnInit {
         agreed: [false, Validators.requiredTrue],
         email: [null, [Validators.required, Validators.email], [CookieCodeValidators.uniqueEmail(this.userService)]],
         password: [null, [Validators.required, Validators.minLength(8)]],
-        confirm_password: [],
+        confirm_password: [null, [Validators.required, Validators.minLength(8)]],
         name: [null, [Validators.required]],
         organization_name: [null, [Validators.required]],
-        organization_phone: [null, [Validators.required]],
+        organization_phone: [null, [Validators.required], [CookieCodeValidators.uniquePhone(this.organizationService)]],
         cnpj: [null, [Validators.required, CookieCodeValidators.cnpj], [CookieCodeValidators.uniqueCNPJ(this.organizationService)]]
       }, {validators: PasswordValidators.mismatchedPasswords('password', 'confirm_password')}
     );

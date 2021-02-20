@@ -49,7 +49,11 @@
         type="password"
         name="password"
         placeholder="********"
+        minlength="8"
       />
+      <mat-error *ngIf="!!form.controls.password?.errors?.minlength">
+        {{'validations.min_length.password'|translate: {minLength: 8} }}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="outline">
@@ -60,9 +64,11 @@
         formControlName="confirm_password"
         placeholder="********"
       />
-      <mat-error>
+      <mat-error *ngIf="!!form.controls.confirm_password?.errors?.mismatchedPasswords">
         {{'validations.match.password'|translate}}
-
+      </mat-error>
+      <mat-error *ngIf="!!form.controls.confirm_password?.errors?.minlength">
+        {{'validations.min_length.password'|translate: {minLength: 8} }}
       </mat-error>
     </mat-form-field>
 
@@ -74,8 +80,11 @@
         mask="00.000.000/0000-00"
         matInput
       />
-      <mat-error>
-        {{!!form.controls.cnpj?.errors?.required ? '' : ('validations.in_use.cnpj'|translate)}}
+      <mat-error *ngIf="!!form.controls.cnpj?.errors?.cnpj_invalid">
+        {{ ('validations.invalid.cnpj'|translate)}}
+      </mat-error>
+      <mat-error *ngIf="!!form.controls.cnpj?.errors?.cnpj">
+        {{ ('validations.in_use.cnpj'|translate)}}
       </mat-error>
     </mat-form-field>
 
@@ -93,8 +102,12 @@
       <input
         formControlName="organization_phone"
         matInput
+        mask="(00) 0000-0000 || (00) 00000-0000"
         type="text"
       />
+      <mat-error *ngIf="!!form.controls.organization_phone?.errors?.phone_in_use">
+        {{ ('validations.in_use.phone'|translate)}}
+      </mat-error>
     </mat-form-field>
 
     <mat-checkbox class="mb-24" formControlName="agreed"
