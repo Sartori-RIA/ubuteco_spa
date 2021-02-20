@@ -29,7 +29,12 @@
       />
     </div>
 
-    {{errors$ | async | json}}
+    <div fxFill fxLayoutAlign="space-around">
+      <mat-error>
+        {{errors$ | async}}
+      </mat-error>
+    </div>
+
     <mat-form-field class="full-width" appearance="outline">
       <mat-label>{{'attributes.user.email'| translate}}</mat-label>
       <input
