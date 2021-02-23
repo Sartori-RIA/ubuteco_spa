@@ -50,30 +50,20 @@ export class FeedbackService {
     });
   }
 
-  destroyItemSuccess(registerType: RegisterType,
-                     male: boolean = true,
-                     action: string = 'Ok') {
-
-    const maleOrFemale = male ? 'success_m' : 'success_f';
-    this.translate.get(`commons.messages.destroy.${maleOrFemale}`, {register: registerType}).subscribe((msg) => {
+  destroyItemSuccess(registerType: RegisterType, action: string = 'Ok') {
+    this.translate.get(`pages.${registerType}.messages.destroy.success`, {register: registerType}).subscribe((msg) => {
       this.success(msg, action);
     });
   }
 
-  updateSuccess(registerType: RegisterType,
-                male: boolean = true,
-                action: string = 'Ok') {
-    const maleOrFemale = male ? 'success_m' : 'success_f';
-    this.translate.get(`commons.messages.update.${maleOrFemale}`, {register: registerType}).subscribe((msg) => {
+  updateSuccess(registerType: RegisterType, action: string = 'Ok') {
+    this.translate.get(`pages.${registerType}.messages.update.success`, {register: registerType}).subscribe((msg) => {
       this.success(msg, action);
     });
   }
 
-  createSuccess(registerType: RegisterType,
-                male: boolean = true,
-                action: string = 'Ok') {
-    const maleOrFemale = male ? 'success_m' : 'success_f';
-    this.translate.get(`commons.messages.create.${maleOrFemale}`, {register: registerType}).subscribe((msg) => {
+  createSuccess(registerType: RegisterType, action: string = 'Ok') {
+    this.translate.get(`pages.${registerType}.messages.create.success`, {register: registerType}).subscribe((msg) => {
       this.success(msg, action);
     });
   }
@@ -89,15 +79,15 @@ export class FeedbackService {
 }
 
 export type RegisterType =
-  'drink'
-  | 'beer'
-  | 'wine'
-  | 'food'
-  | 'dish'
-  | 'table'
-  | 'beer_style'
-  | 'wine_style'
-  | 'maker'
+  'drinks'
+  | 'beers'
+  | 'wines'
+  | 'foods'
+  | 'dishes'
+  | 'tables'
+  | 'beer_styles'
+  | 'wine_styles'
+  | 'makers'
   | 'order_item'
   | 'profile'
   | 'theme';

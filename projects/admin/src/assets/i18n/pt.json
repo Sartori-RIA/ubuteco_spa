@@ -73,6 +73,17 @@
         "new": {
           "title": "Nova Cerveja"
         }
+      },
+      "messages": {
+        "create": {
+          "success": "Cerveja adicionada com sucesso"
+        },
+        "update": {
+          "success": "Cerveja atualizada com sucesso"
+        },
+        "destroy": {
+          "success": "Cerveja removida com sucesso"
+        }
       }
     },
     "beer_styles": {
@@ -83,6 +94,17 @@
         },
         "new": {
           "title": "Qual o novo estilo de cerveja?"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Estilo de Cerveja adicionado com sucesso"
+        },
+        "update": {
+          "success": "Estilo de Cerveja atualizado com sucesso"
+        },
+        "destroy": {
+          "success": "Estilo de cERVEJA removido com sucesso"
         }
       }
     },
@@ -101,6 +123,17 @@
         "ingredient": "Ingrediente:",
         "more_ingredient": "Mais ingredientes",
         "remove_ingredient": "Remover item do cardápio"
+      },
+      "messages": {
+        "create": {
+          "success": "Prato adicionado com sucesso"
+        },
+        "update": {
+          "success": "Prato atualizado com sucesso"
+        },
+        "destroy": {
+          "success": "Prato removido com sucesso"
+        }
       }
     },
     "drinks": {
@@ -112,6 +145,17 @@
         "new": {
           "title": "Nova Bebida"
         }
+      },
+      "messages": {
+        "create": {
+          "success": "Bebida adicionada com sucesso"
+        },
+        "update": {
+          "success": "Bebida atualizada com sucesso"
+        },
+        "destroy": {
+          "success": "Bebida removida com sucesso"
+        }
       }
     },
     "foods": {
@@ -122,6 +166,17 @@
         },
         "new": {
           "title": "Novo Alimento"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Alimento adicionado com sucesso"
+        },
+        "update": {
+          "success": "Alimento atualizado com sucesso"
+        },
+        "destroy": {
+          "success": "Alimento removido com sucesso"
         }
       }
     },
@@ -154,6 +209,17 @@
         },
         "new": {
           "title": "Novo Fabricante"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Fabricante adicionado com sucesso"
+        },
+        "update": {
+          "success": "Fabricante atualizado com sucesso"
+        },
+        "destroy": {
+          "success": "Fabricante removido com sucesso"
         }
       }
     },
@@ -312,20 +378,14 @@
       "welcome": "Seja bem vindo {{name}}",
       "welcome_back": "Seja bem vindo de volta {{name}}",
       "create": {
-        "success_f": "{{register}} adicionada com sucesso",
-        "success_m": "{{register}} adicionado com sucesso",
         "error": "Ops, sinto muito, aconteceu algo inesperado ao tentar criar o registro, por favor tente novamente",
         "error_n": "Ops, sinto muito, aconteceu algo inesperado ao tentar criar os registros, por favor tente novamente"
       },
       "update": {
-        "success_f": "{{register}} atualizada com sucesso",
-        "success_m": "{{register}} atualizado com sucesso",
         "error": "Ops, sinto muito, aconteceu algo inesperado ao tentar atualizar o registro, por favor tente novamente",
         "error_n": "Ops, sinto muito, aconteceu algo inesperado ao tentar atualizar os registros, por favor tente novamente"
       },
       "destroy": {
-        "success_f": "{{register}} removida com sucesso",
-        "success_m": "{{register}} removido com sucesso",
         "error": "Ops, sinto muito, aconteceu algo inesperado ao tentar remover o registro, por favor tente novamente",
         "error_n": "Ops, sinto muito, aconteceu algo inesperado ao tentar remover os registros, por favor tente novamente"
       },

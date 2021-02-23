@@ -78,7 +78,7 @@ export class DishesEffects {
     mergeMap(action =>
       this.dishesService.destroy(action.id).pipe(
         map(() => {
-          this.feedbackService.destroyItemSuccess('dish');
+          this.feedbackService.destroyItemSuccess('dishes');
           return REMOVE_DISH_DONE({id: action.id});
         }),
         catchError(() => {
@@ -94,7 +94,7 @@ export class DishesEffects {
     mergeMap(action => this.dishesService.create(action.data)
       .pipe(
         map(data => {
-          this.feedbackService.createSuccess('dish');
+          this.feedbackService.createSuccess('dishes');
           this.router.navigate(['/cardapio/list']);
           return CREATE_DISH_DONE({data});
         }),
@@ -111,7 +111,7 @@ export class DishesEffects {
     mergeMap(action => this.dishesService.update(action.data)
       .pipe(
         map(data => {
-          this.feedbackService.updateSuccess('dish');
+          this.feedbackService.updateSuccess('dishes');
           this.router.navigate(['/cardapio/list']);
           return UPDATE_DISH_DONE({data});
         }),

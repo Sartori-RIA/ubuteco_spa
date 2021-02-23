@@ -76,7 +76,7 @@ export class FoodEffects {
     mergeMap((action) => this.foodService.destroy(action.id)
       .pipe(
         map(() => {
-          this.feedbackService.destroyItemSuccess('food');
+          this.feedbackService.destroyItemSuccess('foods');
           return REMOVE_FOOD_DONE({id: action.id});
         }),
         catchError(() => {
@@ -92,7 +92,7 @@ export class FoodEffects {
     mergeMap((action) => this.foodService.create(action.food)
       .pipe(
         map((food) => {
-          this.feedbackService.createSuccess('food');
+          this.feedbackService.createSuccess('foods');
           return CREATE_FOOD_DONE({food});
         }),
         catchError(() => {
@@ -108,7 +108,7 @@ export class FoodEffects {
     mergeMap((action) => this.foodService.update(action.food)
       .pipe(
         map((food) => {
-          this.feedbackService.updateSuccess('food');
+          this.feedbackService.updateSuccess('foods');
           return UPDATE_FOOD_DONE({food});
         }),
         catchError(() => {

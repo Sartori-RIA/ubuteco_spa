@@ -93,7 +93,7 @@ export class OrderItemsEffects {
       })
       .pipe(
         map((item) => {
-          this.feedback.createSuccess('order_item', true);
+          this.feedback.createSuccess('order_item');
           return ADD_ORDER_ITEM_DONE({item});
         }),
         catchError((err) => {

@@ -63,7 +63,7 @@ export class DrinkEffects {
     ofType(CREATE_DRINK),
     mergeMap((action) => this.drinkService.create(action.drink).pipe(
       map((drink) => {
-        this.feedbackService.createSuccess('drink', false);
+        this.feedbackService.createSuccess('drinks');
         return CREATE_DRINK_DONE({drink});
       }),
       catchError(() => {
@@ -92,7 +92,7 @@ export class DrinkEffects {
     mergeMap((action) => this.drinkService.update(action.drink)
       .pipe(
         map((drink) => {
-          this.feedbackService.updateSuccess('drink', false);
+          this.feedbackService.updateSuccess('drinks');
           return UPDATE_DRINK_DONE({drink});
         }),
         catchError(() => {
@@ -108,7 +108,7 @@ export class DrinkEffects {
     mergeMap((action) => this.drinkService.destroy(action.id)
       .pipe(
         map(() => {
-          this.feedbackService.destroyItemSuccess('drink', false);
+          this.feedbackService.destroyItemSuccess('drinks');
           return REMOVE_DRINK_DONE({id: action.id});
         }),
         catchError(() => {

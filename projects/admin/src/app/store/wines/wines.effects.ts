@@ -77,7 +77,7 @@ export class WinesEffects {
     mergeMap((action) => this.wineService.destroy(action.id)
       .pipe(
         map(() => {
-          this.feedbackService.destroyItemSuccess('wine', false);
+          this.feedbackService.destroyItemSuccess('wines');
           return REMOVE_WINE_DONE({id: action.id});
         }),
         catchError(() => {
@@ -93,7 +93,7 @@ export class WinesEffects {
     mergeMap((action) => this.wineService.create(action.wine)
       .pipe(
         map((wine) => {
-          this.feedbackService.createSuccess('wine', false);
+          this.feedbackService.createSuccess('wines');
           return CREATE_WINE_DONE({wine});
         }),
         catchError(() => {
@@ -108,7 +108,7 @@ export class WinesEffects {
     ofType(UPDATE_WINE),
     mergeMap((action) => this.wineService.update(action.wine).pipe(
       map((wine) => {
-        this.feedbackService.updateSuccess('wine', false);
+        this.feedbackService.updateSuccess('wines');
         return UPDATE_WINE_DONE({wine});
       }),
       catchError(() => {

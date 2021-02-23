@@ -58,7 +58,7 @@ export class BeerStylesEffects {
     mergeMap((action) => this.beerStyleService.create(action.style)
       .pipe(
         map((style) => {
-          this.feedbackService.createSuccess('beer_style');
+          this.feedbackService.createSuccess('beer_styles');
           return ADD_BEER_STYLE_DONE({style});
         }),
         catchError((e) => {
@@ -74,7 +74,7 @@ export class BeerStylesEffects {
     mergeMap((action) => this.beerStyleService.destroy(action.id)
       .pipe(
         map((res) => {
-          this.feedbackService.destroyItemSuccess('beer_style');
+          this.feedbackService.destroyItemSuccess('beer_styles');
           return DELETE_BEER_STYLE_DONE({id: res.id});
         }),
         catchError((err) => {
@@ -90,7 +90,7 @@ export class BeerStylesEffects {
     mergeMap((action) => this.beerStyleService.update(action.style)
       .pipe(
         map((beerStyle) => {
-          this.feedbackService.updateSuccess('beer_style');
+          this.feedbackService.updateSuccess('beer_styles');
           return UPDATE_BEER_STYLE_DONE({style: beerStyle});
         }),
         catchError((e) => {
