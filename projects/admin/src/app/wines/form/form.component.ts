@@ -42,12 +42,12 @@ export class FormComponent implements OnInit, OnDestroy {
     this.store.dispatch(REQUEST_ALL_MAKERS({page: '1'}));
     this.store.dispatch(REQUEST_ALL_WINE_STYLES({page: '1'}));
     this.updateForm();
-    this.form.controls.maker.valueChanges.subscribe(((value) => {
-      this.makers$ = this.store.pipe(select(selectMakersFilteredByName(value)));
+    this.form.controls.maker.valueChanges.subscribe(((value: Maker) => {
+      this.makers$ = this.store.pipe(select(selectMakersFilteredByName(value.name)));
       this.changeDetectorRefs.detectChanges();
     }));
-    this.form.controls.wine_style.valueChanges.subscribe(((value) => {
-      this.wineStyles$ = this.store.pipe(select(selectWineStylesFilteredByName(value)));
+    this.form.controls.wine_style.valueChanges.subscribe(((value: WineStyle) => {
+      this.wineStyles$ = this.store.pipe(select(selectWineStylesFilteredByName(value.name)));
       this.changeDetectorRefs.detectChanges();
     }));
   }

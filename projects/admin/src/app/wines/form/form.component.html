@@ -48,9 +48,8 @@
           <mat-autocomplete autoActiveFirstOption
                             #styleAuto="matAutocomplete"
                             [displayWith]="displayFn">
-            <mat-option *ngFor="let wineStyle of wineStyles$ | async"
-                        [value]="wineStyle">
-              {{wineStyle.name}}
+            <mat-option *ngFor="let wineStyle of wineStyles$ | async" [value]="wineStyle">
+              {{wineStyle?.name}}
             </mat-option>
           </mat-autocomplete>
 
@@ -74,7 +73,7 @@
                             [displayWith]="displayFn">
             <mat-option *ngFor="let maker of makers$ | async"
                         [value]="maker">
-              {{maker.name}}- {{maker?.state}}/{{maker?.country}}
+              {{maker?.name}}- {{maker?.state}}/{{maker?.country}}
             </mat-option>
           </mat-autocomplete>
 
