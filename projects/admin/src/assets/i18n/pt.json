@@ -104,7 +104,7 @@
           "success": "Estilo de Cerveja atualizado com sucesso"
         },
         "destroy": {
-          "success": "Estilo de cERVEJA removido com sucesso"
+          "success": "Estilo de Cerveja removido com sucesso"
         }
       }
     },
@@ -262,6 +262,17 @@
         },
         "new": {
           "title": "Nova mesa"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Mesa adicionada com sucesso"
+        },
+        "update": {
+          "success": "Mesa atualizada com sucesso"
+        },
+        "destroy": {
+          "success": "Mesa removida com sucesso"
         }
       }
     },

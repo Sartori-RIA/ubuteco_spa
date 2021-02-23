@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Order, OrderItem, OrderItemType} from '../../core/models/order';
 import {AppState} from '../../store';
@@ -7,11 +7,11 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {AddItemDialogComponent, OrderItemDialogData} from '../add-item-dialog/add-item-dialog.component';
 import {Table} from '../../core/models/table';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {selectAllTables} from '../../store/tables/table.selectors';
 import {selectOrderById, selectPreCreatedOrder} from '../../store/orders/orders.selectors';
 import {REQUEST_ORDER, UPDATE_ORDER} from '../../store/orders/orders.actions';
-import {take} from 'rxjs/operators';
+import {take, tap} from 'rxjs/operators';
 import {REQUEST_ALL_TABLES} from '../../store/tables/table.actions';
 import {REQUEST_ORDER_ITEMS} from '../../store/order-items/order-items.actions';
 import {selectAllOrderItems} from '../../store/order-items/order-items.selectors';
@@ -27,12 +27,12 @@ import {REQUEST_ALL_WINES} from '../../store/wines/wines.actions';
   styleUrls: ['./form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormComponent implements OnInit {
-
+export class FormComponent implements OnInit, OnDestroy {
   order$: Observable<Order>;
   orderItems$: Observable<OrderItem[]> = this.store.pipe(select(selectAllOrderItems));
   readonly tables$: Observable<Table[]> = this.store.pipe(select(selectAllTables));
   readonly form: FormGroup = this.mountForm();
+  private subscription: Subscription;
   private readonly actions = [
     REQUEST_ALL_TABLES,
     REQUEST_ALL_DISHES,
@@ -64,6 +64,10 @@ export class FormComponent implements OnInit {
         this.updateForm();
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 
   compareSelectedTable(val1: Table, val2: Table) {
@@ -99,16 +103,15 @@ export class FormComponent implements OnInit {
   }
 
   private updateForm() {
-    const subscription = this.order$.subscribe((order) => {
-      if (order) {
-        this.form.patchValue({
-          table: order.table,
-        });
-        if (subscription) {
-          subscription.unsubscribe();
+    this.subscription = this.order$.pipe(
+      tap((order) => {
+        if (order) {
+          this.form.patchValue({
+            table: order.table,
+          });
         }
-      }
-    });
+      })
+    ).subscribe();
   }
 
   private onOpenDialog(itemType: OrderItemType, orderId: number) {
