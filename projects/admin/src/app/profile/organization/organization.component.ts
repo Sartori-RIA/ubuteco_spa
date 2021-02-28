@@ -1,4 +1,4 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../store';
@@ -12,7 +12,7 @@ import {OrganizationsService} from '../../core/services/api/organizations.servic
   templateUrl: './organization.component.html',
   styleUrls: ['./organization.component.scss']
 })
-export class OrganizationComponent implements AfterViewInit {
+export class OrganizationComponent implements OnInit {
 
   form: FormGroup = this.mountForm();
   organization: Organization = this.activatedRoute.snapshot.data.organization;
@@ -23,7 +23,7 @@ export class OrganizationComponent implements AfterViewInit {
               private store: Store<AppState>) {
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.organization = this.activatedRoute.snapshot.data.organization;
     this.updateForm();
   }
