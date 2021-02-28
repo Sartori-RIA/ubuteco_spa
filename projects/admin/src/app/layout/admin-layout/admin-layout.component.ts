@@ -9,7 +9,6 @@ import {
   Router
 } from '@angular/router';
 import {filter} from 'rxjs/operators';
-import {ThemeService} from '../../core/services/theme/theme.service';
 import {LayoutService} from '../../core/services/theme/layout.service';
 import {ILayoutConf} from '../../core/models/theme';
 
@@ -29,7 +28,6 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly routerEventSub: Subscription;
 
   constructor(private router: Router,
-              public themeService: ThemeService,
               private layout: LayoutService,
               private cdr: ChangeDetectorRef
   ) {

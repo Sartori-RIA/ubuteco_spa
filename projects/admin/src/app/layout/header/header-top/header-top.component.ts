@@ -2,7 +2,6 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {LayoutService} from '../../../core/services/theme/layout.service';
 import {NavigationService} from '../../../core/services/theme/navigation.service';
-import {ThemeService} from '../../../core/services/theme/theme.service';
 import {ILayoutConf} from '../../../core/models/theme';
 import {MatDialog} from '@angular/material/dialog';
 import {SignOutComponent} from '../../../auth/sign-out/sign-out.component';
@@ -20,14 +19,12 @@ export class HeaderTopComponent implements OnInit, OnDestroy {
 
   constructor(private layout: LayoutService,
               private navService: NavigationService,
-              private dialog: MatDialog,
-              public themeService: ThemeService,
+              private dialog: MatDialog
   ) {
   }
 
   ngOnInit() {
     this.layoutConf = this.layout.layoutConf;
-    this.egretThemes = this.themeService.egretThemes;
     this.menuItemSub = this.navService.menuItems$
       .subscribe(res => {
         const limit = 4;

@@ -22,7 +22,6 @@ export class WineResolver implements Resolve<Wine> {
     return this.store.pipe(
       select(selectWineById(id)),
       tap((wine) => {
-        console.log(wine);
         if (!wine) {
           this.store.dispatch(REQUEST_WINE({id}));
         }

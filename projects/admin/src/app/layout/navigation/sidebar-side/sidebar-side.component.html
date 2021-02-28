@@ -44,19 +44,19 @@
           <mat-menu #appUserMenu="matMenu">
             <button mat-menu-item routerLink="/perfil">
               <mat-icon>account_box</mat-icon>
-              <span>Profile</span>
+              <span>{{'pages.menu.profile'|translate}}</span>
             </button>
             <button mat-menu-item routerLink="/perfil/configuracoes">
               <mat-icon>settings</mat-icon>
-              <span>Account Settings</span>
+              <span>{{'pages.menu.settings'|translate}}</span>
             </button>
             <button mat-menu-item routerLink="/calendar">
               <mat-icon>date_range</mat-icon>
-              <span>Organization</span>
+              <span>{{'pages.menu.organization'|translate}}</span>
             </button>
             <button (click)="onLogout()" mat-menu-item>
               <mat-icon>exit_to_app</mat-icon>
-              <span>Sign out</span>
+              <span>{{'pages.menu.sign_out'|translate}}</span>
             </button>
           </mat-menu>
         </div>

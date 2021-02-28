@@ -57,7 +57,7 @@ export class WineStylesEffects {
     mergeMap((action) => this.wineStyleService.create(action.style)
       .pipe(
         map((style) => {
-          this.feedbackService.createSuccess('wine_style');
+          this.feedbackService.createSuccess('wine_styles');
           return ADD_WINE_STYLE_DONE({style});
         }),
         catchError((e) => {
@@ -73,7 +73,7 @@ export class WineStylesEffects {
     mergeMap((action) => this.wineStyleService.destroy(action.id)
       .pipe(
         map((res) => {
-          this.feedbackService.destroyItemSuccess('wine_style');
+          this.feedbackService.destroyItemSuccess('wine_styles');
           return DELETE_WINE_STYLE_DONE({id: res.id});
         }),
         catchError((err) => {
@@ -89,7 +89,7 @@ export class WineStylesEffects {
     mergeMap((action) => this.wineStyleService.update(action.style)
       .pipe(
         map((beerStyle) => {
-          this.feedbackService.updateSuccess('wine_style');
+          this.feedbackService.updateSuccess('wine_styles');
           return UPDATE_WINE_STYLE_DONE({style: beerStyle});
         }),
         catchError((e) => {

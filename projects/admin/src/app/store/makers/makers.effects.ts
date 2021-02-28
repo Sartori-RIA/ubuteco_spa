@@ -60,7 +60,7 @@ export class MakersEffects {
     mergeMap((action) => this.makersService.create(action.maker)
       .pipe(
         map((maker) => {
-          this.feedbackService.createSuccess('maker');
+          this.feedbackService.createSuccess('makers');
           return ADD_MAKER_DONE({maker});
         }),
         catchError((e) => {
@@ -76,7 +76,7 @@ export class MakersEffects {
     mergeMap((action) => this.makersService.destroy(action.id)
       .pipe(
         map((res) => {
-          this.feedbackService.destroyItemSuccess('maker');
+          this.feedbackService.destroyItemSuccess('makers');
           return DELETE_MAKER_DONE({id: res.id});
         }),
         catchError(() => {
@@ -92,7 +92,7 @@ export class MakersEffects {
     mergeMap((action) => this.makersService.update(action.maker)
       .pipe(
         map((res) => {
-          this.feedbackService.updateSuccess('maker');
+          this.feedbackService.updateSuccess('makers');
           return UPDATE_MAKER_DONE({maker: res});
         }),
         catchError(() => {

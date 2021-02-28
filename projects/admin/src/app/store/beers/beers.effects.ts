@@ -76,7 +76,7 @@ export class BeersEffects {
     mergeMap((action) => this.beerService.destroy(action.id)
       .pipe(
         map(() => {
-          this.feedbackService.destroyItemSuccess('beer', false);
+          this.feedbackService.destroyItemSuccess('beers');
           return REMOVE_BEER_DONE({id: action.id});
         }),
         catchError(() => {
@@ -91,7 +91,7 @@ export class BeersEffects {
     ofType(CREATE_BEER),
     mergeMap((action) => this.beerService.create(action.beer).pipe(
       map((beer) => {
-        this.feedbackService.createSuccess('beer', false);
+        this.feedbackService.createSuccess('beers');
         return CREATE_BEER_DONE({beer});
       }),
       catchError(() => {
@@ -107,7 +107,7 @@ export class BeersEffects {
       ofType(UPDATE_BEER),
       mergeMap((action) => this.beerService.update(action.beer).pipe(
         map((beer) => {
-          this.feedbackService.updateSuccess('beer', false);
+          this.feedbackService.updateSuccess('beers');
           return UPDATE_BEER_DONE({beer});
         }),
         catchError(() => {

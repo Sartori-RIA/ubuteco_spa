@@ -24,10 +24,6 @@ import {HeaderSideComponent} from './layout/header/header-side/header-side.compo
 import {SidebarComponent} from './layout/navigation/sidebar/sidebar.component';
 import {FooterComponent} from './layout/footer/footer.component';
 import {AuthModule} from './auth/auth.module';
-import {StoreModule} from '@ngrx/store';
-import * as fromAuth from './store/auth/auth.reducer';
-import {EffectsModule} from '@ngrx/effects';
-import {AuthEffects} from './store/auth/auth.effects';
 import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
@@ -68,14 +64,12 @@ export function createTranslateLoader(http: HttpClient) {
     NgxMaskModule.forRoot(),
     AppStoreModule,
     AuthModule,
-    StoreModule.forFeature(fromAuth.featureKey, fromAuth.reducer),
-    EffectsModule.forFeature([AuthEffects]),
     TranslateModule.forRoot({
       defaultLanguage: 'pt',
       loader: {
         provide: TranslateLoader,
         useFactory: (createTranslateLoader),
-        deps: [HttpClient]
+        deps: [HttpClient],
       }
     })
   ],

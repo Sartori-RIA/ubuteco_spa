@@ -16,8 +16,8 @@ export class ThemeService extends BaseService<Theme> {
     super(http, environment.api_url, logger);
   }
 
-  update(data: Theme, currentUser?: User): Observable<Theme> {
-    return this.http.put<Theme>(`${this.url}profiles/${currentUser.id}/themes/${data.id}`, data).pipe();
+  update(theme: Theme, currentUser?: User): Observable<Theme> {
+    return this.http.put<Theme>(`${this.url}organizations/${currentUser.organization_id}/themes/${theme.id}`, theme).pipe();
   }
 
   show(id: number, currentUser?: User): Observable<Theme> {

@@ -80,7 +80,7 @@ export class TableEffects {
     mergeMap((action) => this.tableService.destroy(action.id)
       .pipe(
         map(() => {
-          this.feedbackService.destroyItemSuccess('table', false);
+          this.feedbackService.destroyItemSuccess('tables');
           return REMOVE_TABLE_DONE({id: action.id});
         }),
         catchError(() => {
@@ -96,7 +96,7 @@ export class TableEffects {
     mergeMap((action) => this.tableService.create(action.table)
       .pipe(
         map((table) => {
-          this.feedbackService.createSuccess('table', false);
+          this.feedbackService.createSuccess('tables');
           return CREATE_TABLE_DONE({table});
         }),
         catchError(() => {
@@ -112,7 +112,7 @@ export class TableEffects {
     mergeMap((action) => this.tableService.update(action.table)
       .pipe(
         map((table) => {
-          this.feedbackService.updateSuccess('table', false);
+          this.feedbackService.updateSuccess('tables');
           return UPDATE_TABLE_DONE({table});
         }),
         catchError(() => {

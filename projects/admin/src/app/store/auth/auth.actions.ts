@@ -1,6 +1,6 @@
 import {createAction, props} from '@ngrx/store';
 import {SignUpPayload, User} from '../../core/models/user';
-import {Theme} from '../../core/models/theme';
+import {Organization} from '../../core/models/organization';
 
 export const SIGN_IN = createAction('[AUTH/API] sign in', props<{ user: User }>());
 
@@ -30,14 +30,8 @@ export const UPDATE_USER_DONE = createAction('[USER/API] update USER done', prop
 
 export const UPDATE_USER_FAILED = createAction('[USER/API] update USER fail');
 
-export const THEME_REQUESTED = createAction('[Theme/API] theme requested', props<{ user: User }>());
+export const UPDATE_ORGANIZATION = createAction('[ORGANIZATION/API] update organization', props<{ data: Organization }>());
 
-export const THEME_LOADED = createAction('[Theme/API] theme loaded', props<{ theme: Theme }>());
+export const UPDATE_ORGANIZATION_DONE = createAction('[ORGANIZATION/API] update organization done', props<{ data: Organization }>());
 
-export const UPDATE_THEME = createAction('[Theme/API] theme update', props<{ theme: Theme, user: User }>());
-
-export const UPDATE_THEME_DONE = createAction('[Theme/API] theme update done', props<{ theme: Theme }>());
-
-export const UPDATE_THEME_FAILED = createAction('[Theme/API] theme update fail');
-
-export const THEME_FAILED = createAction('[Theme/API] theme load fail');
+export const UPDATE_ORGANIZATION_FAILED = createAction('[ORGANIZATION/API] update organization failed');

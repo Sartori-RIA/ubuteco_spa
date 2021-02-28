@@ -2,80 +2,28 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {LayoutService} from './layout.service';
 import {Colors, CustomizerColors, Theme} from '../../models/theme';
-import {Observable, of, zip} from 'rxjs';
+import {Observable, zip} from 'rxjs';
 import {select, Store} from '@ngrx/store';
-import {selectCurrentUser, selectUserTheme} from '../../../store/auth/auth.selectors';
+import {selectCurrentUser} from '../../../store/auth/auth.selectors';
 import {AppState} from '../../../store';
-import {UPDATE_THEME} from '../../../store/auth/auth.actions';
-import {map, take} from 'rxjs/operators';
+import {take} from 'rxjs/operators';
 import {User} from '../../models/user';
+import {
+  selectFooterColors,
+  selectSidebarColors,
+  selectTheme,
+  selectTopBarColors
+} from '../../../store/theme/theme.selectors';
+import {UPDATE_THEME} from '../../../store/theme/theme.actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomizerService {
-  readonly colors$: Observable<CustomizerColors[]> = of([
-    {
-      class: 'black',
-      active: false
-    },
-    {
-      class: 'white',
-      active: false
-    },
-    {
-      class: 'dark-blue',
-      active: false
-    },
-    {
-      class: 'grey',
-      active: false
-    },
-    {
-      class: 'brown',
-      active: false
-    },
-    {
-      class: 'gray',
-      active: false
-    },
-    {
-      class: 'purple',
-      active: false
-    },
-    {
-      class: 'blue',
-      active: false
-    },
 
-    {
-      class: 'indigo',
-      active: false
-    },
-    {
-      class: 'yellow',
-      active: false
-    },
-    {
-      class: 'green',
-      active: false
-    },
-    {
-      class: 'pink',
-      active: false
-    },
-    {
-      class: 'red',
-      active: false
-    },
-    {
-      class: 'slate',
-      active: false
-    }
-  ]);
-  topbarColors$: Observable<CustomizerColors[]>;
-  sidebarColors$: Observable<CustomizerColors[]>;
-  footerColors$: Observable<CustomizerColors[]>;
+  topbarColors$: Observable<CustomizerColors[]> = this.store.pipe(select(selectTopBarColors));
+  sidebarColors$: Observable<CustomizerColors[]> = this.store.pipe(select(selectSidebarColors));
+  footerColors$: Observable<CustomizerColors[]> = this.store.pipe(select(selectFooterColors));
   acceptableColors: Colors[] = [
     'black',
     'slate',
@@ -89,56 +37,21 @@ export class CustomizerService {
     'yellow',
     'green'
   ];
-  private readonly theme$: Observable<Theme> = this.store.pipe(select(selectUserTheme));
+  private readonly theme$: Observable<Theme> = this.store.pipe(select(selectTheme));
   private readonly user$: Observable<User> = this.store.pipe(select(selectCurrentUser));
 
   constructor(private router: Router,
               private layout: LayoutService,
               private store: Store<AppState>) {
-    this.topbarColors$ = this.getTopbarColors();
-    this.sidebarColors$ = this.getSidebarColors();
-    this.footerColors$ = this.getFooterColors();
   }
 
-  getSidebarColors(): Observable<CustomizerColors[]> {
-    return zip(this.colors$, this.theme$)
-      .pipe(
-        take(1),
-        map(([colors, theme]) => colors.map((c) => {
-          c.active = c.class === theme.color_sidebar;
-          return {...c};
-        }))
-      );
-  }
-
-  getTopbarColors(): Observable<CustomizerColors[]> {
-    return zip(this.colors$, this.theme$)
-      .pipe(
-        take(1),
-        map(([colors, theme]) => colors.map((c) => {
-          c.active = c.class === theme.color_header;
-          return {...c};
-        }))
-      );
-  }
-
-  getFooterColors(): Observable<CustomizerColors[]> {
-    return zip(this.colors$, this.theme$)
-      .pipe(
-        take(1),
-        map(([colors, theme]) => colors.map((c) => {
-          c.active = c.class === theme.color_footer;
-          return {...c};
-        }))
-      );
-  }
 
   changeSidebarColor(color: CustomizerColors): void {
     this.layout.publishLayoutChange({sidebarColor: color.class});
     zip(this.user$, this.theme$).pipe(take(1)).subscribe(([user, theme]) => {
       this.store.dispatch(UPDATE_THEME({theme: {...theme, color_sidebar: color.class}, user}));
     });
-    this.sidebarColors$ = this.getSidebarColors();
+    this.sidebarColors$ = this.store.pipe(select(selectSidebarColors));
   }
 
   changeTopbarColor(color: CustomizerColors): void {
@@ -146,7 +59,7 @@ export class CustomizerService {
     zip(this.user$, this.theme$).pipe(take(1)).subscribe(([user, theme]) => {
       this.store.dispatch(UPDATE_THEME({theme: {...theme, color_header: color.class}, user}));
     });
-    this.topbarColors$ = this.getTopbarColors();
+    this.topbarColors$ = this.store.pipe(select(selectTopBarColors));
   }
 
   changeFooterColor(color: CustomizerColors): void {
@@ -154,7 +67,7 @@ export class CustomizerService {
     zip(this.user$, this.theme$).pipe(take(1)).subscribe(([user, theme]) => {
       this.store.dispatch(UPDATE_THEME({theme: {...theme, color_footer: color.class}, user}));
     });
-    this.footerColors$ = this.getFooterColors();
+    this.footerColors$ = this.store.pipe(select(selectFooterColors));
   }
 
   removeClass(el, className): void {
@@ -206,7 +119,6 @@ export class CustomizerService {
   }
 
   toggleClass(el, className): void {
-    console.log('setando cor', className);
     if (!el) {
       return;
     }
