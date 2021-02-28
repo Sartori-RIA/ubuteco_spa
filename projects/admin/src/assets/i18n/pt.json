@@ -259,6 +259,11 @@
       }
     },
     "profile": {
+      "messages": {
+        "update": {
+          "success": "Perfil atualizado com sucesso"
+        }
+      },
       "tabs": {
         "organization": "Configurações da Organização",
         "theme": "Tema da Organização",

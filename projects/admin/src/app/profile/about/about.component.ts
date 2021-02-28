@@ -6,6 +6,7 @@ import {selectAuthLoading, selectCurrentUser,} from '../../store/auth/auth.selec
 import {AppState} from '../../store';
 import {User} from '../../core/models/user';
 import {UPDATE_USER} from '../../store/auth/auth.actions';
+import {take} from "rxjs/operators";
 
 @Component({
   selector: 'app-about',
@@ -34,7 +35,7 @@ export class AboutComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.form.valid) {
-      this.user$.subscribe((user) => {
+      this.user$.pipe(take(1)).subscribe((user) => {
         const data: User = {
           ...user,
           ...this.form.value,
