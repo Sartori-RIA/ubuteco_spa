@@ -77,16 +77,8 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   openFormDialog(element?: WineStyle) {
-    const dialogRef = this.dialog.open(WineStylesFormDialogComponent, {
+    this.dialog.open(WineStylesFormDialogComponent, {
       data: element ? element : {},
-    });
-
-    dialogRef.afterClosed().pipe(take(1)).subscribe((style: WineStyle) => {
-      if (style.id) {
-        this.store.dispatch(UPDATE_WINE_STYLE({style}));
-      } else {
-        this.store.dispatch(ADD_WINE_STYLE({style}));
-      }
     });
   }
 

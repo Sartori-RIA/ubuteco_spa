@@ -35,7 +35,7 @@
     "profile": "Perfil",
     "reports": "Relatórios",
     "tables": "Mesas",
-    "wine_styles": "Estilo de vINHOS",
+    "wine_styles": "Estilo de Vinhos",
     "wines": "Vinhos"
   },
   "pages": {
@@ -304,6 +304,17 @@
         },
         "new": {
           "title": "Novo estilo de vinho"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Estilo de vinho adicionado com sucesso"
+        },
+        "update": {
+          "success": "Estilo de vinho atualizado com sucesso"
+        },
+        "destroy": {
+          "success": "Estilo de vinho removido com sucesso"
         }
       }
     },

@@ -2,9 +2,9 @@ import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core'
 import {FormBuilder, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {WineStyle} from '../../core/models/wine-style';
-import {ADD_WINE_STYLE, UPDATE_WINE_STYLE} from "../../store/wine-styles/wine-styles.actions";
-import {Store} from "@ngrx/store";
-import {AppState} from "../../store";
+import {ADD_WINE_STYLE, UPDATE_WINE_STYLE} from '../../store/wine-styles/wine-styles.actions';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../store';
 
 @Component({
   selector: 'app-wine-styles-form-dialog',
