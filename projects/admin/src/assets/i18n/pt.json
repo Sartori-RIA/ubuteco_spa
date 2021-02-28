@@ -253,6 +253,11 @@
     },
     "organizations": {},
     "profile": {
+      "tabs": {
+        "organization": "Configurações da Organização",
+        "theme": "Tema da Organização",
+        "security": "Dados de acesso"
+      }
     },
     "tables": {
       "fab": "Nova Mesa",
@@ -293,6 +298,14 @@
     },
     "wines": {
       "fab": "Novo Vinho"
+    },
+    "menu": {
+      "sign_out": "Sair",
+      "organization": "Organização",
+      "profile": "Perfil",
+      "settings": "Configurações",
+      "theme": "Tema",
+      "security": "Segurança"
     }
   },
   "attributes": {

@@ -12,12 +12,6 @@ import {
   SIGN_UP,
   SIGN_UP_DONE,
   SIGN_UP_REFUSED,
-  THEME_FAILED,
-  THEME_LOADED,
-  THEME_REQUESTED,
-  UPDATE_THEME,
-  UPDATE_THEME_DONE,
-  UPDATE_THEME_FAILED,
   UPDATE_USER,
   UPDATE_USER_DONE,
   UPDATE_USER_FAILED
@@ -26,10 +20,12 @@ import {catchError, map, mergeMap, take, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {Router} from '@angular/router';
 import {FeedbackService} from '../../core/services/api/feedback.service';
-import {ThemeService} from '../../core/services/api/theme.service';
 import {UserService} from '../../core/services/api/user.service';
 import {KitchenSocketService} from '../../core/sockets/kitchen-socket.service';
 import {TranslateService} from '@ngx-translate/core';
+import {Store} from '@ngrx/store';
+import {AppState} from '../index';
+import {THEME_LOADED} from '../theme/theme.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -75,7 +71,6 @@ export class AuthEffects {
   navigateAfterSignUp$ = createEffect(() => this.actions$.pipe(
     ofType(SIGN_UP_DONE),
     tap(({user}) => {
-      console.log(user)
       this.translate.get('commons.messages.welcome', {name: user.name})
         .pipe(take(1))
         .subscribe((message) => this.feedbackService.success(message));
@@ -89,6 +84,7 @@ export class AuthEffects {
       .pipe(
         map((user) => {
           this.kitchenSocket.joinInRoom(user.organization.cnpj);
+          this.store.dispatch(THEME_LOADED({theme: user.organization.theme}));
           return LOAD_USER_DONE({user});
         }),
         catchError(() => of(LOAD_USER_FAILED()))
@@ -112,33 +108,14 @@ export class AuthEffects {
     )
   ));
 
-  updateTheme$ = createEffect(() => this.actions$.pipe(
-    ofType(UPDATE_THEME),
-    mergeMap((action) => this.themeService.update(action.theme, action.user)
-      .pipe(
-        map((theme) => UPDATE_THEME_DONE({theme})),
-        catchError(() => of(UPDATE_THEME_FAILED()))
-      ),
-    )
-  ));
-
-  loadTheme$ = createEffect(() => this.actions$.pipe(
-    ofType(THEME_REQUESTED),
-    mergeMap((action) => this.themeService.show(action.user.organization.theme_id)
-      .pipe(
-        map((theme) => THEME_LOADED({theme})),
-        catchError(() => of(THEME_FAILED()))
-      ),
-    )
-  ));
 
   constructor(private actions$: Actions,
               private authService: AuthService,
               private feedbackService: FeedbackService,
               private router: Router,
+              private store: Store<AppState>,
               private translate: TranslateService,
               private kitchenSocket: KitchenSocketService,
-              private themeService: ThemeService,
               private userService: UserService) {
   }
 

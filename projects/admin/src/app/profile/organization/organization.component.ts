@@ -1,13 +1,11 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {User} from '../../core/models/user';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../store';
 import {ActivatedRoute} from '@angular/router';
-import {UPDATE_USER} from '../../store/auth/auth.actions';
-import {Organization} from "../../core/models/organization";
-import {CookieCodeValidators} from "../../shared/validators/cookie-code.validators";
-import {OrganizationsService} from "../../core/services/api/organizations.service";
+import {Organization} from '../../core/models/organization';
+import {CookieCodeValidators} from '../../shared/validators/cookie-code.validators';
+import {OrganizationsService} from '../../core/services/api/organizations.service';
 
 @Component({
   selector: 'app-organization',

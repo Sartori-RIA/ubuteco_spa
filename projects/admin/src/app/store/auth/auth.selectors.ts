@@ -38,10 +38,7 @@ export const selectIsWaiter = createSelector(
   (user) => user?.role?.name === 'WAITER'
 );
 
-export const selectUserTheme = createSelector(
-  authFeatureSelector,
-  (state) => state?.theme
-);
+
 
 export const selectCurrentOrganization = createSelector(
   selectCurrentUser,
@@ -73,3 +70,6 @@ export const selectAuthLoading = createSelector(
   authFeatureSelector,
   (state) => state?.loading
 );
+
+
+

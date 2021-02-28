@@ -1,29 +1,25 @@
 <mat-card class="p-0">
   <mat-tab-group>
-    <mat-tab label="Configurações da conta">
+    <mat-tab [label]="'pages.profile.tabs.organization'|translate">
       <mat-card-content class="mt-1">
         <div [formGroup]="form">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Nome</mat-label>
-            <input matInput formControlName="name">
-          </mat-form-field>
 
           <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="email">
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Empresa</mat-label>
+            <mat-label>{{'attributes.organization.name'|translate}}</mat-label>
             <input matInput formControlName="company_name">
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="full-width">
-            <mat-label>CNPJ</mat-label>
+            <mat-label>{{'attributes.organization.cnpj'|translate|uppercase}}</mat-label>
             <input matInput formControlName="cnpj">
           </mat-form-field>
 
-          <button mat-raised-button (click)="onSubmit()" color="primary">Salvar</button>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{'attributes.organization.phone'|translate}}</mat-label>
+            <input matInput formControlName="phone">
+          </mat-form-field>
+
+          <button mat-raised-button (click)="onSubmit()" color="primary">{{'commons.buttons.save'|translate}}</button>
         </div>
       </mat-card-content>
     </mat-tab>

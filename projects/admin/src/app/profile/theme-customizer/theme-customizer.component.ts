@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ITheme} from '../../core/models/theme';
-import {NavigationService} from '../../core/services/theme/navigation.service';
+import {CustomizerColors, ILayoutConf} from '../../core/models/theme';
 import {LayoutService} from '../../core/services/theme/layout.service';
-import {ThemeService} from '../../core/services/theme/theme.service';
-import {CustomizerService} from '../../core/services/theme/customizer.service';
+import {AppState} from '../../store';
+import {select, Store} from '@ngrx/store';
+import {selectFooterColors, selectSidebarColors, selectTopBarColors} from '../../store/theme/theme.selectors';
+import {FOOTER_COLOR_CHANGED, SIDEBAR_COLOR_CHANGED, TOP_BAR_COLOR_CHANGED} from '../../store/theme/theme.actions';
 
 @Component({
   selector: 'app-theme-customizer',
@@ -13,33 +14,28 @@ import {CustomizerService} from '../../core/services/theme/customizer.service';
 export class ThemeCustomizerComponent implements OnInit {
 
   viewMode: 'options' | 'json' = 'options';
-  layoutConf;
-  egretThemes: ITheme[];
-  perfectScrollbarEnabled = true;
+  layoutConf: ILayoutConf;
+  sidebarColors$ = this.store.pipe(select(selectSidebarColors));
+  topBarColors$ = this.store.pipe(select(selectTopBarColors));
+  footerColors$ = this.store.pipe(select(selectFooterColors));
 
-  constructor(private navService: NavigationService,
-              public layout: LayoutService,
-              private themeService: ThemeService,
-              public customizer: CustomizerService) {
+  constructor(private layout: LayoutService,
+              private store: Store<AppState>) {
   }
 
   ngOnInit() {
     this.layoutConf = this.layout.layoutConf;
-    this.egretThemes = this.themeService.egretThemes;
   }
 
-  changeTheme(theme) {
-    // this.themeService.changeTheme(theme);
-    this.layout.publishLayoutChange({matTheme: theme.name});
+  updateSidebar(data: CustomizerColors) {
+    this.store.dispatch(SIDEBAR_COLOR_CHANGED({data}));
   }
 
-  changeSidenav(data) {
-    this.navService.publishNavigationChange(data.value);
+  updateTopBar(data: CustomizerColors) {
+    this.store.dispatch(TOP_BAR_COLOR_CHANGED({data}));
   }
 
-  tooglePerfectScrollbar(data) {
-    this.layout.publishLayoutChange({perfectScrollbar: this.perfectScrollbarEnabled});
+  updateFooter(data: CustomizerColors) {
+    this.store.dispatch(FOOTER_COLOR_CHANGED({data}));
   }
-
-
 }
