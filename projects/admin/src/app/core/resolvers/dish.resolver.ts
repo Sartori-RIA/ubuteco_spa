@@ -20,7 +20,6 @@ export class DishResolver implements Resolve<Dish> {
     : Observable<Dish>
     | Promise<Dish>
     | Dish {
-    console.log('resolver');
     const id = route.params.id;
 
     return this.store.pipe(

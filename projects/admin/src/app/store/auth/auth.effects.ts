@@ -12,6 +12,9 @@ import {
   SIGN_UP,
   SIGN_UP_DONE,
   SIGN_UP_REFUSED,
+  UPDATE_ORGANIZATION,
+  UPDATE_ORGANIZATION_DONE,
+  UPDATE_ORGANIZATION_FAILED,
   UPDATE_USER,
   UPDATE_USER_DONE,
   UPDATE_USER_FAILED
@@ -26,6 +29,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {Store} from '@ngrx/store';
 import {AppState} from '../index';
 import {THEME_LOADED} from '../theme/theme.actions';
+import {OrganizationsService} from '../../core/services/api/organizations.service';
 
 @Injectable()
 export class AuthEffects {
@@ -94,9 +98,9 @@ export class AuthEffects {
 
   updateUser$ = createEffect(() => this.actions$.pipe(
     ofType(UPDATE_USER),
-    mergeMap((action) => this.userService.update(action.user)
+    mergeMap(({user}) => this.userService.update(user)
       .pipe(
-        map((user) => {
+        map((data) => {
           this.feedbackService.updateSuccess('profile');
           return UPDATE_USER_DONE({user});
         }),
@@ -108,10 +112,26 @@ export class AuthEffects {
     )
   ));
 
+  updateOrganization = createEffect(() => this.actions$.pipe(
+    ofType(UPDATE_ORGANIZATION),
+    mergeMap(({data}) => this.organizationService.update(data)
+      .pipe(
+        map((organization) => {
+          this.feedbackService.updateSuccess('organizations');
+          return UPDATE_ORGANIZATION_DONE({data: organization});
+        }),
+        catchError(() => {
+          this.feedbackService.errorAction('update');
+          return of(UPDATE_ORGANIZATION_FAILED());
+        })
+      )
+    )
+  ));
 
   constructor(private actions$: Actions,
               private authService: AuthService,
               private feedbackService: FeedbackService,
+              private organizationService: OrganizationsService,
               private router: Router,
               private store: Store<AppState>,
               private translate: TranslateService,

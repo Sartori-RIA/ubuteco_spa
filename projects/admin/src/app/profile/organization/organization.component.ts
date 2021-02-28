@@ -6,6 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Organization} from '../../core/models/organization';
 import {CookieCodeValidators} from '../../shared/validators/cookie-code.validators';
 import {OrganizationsService} from '../../core/services/api/organizations.service';
+import {UPDATE_ORGANIZATION} from "../../store/auth/auth.actions";
 
 @Component({
   selector: 'app-organization',
@@ -31,7 +32,7 @@ export class OrganizationComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       const organization: Organization = this.form.value;
-      // this.store.dispatch(UPDATE_USER({user}));
+      this.store.dispatch(UPDATE_ORGANIZATION({data: organization}));
     } else {
       this.form.markAllAsTouched();
     }
@@ -39,6 +40,7 @@ export class OrganizationComponent implements OnInit {
 
   private mountForm(): FormGroup {
     return this.fb.group({
+      id: [null, Validators.required],
       name: [null, Validators.required],
       phone: [null, Validators.required],
       cnpj: [null, [Validators.required, CookieCodeValidators.cnpj], [CookieCodeValidators.uniqueCNPJ(this.organizationService)]],
@@ -46,8 +48,8 @@ export class OrganizationComponent implements OnInit {
   }
 
   private updateForm() {
-    console.log(this.activatedRoute.snapshot.data);
     this.form.patchValue({
+      id: this.organization?.id,
       phone: this.organization?.phone,
       name: this.organization?.name,
       cnpj: this.organization?.cnpj

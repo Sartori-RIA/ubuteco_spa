@@ -77,7 +77,6 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   private updateList() {
     this.subscription = this.beerStyles$.subscribe((tables) => {
-      console.log('atualizando')
       this.dataSource = new MatTableDataSource(tables);
       this.changeDetectorRefs.detectChanges();
     });

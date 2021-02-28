@@ -251,7 +251,13 @@
         }
       }
     },
-    "organizations": {},
+    "organizations": {
+      "messages": {
+        "update": {
+          "success": "Organização atualizada com sucesso"
+        }
+      }
+    },
     "profile": {
       "tabs": {
         "organization": "Configurações da Organização",

@@ -19,7 +19,7 @@ export class HeaderInterceptorService implements HttpInterceptor {
       headers = headers.append('Authorization', token);
     }
     if (req.body instanceof FormData) {
-      console.log('multipar');
+      // console.log('multipar');
     } else {
       headers = headers.append('Content-Type', 'application/json');
     }

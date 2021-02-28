@@ -1,5 +1,6 @@
 import {createAction, props} from '@ngrx/store';
 import {SignUpPayload, User} from '../../core/models/user';
+import {Organization} from '../../core/models/organization';
 
 export const SIGN_IN = createAction('[AUTH/API] sign in', props<{ user: User }>());
 
@@ -29,3 +30,8 @@ export const UPDATE_USER_DONE = createAction('[USER/API] update USER done', prop
 
 export const UPDATE_USER_FAILED = createAction('[USER/API] update USER fail');
 
+export const UPDATE_ORGANIZATION = createAction('[ORGANIZATION/API] update organization', props<{ data: Organization }>());
+
+export const UPDATE_ORGANIZATION_DONE = createAction('[ORGANIZATION/API] update organization done', props<{ data: Organization }>());
+
+export const UPDATE_ORGANIZATION_FAILED = createAction('[ORGANIZATION/API] update organization failed');
