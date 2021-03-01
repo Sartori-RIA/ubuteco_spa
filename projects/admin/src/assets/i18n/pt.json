@@ -374,7 +374,7 @@
     "wine": {
       "to_human": "Vinho",
       "abv": "ABV",
-      "vintage_wine": "",
+      "vintage_wine": "vintage_wine",
       "ripening": "Amadurecimento",
       "visual": "Aparencia",
       "grapes": "Uvas"

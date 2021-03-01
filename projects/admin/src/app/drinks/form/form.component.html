@@ -9,58 +9,55 @@
 
 <div mat-dialog-content>
   <div [formGroup]="form">
-
     <div fxLayout="row wrap" fxLayoutAlign="space-between center">
 
-      <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+      <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.base.name'|translate}}</mat-label>
+        <input formControlName="name" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.product.description'|translate}}</mat-label>
+        <textarea rows="5" formControlName="description" matInput></textarea>
+      </mat-form-field>
 
 
-        <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
-                        fxFlex.xs="100">
-          <mat-label>{{'attributes.base.name'|translate}}</mat-label>
-          <input formControlName="name" matInput>
+      <mat-form-field appearance="outline" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.product.quantity_stock'|translate}}</mat-label>
+        <input formControlName="quantity_stock" type="number" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.product.price'|translate}}</mat-label>
+        <input formControlName="price" matInput type="number">
+        <mat-icon matPrefix>attach_money</mat-icon>
+      </mat-form-field>
+
+
+      <div fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100" fxFlex.xs="100">
+        <mat-form-field appearance="outline" fxFlex="80">
+          <mat-label>{{'attributes.maker.to_human'|translate}}</mat-label>
+          <mat-select [compareWith]="compareSelectValues" formControlName="maker">
+            <mat-option *ngFor="let maker of makers$ | async" [value]="maker">
+              {{maker.name}}- {{maker?.state}}/{{maker?.country}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
-
-        <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
-                        fxFlex.xs="100">
-          <mat-label>{{'attributes.product.description'|translate}}</mat-label>
-          <textarea rows="5" formControlName="description" matInput></textarea>
-        </mat-form-field>
-
-
-        <mat-form-field appearance="outline" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
-                        fxFlex.xs="100">
-          <mat-label>{{'attributes.product.quantity_stock'|translate}}</mat-label>
-          <input formControlName="quantity_stock" type="number" matInput>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
-                        fxFlex.xs="100">
-          <mat-label>{{'attributes.product.price'|translate}}</mat-label>
-          <input formControlName="price" matInput type="number">
-          <mat-icon matPrefix>attach_money</mat-icon>
-        </mat-form-field>
-
-
-        <div fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100" fxFlex.xs="100">
-          <mat-form-field appearance="outline" fxFlex="80">
-            <mat-label>{{'attributes.maker.to_human'|translate}}</mat-label>
-            <mat-select [compareWith]="compareSelectValues" formControlName="maker">
-              <mat-option *ngFor="let maker of makers$ | async" [value]="maker">
-                {{maker.name}}- {{maker?.state}}/{{maker?.country}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <button fxFlexOffset="10" [matTooltip]="'pages.makers.fab'|translate" (click)="openDialogAddMaker()" mat-mini-fab>+
-          </button>
-        </div>
-
-        <mat-form-field appearance="outline" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
-                        fxFlex.xs="100">
-          <mat-label>{{'attributes.drink.flavor'|translate}}</mat-label>
-          <input formControlName="flavor" matInput>
-        </mat-form-field>
+        <button fxFlexOffset="10" [matTooltip]="'pages.makers.fab'|translate" (click)="openDialogAddMaker()"
+                mat-mini-fab>+
+        </button>
       </div>
+
+      <mat-form-field appearance="outline" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.drink.flavor'|translate}}</mat-label>
+        <input formControlName="flavor" matInput>
+      </mat-form-field>
     </div>
   </div>
 </div>
