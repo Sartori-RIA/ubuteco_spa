@@ -4,7 +4,6 @@ import {SignInComponent} from './sign-in/sign-in.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
 import {EmailRecoverComponent} from './email-recover/email-recover.component';
 import {PasswordUpdateComponent} from './password-update/password-update.component';
-import {ConfirmationComponent} from './confirmation/confirmation.component';
 
 
 const routes: Routes = [
@@ -27,11 +26,6 @@ const routes: Routes = [
     path: 'atualizar-senha',
     component: PasswordUpdateComponent,
     data: {title: 'routes.auth.change_password'}
-  },
-  {
-    path: 'confirmations',
-    component: ConfirmationComponent,
-    data: {title: 'routes.auth.confirm'}
   }
 ];
 

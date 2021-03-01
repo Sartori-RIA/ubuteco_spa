@@ -45,11 +45,11 @@ export class AuthService {
   }
 
   confirmAccount(token: string): Observable<User> {
-    const url = `${environment.auth_url}/auth/confirmations?confirmation_token=${token}`;
+    const url = `${environment.auth_url}confirmations?confirmation_token=${token}`;
     return this.http.get<User>(url);
   }
 
   resendConfirmationEmail(email: string): Observable<any> {
-    return this.http.post(environment.auth_url + '/auth/confirmations', {email});
+    return this.http.post(environment.auth_url + 'confirmations', {email});
   }
 }
