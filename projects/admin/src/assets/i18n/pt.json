@@ -54,7 +54,7 @@
       "confirm": {
         "title": "Confirmação de conta",
         "invalid_token": "Token inválido",
-        "already_exist_title": "Sua conta ja foi confirmada!",
+        "already_exist_title": "Sua conta já foi confirmada!",
         "message": "Olá {{user_name}}. Obrigado por confirmar a sua conta!"
       },
       "buttons": {
