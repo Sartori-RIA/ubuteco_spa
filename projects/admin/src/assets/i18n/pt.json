@@ -319,7 +319,18 @@
       }
     },
     "wines": {
-      "fab": "Novo Vinho"
+      "fab": "Novo Vinho",
+      "messages": {
+        "create": {
+          "success": "Vinho adicionado com sucesso"
+        },
+        "update": {
+          "success": "Vinho atualizado com sucesso"
+        },
+        "destroy": {
+          "success": "Vinho removido com sucesso"
+        }
+      }
     },
     "menu": {
       "sign_out": "Sair",
@@ -363,7 +374,7 @@
     "wine": {
       "to_human": "Vinho",
       "abv": "ABV",
-      "vintage_wine": "",
+      "vintage_wine": "vintage_wine",
       "ripening": "Amadurecimento",
       "visual": "Aparencia",
       "grapes": "Uvas"

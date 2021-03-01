@@ -11,7 +11,7 @@ import {selectAllFoodsOrderedByName} from '../../store/foods/food.selectors';
 import {Maker} from '../../core/models/maker';
 import {REQUEST_ALL_FOODS} from '../../store/foods/food.actions';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {CREATE_DISH, REMOVE_DISH, UPDATE_DISH} from '../../store/dishes/dishes.actions';
+import {CREATE_DISH, REMOVE_DISH, REMOVE_DISH_ITEM, UPDATE_DISH} from '../../store/dishes/dishes.actions';
 
 @Component({
   selector: 'app-restaurant-menu-form',
@@ -45,6 +45,7 @@ export class FormComponent implements OnInit {
 
   mountForm() {
     this.form = this.fb.group({
+      id: [null, Validators.required],
       name: [null, Validators.required],
       price: [null, [Validators.required, Validators.min(0)]],
       ingredients: this.fb.array([this.createIngredient()])
@@ -59,7 +60,7 @@ export class FormComponent implements OnInit {
   createIngredient(): FormGroup {
     return this.fb.group({
       food: [null, Validators.required],
-      quantity: [null, [Validators.required, Validators.min(1)]],
+      quantity: [1, [Validators.required, Validators.min(1)]],
       id: [null]
     });
   }
@@ -94,6 +95,20 @@ export class FormComponent implements OnInit {
     return this.form.get('ingredients') as FormArray;
   }
 
+  onRemoveItem(i: number): void {
+    const formIngredients = this.ingredientsForm();
+    const form = formIngredients.controls[i];
+    if (form === undefined) {
+      return;
+    }
+    const values = form.value;
+    if (!!values.id) {
+      const dishId = this.form.controls.id.value;
+      this.store.dispatch(REMOVE_DISH_ITEM({item_id: values.id, dish_id: dishId}));
+    }
+    this.ingredientsForm().removeAt(i);
+  }
+
   private updateForm() {
     if (this.dish) {
       this.form.patchValue({
@@ -101,14 +116,10 @@ export class FormComponent implements OnInit {
         price: this.dish.price_cents / 100
       });
       this.dish.dish_ingredients.forEach((v, index) => {
-        let form = (this.form.controls.ingredients as FormArray).controls[
-          index
-          ] as FormGroup;
+        let form = (this.form.controls.ingredients as FormArray).controls[index] as FormGroup;
         if (!form) {
           this.addIngredient();
-          form = (this.form.controls.ingredients as FormArray).controls[
-            index
-            ] as FormGroup;
+          form = (this.form.controls.ingredients as FormArray).controls[index] as FormGroup;
         }
         form.patchValue({
           quantity: v.quantity,

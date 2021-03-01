@@ -13,6 +13,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSort, Sort} from '@angular/material/sort';
 import {REMOVE_BEER, REQUEST_ALL_BEERS} from '../../store/beers/beers.actions';
 import {AppState} from '../../store';
+import {MatDialog} from '@angular/material/dialog';
+import {FormComponent} from "../form/form.component";
 
 @Component({
   selector: 'app-index',
@@ -30,6 +32,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(private store: Store<AppState>,
+              private dialog: MatDialog,
               private changeDetectorRefs: ChangeDetectorRef) {
   }
 
@@ -75,6 +78,19 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   applyFilter(word: string) {
     this.dataSource.filter = word.trim().toLowerCase();
+  }
+
+  openCreateDialog() {
+    this.dialog.open(FormComponent, {
+      disableClose: true
+    });
+  }
+
+  openEditDialog(beer: Beer) {
+    this.dialog.open(FormComponent, {
+      disableClose: true,
+      data: beer
+    });
   }
 
   private updateBeerList() {

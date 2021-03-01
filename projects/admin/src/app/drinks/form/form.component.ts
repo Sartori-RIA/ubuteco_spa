@@ -39,7 +39,7 @@ export class FormComponent implements OnInit {
   }
 
   compareSelectValues(val1: Maker, val2: Maker): boolean {
-    return val1.id === val2.id;
+    return val1?.id === val2?.id;
   }
 
   onCancel() {

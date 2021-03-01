@@ -10,105 +10,92 @@
 <div mat-dialog-content>
   <div [formGroup]="form">
 
-    <div>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
 
-      <div>
+      <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.base.name'|translate}}</mat-label>
+        <input formControlName="name" matInput>
+      </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>{{'attributes.base.name'|translate}}</mat-label>
-          <input formControlName="name" matInput>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>{{'attributes.product.description'|translate}}</mat-label>
-          <textarea rows="5" formControlName="description" matInput></textarea>
-        </mat-form-field>
-
-
-        <mat-form-field appearance="outline">
-          <mat-label>{{'attributes.product.quantity_stock'|translate}}</mat-label>
-          <input formControlName="quantity_stock" type="number" matInput>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>{{'attributes.product.price'|translate}}</mat-label>
-          <input formControlName="price" matInput type="number">
-          <mat-icon matPrefix>attach_money</mat-icon>
-        </mat-form-field>
+      <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.product.description'|translate}}</mat-label>
+        <textarea rows="5" formControlName="description" matInput></textarea>
+      </mat-form-field>
 
 
-        <div>
-          <mat-form-field appearance="outline">
-            <mat-label>{{'attributes.wine_style.to_human'|translate}}</mat-label>
-            <input matInput
-                   formControlName="wine_style"
-                   [matAutocomplete]="styleAuto">
-          </mat-form-field>
+      <mat-form-field appearance="outline" fxFlex.xl="22" fxFlex.lg="22" fxFlex.md="22" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.product.quantity_stock'|translate}}</mat-label>
+        <input formControlName="quantity_stock" type="number" matInput>
+      </mat-form-field>
 
-          <mat-autocomplete autoActiveFirstOption
-                            #styleAuto="matAutocomplete"
-                            [displayWith]="displayFn">
+      <mat-form-field appearance="outline" fxFlex.xl="22" fxFlex.lg="22" fxFlex.md="22" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.product.price'|translate}}</mat-label>
+        <input formControlName="price" matInput type="number">
+        <mat-icon matPrefix>attach_money</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xl="22" fxFlex.lg="22" fxFlex.md="22" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.wine.abv'|translate}}</mat-label>
+        <input formControlName="abv" matInput type="number">
+        <fa-icon matSuffix [icon]="['fas','percentage']"></fa-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xl="22" fxFlex.lg="22" fxFlex.md="22"  fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.wine.vintage_wine'|translate}}</mat-label>
+        <input formControlName="vintage_wine" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xl="30" fxFlex.lg="30" fxFlex.md="30" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.wine.visual'|translate}}</mat-label>
+        <input formControlName="visual" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xl="30" fxFlex.lg="30" fxFlex.md="30" fxflex.sm="100"
+      fxFlex.xs="100">
+        <mat-label>{{'attributes.wine.ripening'|translate}}</mat-label>
+        <input formControlName="ripening" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xl="30" fxFlex.lg="30" fxFlex.md="30" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.wine.grapes'|translate}}</mat-label>
+        <input formControlName="grapes" matInput>
+      </mat-form-field>
+
+      <div fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100" fxFlex.xs="100">
+        <mat-form-field appearance="outline" fxFlex="80">
+          <mat-label>{{'attributes.wine_style.to_human'|translate}}</mat-label>
+          <mat-select [compareWith]="compareSelectValues" formControlName="wine_style">
             <mat-option *ngFor="let wineStyle of wineStyles$ | async" [value]="wineStyle">
               {{wineStyle?.name}}
             </mat-option>
-          </mat-autocomplete>
+          </mat-select>
+        </mat-form-field>
+        <button [matTooltip]="'pages.wine_styles.fab'|translate"
+                (click)="openDialogWineStyle()"
+                mat-mini-fab
+        >+</button>
+      </div>
 
-          <button [matTooltip]="'pages.wine_styles.fab'|translate"
-                  (click)="openDialogWineStyle()"
-                  mat-mini-fab
-          >+
-          </button>
-        </div>
-
-        <div>
-          <mat-form-field appearance="outline" fxFlex="80">
-            <mat-label>{{'attributes.maker.to_human'|translate}}</mat-label>
-            <input matInput
-                   formControlName="maker"
-                   [matAutocomplete]="makerAuto">
-          </mat-form-field>
-
-          <mat-autocomplete autoActiveFirstOption
-                            #makerAuto="matAutocomplete"
-                            [displayWith]="displayFn">
-            <mat-option *ngFor="let maker of makers$ | async"
-                        [value]="maker">
-              {{maker?.name}}- {{maker?.state}}/{{maker?.country}}
+      <div fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100" fxFlex.xs="100">
+        <mat-form-field appearance="outline" fxFlex="80">
+          <mat-label>{{'attributes.maker.to_human'|translate}}</mat-label>
+          <mat-select [compareWith]="compareSelectValues" formControlName="maker">
+            <mat-option *ngFor="let maker of makers$ | async" [value]="maker">
+              {{maker.name}}- {{maker?.state}}/{{maker?.country}}
             </mat-option>
-          </mat-autocomplete>
-
-          <button [matTooltip]="'pages.maker.to_human'|translate"
-                  (click)="openDialogAddMaker()"
-                  mat-mini-fab
-          >+
-          </button>
-        </div>
-
-        <mat-form-field appearance="outline">
-          <mat-label>{{'attributes.wine.abv'|translate}}</mat-label>
-          <input formControlName="abv" matInput type="number">
-          <fa-icon matSuffix [icon]="['fas','percentage']"></fa-icon>
+          </mat-select>
         </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>{{'attributes.wine.vintage_wine'|translate}}</mat-label>
-          <input formControlName="vintage_wine" matInput>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>{{'attributes.wine.visual'|translate}}</mat-label>
-          <input formControlName="visual" matInput>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>{{'attributes.wine.ripening'|translate}}</mat-label>
-          <input formControlName="ripening" matInput>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>{{'attributes.wine.grapes'|translate}}</mat-label>
-          <input formControlName="grapes" matInput>
-        </mat-form-field>
+        <button fxFlexOffset="10" [matTooltip]="'attributes.maker.fab'|translate" (click)="openDialogAddMaker()"
+                mat-mini-fab>+
+        </button>
       </div>
     </div>
   </div>

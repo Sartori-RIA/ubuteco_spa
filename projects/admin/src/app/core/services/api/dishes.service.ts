@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { BaseService } from './base.service';
-import { Dish } from '../../models/dish';
-import { HttpClient, HttpEvent } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
-import { Logger } from '@ngrx/data';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {BaseService} from './base.service';
+import {Dish} from '../../models/dish';
+import {HttpClient, HttpEvent} from '@angular/common/http';
+import {environment} from '../../../../environments/environment';
+import {Logger} from '@ngrx/data';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,10 @@ export class DishesService extends BaseService<Dish> {
   createWithPicture(data: Dish, fileName: string, file: File | Blob): Observable<HttpEvent<Dish>> {
     const form = this.mountdishFormData(data, fileName, file);
     return this.http.post<Dish>(this.url, form, {observe: 'response'}).pipe();
+  }
+
+  removeItem(dishId: number, dishItemId: number): Observable<Dish> {
+    return this.http.delete<Dish>(`${this.url}/${dishId}/ingredients/${dishItemId}`).pipe()
   }
 
   updateWithPicture(data: Dish, fileName: string, file: File): Observable<HttpEvent<Dish>> {

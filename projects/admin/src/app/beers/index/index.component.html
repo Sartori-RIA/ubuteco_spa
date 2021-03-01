@@ -8,7 +8,9 @@
 
 <div class="mat-elevation-z8">
 
-  <app-float-action-button [tooltip]="'pages.beers.fab' |translate"></app-float-action-button>
+  <app-float-action-button [tooltip]="'pages.beers.fab' |translate"
+                           (fabClick)="openCreateDialog()"
+  ></app-float-action-button>
 
   <table mat-table [dataSource]="dataSource"
          matSort matSortDisableClear matSortDirection="desc"
@@ -45,9 +47,8 @@
       <th mat-header-cell *matHeaderCellDef>{{'commons.labels.action'|translate}}</th>
       <td mat-cell *matCellDef="let element">
         <app-trash-button (deleteElement)="deleteBeer(element)"></app-trash-button>
-        <button routerLink="/cervejas/{{element.id}}" mat-button>
-          <fa-icon [icon]="['far', 'eye']"></fa-icon>
-        </button>
+        <app-edit-button (edit)="openEditDialog(element)"></app-edit-button>
+        <app-show-button></app-show-button>
       </td>
     </ng-container>
 
