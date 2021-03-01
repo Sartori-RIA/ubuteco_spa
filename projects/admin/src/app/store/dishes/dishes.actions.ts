@@ -69,3 +69,16 @@ export const SEARCH_DISHES_FAIL = createAction(
 export const DISH_ALREADY_LOADED = createAction(
   '[DISH/API] already loaded'
 );
+
+export const REMOVE_DISH_ITEM = createAction(
+  '[DISH ITEM/API] remove dish item',
+  props<{ dish_id: number, item_id: number }>()
+);
+export const REMOVE_DISH_ITEM_DONE = createAction(
+  '[DISH ITEM/API] remove dish item done',
+  props<{ dish_id: number, item_id: number }>()
+);
+
+export const REMOVE_DISH_ITEM_FAIL = createAction(
+  '[DISH ITEM/API] remove dish item fail'
+);

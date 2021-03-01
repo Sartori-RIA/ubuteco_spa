@@ -29,18 +29,18 @@
         <h3>{{'pages.dishes.labels.ingredients'|translate}}</h3>
       </div>
 
-      <div class="pt-05" formArrayName="ingredients" *ngFor="let item of ingredientsForm().controls; let i=index">
+      <div class="pt-05" fxFill formArrayName="ingredients" *ngFor="let item of ingredientsForm().controls; let i=index">
 
         <div [formGroupName]="i.toString()" fxLayout="row wrap" fxLayoutAlign="space-between center">
 
-          <mat-form-field appearance="outline" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
+          <mat-form-field appearance="outline" fxFlex="100" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
                           fxFlex.xs="100">
             <mat-label>{{'pages.dishes.labels.ingredient'|translate}}</mat-label>
             <mat-select [compareWith]="compareSelectValues" formControlName="food">
               <mat-option *ngFor="let food of foods$ | async" [value]="food">
                 <div fxFlex="100">
                   <img height="60px" [src]="food.image.url" fxFlex="20"/>
-                  <span fxFlexOffset="10" fxFlex="60">{{food.name}} - R$ {{food.price_cents | formatCents}}</span>
+                  <span fxFlexOffset="10" fxFlex="60">{{food.name}} - {{food.price_cents | formatCents}}</span>
                 </div>
               </mat-option>
             </mat-select>
@@ -53,7 +53,7 @@
               <input formControlName="quantity" matInput>
             </mat-form-field>
 
-            <button fxFlexOffset="10" color="red" mat-mini-fab matTooltip="Remover Ingrediente">
+            <button (click)="onRemoveItem(i)" fxFlexOffset="10" color="red" mat-mini-fab matTooltip="Remover Ingrediente">
               <mat-icon>delete_outline</mat-icon>
             </button>
           </div>

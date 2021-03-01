@@ -8,6 +8,9 @@ import {
   REMOVE_DISH,
   REMOVE_DISH_DONE,
   REMOVE_DISH_FAILED,
+  REMOVE_DISH_ITEM,
+  REMOVE_DISH_ITEM_DONE,
+  REMOVE_DISH_ITEM_FAIL,
   REQUEST_ALL_DISHES,
   REQUEST_ALL_DISHES_DONE,
   REQUEST_ALL_DISHES_FAILED,
@@ -50,6 +53,7 @@ const dishesReducer = createReducer(
     UPDATE_DISH,
     CREATE_DISH,
     SEARCH_DISHES,
+    REMOVE_DISH_ITEM,
     (state) => ({...state, loading: true})
   ),
   on(REQUEST_ALL_DISHES_FAILED,
@@ -58,6 +62,7 @@ const dishesReducer = createReducer(
     UPDATE_DISH_FAILED,
     CREATE_DISH_FAILED,
     SEARCH_DISHES_FAIL,
+    REMOVE_DISH_ITEM_FAIL,
     (state) => ({...state, loading: false})
   ),
   on(CREATE_DISH_DONE, (state, {data}) => adapter.addOne(data, {...state, loaded: true, loading: false})),
@@ -74,7 +79,13 @@ const dishesReducer = createReducer(
     ...state,
     total: data.length,
     loading: false
-  }))
+  })),
+  on(REMOVE_DISH_ITEM_DONE, (state, {dish_id, item_id}) => {
+    const index = state.entities[dish_id].dish_ingredients.findIndex((item) => item.id === item_id)
+    const newState = state
+    newState.entities[dish_id].dish_ingredients.slice(index, 1)
+    return {...newState}
+  })
 );
 
 export function reducer(state: DishesState | undefined, action: Action) {

@@ -9,7 +9,7 @@ import {
   DISH_ALREADY_LOADED,
   REMOVE_DISH,
   REMOVE_DISH_DONE,
-  REMOVE_DISH_FAILED,
+  REMOVE_DISH_FAILED, REMOVE_DISH_ITEM, REMOVE_DISH_ITEM_DONE, REMOVE_DISH_ITEM_FAIL,
   REQUEST_ALL_DISHES,
   REQUEST_ALL_DISHES_DONE,
   REQUEST_ALL_DISHES_FAILED,
@@ -128,6 +128,14 @@ export class DishesEffects {
     mergeMap(({search}) => this.dishesService.search(search).pipe(
       map((data) => SEARCH_DISHES_DONE({data})),
       catchError(() => of(SEARCH_DISHES_FAIL()))
+    ))
+  ));
+
+  removeDishItem$ = createEffect(() => this.actions$.pipe(
+    ofType(REMOVE_DISH_ITEM),
+    mergeMap(({item_id, dish_id}) => this.dishesService.removeItem(dish_id, item_id).pipe(
+      map(() => REMOVE_DISH_ITEM_DONE({item_id, dish_id})),
+      catchError(() => of(REMOVE_DISH_ITEM_FAIL()))
     ))
   ));
 
