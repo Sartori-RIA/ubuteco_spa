@@ -74,7 +74,6 @@ export class AppComponent implements OnInit, OnDestroy {
         this.translate.get('pages.auth.confirm.invalid_token')
       ).pipe(take(1)).subscribe(([success, error]) => {
         this.authService.confirmAccount(token).pipe(take(1)).subscribe((user) => {
-          console.log(user);
           this.feedback.success(success);
           this.router.navigate(['.'], {relativeTo: this.activeRoute});
         }, (err: HttpErrorResponse) => {

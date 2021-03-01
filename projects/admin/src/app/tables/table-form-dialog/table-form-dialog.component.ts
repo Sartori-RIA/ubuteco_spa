@@ -25,7 +25,6 @@ export class TableFormDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data);
     this.mountForm();
     this.updateForm();
   }
