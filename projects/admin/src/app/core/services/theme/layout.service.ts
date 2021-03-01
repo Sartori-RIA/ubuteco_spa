@@ -26,7 +26,7 @@ export class LayoutService {
         dir: 'ltr',
         useBreadcrumb: true,
         topbarFixed: false,
-        footerFixed: false,
+        footerFixed: true,
         topbarColor: theme?.color_header || 'white',
         footerColor: theme?.color_footer || 'slate',
         breadcrumb: 'simple',
