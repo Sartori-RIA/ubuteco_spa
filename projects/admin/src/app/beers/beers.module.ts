@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 
 import {BeersRoutingModule} from './beers-routing.module';
-import {BeersHomeComponent} from './beers-home.component';
 import {SharedModule} from '../shared/shared.module';
 import {EffectsModule} from '@ngrx/effects';
 import {BeersEffects} from '../store/beers/beers.effects';
@@ -19,7 +18,6 @@ import { ShowComponent } from './show/show.component';
 
 @NgModule({
   declarations: [
-    BeersHomeComponent,
     IndexComponent,
     FormComponent,
     ShowComponent,

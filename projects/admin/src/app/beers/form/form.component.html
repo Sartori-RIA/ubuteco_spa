@@ -6,81 +6,76 @@
 </div>
 <div mat-dialog-content>
   <div [formGroup]="form">
-
     <div fxLayout="row wrap" fxLayoutAlign="space-between center">
 
-      <div fxFlex.xl="70" fxFlex.lg="70" fxFlex.md="70" fxflex.sm="100" fxFlex.xs="100" fxLayout="row wrap"
-           fxLayoutAlign="space-between center">
+      <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.base.name'|translate}}</mat-label>
+        <input formControlName="name" matInput>
+      </mat-form-field>
 
-        <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
-                        fxFlex.xs="100">
-          <mat-label>{{'attributes.base.name'|translate}}</mat-label>
-          <input formControlName="name" matInput>
+      <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.product.description'|translate}}</mat-label>
+        <textarea rows="5" formControlName="description" matInput></textarea>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.product.quantity_stock'|translate}}</mat-label>
+        <input formControlName="quantity_stock" type="number" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.product.price'|translate}}</mat-label>
+        <input formControlName="price" matInput type="number">
+        <mat-icon matPrefix>attach_money</mat-icon>
+      </mat-form-field>
+
+
+      <div fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100" fxFlex.xs="100">
+        <mat-form-field appearance="outline" fxFlex="80">
+          <mat-label>{{'attributes.beer_style.to_human'|translate}}</mat-label>
+          <mat-select [compareWith]="compareSelectValues" formControlName="beer_style">
+            <mat-option *ngFor="let style of beerStyles$ | async" [value]="style"
+            >{{style.name}}</mat-option>
+          </mat-select>
         </mat-form-field>
-
-        <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
-                        fxFlex.xs="100">
-          <mat-label>{{'attributes.product.description'|translate}}</mat-label>
-          <textarea rows="5" formControlName="description" matInput></textarea>
-        </mat-form-field>
-
-
-        <mat-form-field appearance="outline" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
-                        fxFlex.xs="100">
-          <mat-label>{{'attributes.product.quantity_stock'|translate}}</mat-label>
-          <input formControlName="quantity_stock" type="number" matInput>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
-                        fxFlex.xs="100">
-          <mat-label>{{'attributes.product.price'|translate}}</mat-label>
-          <input formControlName="price" matInput type="number">
-          <mat-icon matPrefix>attach_money</mat-icon>
-        </mat-form-field>
-
-
-        <div fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100" fxFlex.xs="100">
-          <mat-form-field appearance="outline" fxFlex="80">
-            <mat-label>{{'attributes.beer_style.to_human'|translate}}</mat-label>
-            <mat-autocomplete formControlName="beer_style">
-              <mat-option *ngFor="let style of beerStyles$ | async" [value]="style">{{style.name}}</mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-
-          <button fxFlexOffset="10" [matTooltip]="'pages.beer_styles.fab'|translate" (click)="openDialogBeerStyle()"
-                  mat-mini-fab>+
-          </button>
-        </div>
-
-
-        <div fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100" fxFlex.xs="100">
-          <mat-form-field appearance="outline" fxFlex="80">
-            <mat-label>{{'attributes.maker.to_human'|translate}}</mat-label>
-            <mat-autocomplete formControlName="maker">
-              <mat-option *ngFor="let maker of makers$ | async" [value]="maker">
-                {{maker.name}}- {{maker?.state}}/{{maker?.country}}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-          <button fxFlexOffset="10" [matTooltip]="'attributes.maker.to_human'|translate" (click)="openDialogAddMaker()"
-                  mat-mini-fab>+
-          </button>
-        </div>
-
-        <mat-form-field appearance="outline" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
-                        fxFlex.xs="100">
-          <mat-label>{{'attributes.beer.abv'|translate}}</mat-label>
-          <input formControlName="alcohol" matInput type="number">
-          <fa-icon matSuffix [icon]="['fas','percentage']"></fa-icon>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
-                        fxFlex.xs="100">
-          <mat-label>{{'attributes.beer.abv'|translate}}</mat-label>
-          <input formControlName="ibu" matInput type="number">
-        </mat-form-field>
-
+        <button fxFlexOffset="10" [matTooltip]="'pages.beer_styles.fab'|translate" (click)="openDialogBeerStyle()"
+                mat-mini-fab>+
+        </button>
       </div>
+
+
+      <div fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100" fxFlex.xs="100">
+        <mat-form-field appearance="outline" fxFlex="80">
+          <mat-label>{{'attributes.maker.to_human'|translate}}</mat-label>
+          <mat-select [compareWith]="compareSelectValues" formControlName="beer_style">
+            <mat-option *ngFor="let maker of makers$ | async" [value]="maker">
+              {{maker.name}}- {{maker?.state}}/{{maker?.country}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button fxFlexOffset="10" [matTooltip]="'attributes.maker.to_human'|translate" (click)="openDialogAddMaker()"
+                mat-mini-fab>+
+        </button>
+      </div>
+
+      <mat-form-field appearance="outline" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.beer.alcohol'|translate}}</mat-label>
+        <input formControlName="alcohol" matInput type="number">
+        <fa-icon matSuffix [icon]="['fas','percentage']"></fa-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.beer.ibu'|translate}}</mat-label>
+        <input formControlName="ibu" matInput type="number">
+      </mat-form-field>
+
     </div>
   </div>
 </div>
