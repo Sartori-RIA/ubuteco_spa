@@ -1,79 +1,480 @@
 {
-  "DASHBOARD": "Tablero",
-  "APPS": "Apps",
-  "INBOX": "Mensaje",
-  "CHAT": "Charla",
-  "CALENDAR": "Calendario",
-  "DIALOGS": "Diálogo",
-  "CONFIRM": "Confirmar",
-  "LOADER": "Loader",
-
-  "MEMBER": "Miembro",
-  "MATERIAL": "Material",
-  "BUTTONS": "Botones",
-  "CARDS": "Tarjeta",
-  "SELECT": "Seleccionar",
-  "AUTOCOMPLETE": "Autocomplete",
-  "INPUT": "Entrada",
-  "CHECKBOX": "Checkbox",
-  "DATEPICKER": "Datepicker",
-  "RADIO": "Radio",
-  "TOOLBAR": "Toolbar",    
-  "LISTS": "lista",
-  "GRIDS": "Grids",
-  "PROGRESS": "Progreso",
-  "TABS": "Tabs",
-  "SWITCH": "Cambio",
-  "TOOLTIP": "Tooltip",
-  "MENU": "Menú",
-  "SAVE": "Salvar",
-  "SLIDER": "Slider",
-  "SNACKBAR": "Snackbar",
-
-  "FORMS": "Formularios",
-  "EDITOR": "Editor",
-  "BASIC": "Sencillo",
-  "UPLOAD": "Upload",
-  "WIZARD": "paso a paso",
-
-  "TABLES": "Mesas",
-  "FULLSCREEN": "Pantalla Completa",
-  "PAGING": "Paging",
-  "FILTER": "Filtrar",
-
-  "MAP": "Mapa",
-  "CHARTS": "Gráfico",
-  "DND": "Arrastrar y soltar",
-
-  "PAGES": "Página",
-  "TOUR": "Gira",
-  "SESSIONS": "Sesiones",
-  "SIGNIN": "Registrarse",
-  "SIGNUP": "Regístrate",
-  "SIGNOUT": "Deconnectar",
-  "FORGOT": "Forgot",
-  "LOCKSCREEN": "Lockscreen",
-
-  "OTHERS": "Otros",
-  "GALLERY": "Gallery",
-  "PRICINGS": "Pricings",
-  "USERS": "Users",
-  "PROFILE": "Perfil",
-  "BLANK": "Blank",
-  "MATICONS": "Material Iconos",
-  "ADD": "Añadir",
-  "ITEM": "ít.",
-  "SUBITEM": "Subitem",
-  "DOC": "Documentación",
-  "NOTFOUND": "Perdió",
-  "ERROR": "Error",
-  "OVERVIEW": "Resumen",
-  "SETTINGS": "Ajustes",
-
-  "ECOMMERCE": "Ecommerce",
-  "SHOP": "Shop",
-  "PRODUCTS": "Products",
-  "PRODUCT DETAILS": "Product Details",
-  "CART": "Cart",
-  "CHECKOUT": "Checkout"
+  "validations": {
+    "match": {
+      "password": "As senhas não conferem"
+    },
+    "in_use": {
+      "email": "E-mail já em uso",
+      "phone": "Telefone já em uso",
+      "cnpj": "CNPJ já em uso"
+    },
+    "invalid": {
+      "cnpj": "Informe um CNPJ válido"
+    },
+    "min_length": {
+      "password": "Tamanho mínimo de {{minLength}} digitos"
+    }
+  },
+  "routes": {
+    "auth": {
+      "sign_in": "Entrar",
+      "sign_up": "Criar conta",
+      "forgot_password": "Esqueci a senha",
+      "change_password": "Atualizar a senha",
+      "confirm": "Confirmar conta"
+    },
+    "beer_styles": "Estilos de Cervejas",
+    "beers": "Cervejas",
+    "dashboard": "Dashboard",
+    "dishes": "Cardápio",
+    "drinks": "Bebidas",
+    "foods": "Alimentos",
+    "kitchen": "Cozinha",
+    "makers": "Fabricantes",
+    "orders": "Pedidos",
+    "profile": "Perfil",
+    "reports": "Relatórios",
+    "tables": "Mesas",
+    "wine_styles": "Estilo de Vinhos",
+    "wines": "Vinhos"
+  },
+  "pages": {
+    "auth": {
+      "sign_in": {
+        "title": "Entre em sua conta"
+      },
+      "sign_up": {
+        "title": "Criar conta",
+        "text": "Vamos criar sua conta conosco?",
+        "accept_terms": "Eu li e aceito os termos e condições de uso"
+      },
+      "sign_out": {
+        "title": "Tem certeza que deseja sair do sistema?"
+      },
+      "confirm": {
+        "title": "Confirmação de conta",
+        "invalid_token": "Token inválido",
+        "already_exist_title": "Sua conta já foi confirmada!",
+        "message": "Olá {{user_name}}. Obrigado por confirmar a sua conta!"
+      },
+      "buttons": {
+        "sign_in": "Entrar",
+        "sign_up": "Criar conta",
+        "enter_with_account": "Entrar com uma conta existente",
+        "send_new_confirm_email": "Pedir novo email de confirmação"
+      }
+    },
+    "beers": {
+      "fab": "Nova Cerveja",
+      "dialog": {
+        "update": {
+          "title": "Atualizando Cerveja: #{{id}}"
+        },
+        "new": {
+          "title": "Nova Cerveja"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Cerveja adicionada com sucesso"
+        },
+        "update": {
+          "success": "Cerveja atualizada com sucesso"
+        },
+        "destroy": {
+          "success": "Cerveja removida com sucesso"
+        }
+      }
+    },
+    "beer_styles": {
+      "fab": "Novo Estilo de Cerveja",
+      "dialog": {
+        "update": {
+          "title": "Atualizando o Estilo #{{id}}"
+        },
+        "new": {
+          "title": "Qual o novo estilo de cerveja?"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Estilo de Cerveja adicionado com sucesso"
+        },
+        "update": {
+          "success": "Estilo de Cerveja atualizado com sucesso"
+        },
+        "destroy": {
+          "success": "Estilo de Cerveja removido com sucesso"
+        }
+      }
+    },
+    "dishes": {
+      "fab": "Novo Item ao cardápio",
+      "dialog": {
+        "update": {
+          "title": "Atualizando item do Cardápio: #{{id}}"
+        },
+        "new": {
+          "title": "Novo Item do Cardápio"
+        }
+      },
+      "labels": {
+        "ingredients": "Ingredientes:",
+        "ingredient": "Ingrediente:",
+        "more_ingredient": "Mais ingredientes",
+        "remove_ingredient": "Remover item do cardápio"
+      },
+      "messages": {
+        "create": {
+          "success": "Prato adicionado com sucesso"
+        },
+        "update": {
+          "success": "Prato atualizado com sucesso"
+        },
+        "destroy": {
+          "success": "Prato removido com sucesso"
+        }
+      }
+    },
+    "drinks": {
+      "fab": "Nova Bebida",
+      "dialog": {
+        "update": {
+          "title": "Atualizando Bebida: #{{id}}"
+        },
+        "new": {
+          "title": "Nova Bebida"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Bebida adicionada com sucesso"
+        },
+        "update": {
+          "success": "Bebida atualizada com sucesso"
+        },
+        "destroy": {
+          "success": "Bebida removida com sucesso"
+        }
+      }
+    },
+    "foods": {
+      "fab": "Novo Alimento",
+      "dialog": {
+        "update": {
+          "title": "Atualizando Alimento: #{{id}}"
+        },
+        "new": {
+          "title": "Novo Alimento"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Alimento adicionado com sucesso"
+        },
+        "update": {
+          "success": "Alimento atualizado com sucesso"
+        },
+        "destroy": {
+          "success": "Alimento removido com sucesso"
+        }
+      }
+    },
+    "kitchen": {
+      "table": {
+        "order": "Pedido",
+        "table": "Mesa",
+        "customer": "Cliente",
+        "dish": "Prato",
+        "quantity": "Quantidade"
+      },
+      "status": {
+        "awaiting": "Aguardando",
+        "canceled": "Cancelado",
+        "cooking": "Preparando",
+        "with_the_client": "Entregue",
+        "ready": "Pronto",
+        "empty_stock": "Sem estoque"
+      },
+      "flash": {
+        "dish_received": "NOVO PEDIDO RECEBIDO",
+        "dish_updated": "PEDIDO ATUALIZADO"
+      }
+    },
+    "makers": {
+      "fab": "Novo Fabricante",
+      "dialog": {
+        "update": {
+          "title": "Atualizando Fabricante: #{{id}}"
+        },
+        "new": {
+          "title": "Novo Fabricante"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Fabricante adicionado com sucesso"
+        },
+        "update": {
+          "success": "Fabricante atualizado com sucesso"
+        },
+        "destroy": {
+          "success": "Fabricante removido com sucesso"
+        }
+      }
+    },
+    "orders": {
+      "fab": "Novo Pedido",
+      "dialog": {
+        "item_select": "Selecione o item",
+        "item_select_option": "{{name}} - R${{price}} - Dísponíveis: {{quantity}}"
+      },
+      "form": {
+        "order_n": "Pedido #{{id}}",
+        "table_select_item": "{{name}} - Lugares: {{chairs}}"
+      },
+      "labels": {
+        "close_order": "Fechar Pedido",
+        "remove": "Remover"
+      },
+      "flash": {
+        "items": {
+          "success": {
+            "updated": "Item atualizado ao pedido com sucesso",
+            "destroy": "Item removido do pedido com sucesso"
+          },
+          "fail": {
+            "updated": "Falhou ao atualizar o item ao pedido",
+            "destroy": "Falhou ao remover o item do pedido",
+            "create": "Falhou ao adicionar o item ao pedido"
+          }
+        }
+      }
+    },
+    "organizations": {
+      "messages": {
+        "update": {
+          "success": "Organização atualizada com sucesso"
+        }
+      }
+    },
+    "profile": {
+      "messages": {
+        "update": {
+          "success": "Perfil atualizado com sucesso"
+        }
+      },
+      "tabs": {
+        "organization": "Configurações da Organização",
+        "theme": "Tema da Organização",
+        "security": "Dados de acesso"
+      }
+    },
+    "tables": {
+      "fab": "Nova Mesa",
+      "dialog": {
+        "update": {
+          "title": "Atualizando Mesa: #{{id}}"
+        },
+        "new": {
+          "title": "Nova mesa"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Mesa adicionada com sucesso"
+        },
+        "update": {
+          "success": "Mesa atualizada com sucesso"
+        },
+        "destroy": {
+          "success": "Mesa removida com sucesso"
+        }
+      }
+    },
+    "uploader": {
+      "title": "Escolha uma imagem para enviar",
+      "text": "Arraste uma imagem ou clique para escolher"
+    },
+    "wine_styles": {
+      "fab": "Novo Estilo de Vinho",
+      "dialog": {
+        "update": {
+          "title": "Atualizando o Estilo #{{id}}"
+        },
+        "new": {
+          "title": "Novo estilo de vinho"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Estilo de vinho adicionado com sucesso"
+        },
+        "update": {
+          "success": "Estilo de vinho atualizado com sucesso"
+        },
+        "destroy": {
+          "success": "Estilo de vinho removido com sucesso"
+        }
+      }
+    },
+    "wines": {
+      "fab": "Novo Vinho",
+      "messages": {
+        "create": {
+          "success": "Vinho adicionado com sucesso"
+        },
+        "update": {
+          "success": "Vinho atualizado com sucesso"
+        },
+        "destroy": {
+          "success": "Vinho removido com sucesso"
+        }
+      }
+    },
+    "menu": {
+      "sign_out": "Sair",
+      "organization": "Organização",
+      "profile": "Perfil",
+      "settings": "Configurações",
+      "theme": "Tema",
+      "security": "Segurança"
+    }
+  },
+  "attributes": {
+    "base": {
+      "id": "Id",
+      "name": "Nome",
+      "created_at": "Criado em:",
+      "updated_at": "Atualziado em:"
+    },
+    "product": {
+      "to_human": "Produto",
+      "category": "Categoria",
+      "price": "Valor",
+      "description": "Descrição",
+      "quantity_stock": "Quantidade em estoque",
+      "price_cents": "Valor em centavos",
+      "price_currency": "Moeda",
+      "image": "Foto"
+    },
+    "user": {
+      "email": "E-mail",
+      "password": "Senha",
+      "confirm_password": "Confirmar senha"
+    },
+    "beer": {
+      "to_human": "Cerveja",
+      "ibu": "IBU",
+      "alcohol": "ABV"
+    },
+    "beer_style": {
+      "to_human": "Estilo de cerveja"
+    },
+    "wine": {
+      "to_human": "Vinho",
+      "abv": "ABV",
+      "vintage_wine": "vintage_wine",
+      "ripening": "Amadurecimento",
+      "visual": "Aparencia",
+      "grapes": "Uvas"
+    },
+    "wine_style": {
+      "to_human": "Estilo de vinho"
+    },
+    "drink": {
+      "to_human": "Bebida",
+      "flavor": "Sabor"
+    },
+    "maker": {
+      "to_human": "Fabricante",
+      "country": "País",
+      "state": "Estado"
+    },
+    "food": {
+      "to_human": "Alimento",
+      "valid_until": "Valido até"
+    },
+    "dish": {
+      "to_human": "Prato",
+      "dish_ingredients": "Ingredientes",
+      "quantity": "Quantidade"
+    },
+    "table": {
+      "to_human": "Mesa",
+      "chairs": "Lugares"
+    },
+    "order": {
+      "to_human": "Pedido",
+      "table": "Mesa",
+      "customer": "Cliente",
+      "quantity": "Quantidade",
+      "subtotal": "Subtotal",
+      "discount": "Desconto",
+      "total": "Total"
+    },
+    "organization": {
+      "to_human": "Empresa",
+      "cnpj": "CNPJ",
+      "name": "Nome da empresa",
+      "phone": "Telefone da empresa",
+      "logo": "Logo da empresa"
+    },
+    "role": {
+      "to_human": "Perfil de acesso",
+      "super_admin": "Super Admin",
+      "admin": "Admin",
+      "kitchen": "Cozinha",
+      "waiter": "Garçon",
+      "cash_register": "Caixa",
+      "customer": "Cliente"
+    }
+  },
+  "commons": {
+    "messages": {
+      "welcome": "Seja bem vindo {{name}}",
+      "welcome_back": "Seja bem vindo de volta {{name}}",
+      "create": {
+        "error": "Ops, sinto muito, aconteceu algo inesperado ao tentar criar o registro, por favor tente novamente",
+        "error_n": "Ops, sinto muito, aconteceu algo inesperado ao tentar criar os registros, por favor tente novamente"
+      },
+      "update": {
+        "error": "Ops, sinto muito, aconteceu algo inesperado ao tentar atualizar o registro, por favor tente novamente",
+        "error_n": "Ops, sinto muito, aconteceu algo inesperado ao tentar atualizar os registros, por favor tente novamente"
+      },
+      "destroy": {
+        "error": "Ops, sinto muito, aconteceu algo inesperado ao tentar remover o registro, por favor tente novamente",
+        "error_n": "Ops, sinto muito, aconteceu algo inesperado ao tentar remover os registros, por favor tente novamente"
+      },
+      "fetch": {
+        "error": "Ops, sinto muito, aconteceu algo inesperado ao tentar recuperar o registro, por favor tente novamente",
+        "error_n": "Ops, sinto muito, aconteceu algo inesperado ao tentar recuperar os registros, por favor tente novamente"
+      },
+      "forbidden": {
+        "title": "Sem permissão necessária: 403",
+        "text": "Parece que você esta tentando algo que não tem o nivel de acesso necessário, por favor contacte seu administrador"
+      }
+    },
+    "buttons": {
+      "confirm": "Confirmar",
+      "ok": "Ok",
+      "cancel": "Cancelar",
+      "back": "Voltar",
+      "close": "Fechar",
+      "load_more": "Carregar mais",
+      "next": "Avançar",
+      "exit": "Sair",
+      "save": "Salvar"
+    },
+    "dialogs": {
+      "confirm": {
+        "title": "Aviso",
+        "text": "Deseja prosseguir com esta ação?"
+      }
+    },
+    "labels": {
+      "search": "Buscar:",
+      "action": "Ação"
+    }
+  }
 }

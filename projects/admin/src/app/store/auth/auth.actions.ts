@@ -35,3 +35,5 @@ export const UPDATE_ORGANIZATION = createAction('[ORGANIZATION/API] update organ
 export const UPDATE_ORGANIZATION_DONE = createAction('[ORGANIZATION/API] update organization done', props<{ data: Organization }>());
 
 export const UPDATE_ORGANIZATION_FAILED = createAction('[ORGANIZATION/API] update organization failed');
+
+export const FORBIDDEN_ACTION = createAction('[DEVISE/CANCANCAN] trying a forbidden action')

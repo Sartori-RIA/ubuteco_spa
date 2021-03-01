@@ -449,6 +449,10 @@
       "fetch": {
         "error": "Ops, sinto muito, aconteceu algo inesperado ao tentar recuperar o registro, por favor tente novamente",
         "error_n": "Ops, sinto muito, aconteceu algo inesperado ao tentar recuperar os registros, por favor tente novamente"
+      },
+      "forbidden": {
+        "title": "Sem permissão necessária: 403",
+        "text": "Parece que você esta tentando algo que não tem o nivel de acesso necessário, por favor contacte seu administrador"
       }
     },
     "buttons": {
