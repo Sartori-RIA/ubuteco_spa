@@ -38,7 +38,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="(isSuperAdmin$ | async )? displayedColumnsAdmin : displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: (isSuperAdmin$ | async )? displayedColumnsAdmin : displayedColumns;"></tr>
   </table>
 
 </div>
