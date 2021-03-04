@@ -25,11 +25,14 @@ import {AppState} from '../index';
 export class ThemeEffects {
   updateTheme$ = createEffect(() => this.actions$.pipe(
     ofType(UPDATE_THEME),
-    mergeMap(({user, theme}) => this.themeService.update(theme, user)
-      .pipe(
-        map((data) => UPDATE_THEME_DONE({theme: data})),
-        catchError(() => of(UPDATE_THEME_FAILED()))
-      ),
+    mergeMap(({user, theme}) => {
+        console.log('atualizando')
+        return this.themeService.update(theme, user)
+          .pipe(
+            map((data) => UPDATE_THEME_DONE({theme: data})),
+            catchError(() => of(UPDATE_THEME_FAILED()))
+          )
+      },
     )
   ));
 
