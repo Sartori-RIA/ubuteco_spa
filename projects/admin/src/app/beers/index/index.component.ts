@@ -15,6 +15,13 @@ import {REMOVE_BEER, REQUEST_ALL_BEERS} from '../../store/beers/beers.actions';
 import {AppState} from '../../store';
 import {MatDialog} from '@angular/material/dialog';
 import {FormComponent} from "../form/form.component";
+import {
+  canCreateBeers,
+  canCreateBeerStyles, canDestroyBeers,
+  canDestroyBeerStyles, canEditBeers,
+  canEditBeerStyles, canShowBeerActions,
+  canShowBeerStyleActions
+} from "../../store/auth/auth.selectors";
 
 @Component({
   selector: 'app-index',
@@ -25,7 +32,12 @@ import {FormComponent} from "../form/form.component";
 export class IndexComponent implements OnInit, OnDestroy {
 
   beers$: Observable<Beer[]> = this.store.pipe(select(selectAllBeers));
-  displayedColumns: string[] = ['id', 'image', 'name', 'style', 'price', 'action'];
+  canCreate$ = this.store.pipe(select(canCreateBeers));
+  canDestroy$ = this.store.pipe(select(canDestroyBeers));
+  canEdit$ = this.store.pipe(select(canEditBeers));
+  canShowActions$ = this.store.pipe(select(canShowBeerActions));
+  displayedColumns: string[] = ['id', 'image', 'name', 'style', 'price'];
+  displayedColumnsWithAction: string[] = ['id', 'image', 'name', 'style', 'price', 'action'];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   private data: Beer[] = [];
   dataSource = new MatTableDataSource(this.data);
