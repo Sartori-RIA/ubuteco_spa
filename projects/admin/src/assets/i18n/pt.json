@@ -4,9 +4,10 @@
       "password": "As senhas não conferem"
     },
     "in_use": {
-      "email": "E-mail já em uso",
-      "phone": "Telefone já em uso",
-      "cnpj": "CNPJ já em uso"
+      "email": "Este e-mail já em uso",
+      "phone": "Este telefone já em uso",
+      "cnpj": "Este CNPJ já em uso",
+      "name": "Este nome já esta em uso"
     },
     "invalid": {
       "cnpj": "Informe um CNPJ válido"

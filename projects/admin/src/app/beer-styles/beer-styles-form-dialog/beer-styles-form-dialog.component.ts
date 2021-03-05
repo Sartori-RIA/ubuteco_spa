@@ -1,10 +1,12 @@
 import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {BeerStyle} from '../../core/models/beer-style';
 import {AppState} from '../../store';
 import {Store} from '@ngrx/store';
 import {ADD_BEER_STYLE, UPDATE_BEER_STYLE} from '../../store/beer-styles/beer-styles.actions';
+import {BeerStylesService} from '../../core/services/api/beer-styles.service';
+import {uButecoValidators} from '../../shared/validators/u-buteco.validators';
 
 @Component({
   selector: 'app-beer-styles-form-dialog',
@@ -14,11 +16,12 @@ import {ADD_BEER_STYLE, UPDATE_BEER_STYLE} from '../../store/beer-styles/beer-st
 })
 export class BeerStylesFormDialogComponent implements OnInit {
 
-  beerStyleControl = this.fb.control(null, [Validators.required]);
+  beerStyleControl: FormControl = this.mountForm();
 
   constructor(private dialogRef: MatDialogRef<BeerStylesFormDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: BeerStyle,
               private store: Store<AppState>,
+              private BeerStyleService: BeerStylesService,
               private fb: FormBuilder) {
   }
 
@@ -51,4 +54,11 @@ export class BeerStylesFormDialogComponent implements OnInit {
     this.beerStyleControl.patchValue(this.data?.name);
   }
 
+  private mountForm(): FormControl {
+    return this.fb.control(
+      null,
+      [Validators.required],
+      [uButecoValidators.uniqueBeerStyle(this.BeerStyleService, this.data?.name)]
+    );
+  }
 }

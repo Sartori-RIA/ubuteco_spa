@@ -4,6 +4,8 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {OrganizationsService} from '../../core/services/api/organizations.service';
 import {UserService} from '../../core/services/api/user.service';
+import {BeerStylesService} from "../../core/services/api/beer-styles.service";
+import {WineStyleService} from "../../core/services/api/wine-style.service";
 
 export namespace uButecoValidators {
   export function cpf(control: AbstractControl): { [key: string]: boolean } | null {
@@ -52,6 +54,30 @@ export namespace uButecoValidators {
       return service.checkPhone(control.value.replace(/\D+/g, '')).pipe(
         map((response) =>
           response.status === 200 && oldPhone !== control.value ? {phone_in_use: true} : null)
+      );
+    };
+  }
+
+  export function uniqueBeerStyle(service: BeerStylesService, oldName?: string): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors> => {
+      if (control.value == null) {
+        return null;
+      }
+      return service.checkStyleAvailable(control.value).pipe(
+        map((response) =>
+          response.status === 200 && oldName !== control.value ? {name_in_use: true} : null)
+      );
+    };
+  }
+
+  export function uniqueWineStyle(service: WineStyleService, oldName?: string): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors> => {
+      if (control.value == null) {
+        return null;
+      }
+      return service.checkStyleAvailable(control.value).pipe(
+        map((response) =>
+          response.status === 200 && oldName !== control.value ? {name_in_use: true} : null)
       );
     };
   }

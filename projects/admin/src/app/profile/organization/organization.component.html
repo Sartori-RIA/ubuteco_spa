@@ -20,7 +20,8 @@
           </mat-form-field>
 
           <button [disabled]="canEdit$ | async"
-                  mat-raised-button (click)="onSubmit()"
+                  mat-raised-button
+                  (click)="onSubmit()"
                   color="primary"
           >{{'commons.buttons.save'|translate}}</button>
         </div>
