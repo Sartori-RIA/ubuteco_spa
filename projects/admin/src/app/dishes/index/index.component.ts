@@ -15,6 +15,7 @@ import {
 import {REMOVE_DISH, REQUEST_ALL_DISHES} from '../../store/dishes/dishes.actions';
 import {MatDialog} from "@angular/material/dialog";
 import {FormComponent} from "../form/form.component";
+import {canCreateDishes, canDestroyDishes, canEditDishes, canShowDishActions} from "../../store/auth/auth.selectors";
 
 @Component({
   selector: 'app-index',
@@ -26,6 +27,9 @@ export class IndexComponent implements OnInit, OnDestroy {
 
 
   menu$: Observable<Dish[]> = this.store.pipe(select(selectAllDishes));
+  canCreate$ = this.store.pipe(select(canCreateDishes));
+  canDestroy$ = this.store.pipe(select(canDestroyDishes));
+  canEdit$ = this.store.pipe(select(canEditDishes));
   displayedColumns: string[] = ['id', 'image', 'name', 'price', 'action'];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   private data: Dish[] = [];
@@ -79,16 +83,14 @@ export class IndexComponent implements OnInit, OnDestroy {
     this.dataSource.filter = word.trim().toLowerCase();
   }
 
+  openForm() {
+    this.dialog.open(FormComponent, {});
+  }
+
   private updateRestaurantMenuList() {
     this.subscription = this.menu$.subscribe((items) => {
       this.dataSource = new MatTableDataSource(items);
       this.changeDetectorRefs.detectChanges();
-    });
-  }
-
-  openForm() {
-    this.dialog.open(FormComponent, {
-
     });
   }
 }

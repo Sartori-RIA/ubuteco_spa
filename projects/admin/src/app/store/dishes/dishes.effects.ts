@@ -95,7 +95,6 @@ export class DishesEffects {
       .pipe(
         map(data => {
           this.feedbackService.createSuccess('dishes');
-          this.router.navigate(['/cardapio/list']);
           return CREATE_DISH_DONE({data});
         }),
         catchError(() => {
@@ -112,7 +111,6 @@ export class DishesEffects {
       .pipe(
         map(data => {
           this.feedbackService.updateSuccess('dishes');
-          this.router.navigate(['/cardapio/list']);
           return UPDATE_DISH_DONE({data});
         }),
         catchError(() => {
@@ -140,7 +138,6 @@ export class DishesEffects {
   ));
 
   constructor(private actions$: Actions,
-              private router: Router,
               private store: Store<AppState>,
               private feedbackService: FeedbackService,
               private dishesService: DishesService) {

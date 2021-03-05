@@ -4,7 +4,7 @@ import {LayoutService} from './layout.service';
 import {Colors, CustomizerColors, Theme} from '../../models/theme';
 import {Observable, zip} from 'rxjs';
 import {select, Store} from '@ngrx/store';
-import {selectCurrentUser} from '../../../store/auth/auth.selectors';
+import {canEditTheme, selectCurrentUser, selectIsAdmin, selectIsSuperAdmin} from '../../../store/auth/auth.selectors';
 import {AppState} from '../../../store';
 import {take} from 'rxjs/operators';
 import {User} from '../../models/user';
@@ -24,6 +24,8 @@ export class CustomizerService {
   topbarColors$: Observable<CustomizerColors[]> = this.store.pipe(select(selectTopBarColors));
   sidebarColors$: Observable<CustomizerColors[]> = this.store.pipe(select(selectSidebarColors));
   footerColors$: Observable<CustomizerColors[]> = this.store.pipe(select(selectFooterColors));
+  canEditTheme$: Observable<boolean> = this.store.pipe(select(canEditTheme));
+
   acceptableColors: Colors[] = [
     'black',
     'slate',
@@ -48,24 +50,30 @@ export class CustomizerService {
 
   changeSidebarColor(color: CustomizerColors): void {
     this.layout.publishLayoutChange({sidebarColor: color.class});
-    zip(this.user$, this.theme$).pipe(take(1)).subscribe(([user, theme]) => {
-      this.store.dispatch(UPDATE_THEME({theme: {...theme, color_sidebar: color.class}, user}));
+    zip(this.user$, this.theme$, this.canEditTheme$).pipe(take(1)).subscribe(([user, theme, canEdit]) => {
+      if (canEdit) {
+        this.store.dispatch(UPDATE_THEME({theme: {...theme, color_sidebar: color.class}, user}));
+      }
     });
     this.sidebarColors$ = this.store.pipe(select(selectSidebarColors));
   }
 
   changeTopbarColor(color: CustomizerColors): void {
     this.layout.publishLayoutChange({topbarColor: color.class});
-    zip(this.user$, this.theme$).pipe(take(1)).subscribe(([user, theme]) => {
-      this.store.dispatch(UPDATE_THEME({theme: {...theme, color_header: color.class}, user}));
+    zip(this.user$, this.theme$, this.canEditTheme$).pipe(take(1)).subscribe(([user, theme, canEdit]) => {
+      if (canEdit) {
+        this.store.dispatch(UPDATE_THEME({theme: {...theme, color_header: color.class}, user}));
+      }
     });
     this.topbarColors$ = this.store.pipe(select(selectTopBarColors));
   }
 
   changeFooterColor(color: CustomizerColors): void {
     this.layout.publishLayoutChange({footerColor: color.class});
-    zip(this.user$, this.theme$).pipe(take(1)).subscribe(([user, theme]) => {
-      this.store.dispatch(UPDATE_THEME({theme: {...theme, color_footer: color.class}, user}));
+    zip(this.user$, this.theme$, this.canEditTheme$).pipe(take(1)).subscribe(([user, theme, canEdit]) => {
+      if (canEdit) {
+        this.store.dispatch(UPDATE_THEME({theme: {...theme, color_footer: color.class}, user}));
+      }
     });
     this.footerColors$ = this.store.pipe(select(selectFooterColors));
   }

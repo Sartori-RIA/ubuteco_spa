@@ -12,7 +12,7 @@ import {SignOutComponent} from '../../../auth/sign-out/sign-out.component';
 })
 export class HeaderTopComponent implements OnInit, OnDestroy {
   layoutConf: ILayoutConf;
-  menuItems: any;
+  menuItems = this.navService.iconMenu;
   menuItemSub: Subscription;
   egretThemes: any[] = [];
   @Input() notificPanel;
@@ -25,23 +25,6 @@ export class HeaderTopComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.layoutConf = this.layout.layoutConf;
-    this.menuItemSub = this.navService.menuItems$
-      .subscribe(res => {
-        const limit = 4;
-        const mainItems: any[] = res.slice(0, limit);
-        if (res.length <= limit) {
-          return this.menuItems = mainItems;
-        }
-        const subItems: any[] = res.slice(limit, res.length - 1);
-        mainItems.push({
-          name: 'More',
-          type: 'dropDown',
-          tooltip: 'More',
-          icon: 'more_horiz',
-          sub: subItems
-        });
-        this.menuItems = mainItems;
-      });
   }
 
   ngOnDestroy() {

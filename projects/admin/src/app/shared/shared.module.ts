@@ -32,6 +32,7 @@ import {ShowButtonComponent} from './components/buttons/show-button/show-button.
 import {TrashButtonComponent} from './components/buttons/trash-button/trash-button.component';
 import {AvatarModule} from 'ngx-avatar';
 import {TranslateModule} from '@ngx-translate/core';
+import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 
 const NG_MODULES = [
   CommonModule,
@@ -51,7 +52,8 @@ const LIBS_MODULES = [
   NgxCustomFormsModule,
   PerfectScrollbarModule,
   AvatarModule,
-  TranslateModule
+  TranslateModule,
+  SweetAlert2Module
 ];
 
 const IBUTECO_LIBS = [

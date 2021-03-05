@@ -4,7 +4,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../store';
-import {SIGN_OUT} from '../../store/auth/auth.actions';
+import {FORBIDDEN_ACTION, SIGN_OUT} from '../../store/auth/auth.actions';
 
 @Injectable()
 export class HeaderInterceptorService implements HttpInterceptor {
@@ -26,16 +26,20 @@ export class HeaderInterceptorService implements HttpInterceptor {
     const cloneReq = req.clone({headers});
     return next.handle(cloneReq).pipe(
       catchError((err) => {
-        if (err.status === 500) {
-
-        }
-        if (err.status === 0) {
-          // alert('servidor desligado ou inalcançável')
-        }
-        if (err.status === 401) {
-          if (!req.url.includes('/auth/sign_in')) {
-            this.store.dispatch(SIGN_OUT());
-          }
+        switch (err.status) {
+          case 500:
+            break;
+          case 403:
+            this.store.dispatch(FORBIDDEN_ACTION());
+            break;
+          case 401:
+            if (!req.url.includes('/auth/sign_in')) {
+              this.store.dispatch(SIGN_OUT());
+            }
+            break;
+          case 0:
+            // alert('servidor desligado ou inalcançável')
+            break;
         }
         return throwError(err);
       })

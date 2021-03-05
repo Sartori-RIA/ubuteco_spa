@@ -13,6 +13,7 @@ import {Table} from '../../core/models/table';
 import {REMOVE_TABLE, REQUEST_ALL_TABLES} from '../../store/tables/table.actions';
 import {MatDialog} from '@angular/material/dialog';
 import {TableFormDialogComponent} from '../table-form-dialog/table-form-dialog.component';
+import {canCreateTables, canDestroyTables, canEditTables, canShowTableActions} from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-index',
@@ -23,7 +24,12 @@ import {TableFormDialogComponent} from '../table-form-dialog/table-form-dialog.c
 export class IndexComponent implements OnInit, OnDestroy {
 
   tables$: Observable<Table[]> = this.store.pipe(select(selectAllTables));
-  displayedColumns: string[] = ['id', 'name', 'chairs', 'action'];
+  canCreate$ = this.store.pipe(select(canCreateTables));
+  canDestroy$ = this.store.pipe(select(canDestroyTables));
+  canEdit$ = this.store.pipe(select(canEditTables));
+  canShowActions$ = this.store.pipe(select(canShowTableActions));
+  displayedColumnsWithAction: string[] = ['id', 'name', 'chairs', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'chairs'];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   private data: Table[] = [];
   dataSource = new MatTableDataSource(this.data);

@@ -14,7 +14,8 @@ import {Food} from '../../core/models/food';
 import {REMOVE_FOOD, REQUEST_ALL_FOODS} from '../../store/foods/food.actions';
 import {AppState} from '../../store';
 import {MatDialog} from '@angular/material/dialog';
-import {FormComponent} from "../form/form.component";
+import {FormComponent} from '../form/form.component';
+import {canCreateFoods, canDestroyFoods, canEditFoods} from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-index',
@@ -25,6 +26,9 @@ import {FormComponent} from "../form/form.component";
 export class IndexComponent implements OnInit, OnDestroy {
 
   foods$: Observable<Food[]> = this.store.pipe(select(selectAllFoods));
+  canCreate$ = this.store.pipe(select(canCreateFoods));
+  canDestroy$ = this.store.pipe(select(canDestroyFoods));
+  canEdit$ = this.store.pipe(select(canEditFoods));
   displayedColumns: string[] = ['id', 'image', 'name', 'quantity', 'price', 'action'];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   private data: Food[] = [];

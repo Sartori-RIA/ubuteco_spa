@@ -8,8 +8,9 @@
 <div class="mat-elevation-z8">
 
   <app-float-action-button (fabClick)="openCreateDialog()"
-                           [tooltip]="'pages.foods.fab' |translate">
-  </app-float-action-button>
+                           [tooltip]="'pages.foods.fab' |translate"
+                           *ngIf="canCreate$|async"
+  ></app-float-action-button>
 
   <table mat-table [dataSource]="dataSource"
          matSort matSortDisableClear matSortDirection="desc"
@@ -45,10 +46,9 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>{{'commons.labels.action'|translate}}</th>
       <td mat-cell *matCellDef="let element">
-        <app-trash-button (deleteElement)="deleteFood(element)"></app-trash-button>
-        <button routerLink="/alimentos/{{element.id}}" mat-button>
-          <fa-icon [icon]="['far', 'eye']"></fa-icon>
-        </button>
+        <app-trash-button *ngIf="canDestroy$ | async" (deleteElement)="deleteFood(element)"></app-trash-button>
+        <app-edit-button *ngIf="canEdit$ | async"></app-edit-button>
+        <app-show-button></app-show-button>
       </td>
     </ng-container>
 

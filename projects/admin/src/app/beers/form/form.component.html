@@ -36,21 +36,25 @@
 
 
       <div fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100" fxFlex.xs="100">
-        <mat-form-field appearance="outline" fxFlex="80">
+        <mat-form-field appearance="outline" [fxFlex]=" (canCreateBeerStyle$ | async) ? 80 : 100">
           <mat-label>{{'attributes.beer_style.to_human'|translate}}</mat-label>
           <mat-select [compareWith]="compareSelectValues" formControlName="beer_style">
             <mat-option *ngFor="let style of beerStyles$ | async" [value]="style"
             >{{style.name}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <button fxFlexOffset="10" [matTooltip]="'pages.beer_styles.fab'|translate" (click)="openDialogBeerStyle()"
-                mat-mini-fab>+
+        <button fxFlexOffset="10"
+                [matTooltip]="'pages.beer_styles.fab'|translate"
+                (click)="openDialogBeerStyle()"
+                mat-mini-fab
+                *ngIf="canCreateBeerStyle$ | async"
+        >+
         </button>
       </div>
 
 
       <div fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100" fxFlex.xs="100">
-        <mat-form-field appearance="outline" fxFlex="80">
+        <mat-form-field appearance="outline" [fxFlex]="(canCreateMaker$ | async) ? 80 : 100">
           <mat-label>{{'attributes.maker.to_human'|translate}}</mat-label>
           <mat-select [compareWith]="compareSelectValues" formControlName="beer_style">
             <mat-option *ngFor="let maker of makers$ | async" [value]="maker">
@@ -58,7 +62,10 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <button fxFlexOffset="10" [matTooltip]="'attributes.maker.to_human'|translate" (click)="openDialogAddMaker()"
+        <button fxFlexOffset="10"
+                [matTooltip]="'attributes.maker.to_human'|translate"
+                (click)="openDialogAddMaker()"
+                *ngIf="canCreateMaker$ | async"
                 mat-mini-fab>+
         </button>
       </div>

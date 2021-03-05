@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {AuthService} from '../../core/services/api/auth.service';
 import {
+  FORBIDDEN_ACTION,
   LOAD_USER,
   LOAD_USER_DONE,
   LOAD_USER_FAILED,
@@ -20,7 +21,7 @@ import {
   UPDATE_USER_FAILED
 } from './auth.actions';
 import {catchError, map, mergeMap, take, tap} from 'rxjs/operators';
-import {of} from 'rxjs';
+import {of, zip} from 'rxjs';
 import {Router} from '@angular/router';
 import {FeedbackService} from '../../core/services/api/feedback.service';
 import {UserService} from '../../core/services/api/user.service';
@@ -30,6 +31,7 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../index';
 import {THEME_LOADED} from '../theme/theme.actions';
 import {OrganizationsService} from '../../core/services/api/organizations.service';
+import Swal from "sweetalert2";
 
 @Injectable()
 export class AuthEffects {
@@ -127,6 +129,23 @@ export class AuthEffects {
       )
     )
   ));
+
+  forbiddenAction$ = createEffect(() => this.actions$.pipe(
+    ofType(FORBIDDEN_ACTION),
+    tap(() => {
+      zip(
+        this.translate.get('commons.messages.forbidden.title'),
+        this.translate.get('commons.messages.forbidden.text'),
+      ).pipe(take(1)).subscribe(([title, text]) => {
+        Swal.fire({
+          icon: 'error',
+          title,
+          text,
+          position: 'center'
+        });
+      });
+    })
+  ), {dispatch: false})
 
   constructor(private actions$: Actions,
               private authService: AuthService,
