@@ -46,25 +46,26 @@
                   class="my-avatar"
                   [size]="40"
                   [name]="user?.name"
-                  [src]="user?.picture?.url"></ngx-avatar>
+                  [src]="user?.picture?.url"
+      ></ngx-avatar>
   </button>
 
   <mat-menu #accountMenu="matMenu">
     <button mat-menu-item routerLink="/perfil">
       <mat-icon>account_box</mat-icon>
-      <span>Perfil</span>
+      <span>{{'pages.menu.profile'|translate}}</span>
     </button>
     <button mat-menu-item routerLink="/perfil/configuracoes">
       <mat-icon>settings</mat-icon>
-      <span>Configurações da conta</span>
+      <span>{{'pages.menu.settings'|translate}}</span>
     </button>
     <button mat-menu-item routerLink="/perfil/tema">
       <mat-icon>settings</mat-icon>
-      <span>Tema</span>
+      <span>{{'pages.menu.theme'|translate}}</span>
     </button>
     <button mat-menu-item (click)="onLogout()">
       <mat-icon>exit_to_app</mat-icon>
-      <span> Sair </span>
+      <span> {{'pages.menu.sign_out'|translate}} </span>
     </button>
   </mat-menu>
 </mat-toolbar>

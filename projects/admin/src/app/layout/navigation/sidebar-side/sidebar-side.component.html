@@ -4,8 +4,7 @@
 
       <!-- App Logo -->
       <div class="branding">
-        <img src="https://cookiecode.com.br/assets/logotipo.svg" alt="" class="app-logo">
-        <span class="app-logo-text">CookieCode</span>
+        <span class="app-logo-text">uButeco</span>
 
         <span style="margin: auto" *ngIf="layoutConf.sidebarStyle !== 'compact'"></span>
       </div>
@@ -38,7 +37,8 @@
             mat-icon-button
             mat-xs-button
             matTooltip="Sign Out"
-            routerLink="/sessions/signin">
+            (click)="onLogout()"
+          >
             <mat-icon>exit_to_app</mat-icon>
           </button>
           <mat-menu #appUserMenu="matMenu">

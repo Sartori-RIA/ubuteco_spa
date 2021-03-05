@@ -1,12 +1,14 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store';
 import {ActivatedRoute} from '@angular/router';
 import {Organization} from '../../core/models/organization';
 import {CookieCodeValidators} from '../../shared/validators/cookie-code.validators';
 import {OrganizationsService} from '../../core/services/api/organizations.service';
-import {UPDATE_ORGANIZATION} from "../../store/auth/auth.actions";
+import {UPDATE_ORGANIZATION} from '../../store/auth/auth.actions';
+import {Observable} from 'rxjs';
+import {canEditOrganization} from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-organization',
@@ -16,6 +18,7 @@ import {UPDATE_ORGANIZATION} from "../../store/auth/auth.actions";
 export class OrganizationComponent implements OnInit {
 
   form: FormGroup = this.mountForm();
+  canEdit$: Observable<boolean> = this.store.pipe(select(canEditOrganization));
   organization: Organization = this.activatedRoute.snapshot.data.organization;
 
   constructor(private fb: FormBuilder,
@@ -27,6 +30,11 @@ export class OrganizationComponent implements OnInit {
   ngOnInit(): void {
     this.organization = this.activatedRoute.snapshot.data.organization;
     this.updateForm();
+    this.canEdit$.subscribe((can) => {
+      if (!can) {
+        this.form.disable();
+      }
+    });
   }
 
   onSubmit() {

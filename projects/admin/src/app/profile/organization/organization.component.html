@@ -19,7 +19,10 @@
             <input matInput formControlName="phone">
           </mat-form-field>
 
-          <button mat-raised-button (click)="onSubmit()" color="primary">{{'commons.buttons.save'|translate}}</button>
+          <button [disabled]="canEdit$ | async"
+                  mat-raised-button (click)="onSubmit()"
+                  color="primary"
+          >{{'commons.buttons.save'|translate}}</button>
         </div>
       </mat-card-content>
     </mat-tab>

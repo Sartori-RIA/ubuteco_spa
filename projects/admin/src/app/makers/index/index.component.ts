@@ -9,6 +9,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import {DELETE_MAKER, REQUEST_ALL_MAKERS} from '../../store/makers/makers.actions';
 import {MakersFormDialogComponent} from '../makers-form-dialog/makers-form-dialog.component';
+import {canCreateMakers, canDestroyMakers, canEditMakers} from "../../store/auth/auth.selectors";
 
 @Component({
   selector: 'app-index',
@@ -19,6 +20,9 @@ import {MakersFormDialogComponent} from '../makers-form-dialog/makers-form-dialo
 export class IndexComponent implements OnInit, OnDestroy {
 
   makers$: Observable<Maker[]> = this.store.pipe(select(selectAllMakers));
+  canCreate$ = this.store.pipe(select(canCreateMakers));
+  canDestroy$ = this.store.pipe(select(canDestroyMakers));
+  canEdit$ = this.store.pipe(select(canEditMakers));
   displayedColumns: string[] = ['id', 'name', 'country', 'action'];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   private data: Maker[] = [];

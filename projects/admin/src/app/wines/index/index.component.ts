@@ -16,6 +16,7 @@ import {REMOVE_WINE, REQUEST_ALL_WINES} from '../../store/wines/wines.actions';
 import {MatDialog} from '@angular/material/dialog';
 import {FormComponent} from '../form/form.component';
 import {ShowComponent} from '../show/show.component';
+import {canCreateWines, canDestroyWines, canEditWines, canShowWineActions} from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-index',
@@ -26,6 +27,9 @@ import {ShowComponent} from '../show/show.component';
 export class IndexComponent implements OnInit, OnDestroy {
 
   wines$: Observable<Wine[]> = this.store.pipe(select(selectAllWines));
+  canCreate$ = this.store.pipe(select(canCreateWines));
+  canDestroy$ = this.store.pipe(select(canDestroyWines));
+  canEdit$ = this.store.pipe(select(canEditWines));
   displayedColumns: string[] = ['id', 'image', 'name', 'style', 'price', 'action'];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   private data: Wine[] = [];

@@ -14,7 +14,13 @@ import {
   selectWineStylesOrderedByName
 } from '../../store/wine-styles/wine-styles.selectors';
 import {DELETE_WINE_STYLE, REQUEST_ALL_WINE_STYLES} from '../../store/wine-styles/wine-styles.actions';
-import {selectIsSuperAdmin} from '../../store/auth/auth.selectors';
+import {
+  canCreateBeers, canCreateWineStyles,
+  canDestroyBeers, canDestroyWineStyles,
+  canEditBeers, canEditWineStyles,
+  canShowBeerActions, canShowWineStyleActions,
+  selectIsSuperAdmin
+} from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-index',
@@ -25,7 +31,10 @@ import {selectIsSuperAdmin} from '../../store/auth/auth.selectors';
 export class IndexComponent implements OnInit, OnDestroy {
 
   wineStyles$: Observable<WineStyle[]> = this.store.pipe(select(selectAllWineStyles));
-  isSuperAdmin$: Observable<boolean> = this.store.pipe(select(selectIsSuperAdmin));
+  canCreate$ = this.store.pipe(select(canCreateWineStyles));
+  canDestroy$ = this.store.pipe(select(canDestroyWineStyles));
+  canEdit$ = this.store.pipe(select(canEditWineStyles));
+  canShowActions$ = this.store.pipe(select(canShowWineStyleActions));
   displayedColumnsAdmin: string[] = ['id', 'name', 'action'];
   displayedColumns: string[] = ['id', 'name'];
   @ViewChild(MatSort, {static: true}) sort: MatSort;

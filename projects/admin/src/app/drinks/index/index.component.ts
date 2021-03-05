@@ -22,10 +22,11 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSort, Sort} from '@angular/material/sort';
 import {REMOVE_DRINK, REQUEST_ALL_DRINKS} from '../../store/drinks/drink.actions';
 import {AppState} from '../../store';
-import {MatPaginator} from "@angular/material/paginator";
-import {MatDialog} from "@angular/material/dialog";
-import {FormComponent} from "../form/form.component";
-import {ShowComponent} from "../show/show.component";
+import {MatPaginator} from '@angular/material/paginator';
+import {MatDialog} from '@angular/material/dialog';
+import {FormComponent} from '../form/form.component';
+import {ShowComponent} from '../show/show.component';
+import {canCreateDrinks, canDestroyDrinks, canEditDrinks} from "../../store/auth/auth.selectors";
 
 @Component({
   selector: 'app-index',
@@ -37,6 +38,9 @@ export class IndexComponent implements OnInit, OnDestroy, AfterViewInit {
 
   drinks$: Observable<Drink[]> = this.store.pipe(select(selectAllDrinks));
   drinksCounter$: Observable<number> = this.store.pipe(select(selectDrinksTotal));
+  canCreate$ = this.store.pipe(select(canCreateDrinks));
+  canDestroy$ = this.store.pipe(select(canDestroyDrinks));
+  canEdit$ = this.store.pipe(select(canEditDrinks));
   displayedColumns: string[] = ['id', 'image', 'name', 'maker', 'price', 'action'];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

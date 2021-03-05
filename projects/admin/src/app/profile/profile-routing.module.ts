@@ -4,9 +4,9 @@ import {ProfileComponent} from './profile/profile.component';
 import {OrganizationComponent} from './organization/organization.component';
 import {ThemeCustomizerComponent} from './theme-customizer/theme-customizer.component';
 import {UserResolver} from '../core/resolvers/user.resolver';
-import {AboutComponent} from "./about/about.component";
-import {SecurityComponent} from "./security/security.component";
-import {OrganizationResolver} from "../core/resolvers/organization.resolver";
+import {AboutComponent} from './about/about.component';
+import {SecurityComponent} from './security/security.component';
+import {OrganizationResolver} from '../core/resolvers/organization.resolver';
 
 const routes: Routes = [
   {
