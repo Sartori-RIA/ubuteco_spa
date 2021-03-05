@@ -23,7 +23,7 @@
               <span>{{'pages.menu.profile'|translate}}</span>
             </mat-list-item>
             <mat-divider></mat-divider>
-            <mat-list-item routerLink="/perfil/tema" routerLinkActive="list-item-active">
+            <mat-list-item *ngIf="canEditTheme$ | async" routerLink="/perfil/tema" routerLinkActive="list-item-active">
               <mat-icon>security</mat-icon>
               <span>{{'pages.menu.theme'|translate}}</span>
             </mat-list-item>

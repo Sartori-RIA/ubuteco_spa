@@ -3,7 +3,7 @@ import {User} from '../../core/models/user';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store';
-import {canReadOrganization, selectCurrentUser} from '../../store/auth/auth.selectors';
+import {canEditTheme, canReadOrganization, selectCurrentUser} from '../../store/auth/auth.selectors';
 import {MatDialog} from '@angular/material/dialog';
 import {take} from 'rxjs/operators';
 import {UploadFileComponent, UploadFileParams} from '../../upload-file/upload-file/upload-file.component';
@@ -18,6 +18,7 @@ export class ProfileComponent {
 
   user$: Observable<User> = this.store.pipe(select(selectCurrentUser));
   canReadOrg$: Observable<boolean> = this.store.pipe(select(canReadOrganization));
+  canEditTheme$: Observable<boolean> = this.store.pipe(select(canEditTheme));
 
   constructor(private store: Store<AppState>,
               private dialog: MatDialog) {

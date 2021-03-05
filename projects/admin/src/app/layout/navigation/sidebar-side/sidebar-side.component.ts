@@ -16,7 +16,7 @@ import {LOAD_USER} from '../../../store/auth/auth.actions';
   templateUrl: './sidebar-side.component.html'
 })
 export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
-  menuItems: any[];
+  menuItems = this.navService.iconMenu;
   hasIconTypeMenuItem: boolean;
   iconTypeMenuTitle: string;
   layoutConf: ILayoutConf;
@@ -31,14 +31,6 @@ export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.store.dispatch(LOAD_USER());
-    this.iconTypeMenuTitle = this.navService.iconTypeMenuTitle;
-    this.menuItemsSub = this.navService.menuItems$.subscribe(menuItem => {
-      this.menuItems = menuItem;
-      // Checks item list has any icon type.
-      this.hasIconTypeMenuItem = !!this.menuItems.filter(
-        item => item.type === 'icon'
-      ).length;
-    });
     this.layoutConf = this.layout.layoutConf;
   }
 

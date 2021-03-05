@@ -77,7 +77,7 @@ export const selectAuthLoading = createSelector(
 
 export const canReadBeerStyles = createSelector(
   selectUserRole,
-  (role) => true
+  (role) => role !== 'KITCHEN'
 );
 export const canEditBeerStyles = createSelector(
   selectUserRole,
@@ -101,7 +101,7 @@ export const canShowBeerStyleActions = createSelector(
 
 export const canReadBeers = createSelector(
   selectUserRole,
-  (role) => role !== undefined
+  (role) => role !== undefined && role !== 'KITCHEN'
 );
 
 export const canEditBeers = createSelector(
@@ -127,7 +127,7 @@ export const canShowBeerActions = createSelector(
 
 export const canReadDishes = createSelector(
   selectUserRole,
-  (role) => role !== undefined
+  (role) => role !== undefined && role !== 'KITCHEN'
 );
 
 export const canEditDishes = createSelector(
@@ -153,7 +153,7 @@ export const canShowDishActions = createSelector(
 
 export const canReadDrinks = createSelector(
   selectUserRole,
-  (role) => role !== undefined
+  (role) => role !== undefined && role !== 'KITCHEN'
 );
 
 export const canEditDrinks = createSelector(
@@ -179,7 +179,7 @@ export const canShowDrinkActions = createSelector(
 
 export const canReadFoods = createSelector(
   selectUserRole,
-  (role) => role !== undefined
+  (role) => role !== undefined && role !== 'KITCHEN'
 );
 
 export const canEditFoods = createSelector(
@@ -215,7 +215,7 @@ export const canEditKitchen = createSelector(
 
 export const canReadMakers = createSelector(
   selectUserRole,
-  (role) => role !== undefined
+  (role) => role !== undefined &&  role !== 'KITCHEN'
 );
 
 export const canEditMakers = createSelector(
@@ -241,7 +241,7 @@ export const canShowMakerActions = createSelector(
 
 export const canReadOrders = createSelector(
   selectUserRole,
-  (role) => role !== undefined
+  (role) => role !== undefined && role !== 'KITCHEN'
 );
 
 export const canEditOrders = createSelector(
@@ -292,7 +292,7 @@ export const canEditTheme = createSelector(
 
 export const canReadTables = createSelector(
   selectUserRole,
-  (role) => role !== undefined
+  (role) => role !== undefined && role !== 'KITCHEN'
 );
 
 export const canEditTables = createSelector(
@@ -318,7 +318,7 @@ export const canShowTableActions = createSelector(
 
 export const canReadWines = createSelector(
   selectUserRole,
-  (role) => role !== undefined
+  (role) => role !== undefined && role !== 'KITCHEN'
 );
 
 export const canEditWines = createSelector(
@@ -344,7 +344,7 @@ export const canShowWineActions = createSelector(
 
 export const canReadWineStyles = createSelector(
   selectUserRole,
-  (role) => true
+  (role) =>  role !== 'KITCHEN'
 );
 
 export const canEditWineStyles = createSelector(

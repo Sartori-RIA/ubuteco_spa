@@ -8,47 +8,11 @@
 
       <ul class="menu" *ngIf="!layoutConf.isMobile">
         <li *ngFor="let item of menuItems; let i = index;">
-          <div *ngIf="item.type !== 'separator'" routerLinkActive="open">
-            <a matRipple routerLink="/{{item.state}}" *ngIf="item.type === 'link'">
+          <div *ngIf="item.canShow$ | async" routerLinkActive="open">
+            <a matRipple routerLink="/{{item.state}}">
               <mat-icon>{{item.icon}}</mat-icon>
               {{item.name }}
             </a>
-            <div *ngIf="item.type === 'dropDown'">
-              <label matRipple for="drop-{{i}}" class="toggle">
-                <mat-icon>{{item.icon}}</mat-icon>
-                {{item.name }}</label>
-              <a matRipple>
-                <mat-icon>{{item.icon}}</mat-icon>
-                {{item.name}}</a>
-              <input type="checkbox" id="drop-{{i}}"/>
-              <ul>
-                <li *ngFor="let itemLvL2 of item.sub; let j = index;" routerLinkActive="open">
-                  <a matRipple routerLink="{{item.state ? '/'+item.state : ''}}/{{itemLvL2.state}}"
-                     *ngIf="itemLvL2.type !== 'dropDown'">
-                    <mat-icon *ngIf="itemLvL2.icon">{{itemLvL2.icon}}</mat-icon>
-                    {{itemLvL2.name }}
-                  </a>
-
-                  <div *ngIf="itemLvL2.type === 'dropDown'">
-                    <label matRipple for="drop-{{i}}{{j}}" class="toggle">{{itemLvL2.name}}</label>
-                    <a matRipple>
-                      <mat-icon *ngIf="itemLvL2.icon">{{itemLvL2.icon}}</mat-icon>
-                      {{itemLvL2.name}}</a>
-                    <input type="checkbox" id="drop-{{i}}{{j}}"/>
-                    <!-- Level 3 -->
-                    <ul>
-                      <li *ngFor="let itemLvL3 of itemLvL2.sub" routerLinkActive="open">
-                        <a matRipple
-                           routerLink="{{item.state ? '/'+item.state : ''}}{{itemLvL2.state ? '/'+itemLvL2.state : ''}}/{{itemLvL3.state}}">
-                          <mat-icon *ngIf="itemLvL3.icon">{{itemLvL3.icon}}</mat-icon>
-                          {{itemLvL3.name }}
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-              </ul>
-            </div>
           </div>
         </li>
       </ul>
@@ -96,19 +60,19 @@
       <mat-menu #accountMenu="matMenu">
         <button mat-menu-item routerLink="/perfil">
           <mat-icon>account_box</mat-icon>
-          <span>Perfil</span>
+          <span>{{'pages.menu.profile'|translate}}</span>
         </button>
         <button mat-menu-item routerLink="/perfil/configuracoes">
           <mat-icon>settings</mat-icon>
-          <span>Configurações da conta</span>
+          <span>{{'pages.menu.settings'|translate}}</span>
         </button>
         <button mat-menu-item routerLink="/perfil/tema">
           <mat-icon>settings</mat-icon>
-          <span>Tema</span>
+          <span>{{'pages.menu.theme'|translate}}</span>
         </button>
         <button mat-menu-item (click)="onLogout()" >
           <mat-icon>exit_to_app</mat-icon>
-          <span>Sair</span>
+          <span>{{'pages.menu.sign_out'|translate}}</span>
         </button>
       </mat-menu>
       <!-- Mobile screen menu toggle -->

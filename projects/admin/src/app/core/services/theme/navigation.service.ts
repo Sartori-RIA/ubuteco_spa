@@ -1,9 +1,15 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {IconName} from '@fortawesome/fontawesome-svg-core';
 import {IconDefinition} from '@fortawesome/fontawesome-common-types';
-import {faBeer, faWineBottle} from '@fortawesome/free-solid-svg-icons';
 import {select, Store} from '@ngrx/store';
+import {
+  canReadBeers,
+  canReadBeerStyles, canReadDishes,
+  canReadDrinks, canReadFoods, canReadKitchen,
+  canReadMakers, canReadOrders, canReadTables, canReadWines,
+  canReadWineStyles
+} from '../../../store/auth/auth.selectors';
 import {AppState} from '../../../store';
 
 export interface IMenuItem {
@@ -12,19 +18,11 @@ export interface IMenuItem {
   icon?: string | IconName; // Material icon name
   tooltip?: string; // Tooltip text
   disabled?: boolean; // If true, item will not be appeared in sidenav.
-  sub?: IChildItem[]; // Dropdown items
   badges?: IBadge[];
   iconType: 'font-awesome' | 'material-design';
   fontSet?: 'fab' | 'fas' | 'far'; // optional, only to font awesome icons
   faIcon?: IconDefinition; // optional, only to font awesome icons
-}
-
-export interface IChildItem {
-  type?: string;
-  name: string; // Display text
-  state?: string; // Router state
-  icon?: string;
-  sub?: IChildItem[];
+  canShow$: Observable<boolean>;
 }
 
 export interface IBadge {
@@ -36,6 +34,10 @@ export interface IBadge {
   providedIn: 'root'
 })
 export class NavigationService {
+
+  constructor(private store: Store<AppState>) {
+  }
+
   iconMenu: IMenuItem[] = [
     {
       name: 'Fabricantes',
@@ -43,6 +45,7 @@ export class NavigationService {
       icon: 'dashboard',
       state: 'fabricantes',
       iconType: 'material-design',
+      canShow$: this.store.pipe(select(canReadMakers))
     },
     {
       name: 'Estilos de Cervejas',
@@ -50,6 +53,7 @@ export class NavigationService {
       icon: 'style',
       state: 'estilos-cervejas',
       iconType: 'material-design',
+      canShow$: this.store.pipe(select(canReadBeerStyles))
     },
     {
       name: 'Estilos de Vinhos',
@@ -57,6 +61,7 @@ export class NavigationService {
       icon: 'style',
       state: 'estilos-vinhos',
       iconType: 'material-design',
+      canShow$: this.store.pipe(select(canReadWineStyles))
     },
     {
       name: 'Bebidas',
@@ -64,6 +69,7 @@ export class NavigationService {
       icon: 'local_bar',
       state: 'bebidas',
       iconType: 'material-design',
+      canShow$: this.store.pipe(select(canReadDrinks))
     },
     {
       name: 'Cervejas',
@@ -71,6 +77,7 @@ export class NavigationService {
       icon: 'sports_bar',
       state: 'cervejas',
       iconType: 'material-design',
+      canShow$: this.store.pipe(select(canReadBeers))
     },
     {
       name: 'Vinhos',
@@ -78,6 +85,7 @@ export class NavigationService {
       icon: 'wine_bar',
       state: 'vinhos',
       iconType: 'material-design',
+      canShow$: this.store.pipe(select(canReadWines))
     },
     {
       name: 'Estoque de Alimentos',
@@ -85,6 +93,7 @@ export class NavigationService {
       icon: 'inventory',
       state: 'alimentos',
       iconType: 'material-design',
+      canShow$: this.store.pipe(select(canReadFoods))
     },
     {
       name: 'Cardápio',
@@ -92,6 +101,7 @@ export class NavigationService {
       icon: 'restaurant_menu',
       state: 'cardapio',
       iconType: 'material-design',
+      canShow$: this.store.pipe(select(canReadDishes))
     },
     {
       name: 'Cozinha',
@@ -99,6 +109,7 @@ export class NavigationService {
       icon: 'restaurant',
       state: 'cozinha',
       iconType: 'material-design',
+      canShow$: this.store.pipe(select(canReadKitchen))
     },
     {
       name: 'Mesas',
@@ -106,6 +117,7 @@ export class NavigationService {
       icon: 'event_seat',
       state: 'mesas',
       iconType: 'material-design',
+      canShow$: this.store.pipe(select(canReadTables))
     },
     {
       name: 'Pedidos',
@@ -113,26 +125,7 @@ export class NavigationService {
       icon: 'shopping_cart',
       state: 'pedidos/list',
       iconType: 'material-design',
+      canShow$: this.store.pipe(select(canReadOrders))
     },
   ];
-  // This title will appear if any icon type item is present in menu.
-  iconTypeMenuTitle = 'Frequently Accessed';
-
-  // Icon menu TITLE at the very top of navigation.
-  // sets iconMenu as default;
-  menuItems = new BehaviorSubject<IMenuItem[]>(this.iconMenu);
-  // navigation component has subscribed to this Observable
-  menuItems$ = this.menuItems.asObservable();
-
-  constructor() {
-  }
-
-  // Customizer component uses this method to change menu.
-  // You can remove this method and customizer component.
-  // Or you can customize this method to supply different menu for
-
-  // different user type.
-  publishNavigationChange(menuType: string) {
-    this.menuItems.next(this.iconMenu);
-  }
 }
