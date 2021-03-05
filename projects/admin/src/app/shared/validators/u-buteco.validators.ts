@@ -5,7 +5,7 @@ import {map} from 'rxjs/operators';
 import {OrganizationsService} from '../../core/services/api/organizations.service';
 import {UserService} from '../../core/services/api/user.service';
 
-export namespace CookieCodeValidators {
+export namespace uButecoValidators {
   export function cpf(control: AbstractControl): { [key: string]: boolean } | null {
     if (cpfValidator.isValid(control.value)) {
       return null;

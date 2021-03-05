@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/co
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store';
-import {CookieCodeValidators} from '../../shared/validators/cookie-code.validators';
+import {uButecoValidators} from '../../shared/validators/u-buteco.validators';
 import {Observable, Subscription} from 'rxjs';
 import {selectAuthLoading, selectCurrentUser} from '../../store/auth/auth.selectors';
 import {PasswordValidators} from 'ngx-validators';
@@ -71,7 +71,7 @@ export class SecurityComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       email: [null,
         [Validators.required, Validators.email],
-        [CookieCodeValidators.uniqueEmail(this.userService)]],
+        [uButecoValidators.uniqueEmail(this.userService)]],
       password: [null],
       confirm_password: []
     });
@@ -82,7 +82,7 @@ export class SecurityComponent implements OnInit, OnDestroy {
       this.form.patchValue({
         email: data.email,
       });
-      this.form.controls.email.setAsyncValidators([CookieCodeValidators.uniqueEmail(this.userService, data.email)]);
+      this.form.controls.email.setAsyncValidators([uButecoValidators.uniqueEmail(this.userService, data.email)]);
       this.form.updateValueAndValidity();
     });
   }
