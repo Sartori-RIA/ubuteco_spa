@@ -12,6 +12,7 @@ import {DrinksService} from '../../core/services/api/drinks.service';
 import {CREATE_DRINK, UPDATE_DRINK} from '../../store/drinks/drink.actions';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MakersFormDialogComponent} from '../../makers/makers-form-dialog/makers-form-dialog.component';
+import {canCreateMakers} from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-drink-form',
@@ -23,6 +24,7 @@ export class FormComponent implements OnInit {
 
   form: FormGroup = this.mountForm();
   readonly makers$: Observable<Maker[]> = this.store.pipe(select(selectAllMakers));
+  canCreateMaker$ = this.store.pipe(select(canCreateMakers));
 
   constructor(private store: Store<AppState>,
               private drinkService: DrinksService,

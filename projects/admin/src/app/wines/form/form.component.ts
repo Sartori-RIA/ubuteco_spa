@@ -18,6 +18,7 @@ import {
 import {REQUEST_ALL_WINE_STYLES} from '../../store/wine-styles/wine-styles.actions';
 import {CREATE_WINE, UPDATE_WINE} from '../../store/wines/wines.actions';
 import {WineStylesFormDialogComponent} from '../../wine-styles/wine-styles-form-dialog/wine-styles-form-dialog.component';
+import {canCreateMakers, canCreateWineStyles} from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-form',
@@ -29,6 +30,8 @@ export class FormComponent implements OnInit, OnDestroy {
   form: FormGroup = this.mountForm();
   wineStyles$: Observable<WineStyle[]> = this.store.pipe(select(selectAllWineStyles));
   makers$: Observable<Maker[]> = this.store.pipe(select(selectAllMakers));
+  canCreateWineStyle$ = this.store.pipe(select(canCreateWineStyles));
+  canCreateMaker$ = this.store.pipe(select(canCreateMakers));
 
   constructor(private fb: FormBuilder,
               private dialogRef: MatDialogRef<FormComponent>,
@@ -101,7 +104,19 @@ export class FormComponent implements OnInit, OnDestroy {
 
   private updateForm() {
     if (this.data?.id) {
-      const {name, abv, price_cents, description, wine_style, quantity_stock, maker, grapes, ripening, vintage_wine, visual} = this.data;
+      const {
+        name,
+        abv,
+        price_cents,
+        description,
+        wine_style,
+        quantity_stock,
+        maker,
+        grapes,
+        ripening,
+        vintage_wine,
+        visual
+      } = this.data;
       this.form.patchValue({
         name,
         price: price_cents / 100,

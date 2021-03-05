@@ -1,8 +1,8 @@
 <div mat-dialog-title>
   <div class="text-center">
-    <h1 *ngIf="data; else newWine">Atualizando Vinho: {{data?.name}} #{{data?.id}}</h1>
+    <h1 *ngIf="data; else newWine">{{'pages.wines.dialog.update.title'|translate:{id: data.id} }}</h1>
     <ng-template #newWine>
-      <h1>Novo Vinho</h1>
+      <h1>{{'pages.wibes.dialog.new.title'|translate}}</h1>
     </ng-template>
   </div>
 </div>
@@ -45,7 +45,7 @@
         <fa-icon matSuffix [icon]="['fas','percentage']"></fa-icon>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" fxFlex.xl="22" fxFlex.lg="22" fxFlex.md="22"  fxflex.sm="100"
+      <mat-form-field appearance="outline" fxFlex.xl="22" fxFlex.lg="22" fxFlex.md="22" fxflex.sm="100"
                       fxFlex.xs="100">
         <mat-label>{{'attributes.wine.vintage_wine'|translate}}</mat-label>
         <input formControlName="vintage_wine" matInput>
@@ -58,7 +58,7 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline" fxFlex.xl="30" fxFlex.lg="30" fxFlex.md="30" fxflex.sm="100"
-      fxFlex.xs="100">
+                      fxFlex.xs="100">
         <mat-label>{{'attributes.wine.ripening'|translate}}</mat-label>
         <input formControlName="ripening" matInput>
       </mat-form-field>
@@ -70,7 +70,7 @@
       </mat-form-field>
 
       <div fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100" fxFlex.xs="100">
-        <mat-form-field appearance="outline" fxFlex="80">
+        <mat-form-field appearance="outline" [fxFlex]="(canCreateWineStyle$ | async) ? 80 : 100">
           <mat-label>{{'attributes.wine_style.to_human'|translate}}</mat-label>
           <mat-select [compareWith]="compareSelectValues" formControlName="wine_style">
             <mat-option *ngFor="let wineStyle of wineStyles$ | async" [value]="wineStyle">
@@ -81,11 +81,13 @@
         <button [matTooltip]="'pages.wine_styles.fab'|translate"
                 (click)="openDialogWineStyle()"
                 mat-mini-fab
-        >+</button>
+                *ngIf="canCreateWineStyle$ | async"
+        >+
+        </button>
       </div>
 
       <div fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100" fxFlex.xs="100">
-        <mat-form-field appearance="outline" fxFlex="80">
+        <mat-form-field appearance="outline" [fxFlex]="(canCreateMaker$ | async) ? 80 : 100">
           <mat-label>{{'attributes.maker.to_human'|translate}}</mat-label>
           <mat-select [compareWith]="compareSelectValues" formControlName="maker">
             <mat-option *ngFor="let maker of makers$ | async" [value]="maker">
@@ -93,8 +95,12 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <button fxFlexOffset="10" [matTooltip]="'attributes.maker.fab'|translate" (click)="openDialogAddMaker()"
-                mat-mini-fab>+
+        <button fxFlexOffset="10"
+                [matTooltip]="'attributes.maker.fab'|translate"
+                (click)="openDialogAddMaker()"
+                mat-mini-fab
+                *ngIf="canCreateMaker$ | async"
+        >+
         </button>
       </div>
     </div>

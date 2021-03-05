@@ -14,14 +14,8 @@ import {MatSort, Sort} from '@angular/material/sort';
 import {REMOVE_BEER, REQUEST_ALL_BEERS} from '../../store/beers/beers.actions';
 import {AppState} from '../../store';
 import {MatDialog} from '@angular/material/dialog';
-import {FormComponent} from "../form/form.component";
-import {
-  canCreateBeers,
-  canCreateBeerStyles, canDestroyBeers,
-  canDestroyBeerStyles, canEditBeers,
-  canEditBeerStyles, canShowBeerActions,
-  canShowBeerStyleActions
-} from "../../store/auth/auth.selectors";
+import {FormComponent} from '../form/form.component';
+import {canCreateBeers, canDestroyBeers, canEditBeers, canShowBeerActions} from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-index',
