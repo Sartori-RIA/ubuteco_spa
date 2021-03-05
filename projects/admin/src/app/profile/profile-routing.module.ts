@@ -7,6 +7,7 @@ import {UserResolver} from '../core/resolvers/user.resolver';
 import {AboutComponent} from './about/about.component';
 import {SecurityComponent} from './security/security.component';
 import {OrganizationResolver} from '../core/resolvers/organization.resolver';
+import {ThemeGuard} from '../core/guards/theme.guard';
 
 const routes: Routes = [
   {
@@ -40,7 +41,13 @@ const routes: Routes = [
           user: UserResolver
         },
       },
-      {path: 'tema', component: ThemeCustomizerComponent}
+      {
+        path: 'tema',
+        component: ThemeCustomizerComponent,
+        canActivate: [ThemeGuard],
+        canActivateChild: [ThemeGuard],
+        canLoad: [ThemeGuard]
+      }
     ]
   }
 ];
