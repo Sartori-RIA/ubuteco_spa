@@ -27,7 +27,7 @@
               <mat-icon *ngSwitchCase="'material-design'">{{item.icon}}</mat-icon>
               <fa-icon *ngSwitchCase="'font-awesome'" [icon]="item.faIcon"></fa-icon>
             </div>
-            <span class="item-name lvl1">{{item.name}}</span>
+            <span class="item-name lvl1">{{item.name | translate}}</span>
             <span fxFlex></span>
             <span class="menuitem-badge mat-bg-{{ badge.color }}" [ngStyle]="{background: badge.color}"
                   *ngFor="let badge of item.badges">{{ badge.value }}</span>

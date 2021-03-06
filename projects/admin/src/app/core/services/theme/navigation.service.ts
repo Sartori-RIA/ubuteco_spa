@@ -40,7 +40,7 @@ export class NavigationService {
 
   iconMenu: IMenuItem[] = [
     {
-      name: 'Fabricantes',
+      name: 'routes.makers',
       tooltip: 'Blank',
       icon: 'dashboard',
       state: 'fabricantes',
@@ -48,7 +48,7 @@ export class NavigationService {
       canShow$: this.store.pipe(select(canReadMakers))
     },
     {
-      name: 'Estilos de Cervejas',
+      name: 'routes.beer_styles',
       tooltip: 'Blank',
       icon: 'style',
       state: 'estilos-cervejas',
@@ -56,7 +56,7 @@ export class NavigationService {
       canShow$: this.store.pipe(select(canReadBeerStyles))
     },
     {
-      name: 'Estilos de Vinhos',
+      name: 'routes.wine_styles',
       tooltip: 'Blank',
       icon: 'style',
       state: 'estilos-vinhos',
@@ -64,7 +64,7 @@ export class NavigationService {
       canShow$: this.store.pipe(select(canReadWineStyles))
     },
     {
-      name: 'Bebidas',
+      name: 'routes.drinks',
       tooltip: 'Blank',
       icon: 'local_bar',
       state: 'bebidas',
@@ -72,7 +72,7 @@ export class NavigationService {
       canShow$: this.store.pipe(select(canReadDrinks))
     },
     {
-      name: 'Cervejas',
+      name: 'routes.beers',
       tooltip: 'Blank',
       icon: 'sports_bar',
       state: 'cervejas',
@@ -80,7 +80,7 @@ export class NavigationService {
       canShow$: this.store.pipe(select(canReadBeers))
     },
     {
-      name: 'Vinhos',
+      name: 'routes.wines',
       tooltip: 'Blank',
       icon: 'wine_bar',
       state: 'vinhos',
@@ -88,7 +88,7 @@ export class NavigationService {
       canShow$: this.store.pipe(select(canReadWines))
     },
     {
-      name: 'Estoque de Alimentos',
+      name: 'routes.foods',
       tooltip: 'Blank',
       icon: 'inventory',
       state: 'alimentos',
@@ -96,7 +96,7 @@ export class NavigationService {
       canShow$: this.store.pipe(select(canReadFoods))
     },
     {
-      name: 'Cardápio',
+      name: 'routes.dishes',
       tooltip: 'Blank',
       icon: 'restaurant_menu',
       state: 'cardapio',
@@ -104,7 +104,7 @@ export class NavigationService {
       canShow$: this.store.pipe(select(canReadDishes))
     },
     {
-      name: 'Cozinha',
+      name: 'routes.kitchen',
       tooltip: 'Blank',
       icon: 'restaurant',
       state: 'cozinha',
@@ -112,7 +112,7 @@ export class NavigationService {
       canShow$: this.store.pipe(select(canReadKitchen))
     },
     {
-      name: 'Mesas',
+      name: 'routes.tables',
       tooltip: 'Blank',
       icon: 'event_seat',
       state: 'mesas',
@@ -120,7 +120,7 @@ export class NavigationService {
       canShow$: this.store.pipe(select(canReadTables))
     },
     {
-      name: 'Pedidos',
+      name: 'routes.orders',
       tooltip: 'Blank',
       icon: 'shopping_cart',
       state: 'pedidos/list',
