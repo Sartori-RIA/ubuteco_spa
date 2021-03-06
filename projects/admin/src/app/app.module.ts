@@ -1,4 +1,4 @@
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -30,6 +30,9 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient} from '@angular/common/http';
 import {NgxMaskModule} from 'ngx-mask';
+import {COUNTRIES_DB} from './core/models/country';
+import {MatIconRegistry} from '@angular/material/icon';
+import {LocalStorage} from './shared/util/storage';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -65,7 +68,7 @@ export function createTranslateLoader(http: HttpClient) {
     AppStoreModule,
     AuthModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'pt',
+      defaultLanguage: LocalStorage.country(),
       loader: {
         provide: TranslateLoader,
         useFactory: (createTranslateLoader),
@@ -81,7 +84,19 @@ export function createTranslateLoader(http: HttpClient) {
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(library: FaIconLibrary) {
+  constructor(library: FaIconLibrary,
+              private iconRegistry: MatIconRegistry,
+              private sanitizer: DomSanitizer) {
     library.addIconPacks(fab, fas, far);
+    this.registerCountries();
+  }
+
+  registerCountries() {
+    for (const country of COUNTRIES_DB) {
+      const countryAlpha2Code = country.alpha2Code.toLowerCase();
+      this.iconRegistry
+        .addSvgIcon(countryAlpha2Code, this.sanitizer
+          .bypassSecurityTrustResourceUrl(`assets/svg-country-flags/svg/${countryAlpha2Code}.svg`));
+    }
   }
 }

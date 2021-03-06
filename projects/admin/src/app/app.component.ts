@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, PLATFORM_ID} from '@angular/core';
 import {Subscription, zip} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {AppState} from './store';
@@ -11,6 +11,8 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {AuthService} from './core/services/api/auth.service';
 import {User} from './core/models/user';
 import {FeedbackService} from './core/services/api/feedback.service';
+import {isPlatformBrowser} from '@angular/common';
+import {LocalStorage} from './shared/util/storage';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
               private router: Router,
               private authService: AuthService,
               private translate: TranslateService,
+              @Inject(PLATFORM_ID) private platformId: any,
               private activeRoute: ActivatedRoute,
               private feedback: FeedbackService,
               private routePartsService: RoutePartsService) {
@@ -35,6 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.changePageTitle();
     this.confirmAccount();
+    this.setLocale();
   }
 
   ngOnDestroy(): void {
@@ -88,4 +92,10 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
+  private setLocale() {
+    if (isPlatformBrowser(this.platformId)) {
+      const country = LocalStorage.country();
+      this.translate.use((country)?.toLowerCase());
+    }
+  }
 }

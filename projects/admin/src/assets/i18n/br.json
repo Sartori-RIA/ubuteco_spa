@@ -4,10 +4,10 @@
       "password": "As senhas não conferem"
     },
     "in_use": {
-      "email": "Este e-mail já em uso",
-      "phone": "Este telefone já em uso",
-      "cnpj": "Este CNPJ já em uso",
-      "name": "Este nome já esta em uso"
+      "email": "E-mail já em uso",
+      "phone": "Telefone já em uso",
+      "cnpj": "CNPJ já em uso",
+      "name": "Nome já esta em uso"
     },
     "invalid": {
       "cnpj": "Informe um CNPJ válido"
@@ -426,7 +426,7 @@
       "super_admin": "Super Admin",
       "admin": "Admin",
       "kitchen": "Cozinha",
-      "waiter": "Garçon",
+      "waiter": "Garçom",
       "cash_register": "Caixa",
       "customer": "Cliente"
     }
@@ -452,7 +452,7 @@
         "error_n": "Ops, sinto muito, aconteceu algo inesperado ao tentar recuperar os registros, por favor tente novamente"
       },
       "forbidden": {
-        "title": "Sem permissão necessária: 403",
+        "title": "Não possui permissão necessária: 403",
         "text": "Parece que você esta tentando algo que não tem o nivel de acesso necessário, por favor contacte seu administrador"
       }
     },
