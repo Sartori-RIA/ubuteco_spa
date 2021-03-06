@@ -77,7 +77,7 @@ export const selectAuthLoading = createSelector(
 
 export const canReadBeerStyles = createSelector(
   selectUserRole,
-  (role) => role !== 'KITCHEN'
+  (role) => role === 'SUPER_ADMIN'
 );
 export const canEditBeerStyles = createSelector(
   selectUserRole,
@@ -215,7 +215,7 @@ export const canEditKitchen = createSelector(
 
 export const canReadMakers = createSelector(
   selectUserRole,
-  (role) => role !== undefined &&  role !== 'KITCHEN'
+  (role) =>  role === 'SUPER_ADMIN' || role === 'ADMIN'
 );
 
 export const canEditMakers = createSelector(
@@ -292,7 +292,7 @@ export const canEditTheme = createSelector(
 
 export const canReadTables = createSelector(
   selectUserRole,
-  (role) => role !== undefined && role !== 'KITCHEN'
+  (role) => role === 'SUPER_ADMIN' || role === 'ADMIN'
 );
 
 export const canEditTables = createSelector(
@@ -344,7 +344,7 @@ export const canShowWineActions = createSelector(
 
 export const canReadWineStyles = createSelector(
   selectUserRole,
-  (role) =>  role !== 'KITCHEN'
+  (role) =>   role === 'SUPER_ADMIN'
 );
 
 export const canEditWineStyles = createSelector(
