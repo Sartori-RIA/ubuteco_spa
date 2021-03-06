@@ -425,7 +425,7 @@
       "super_admin": "Super Admin",
       "admin": "Admin",
       "kitchen": "Cozinha",
-      "waiter": "Garçon",
+      "waiter": "Garçom",
       "cash_register": "Caixa",
       "customer": "Cliente"
     }
@@ -451,7 +451,7 @@
         "error_n": "Ops, sinto muito, aconteceu algo inesperado ao tentar recuperar os registros, por favor tente novamente"
       },
       "forbidden": {
-        "title": "Sem permissão necessária: 403",
+        "title": "Não possui permissão necessária: 403",
         "text": "Parece que você esta tentando algo que não tem o nivel de acesso necessário, por favor contacte seu administrador"
       }
     },

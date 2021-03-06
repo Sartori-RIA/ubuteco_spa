@@ -1,0 +1,480 @@
+{
+  "validations": {
+    "match": {
+      "password": "Passwords do not match"
+    },
+    "in_use": {
+      "email": "Email already in use",
+      "phone": "Telephone already in use",
+      "cnpj": "CNPJ already in use"
+    },
+    "invalid": {
+      "cnpj": "Enter a valid CNPJ"
+    },
+    "min_length": {
+      "password": "Minimum length of {{minLength}} digits"
+    }
+  },
+  "routes": {
+    "auth": {
+      "sign_in": "Sign In",
+      "sign_up": "Sign Up",
+      "forgot_password": "Forgot Password",
+      "change_password": "Update Password",
+      "confirm": "Confirm Account"
+    },
+    "beer_styles": "Beer Styles",
+    "beers": "Beers",
+    "dashboard": "Dashboard",
+    "dishes": "Dishes",
+    "drinks": "Drinks",
+    "foods": "Foods",
+    "kitchen": "kitchen",
+    "makers": "Makers",
+    "orders": "Orders",
+    "profile": "Profile",
+    "reports": "Reports",
+    "tables": "Tables",
+    "wine_styles": "Wine Styles",
+    "wines": "Wines"
+  },
+  "pages": {
+    "auth": {
+      "sign_in": {
+        "title": "Sign in to your account"
+      },
+      "sign_up": {
+        "title": "Create an account",
+        "text": "Are we going to create your account with us?",
+        "accept_terms": "I have read and accept the terms and conditions of use"
+      },
+      "sign_out": {
+        "title": "Are you sure you want to exit the system?"
+      },
+      "confirm": {
+        "title": "Account verification",
+        "invalid_token": "Invalid token",
+        "already_exist_title": "Your account has already been confirmed!",
+        "message": "Hi {{user_name}}. Thank you for verifying your account!"
+      },
+      "buttons": {
+        "sign_in": "Sign In",
+        "sign_up": "Sign Up",
+        "enter_with_account": "Sign in with an existing account",
+        "send_new_confirm_email": "Request new confirmation email"
+      }
+    },
+    "beers": {
+      "fab": "Add Beer",
+      "dialog": {
+        "update": {
+          "title": "Beer Update: #{{id}}"
+        },
+        "new": {
+          "title": "Add Beer"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Beer successfully added"
+        },
+        "update": {
+          "success": "Beer updated successfully"
+        },
+        "destroy": {
+          "success": "Beer removed successfully"
+        }
+      }
+    },
+    "beer_styles": {
+      "fab": "Add Beer style",
+      "dialog": {
+        "update": {
+          "title": "Beer Style Update: #{{id}}"
+        },
+        "new": {
+          "title": "Add Beer Style"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Beer style successfully added"
+        },
+        "update": {
+          "success": "Beer style successfully updated"
+        },
+        "destroy": {
+          "success": "Beer style successfully removed"
+        }
+      }
+    },
+    "dishes": {
+      "fab": "Add Dish",
+      "dialog": {
+        "update": {
+          "title": "Dish Update: #{{id}}"
+        },
+        "new": {
+          "title": "Add Dish"
+        }
+      },
+      "labels": {
+        "ingredients": "Ingredients:",
+        "ingredient": "Ingredient:",
+        "more_ingredient": "More Ingredients",
+        "remove_ingredient": "Remove menu item"
+      },
+      "messages": {
+        "create": {
+          "success": "Dish successfully added"
+        },
+        "update": {
+          "success": "Dish updated successfully"
+        },
+        "destroy": {
+          "success": "Dish successfully removed"
+        }
+      }
+    },
+    "drinks": {
+      "fab": "Add Drink",
+      "dialog": {
+        "update": {
+          "title": "Drink Update: #{{id}}"
+        },
+        "new": {
+          "title": "Add Drink"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Drink added successfully"
+        },
+        "update": {
+          "success": "Drink updated successfully"
+        },
+        "destroy": {
+          "success": "Drink successfully removed"
+        }
+      }
+    },
+    "foods": {
+      "fab": "Add Food",
+      "dialog": {
+        "update": {
+          "title": "Food Update: #{{id}}"
+        },
+        "new": {
+          "title": "Add Food"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Food successfully added"
+        },
+        "update": {
+          "success": "Food updated successfully"
+        },
+        "destroy": {
+          "success": "Food successfully removed"
+        }
+      }
+    },
+    "kitchen": {
+      "table": {
+        "order": "Order",
+        "table": "Table",
+        "customer": "Customer",
+        "dish": "Dish",
+        "quantity": "Quantity"
+      },
+      "status": {
+        "awaiting": "Awaiting",
+        "canceled": "Canceled",
+        "cooking": "Cooking",
+        "with_the_client": "Delivered",
+        "ready": "Ready",
+        "empty_stock": "Empty Stock"
+      },
+      "flash": {
+        "dish_received": "NEW ORDER RECEIVED",
+        "dish_updated": "UPDATED ORDER"
+      }
+    },
+    "makers": {
+      "fab": "Add Maker",
+      "dialog": {
+        "update": {
+          "title": "Maker Update: #{{id}}"
+        },
+        "new": {
+          "title": "Add Maker"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Manufacturer added successfully"
+        },
+        "update": {
+          "success": "Manufacturer updated successfully"
+        },
+        "destroy": {
+          "success": "Manufacturer removed successfully"
+        }
+      }
+    },
+    "orders": {
+      "fab": "Add Order",
+      "dialog": {
+        "item_select": "Select Item",
+        "item_select_option": "{{name}} - R${{price}} - Available: {{quantity}}"
+      },
+      "form": {
+        "order_n": "Order: #{{id}}",
+        "table_select_item": "{{name}} - Seats: {{chairs}}"
+      },
+      "labels": {
+        "close_order": "Close Order",
+        "remove": "Remove"
+      },
+      "flash": {
+        "items": {
+          "success": {
+            "updated": "Item successfully updated to order",
+            "destroy": "Item successfully removed from order"
+          },
+          "fail": {
+            "updated": "Failed to update item to order",
+            "destroy": "Failed to remove item from order",
+            "create": "Failed to add the item to the order"
+          }
+        }
+      }
+    },
+    "organizations": {
+      "messages": {
+        "update": {
+          "success": "Organization updated successfully"
+        }
+      }
+    },
+    "profile": {
+      "messages": {
+        "update": {
+          "success": "Profile updated successfully"
+        }
+      },
+      "tabs": {
+        "organization": "Organization Settings",
+        "theme": "Organization Theme",
+        "security": "Access data"
+      }
+    },
+    "tables": {
+      "fab": "Add Table",
+      "dialog": {
+        "update": {
+          "title": "table Update: #{{id}}"
+        },
+        "new": {
+          "title": "Add Table"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Table added successfully"
+        },
+        "update": {
+          "success": "Table updated successfully"
+        },
+        "destroy": {
+          "success": "Table successfully removed"
+        }
+      }
+    },
+    "uploader": {
+      "title": "Choose an image to upload",
+      "text": "Drag an image or click to choose"
+    },
+    "wine_styles": {
+      "fab": "Add Wine Style",
+      "dialog": {
+        "update": {
+          "title": "Wine Style Update: #{{id}}"
+        },
+        "new": {
+          "title": "Add Wine Style"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Wine style added successfully"
+        },
+        "update": {
+          "success": "Successfully updated wine style"
+        },
+        "destroy": {
+          "success": "Wine style removed successfully"
+        }
+      }
+    },
+    "wines": {
+      "fab": "Add Wine",
+      "messages": {
+        "create": {
+          "success": "Wine added successfully"
+        },
+        "update": {
+          "success": "Wine updated successfully"
+        },
+        "destroy": {
+          "success": "Wine successfully removed"
+        }
+      }
+    },
+    "menu": {
+      "sign_out": "Sign Out",
+      "organization": "Organization",
+      "profile": "Profile",
+      "settings": "Settings",
+      "theme": "Theme",
+      "security": "Security"
+    }
+  },
+  "attributes": {
+    "base": {
+      "id": "Id",
+      "name": "Name",
+      "created_at": "Created at:",
+      "updated_at": "Updated at:"
+    },
+    "product": {
+      "to_human": "Product",
+      "category": "Category",
+      "price": "Price",
+      "description": "Description",
+      "quantity_stock": "Quantity Stock",
+      "price_cents": "Cents",
+      "price_currency": "Currency",
+      "image": "Image"
+    },
+    "user": {
+      "email": "Email",
+      "password": "Password",
+      "confirm_password": "Confirm Password"
+    },
+    "beer": {
+      "to_human": "Beer",
+      "ibu": "IBU",
+      "alcohol": "ABV"
+    },
+    "beer_style": {
+      "to_human": "Beer Style"
+    },
+    "wine": {
+      "to_human": "Wine",
+      "abv": "ABV",
+      "vintage_wine": "Vintage Wine",
+      "ripening": "Ripening",
+      "visual": "Visual",
+      "grapes": "Grapes"
+    },
+    "wine_style": {
+      "to_human": "Wine Style"
+    },
+    "drink": {
+      "to_human": "Drink",
+      "flavor": "Flavor"
+    },
+    "maker": {
+      "to_human": "Maker",
+      "country": "Country",
+      "state": "State"
+    },
+    "food": {
+      "to_human": "Food",
+      "valid_until": "Valid Until"
+    },
+    "dish": {
+      "to_human": "Dish",
+      "dish_ingredients": "Dish Ingredients",
+      "quantity": "Quantity"
+    },
+    "table": {
+      "to_human": "Table",
+      "chairs": "Chairs"
+    },
+    "order": {
+      "to_human": "Order",
+      "table": "Table",
+      "customer": "Customer",
+      "quantity": "Quantity",
+      "subtotal": "Subtotal",
+      "discount": "Discount",
+      "total": "Total"
+    },
+    "organization": {
+      "to_human": "Organization",
+      "cnpj": "CNPJ",
+      "name": "Organization name",
+      "phone": "Organization phone",
+      "logo": "Logo"
+    },
+    "role": {
+      "to_human": "Role",
+      "super_admin": "Super Admin",
+      "admin": "Admin",
+      "kitchen": "Kitchen",
+      "waiter": "Waiter",
+      "cash_register": "Cash Register",
+      "customer": "Customer"
+    }
+  },
+  "commons": {
+    "messages": {
+      "welcome": "Welcome {{name}}",
+      "welcome_back": "Welcome back {{name}}",
+      "create": {
+        "error": "Oops, I'm sorry, something unexpected happened when trying to create the record, please try again",
+        "error_n": "Oops, I'm sorry, something unexpected happened when trying to create the records, please try again"
+      },
+      "update": {
+        "error": "Oops, I'm sorry, something unexpected happened when trying to update the registry, please try again",
+        "error_n": "Oops, I'm sorry, something unexpected happened when trying to update the records, please try again"
+      },
+      "destroy": {
+        "error": "Oops, I'm sorry, something unexpected happened when trying to remove the registry, please try again",
+        "error_n": "Oops, I'm sorry, something unexpected happened while trying to remove the records, please try again"
+      },
+      "fetch": {
+        "error": "Oops, I'm sorry, something unexpected happened when trying to recover the registry, please try again",
+        "error_n": "Oops, I'm sorry, something unexpected happened when trying to retrieve the records, please try again"
+      },
+      "forbidden": {
+        "title": "No permission required: 403",
+        "text": "It seems that you are trying something that does not have the necessary access level, please contact your administrator"
+      }
+    },
+    "buttons": {
+      "confirm": "Confirm",
+      "ok": "Ok",
+      "cancel": "Cancel",
+      "back": "Back",
+      "close": "Close",
+      "load_more": "Load more",
+      "next": "Next",
+      "exit": "Exit",
+      "save": "Save"
+    },
+    "dialogs": {
+      "confirm": {
+        "title": "Warning",
+        "text": "Do you want to proceed with this action?"
+      }
+    },
+    "labels": {
+      "search": "Search:",
+      "action": "Action"
+    }
+  }
+}

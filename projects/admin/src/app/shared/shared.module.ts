@@ -32,7 +32,8 @@ import {ShowButtonComponent} from './components/buttons/show-button/show-button.
 import {TrashButtonComponent} from './components/buttons/trash-button/trash-button.component';
 import {AvatarModule} from 'ngx-avatar';
 import {TranslateModule} from '@ngx-translate/core';
-import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
+import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
+import {CountrySelectorComponent} from "./components/country-selector/country-selector.component";
 
 const NG_MODULES = [
   CommonModule,
@@ -77,6 +78,7 @@ const COMPONENTS = [
   NextButtonComponent,
   ShowButtonComponent,
   TrashButtonComponent,
+  CountrySelectorComponent,
 ];
 
 const PIPES = [

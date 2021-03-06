@@ -10,4 +10,8 @@ export namespace LocalStorage {
   export const setJwt = (token: string): void => localStorage.setItem('token', token);
 
   export const reset = (): void => localStorage.clear();
+
+  export const setCountry = (name: string) => localStorage.setItem('country', name);
+
+  export const country = () => localStorage.getItem('country') || 'br';
 }
