@@ -6,7 +6,8 @@
     "in_use": {
       "email": "Email already in use",
       "phone": "Telephone already in use",
-      "cnpj": "CNPJ already in use"
+      "cnpj": "CNPJ already in use",
+      "name": "Name already in use"
     },
     "invalid": {
       "cnpj": "Enter a valid CNPJ"

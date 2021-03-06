@@ -4,7 +4,7 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store';
 import {ActivatedRoute} from '@angular/router';
 import {Organization} from '../../core/models/organization';
-import {CookieCodeValidators} from '../../shared/validators/cookie-code.validators';
+import {uButecoValidators} from '../../shared/validators/u-buteco.validators';
 import {OrganizationsService} from '../../core/services/api/organizations.service';
 import {UPDATE_ORGANIZATION} from '../../store/auth/auth.actions';
 import {Observable} from 'rxjs';
@@ -51,7 +51,7 @@ export class OrganizationComponent implements OnInit {
       id: [null, Validators.required],
       name: [null, Validators.required],
       phone: [null, Validators.required],
-      cnpj: [null, [Validators.required, CookieCodeValidators.cnpj], [CookieCodeValidators.uniqueCNPJ(this.organizationService)]],
+      cnpj: [null, [Validators.required, uButecoValidators.cnpj], [uButecoValidators.uniqueCNPJ(this.organizationService)]],
     });
   }
 

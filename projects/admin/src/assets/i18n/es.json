@@ -6,7 +6,8 @@
     "in_use": {
       "email": "Correo electrónico ya en uso",
       "phone": "Teléfono ya en uso",
-      "cnpj": "CNPJ ya en uso"
+      "cnpj": "CNPJ ya en uso",
+      "name": "Nombre ya en uso"
     },
     "invalid": {
       "cnpj": "Ingrese un CNPJ válido"
