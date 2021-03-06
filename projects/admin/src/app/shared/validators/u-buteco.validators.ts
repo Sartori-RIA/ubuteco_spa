@@ -4,8 +4,8 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {OrganizationsService} from '../../core/services/api/organizations.service';
 import {UserService} from '../../core/services/api/user.service';
-import {BeerStylesService} from "../../core/services/api/beer-styles.service";
-import {WineStyleService} from "../../core/services/api/wine-style.service";
+import {BeerStylesService} from '../../core/services/api/beer-styles.service';
+import {WineStyleService} from '../../core/services/api/wine-style.service';
 
 export namespace uButecoValidators {
   export function cpf(control: AbstractControl): { [key: string]: boolean } | null {
