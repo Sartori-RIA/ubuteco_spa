@@ -34,6 +34,7 @@ import {AvatarModule} from 'ngx-avatar';
 import {TranslateModule} from '@ngx-translate/core';
 import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
 import {CountrySelectorComponent} from "./components/country-selector/country-selector.component";
+import { DialogActionButtonsComponent } from './components/dialog-action-buttons/dialog-action-buttons.component';
 
 const NG_MODULES = [
   CommonModule,
@@ -79,6 +80,7 @@ const COMPONENTS = [
   ShowButtonComponent,
   TrashButtonComponent,
   CountrySelectorComponent,
+  DialogActionButtonsComponent
 ];
 
 const PIPES = [

@@ -321,6 +321,14 @@
     },
     "wines": {
       "fab": "Novo Vinho",
+      "dialog": {
+        "update": {
+          "title": "Atualizando o Vinho: #{{id}}"
+        },
+        "new": {
+          "title": "Novo Vinho"
+        }
+      },
       "messages": {
         "create": {
           "success": "Vinho adicionado com sucesso"

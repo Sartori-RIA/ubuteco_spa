@@ -321,6 +321,14 @@
     },
     "wines": {
       "fab": "Add Wine",
+      "dialog": {
+        "update": {
+          "title": "updating Wine: #{{id}}"
+        },
+        "new": {
+          "title": "Add Wine"
+        }
+      },
       "messages": {
         "create": {
           "success": "Wine added successfully"

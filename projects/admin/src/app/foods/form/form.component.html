@@ -1,6 +1,6 @@
 <div mat-dialog-title>
   <div fxFlex="100" class="text-center">
-    <h1 *ngIf="!!data.data && !data.disabled">{{'pages.foods.dialog.new.title'|translate:{id: data?.data?.id} }}</h1>
+    <h1 *ngIf="!!data.data && !data.disabled">{{'pages.foods.dialog.update.title'|translate:{id: data?.data?.id} }}</h1>
 
     <h1 *ngIf="!data.data && !data.disabled">{{'pages.foods.dialog.new.title'|translate}}</h1>
 
@@ -43,7 +43,10 @@
   </div>
 </div>
 <div mat-dialog-actions>
-  <app-confirm-button *ngIf="!data.disabled" (confirmed)="onSubmit()" ></app-confirm-button>
-  <span fxFlex></span>
-  <app-cancel-button *ngIf="!data.disabled" (cancel)="onCancel()"></app-cancel-button>
+  <app-dialog-action-buttons
+    (cancel)="onCancel()"
+    (confirm)="onSubmit()"
+    [show]="!data.disabled"
+    fxFill
+  ></app-dialog-action-buttons>
 </div>

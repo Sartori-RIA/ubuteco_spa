@@ -26,11 +26,11 @@ export class MakersFormDialogComponent implements OnInit {
     this.updateForm();
   }
 
-  onNoClick() {
+  onCancel() {
     this.dialogRef.close();
   }
 
-  onAddMaker() {
+  onSubmit() {
     if (this.form.valid) {
       const maker = this.mountMaker();
       if (maker.id) {

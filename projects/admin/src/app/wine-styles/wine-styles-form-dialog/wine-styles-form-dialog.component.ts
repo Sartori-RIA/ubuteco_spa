@@ -16,7 +16,7 @@ import {WineStyleService} from '../../core/services/api/wine-style.service';
 })
 export class WineStylesFormDialogComponent implements OnInit {
 
-  wineStyleControl = this.fb.control(null, [Validators.required]);
+  wineStyleControl: FormControl = this.mountForm();
 
   constructor(public dialogRef: MatDialogRef<WineStylesFormDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: WineStyle,
@@ -29,11 +29,11 @@ export class WineStylesFormDialogComponent implements OnInit {
     this.updateForm();
   }
 
-  onNoClick() {
+  onCancel() {
     this.dialogRef.close();
   }
 
-  onAddBeerStyle() {
+  onSubmit() {
     if (this.wineStyleControl.valid) {
       const style: WineStyle = {
         ...this.data,

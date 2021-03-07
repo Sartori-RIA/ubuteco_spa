@@ -78,7 +78,8 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   openCreateDialog() {
-    this.dialog.open(FormComponent, {disableClose: true});
+    const data: BaseDialogParams<Wine> = {data: undefined, disabled: false};
+    this.dialog.open(FormComponent, {disableClose: true, data});
   }
 
   delete(wine: Wine) {

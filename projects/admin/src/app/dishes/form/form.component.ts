@@ -105,6 +105,10 @@ export class FormComponent implements OnInit {
     this.ingredientsForm().removeAt(i);
   }
 
+  onCancel() {
+    this.dialogRef.close();
+  }
+
   private updateForm() {
     if (!!this.data.data) {
       const data = this.data.data;
