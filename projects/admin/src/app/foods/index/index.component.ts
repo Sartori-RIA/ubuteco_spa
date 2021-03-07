@@ -16,6 +16,8 @@ import {AppState} from '../../store';
 import {MatDialog} from '@angular/material/dialog';
 import {FormComponent} from '../form/form.component';
 import {canCreateFoods, canDestroyFoods, canEditFoods} from '../../store/auth/auth.selectors';
+import {BaseDialogParams} from "../../core/models/base.model";
+import {Beer} from "../../core/models/beer";
 
 @Component({
   selector: 'app-index',
@@ -82,8 +84,19 @@ export class IndexComponent implements OnInit, OnDestroy {
     this.dataSource.filter = word.trim().toLowerCase();
   }
 
+  openShowDialog(food: Food) {
+    const data: BaseDialogParams<Food> = {data: food, disabled: true};
+    this.dialog.open(FormComponent, {disableClose: false, data});
+  }
+
   openCreateDialog() {
-    this.dialog.open(FormComponent, {disableClose: true});
+    const data: BaseDialogParams<Food> = {data: undefined, disabled: false};
+    this.dialog.open(FormComponent, {disableClose: true, data});
+  }
+
+  openEditDialog(food: Food) {
+    const data: BaseDialogParams<Food> = {data: food, disabled: false};
+    this.dialog.open(FormComponent, {disableClose: true, data});
   }
 
   private updateFoodList() {

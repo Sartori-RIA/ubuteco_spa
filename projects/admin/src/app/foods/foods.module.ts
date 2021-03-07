@@ -8,14 +8,12 @@ import * as featureReducers from '../store/foods/food.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {FoodEffects} from '../store/foods/food.effects';
 import {IndexComponent} from './index/index.component';
-import { ShowComponent } from './show/show.component';
 
 
 @NgModule({
   declarations: [
     FormComponent,
     IndexComponent,
-    ShowComponent
   ],
   imports: [
     SharedModule,
