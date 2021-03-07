@@ -15,6 +15,7 @@ import {MakersFormDialogComponent} from '../../makers/makers-form-dialog/makers-
 import {REQUEST_ALL_MAKERS} from '../../store/makers/makers.actions';
 import {Beer} from '../../core/models/beer';
 import {canCreateBeerStyles, canCreateMakers} from '../../store/auth/auth.selectors';
+import {BaseDialogParams} from '../../core/models/base.model';
 
 @Component({
   selector: 'app-form',
@@ -33,7 +34,7 @@ export class FormComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private store: Store<AppState>,
               private dialogRef: MatDialogRef<FormComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Beer,
+              @Inject(MAT_DIALOG_DATA) public data: BaseDialogParams<Beer>,
               private dialog: MatDialog) {
   }
 
@@ -82,17 +83,21 @@ export class FormComponent implements OnInit {
   }
 
   private updateForm() {
-    if (this.data) {
+    if (this.data.data) {
+      const beer = this.data?.data;
       this.form.patchValue({
-        name: this.data.name,
-        price: this.data.price_cents / 100,
-        beer_style: this.data.beer_style,
-        maker: this.data.maker,
-        ibu: this.data.ibu,
-        alcohol: this.data.alcohol,
-        quantity_stock: this.data.quantity_stock,
-        description: this.data.description
+        name: beer.name,
+        price: beer.price_cents / 100,
+        beer_style: beer.beer_style,
+        maker: beer.maker,
+        ibu: beer.ibu,
+        alcohol: beer.alcohol,
+        quantity_stock: beer.quantity_stock,
+        description: beer.description
       });
+      if (!!this.data.disabled) {
+        this.form.disable();
+      }
     }
   }
 
@@ -128,7 +133,7 @@ export class FormComponent implements OnInit {
       maker_id: value.maker.id,
       alcohol: value.alcohol,
       quantity_stock: value.quantity_stock,
-      id: this.data?.id,
+      id: this.data?.data?.id,
     };
   }
 }

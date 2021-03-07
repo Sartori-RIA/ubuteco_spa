@@ -11,7 +11,8 @@ import {selectAllFoodsOrderedByName} from '../../store/foods/food.selectors';
 import {Maker} from '../../core/models/maker';
 import {REQUEST_ALL_FOODS} from '../../store/foods/food.actions';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {CREATE_DISH, REMOVE_DISH, REMOVE_DISH_ITEM, UPDATE_DISH} from '../../store/dishes/dishes.actions';
+import {CREATE_DISH, REMOVE_DISH_ITEM, UPDATE_DISH} from '../../store/dishes/dishes.actions';
+import {BaseDialogParams} from "../../core/models/base.model";
 
 @Component({
   selector: 'app-restaurant-menu-form',
@@ -22,7 +23,6 @@ import {CREATE_DISH, REMOVE_DISH, REMOVE_DISH_ITEM, UPDATE_DISH} from '../../sto
 export class FormComponent implements OnInit {
   form: FormGroup;
   ingredients: FormArray;
-  readonly dish: Dish = this.activatedRoute.snapshot.data.item;
   readonly foods$: Observable<Food[]> = this.store.pipe(
     select(selectAllFoodsOrderedByName(true))
   );
@@ -30,7 +30,7 @@ export class FormComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private store: Store<AppState>,
               private dialogRef: MatDialogRef<FormComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Dish,
+              @Inject(MAT_DIALOG_DATA) public data: BaseDialogParams<Dish>,
               private dialog: MatDialog,
               private router: Router,
               private feedbackService: FeedbackService,
@@ -87,10 +87,6 @@ export class FormComponent implements OnInit {
     }
   }
 
-  toTrash() {
-    this.store.dispatch(REMOVE_DISH({id: this.dish.id}));
-  }
-
   ingredientsForm(): FormArray {
     return this.form.get('ingredients') as FormArray;
   }
@@ -109,13 +105,18 @@ export class FormComponent implements OnInit {
     this.ingredientsForm().removeAt(i);
   }
 
+  onCancel() {
+    this.dialogRef.close();
+  }
+
   private updateForm() {
-    if (this.dish) {
+    if (!!this.data.data) {
+      const data = this.data.data;
       this.form.patchValue({
-        name: this.dish.name,
-        price: this.dish.price_cents / 100
+        name: data.name,
+        price: data.price_cents / 100
       });
-      this.dish.dish_ingredients.forEach((v, index) => {
+      data.dish_ingredients?.forEach((v, index) => {
         let form = (this.form.controls.ingredients as FormArray).controls[index] as FormGroup;
         if (!form) {
           this.addIngredient();
@@ -127,6 +128,9 @@ export class FormComponent implements OnInit {
           id: v.id
         });
       });
+      if (this.data.disabled) {
+        this.form.disable();
+      }
     }
   }
 

@@ -11,13 +11,11 @@ import { MakersEffects } from '../store/makers/makers.effects';
 import { IndexComponent } from './index/index.component';
 import { SharedModule } from '../shared/shared.module';
 import { MakersModule } from '../makers/makers.module';
-import { ShowComponent } from './show/show.component';
 
 @NgModule({
   declarations: [
     FormComponent,
     IndexComponent,
-    ShowComponent
   ],
   imports: [
     SharedModule,

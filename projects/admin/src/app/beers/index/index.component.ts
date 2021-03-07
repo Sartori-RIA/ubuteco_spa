@@ -16,6 +16,7 @@ import {AppState} from '../../store';
 import {MatDialog} from '@angular/material/dialog';
 import {FormComponent} from '../form/form.component';
 import {canCreateBeers, canDestroyBeers, canEditBeers, canShowBeerActions} from '../../store/auth/auth.selectors';
+import {BaseDialogParams} from '../../core/models/base.model';
 
 @Component({
   selector: 'app-index',
@@ -87,16 +88,27 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   openCreateDialog() {
-    this.dialog.open(FormComponent, {
-      disableClose: true
-    });
+    const data: BaseDialogParams<Beer> = {
+      data: undefined,
+      disabled: false,
+    };
+    this.dialog.open(FormComponent, {disableClose: true, data});
   }
 
   openEditDialog(beer: Beer) {
-    this.dialog.open(FormComponent, {
-      disableClose: true,
-      data: beer
-    });
+    const data: BaseDialogParams<Beer> = {
+      data: beer,
+      disabled: false,
+    };
+    this.dialog.open(FormComponent, {disableClose: true, data});
+  }
+
+  showElement(beer: Beer) {
+    const data: BaseDialogParams<Beer> = {
+      data: beer,
+      disabled: true,
+    };
+    this.dialog.open(FormComponent, {data});
   }
 
   private updateBeerList() {

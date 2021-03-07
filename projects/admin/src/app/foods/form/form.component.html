@@ -1,8 +1,11 @@
 <div mat-dialog-title>
-  <h1 *ngIf="data; else newFood">{{'pages.foods.dialog.update.title'|translate: {id: data.id} }}</h1>
-  <ng-template #newFood>
-    <h1>{{'pages.foods.dialog.new.title'|translate}}</h1>
-  </ng-template>
+  <div fxFlex="100" class="text-center">
+    <h1 *ngIf="!!data.data && !data.disabled">{{'pages.foods.dialog.update.title'|translate:{id: data?.data?.id} }}</h1>
+
+    <h1 *ngIf="!data.data && !data.disabled">{{'pages.foods.dialog.new.title'|translate}}</h1>
+
+    <h1 *ngIf="!!data.data && data.disabled">{{data.data.name}}</h1>
+  </div>
 </div>
 
 <div mat-dialog-content>
@@ -40,7 +43,10 @@
   </div>
 </div>
 <div mat-dialog-actions>
-  <button (click)="onSubmit()" mat-raised-button color="primary">{{'commons.buttons.save'|translate}}</button>
-  <span fxFlex></span>
-  <app-cancel-button (cancel)="onCancel()"></app-cancel-button>
+  <app-dialog-action-buttons
+    (cancel)="onCancel()"
+    (confirm)="onSubmit()"
+    [show]="!data.disabled"
+    fxFill
+  ></app-dialog-action-buttons>
 </div>

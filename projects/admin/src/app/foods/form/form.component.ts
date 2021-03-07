@@ -9,6 +9,7 @@ import {CREATE_FOOD, UPDATE_FOOD} from '../../store/foods/food.actions';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import * as moment from 'moment';
 import {CustomValidators} from 'ng2-validation';
+import {BaseDialogParams} from '../../core/models/base.model';
 
 @Component({
   selector: 'app-food-form',
@@ -25,7 +26,7 @@ export class FormComponent implements OnInit {
               private dialog: MatDialog,
               private feedbackService: FeedbackService,
               private dialogRef: MatDialogRef<FormComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Food,
+              @Inject(MAT_DIALOG_DATA) public data: BaseDialogParams<Food>,
               private foodService: FoodsService,
               private fb: FormBuilder) {
   }
@@ -67,13 +68,17 @@ export class FormComponent implements OnInit {
   }
 
   private updateForm() {
-    if (this.data) {
+    if (!!this.data.data) {
+      const data = this.data.data;
       this.form.patchValue({
-        name: this.data.name,
-        price: this.data.price_cents / 100,
-        quantity_stock: this.data.quantity_stock,
-        valid_until: this.data.valid_until,
+        name: data.name,
+        price: data.price_cents / 100,
+        quantity_stock: data.quantity_stock,
+        valid_until: data.valid_until,
       });
+      if (this.data.disabled) {
+        this.form.disable();
+      }
     }
   }
 
@@ -84,7 +89,7 @@ export class FormComponent implements OnInit {
       price: value.price,
       quantity_stock: value.quantity_stock,
       valid_until: value.valid_until,
-      id: this.data?.id
+      id: this.data?.data?.id
     };
   }
 

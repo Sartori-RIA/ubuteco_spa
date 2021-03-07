@@ -19,6 +19,7 @@ import {REQUEST_ALL_WINE_STYLES} from '../../store/wine-styles/wine-styles.actio
 import {CREATE_WINE, UPDATE_WINE} from '../../store/wines/wines.actions';
 import {WineStylesFormDialogComponent} from '../../wine-styles/wine-styles-form-dialog/wine-styles-form-dialog.component';
 import {canCreateMakers, canCreateWineStyles} from '../../store/auth/auth.selectors';
+import {BaseDialogParams} from '../../core/models/base.model';
 
 @Component({
   selector: 'app-form',
@@ -35,7 +36,7 @@ export class FormComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder,
               private dialogRef: MatDialogRef<FormComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Wine,
+              @Inject(MAT_DIALOG_DATA) public data: BaseDialogParams<Wine>,
               private store: Store<AppState>,
               private changeDetectorRefs: ChangeDetectorRef,
               private dialog: MatDialog) {
@@ -103,30 +104,19 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   private updateForm() {
-    if (this.data?.id) {
+    if (this.data?.data) {
       const {
-        name,
-        abv,
-        price_cents,
-        description,
-        wine_style,
-        quantity_stock,
-        maker,
-        grapes,
-        ripening,
-        vintage_wine,
-        visual
-      } = this.data;
+        name, abv, price_cents, description, wine_style, quantity_stock,
+        maker, grapes, ripening, vintage_wine, visual
+      } = this.data.data;
       this.form.patchValue({
-        name,
-        price: price_cents / 100,
-        wine_style,
-        maker,
-        abv,
-        quantity_stock,
-        description,
+        name, price: price_cents / 100, wine_style,
+        maker, abv, quantity_stock, description,
         grapes, ripening, vintage_wine, visual
       });
+      if (this.data.disabled) {
+        this.form.disable();
+      }
     }
   }
 
@@ -166,7 +156,7 @@ export class FormComponent implements OnInit, OnDestroy {
       visual: value.visual,
       ripening: value.ripening,
       grapes: value.grapes,
-      id: this.data?.id,
+      id: this.data?.data?.id,
     };
   }
 }

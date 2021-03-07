@@ -29,11 +29,11 @@ export class BeerStylesFormDialogComponent implements OnInit {
     this.updateForm();
   }
 
-  onNoClick() {
+  onCancel() {
     this.dialogRef.close();
   }
 
-  onAddBeerStyle() {
+  onSubmit() {
     if (this.beerStyleControl.valid) {
       const style: BeerStyle = {
         ...this.data,

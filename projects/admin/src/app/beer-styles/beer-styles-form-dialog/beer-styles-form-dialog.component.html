@@ -22,7 +22,9 @@
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button color="warn" (click)="onNoClick()">{{'commons.buttons.cancel'|translate}}</button>
-  <span fxFlex></span>
-  <button mat-raised-button color="primary" (click)="onAddBeerStyle()">{{'commons.buttons.save'|translate}}</button>
+  <app-dialog-action-buttons
+    (cancel)="onCancel()"
+    fxFill
+    (confirm)="onSubmit()"
+  ></app-dialog-action-buttons>
 </div>

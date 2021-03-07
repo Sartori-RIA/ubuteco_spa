@@ -13,14 +13,12 @@ import {BeerStylesEffects} from '../store/beer-styles/beer-styles.effects';
 import {MakersEffects} from '../store/makers/makers.effects';
 import {MakersModule} from '../makers/makers.module';
 import {BeerStylesModule} from '../beer-styles/beer-styles.module';
-import { FormComponent } from './form/form.component';
-import { ShowComponent } from './show/show.component';
+import {FormComponent} from './form/form.component';
 
 @NgModule({
   declarations: [
     IndexComponent,
     FormComponent,
-    ShowComponent,
   ],
   imports: [
     SharedModule,

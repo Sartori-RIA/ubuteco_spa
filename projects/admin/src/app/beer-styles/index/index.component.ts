@@ -72,7 +72,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     return this.updateList();
   }
 
-  deleteTable(beerStyle: BeerStyle) {
+  destroy(beerStyle: BeerStyle) {
     this.store.dispatch(DELETE_BEER_STYLE({id: beerStyle.id}));
   }
 

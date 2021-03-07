@@ -47,13 +47,13 @@ export class TableFormDialogComponent implements OnInit {
       } else {
         this.store.dispatch(CREATE_TABLE({table: data}));
       }
-      this.onNoClick();
+      this.dialogRef.close();
     } else {
       this.form.markAllAsTouched();
     }
   }
 
-  onNoClick() {
+  onCancel() {
     this.dialogRef.close();
   }
 

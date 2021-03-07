@@ -15,11 +15,10 @@ import {
 } from '../../store/wine-styles/wine-styles.selectors';
 import {DELETE_WINE_STYLE, REQUEST_ALL_WINE_STYLES} from '../../store/wine-styles/wine-styles.actions';
 import {
-  canCreateBeers, canCreateWineStyles,
-  canDestroyBeers, canDestroyWineStyles,
-  canEditBeers, canEditWineStyles,
-  canShowBeerActions, canShowWineStyleActions,
-  selectIsSuperAdmin
+  canCreateWineStyles,
+  canDestroyWineStyles,
+  canEditWineStyles,
+  canShowWineStyleActions
 } from '../../store/auth/auth.selectors';
 
 @Component({
@@ -74,7 +73,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     return this.updateList();
   }
 
-  deleteTable(beerStyle: BeerStyle) {
+  destroy(beerStyle: BeerStyle) {
     this.store.dispatch(DELETE_WINE_STYLE({id: beerStyle.id}));
   }
 
