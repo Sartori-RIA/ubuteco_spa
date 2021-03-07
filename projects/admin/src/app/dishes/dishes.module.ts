@@ -8,15 +8,12 @@ import {FormComponent} from './form/form.component';
 import {SharedModule} from '../shared/shared.module';
 import {FoodEffects} from '../store/foods/food.effects';
 import {IndexComponent} from './index/index.component';
-import {DishesHomeComponent} from './dishes-home.component';
 import {DishesRoutingModule} from './dishes-routing.module';
-
 
 @NgModule({
   declarations: [
     IndexComponent,
     FormComponent,
-    DishesHomeComponent,
   ],
   imports: [
     SharedModule,

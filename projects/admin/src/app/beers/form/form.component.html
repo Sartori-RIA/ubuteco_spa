@@ -1,9 +1,11 @@
-<div mat-dialog-title class="text-center">
-  <h1 *ngIf="!!data.data && !data.disabled">{{'pages.beers.dialog.new.title'|translate:{id: data?.data?.id} }}</h1>
+<div mat-dialog-title>
+  <div fxFlex="100" class="text-center">
+    <h1 *ngIf="!!data.data && !data.disabled">{{'pages.beers.dialog.new.title'|translate:{id: data?.data?.id} }}</h1>
 
-  <h1 *ngIf="!data.data && !data.disabled">{{'pages.beers.dialog.new.title'|translate}}</h1>
+    <h1 *ngIf="!data.data && !data.disabled">{{'pages.beers.dialog.new.title'|translate}}</h1>
 
-  <h1 *ngIf="!!data.data && data.disabled">{{data.data.name}}</h1>
+    <h1 *ngIf="!!data.data && data.disabled">{{data.data.name}}</h1>
+  </div>
 </div>
 <div mat-dialog-content>
   <div [formGroup]="form">

@@ -13,9 +13,10 @@ import {
   selectAllDishesOrderedByPrice
 } from '../../store/dishes/dishes.selectors';
 import {REMOVE_DISH, REQUEST_ALL_DISHES} from '../../store/dishes/dishes.actions';
-import {MatDialog} from "@angular/material/dialog";
-import {FormComponent} from "../form/form.component";
-import {canCreateDishes, canDestroyDishes, canEditDishes, canShowDishActions} from "../../store/auth/auth.selectors";
+import {MatDialog} from '@angular/material/dialog';
+import {FormComponent} from '../form/form.component';
+import {canCreateDishes, canDestroyDishes, canEditDishes} from '../../store/auth/auth.selectors';
+import {BaseDialogParams} from "../../core/models/base.model";
 
 @Component({
   selector: 'app-index',
@@ -84,7 +85,27 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   openForm() {
-    this.dialog.open(FormComponent, {});
+    const data: BaseDialogParams<Dish> = {
+      data: undefined,
+      disabled: false,
+    };
+    this.dialog.open(FormComponent, {disableClose: true, data});
+  }
+
+  openEditForm(dish: Dish) {
+    const data: BaseDialogParams<Dish> = {
+      data: dish,
+      disabled: false,
+    };
+    this.dialog.open(FormComponent, {disableClose: true, data});
+  }
+
+  openShowForm(dish: Dish) {
+    const data: BaseDialogParams<Dish> = {
+      data: dish,
+      disabled: true,
+    };
+    this.dialog.open(FormComponent, {disableClose: false, data});
   }
 
   private updateRestaurantMenuList() {

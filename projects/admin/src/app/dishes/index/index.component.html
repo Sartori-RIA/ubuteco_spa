@@ -43,8 +43,8 @@
       <th mat-header-cell *matHeaderCellDef>{{'commons.labels.action'|translate}}</th>
       <td mat-cell *matCellDef="let element">
         <app-trash-button *ngIf="canDestroy$" (deleteElement)="deleteDish(element)"></app-trash-button>
-        <app-edit-button *ngIf="canEdit$ | async"></app-edit-button>
-        <app-show-button></app-show-button>
+        <app-edit-button *ngIf="canEdit$ | async" (edit)="openEditForm(element)"></app-edit-button>
+        <app-show-button (showElement)="openShowForm(element)"></app-show-button>
       </td>
     </ng-container>
 

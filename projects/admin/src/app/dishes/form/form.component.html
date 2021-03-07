@@ -1,9 +1,10 @@
 <div mat-dialog-title>
   <div fxFlex="100" class="text-center">
-    <h2 *ngIf="dish; else newItem">{{'pages.dishes.dialog.update.title'|translate:{id: data.id} }}</h2>
-    <ng-template #newItem>
-      <h2>{{'pages.dishes.dialog.new.title'|translate}}</h2>
-    </ng-template>
+    <h1 *ngIf="!!data.data && !data.disabled">{{'pages.dishes.dialog.new.title'|translate:{id: data?.data?.id} }}</h1>
+
+    <h1 *ngIf="!data.data && !data.disabled">{{'pages.dishes.dialog.new.title'|translate}}</h1>
+
+    <h1 *ngIf="!!data.data && data.disabled">{{data.data.name}}</h1>
   </div>
 </div>
 
@@ -29,7 +30,8 @@
         <h3>{{'pages.dishes.labels.ingredients'|translate}}</h3>
       </div>
 
-      <div class="pt-05" fxFill formArrayName="ingredients" *ngFor="let item of ingredientsForm().controls; let i=index">
+      <div class="pt-05" fxFill formArrayName="ingredients"
+           *ngFor="let item of ingredientsForm().controls; let i=index">
 
         <div [formGroupName]="i.toString()" fxLayout="row wrap" fxLayoutAlign="space-between center">
 
@@ -53,7 +55,8 @@
               <input formControlName="quantity" matInput>
             </mat-form-field>
 
-            <button (click)="onRemoveItem(i)" fxFlexOffset="10" color="red" mat-mini-fab matTooltip="Remover Ingrediente">
+            <button *ngIf="!data.disabled" (click)="onRemoveItem(i)" fxFlexOffset="10" color="red" mat-mini-fab
+                    matTooltip="Remover Ingrediente">
               <mat-icon>delete_outline</mat-icon>
             </button>
           </div>
@@ -65,13 +68,15 @@
 </div>
 
 <div mat-dialog-actions>
-  <button (click)="onSubmit()" mat-raised-button color="primary">{{'commons.buttons.save'|translate}}</button>
-  <button (click)="addIngredient()" [matTooltip]="'pages.dishes.labels.more_ingredient'|translate" mat-raised-button
+
+  <app-confirm-button *ngIf="!data.disabled" (confirmed)="onSubmit()"></app-confirm-button>
+
+  <button *ngIf="!data.disabled"
+          (click)="addIngredient()"
+          [matTooltip]="'pages.dishes.labels.more_ingredient'|translate"
+          mat-raised-button
           color="primary">
     <mat-icon>add</mat-icon>
   </button>
-  <button (click)="toTrash()" [matTooltip]="'pages.dishes.labels.remove_ingredient'|translate" mat-raised-button
-          color="warn" *ngIf="dish">
-    <mat-icon>delete_outline</mat-icon>
-  </button>
+
 </div>
