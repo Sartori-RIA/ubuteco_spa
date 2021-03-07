@@ -15,8 +15,8 @@ import {Wine} from '../../core/models/wine';
 import {REMOVE_WINE, REQUEST_ALL_WINES} from '../../store/wines/wines.actions';
 import {MatDialog} from '@angular/material/dialog';
 import {FormComponent} from '../form/form.component';
-import {ShowComponent} from '../show/show.component';
-import {canCreateWines, canDestroyWines, canEditWines, canShowWineActions} from '../../store/auth/auth.selectors';
+import {canCreateWines, canDestroyWines, canEditWines} from '../../store/auth/auth.selectors';
+import {BaseDialogParams} from '../../core/models/base.model';
 
 @Component({
   selector: 'app-index',
@@ -85,8 +85,20 @@ export class IndexComponent implements OnInit, OnDestroy {
     this.store.dispatch(REMOVE_WINE({id: wine.id}));
   }
 
-  show(data: Wine) {
-    this.dialog.open(ShowComponent, {data});
+  openShow(wine: Wine) {
+    const data: BaseDialogParams<Wine> = {data: wine, disabled: true};
+    this.dialog.open(FormComponent, {data, disableClose: false});
+  }
+
+  openEdit(wine: Wine) {
+    const data: BaseDialogParams<Wine> = {data: wine, disabled: false};
+    this.dialog.open(FormComponent, {data, disableClose: true});
+  }
+
+
+  openCreate() {
+    const data: BaseDialogParams<Wine> = {data: undefined, disabled: false};
+    this.dialog.open(FormComponent, {data, disableClose: true});
   }
 
   applyFilter(word: string) {

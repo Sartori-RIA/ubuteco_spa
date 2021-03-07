@@ -19,7 +19,6 @@
          (matSortChange)="sortData($event)"
   >
 
-
     <ng-container matColumnDef="id">
       <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'attributes.base.id'|translate|uppercase}}</th>
       <td mat-cell *matCellDef="let element"> {{element?.id}} </td>
@@ -49,8 +48,8 @@
       <th mat-header-cell *matHeaderCellDef>{{'commons.labels.action'|translate}}</th>
       <td mat-cell *matCellDef="let element">
         <app-trash-button *ngIf="canDestroy$ | async" (deleteElement)="delete(element)"></app-trash-button>
-        <app-edit-button *ngIf="canEdit$"></app-edit-button>
-        <app-show-button></app-show-button>
+        <app-edit-button *ngIf="canEdit$" (edit)="openEdit(element)"></app-edit-button>
+        <app-show-button (showElement)="openShow(element)"></app-show-button>
       </td>
     </ng-container>
 

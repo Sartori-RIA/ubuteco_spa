@@ -14,13 +14,11 @@ import {FormComponent} from './form/form.component';
 import {WinesEffects} from '../store/wines/wines.effects';
 import {WineStylesEffects} from '../store/wine-styles/wine-styles.effects';
 import {WineStylesModule} from '../wine-styles/wine-styles.module';
-import { ShowComponent } from './show/show.component';
 
 @NgModule({
   declarations: [
     IndexComponent,
     FormComponent,
-    ShowComponent,
   ],
   imports: [
     SharedModule,
