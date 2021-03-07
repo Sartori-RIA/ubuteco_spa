@@ -11,7 +11,13 @@ export namespace LocalStorage {
 
   export const reset = (): void => localStorage.clear();
 
-  export const setCountry = (name: string) => localStorage.setItem('country', name);
+  export const setCountry = (name: string): void => localStorage.setItem('country', name);
 
-  export const country = () => localStorage.getItem('country') || 'br';
+  export const country = (): string => {
+    const data = localStorage.getItem('country');
+    if (data === 'pt') {
+      setCountry('br');
+    }
+    return localStorage.getItem('country') || 'br';
+  };
 }

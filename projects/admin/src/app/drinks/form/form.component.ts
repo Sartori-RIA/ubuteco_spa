@@ -13,6 +13,7 @@ import {CREATE_DRINK, UPDATE_DRINK} from '../../store/drinks/drink.actions';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MakersFormDialogComponent} from '../../makers/makers-form-dialog/makers-form-dialog.component';
 import {canCreateMakers} from '../../store/auth/auth.selectors';
+import {BaseDialogParams} from '../../core/models/base.model';
 
 @Component({
   selector: 'app-drink-form',
@@ -29,7 +30,7 @@ export class FormComponent implements OnInit {
   constructor(private store: Store<AppState>,
               private drinkService: DrinksService,
               private dialogRef: MatDialogRef<FormComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Drink,
+              @Inject(MAT_DIALOG_DATA) public data: BaseDialogParams<Drink>,
               private dialog: MatDialog,
               private feedbackService: FeedbackService,
               private fb: FormBuilder) {
@@ -82,15 +83,19 @@ export class FormComponent implements OnInit {
   }
 
   private updateForm() {
-    if (this.data) {
+    if (!!this.data.data) {
+      const data = this.data.data;
       this.form.patchValue({
-        name: this.data.name,
-        price: this.data.price_cents / 100,
-        maker: this.data.maker,
-        quantity_stock: this.data.quantity_stock,
-        description: this.data.description,
-        flavor: this.data.flavor
+        name: data.name,
+        price: data.price_cents / 100,
+        maker: data.maker,
+        quantity_stock: data.quantity_stock,
+        description: data.description,
+        flavor: data.flavor
       });
+      if (this.data.disabled) {
+        this.form.disable();
+      }
     }
   }
 
@@ -103,7 +108,7 @@ export class FormComponent implements OnInit {
       maker_id: value.maker?.id,
       quantity_stock: value.quantity_stock,
       flavor: value.flavor,
-      id: this.data?.id,
+      id: this.data?.data?.id,
     };
   }
 

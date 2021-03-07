@@ -25,8 +25,8 @@ import {AppState} from '../../store';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatDialog} from '@angular/material/dialog';
 import {FormComponent} from '../form/form.component';
-import {ShowComponent} from '../show/show.component';
-import {canCreateDrinks, canDestroyDrinks, canEditDrinks} from "../../store/auth/auth.selectors";
+import {canCreateDrinks, canDestroyDrinks, canEditDrinks} from '../../store/auth/auth.selectors';
+import {BaseDialogParams} from '../../core/models/base.model';
 
 @Component({
   selector: 'app-index',
@@ -98,8 +98,9 @@ export class IndexComponent implements OnInit, OnDestroy, AfterViewInit {
     this.store.dispatch(REMOVE_DRINK({id: drink.id}));
   }
 
-  show(data: Drink) {
-    this.dialog.open(ShowComponent, {data});
+  openShowDialog(drink: Drink) {
+    const data: BaseDialogParams<Drink> = {data: drink, disabled: true};
+    this.dialog.open(FormComponent, {disableClose: false, data});
   }
 
   applyFilter(word: string) {
@@ -110,9 +111,13 @@ export class IndexComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   openCreateDialog() {
-    this.dialog.open(FormComponent, {
-      disableClose: true
-    });
+    const data: BaseDialogParams<Drink> = {data: undefined, disabled: false};
+    this.dialog.open(FormComponent, {disableClose: true, data});
+  }
+
+  openEditDialog(drink: Drink) {
+    const data: BaseDialogParams<Drink> = {data: drink, disabled: false};
+    this.dialog.open(FormComponent, {disableClose: true, data});
   }
 
   private updateBeerList() {
