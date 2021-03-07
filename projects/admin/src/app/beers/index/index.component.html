@@ -49,7 +49,7 @@
       <td mat-cell *matCellDef="let element">
         <app-trash-button *ngIf="canDestroy$ | async" (deleteElement)="deleteBeer(element)"></app-trash-button>
         <app-edit-button *ngIf="canEdit$" (edit)="openEditDialog(element)"></app-edit-button>
-        <app-show-button></app-show-button>
+        <app-show-button (showElement)="showElement(element)" ></app-show-button>
       </td>
     </ng-container>
 

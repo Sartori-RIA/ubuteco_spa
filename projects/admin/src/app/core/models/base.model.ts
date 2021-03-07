@@ -10,3 +10,8 @@ export interface PictureFromS3 {
     url: string;
   };
 }
+
+export interface BaseDialogParams<T> {
+  data: T;
+  disabled: boolean;
+}
