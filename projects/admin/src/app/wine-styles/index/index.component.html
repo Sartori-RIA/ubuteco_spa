@@ -32,8 +32,13 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>{{'commons.labels.action'|translate}}</th>
       <td mat-cell *matCellDef="let element">
-        <app-trash-button *ngIf="canDestroy$ | async" (deleteElement)="deleteTable(element)"></app-trash-button>
-        <app-edit-button *ngIf="canEdit$ | async" (edit)="openFormDialog(element)"></app-edit-button>
+        <app-table-action-buttons
+          [canDestroy]="canDestroy$ | async"
+          [canEdit]="canEdit$ | async"
+          [canShow]="false"
+          (destroy)="destroy(element)"
+          (update)="openFormDialog(element)"
+        ></app-table-action-buttons>
       </td>
     </ng-container>
 

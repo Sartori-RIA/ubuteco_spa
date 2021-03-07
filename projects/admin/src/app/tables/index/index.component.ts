@@ -66,7 +66,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     return this.updateList();
   }
 
-  deleteTable(table: Table) {
+  destroy(table: Table) {
     this.store.dispatch(REMOVE_TABLE({id: table.id}));
   }
 

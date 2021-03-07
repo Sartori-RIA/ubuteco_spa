@@ -16,7 +16,7 @@ import {REMOVE_DISH, REQUEST_ALL_DISHES} from '../../store/dishes/dishes.actions
 import {MatDialog} from '@angular/material/dialog';
 import {FormComponent} from '../form/form.component';
 import {canCreateDishes, canDestroyDishes, canEditDishes} from '../../store/auth/auth.selectors';
-import {BaseDialogParams} from "../../core/models/base.model";
+import {BaseDialogParams} from '../../core/models/base.model';
 
 @Component({
   selector: 'app-index',

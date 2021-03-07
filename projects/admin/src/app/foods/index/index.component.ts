@@ -16,8 +16,7 @@ import {AppState} from '../../store';
 import {MatDialog} from '@angular/material/dialog';
 import {FormComponent} from '../form/form.component';
 import {canCreateFoods, canDestroyFoods, canEditFoods} from '../../store/auth/auth.selectors';
-import {BaseDialogParams} from "../../core/models/base.model";
-import {Beer} from "../../core/models/beer";
+import {BaseDialogParams} from '../../core/models/base.model';
 
 @Component({
   selector: 'app-index',
