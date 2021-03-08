@@ -48,12 +48,12 @@ export class NavigationService {
       canShow$: this.store.pipe(select(canReadMakers))
     },
     {
-      name: 'routes.employees',
+      name: 'routes.users',
       tooltip: 'Blank',
       canShow$: this.store.pipe(select(canReadEmployees)),
       state: 'empregados',
       iconType: 'material-design',
-      icon: 'users'
+      icon: 'group'
     },
     {
       name: 'routes.beer_styles',

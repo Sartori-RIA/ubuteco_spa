@@ -6,10 +6,11 @@ import {StoreModule} from '@ngrx/store';
 import * as fromEmployees from '../store/employees/employees.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {EmployeesEffects} from '../store/employees/employees.effects';
+import { IndexComponent } from './index/index.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [IndexComponent],
   imports: [
     SharedModule,
     EmployeesRoutingModule,

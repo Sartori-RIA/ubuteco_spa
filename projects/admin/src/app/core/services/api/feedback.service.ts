@@ -90,4 +90,6 @@ export type RegisterType =
   | 'order_item'
   | 'profile'
   | 'organizations'
-  | 'theme';
+  | 'theme'
+  | 'users'
+  ;
