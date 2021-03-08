@@ -3,10 +3,12 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {uButecoValidators} from '../../shared/validators/u-buteco.validators';
 import {UserService} from '../../core/services/api/user.service';
 import {OrganizationsService} from '../../core/services/api/organizations.service';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store';
 import {SIGN_UP} from '../../store/auth/auth.actions';
 import {PasswordValidators} from 'ngx-validators';
+import {Observable} from 'rxjs';
+import {selectAuthLoading} from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,6 +19,7 @@ import {PasswordValidators} from 'ngx-validators';
 export class SignUpComponent implements OnInit {
 
   form: FormGroup = this.mountForm();
+  loading$: Observable<boolean> = this.store.pipe(select(selectAuthLoading));
 
   constructor(private fb: FormBuilder,
               private store: Store<AppState>,

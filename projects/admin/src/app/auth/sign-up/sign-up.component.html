@@ -114,9 +114,19 @@
     >{{'pages.auth.sign_up.accept_terms' | translate}}
     </mat-checkbox
     >
-    <button (click)="onSubmit()" mat-raised-button color="primary"
-    >{{'pages.auth.buttons.sign_up' |translate}}
-    </button>
+
+    <div fxLayout="row" fxFill>
+
+      <app-button-loading
+        color="primary"
+        style="width: 100%"
+        [loading]="loading$ | async"
+        (btnClick)="onSubmit()"
+      >
+        {{'pages.auth.buttons.sign_up' | translate }}
+      </app-button-loading>
+    </div>
+
     <mat-divider class="my-32"></mat-divider>
 
 

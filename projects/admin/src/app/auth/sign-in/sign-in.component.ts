@@ -4,7 +4,7 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store';
 import {SIGN_IN} from '../../store/auth/auth.actions';
 import {Observable} from 'rxjs';
-import {selectSignInErrors} from '../../store/auth/auth.selectors';
+import {selectAuthLoading, selectSignInErrors} from '../../store/auth/auth.selectors';
 import {MatProgressBar} from '@angular/material/progress-bar';
 
 @Component({
@@ -17,6 +17,7 @@ export class SignInComponent implements OnInit {
   @ViewChild(MatProgressBar) progressBar: MatProgressBar;
   form: FormGroup = this.mountForm();
   errors$: Observable<string> = this.store.pipe(select(selectSignInErrors));
+  loading$: Observable<boolean> = this.store.pipe(select(selectAuthLoading));
 
   constructor(private fb: FormBuilder,
               private store: Store<AppState>) {

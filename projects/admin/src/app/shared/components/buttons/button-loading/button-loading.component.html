@@ -1,12 +1,15 @@
-<button mat-button [color]="color" class="button-loading {{btnClass}}" [type]="type" [disabled]="loading" 
-[ngClass]="{
-    loading: loading,
-    'mat-button': !raised,
-    'mat-raised-button': raised
-  }">
-    <div class="btn-spinner" *ngIf="loading"></div>
-    <span *ngIf="!loading">
-        <ng-content></ng-content>
-    </span>
-    <span *ngIf="loading">{{loadingText}}</span>
+<button mat-flat-button
+        (click)="btnClick.emit()"
+        [color]="color"
+        [disabled]="loading"
+        [style]="style"
+>
+  <span *ngIf="!loading; else showLoading">
+     <ng-content></ng-content>
+  </span>
+  <ng-template #showLoading>
+    <span fxFlex></span>
+    <mat-spinner diameter="35"></mat-spinner>
+    <span fxFlex></span>
+  </ng-template>
 </button>
