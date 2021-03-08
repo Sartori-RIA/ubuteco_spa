@@ -4,7 +4,7 @@ import {Dish} from '../../core/models/dish';
 import {
   CREATE_DISH,
   CREATE_DISH_DONE,
-  CREATE_DISH_FAILED,
+  CREATE_DISH_FAILED, DISH_ALREADY_LOADED,
   REMOVE_DISH,
   REMOVE_DISH_DONE,
   REMOVE_DISH_FAILED,
@@ -63,6 +63,7 @@ const dishesReducer = createReducer(
     CREATE_DISH_FAILED,
     SEARCH_DISHES_FAIL,
     REMOVE_DISH_ITEM_FAIL,
+    DISH_ALREADY_LOADED,
     (state) => ({...state, loading: false})
   ),
   on(CREATE_DISH_DONE, (state, {data}) => adapter.addOne(data, {...state, loaded: true, loading: false})),

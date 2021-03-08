@@ -14,6 +14,7 @@ import {
   SEARCH_TABLES,
   SEARCH_TABLES_DONE,
   SEARCH_TABLES_FAIL,
+  TABLES_ALREADY_LOADED,
   UPDATE_TABLE,
   UPDATE_TABLE_DONE,
   UPDATE_TABLE_FAILED
@@ -56,6 +57,7 @@ const tableReducer = createReducer(initialState,
     UPDATE_TABLE_FAILED,
     CREATE_TABLE_FAILED,
     SEARCH_TABLES_FAIL,
+    TABLES_ALREADY_LOADED,
     (state) => ({...state, loading: false})
   ),
   on(CREATE_TABLE_DONE, (state, {table}) => adapter.addOne(table, {...state, loaded: true, loading: false})),
@@ -68,7 +70,7 @@ const tableReducer = createReducer(initialState,
     total: data.length,
     loading: false
   }))
-);
+)
 
 export function reducer(state: TableState | undefined, action: Action): TableState {
   return tableReducer(state, action);

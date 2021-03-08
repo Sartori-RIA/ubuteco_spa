@@ -5,7 +5,7 @@ import {
   ADD_MAKER_FAILED,
   DELETE_MAKER,
   DELETE_MAKER_DONE,
-  DELETE_MAKER_FAILED,
+  DELETE_MAKER_FAILED, MAKERS_ALREADY_LOADED,
   REQUEST_ALL_MAKERS,
   REQUEST_ALL_MAKERS_DONE,
   REQUEST_ALL_MAKERS_FAILED,
@@ -52,6 +52,7 @@ const makerReducer = createReducer(initialState,
     UPDATE_MAKER_FAILED,
     DELETE_MAKER_FAILED,
     SEARCH_MAKERS_FAIL,
+    MAKERS_ALREADY_LOADED,
     (state) => ({...state, loading: false})
   ),
   on(REQUEST_ALL_MAKERS_DONE, (state, {data, total}) => adapter.upsertMany(data, {

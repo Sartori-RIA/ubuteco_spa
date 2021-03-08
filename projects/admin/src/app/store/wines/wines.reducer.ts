@@ -18,7 +18,7 @@ import {
   SEARCH_WINE_FAIL,
   UPDATE_WINE,
   UPDATE_WINE_DONE,
-  UPDATE_WINE_FAILED
+  UPDATE_WINE_FAILED, WINE_ALREADY_LOADED
 } from './wines.actions';
 import {Wine} from '../../core/models/wine';
 
@@ -62,6 +62,7 @@ const winesReducer = createReducer(initialState,
     UPDATE_WINE_FAILED,
     CREATE_WINE_FAILED,
     SEARCH_WINE_FAIL,
+    WINE_ALREADY_LOADED,
     (state) => ({...state, loading: false})
   ),
   on(REMOVE_WINE_DONE, (state, {id}) => adapter.removeOne(id.toString(), {...state, loaded: true, loading: false})),
