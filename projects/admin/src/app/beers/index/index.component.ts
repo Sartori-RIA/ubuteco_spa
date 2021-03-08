@@ -7,7 +7,8 @@ import {
   selectAllBeersOrderedById,
   selectAllBeersOrderedByName,
   selectAllBeersOrderedByPrice,
-  selectAllBeersOrderedByStyle
+  selectAllBeersOrderedByStyle,
+  selectBeerLoading
 } from '../../store/beers/beers.selectors';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort, Sort} from '@angular/material/sort';
@@ -27,12 +28,13 @@ import {BaseDialogParams} from '../../core/models/base.model';
 export class IndexComponent implements OnInit, OnDestroy {
 
   beers$: Observable<Beer[]> = this.store.pipe(select(selectAllBeers));
-  canCreate$ = this.store.pipe(select(canCreateBeers));
-  canDestroy$ = this.store.pipe(select(canDestroyBeers));
-  canEdit$ = this.store.pipe(select(canEditBeers));
-  canShowActions$ = this.store.pipe(select(canShowBeerActions));
-  displayedColumns: string[] = ['id', 'image', 'name', 'style', 'price'];
-  displayedColumnsWithAction: string[] = ['id', 'image', 'name', 'style', 'price', 'action'];
+  readonly canCreate$ = this.store.pipe(select(canCreateBeers));
+  readonly canDestroy$ = this.store.pipe(select(canDestroyBeers));
+  readonly canEdit$ = this.store.pipe(select(canEditBeers));
+  readonly canShowActions$ = this.store.pipe(select(canShowBeerActions));
+  readonly displayedColumns: string[] = ['id', 'image', 'name', 'style', 'price'];
+  readonly displayedColumnsWithAction: string[] = ['id', 'image', 'name', 'style', 'price', 'action'];
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectBeerLoading));
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   private data: Beer[] = [];
   dataSource = new MatTableDataSource(this.data);

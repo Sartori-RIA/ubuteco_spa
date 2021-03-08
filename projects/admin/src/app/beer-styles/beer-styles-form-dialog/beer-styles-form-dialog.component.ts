@@ -3,10 +3,12 @@ import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {BeerStyle} from '../../core/models/beer-style';
 import {AppState} from '../../store';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import {ADD_BEER_STYLE, UPDATE_BEER_STYLE} from '../../store/beer-styles/beer-styles.actions';
 import {BeerStylesService} from '../../core/services/api/beer-styles.service';
 import {uButecoValidators} from '../../shared/validators/u-buteco.validators';
+import {selectBeerStyleLoading} from '../../store/beer-styles/beer-styles.selectors';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-beer-styles-form-dialog',
@@ -17,7 +19,7 @@ import {uButecoValidators} from '../../shared/validators/u-buteco.validators';
 export class BeerStylesFormDialogComponent implements OnInit {
 
   beerStyleControl: FormControl = this.mountForm();
-
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectBeerStyleLoading));
   constructor(private dialogRef: MatDialogRef<BeerStylesFormDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: BeerStyle,
               private store: Store<AppState>,

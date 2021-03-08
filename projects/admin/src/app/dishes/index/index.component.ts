@@ -10,7 +10,7 @@ import {
   selectAllDishes,
   selectAllDishesOrderedById,
   selectAllDishesOrderedByName,
-  selectAllDishesOrderedByPrice
+  selectAllDishesOrderedByPrice, selectDishesLoading
 } from '../../store/dishes/dishes.selectors';
 import {REMOVE_DISH, REQUEST_ALL_DISHES} from '../../store/dishes/dishes.actions';
 import {MatDialog} from '@angular/material/dialog';
@@ -28,10 +28,11 @@ export class IndexComponent implements OnInit, OnDestroy {
 
 
   menu$: Observable<Dish[]> = this.store.pipe(select(selectAllDishes));
-  canCreate$ = this.store.pipe(select(canCreateDishes));
-  canDestroy$ = this.store.pipe(select(canDestroyDishes));
-  canEdit$ = this.store.pipe(select(canEditDishes));
-  displayedColumns: string[] = ['id', 'image', 'name', 'price', 'action'];
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectDishesLoading));
+  readonly canCreate$ = this.store.pipe(select(canCreateDishes));
+  readonly canDestroy$ = this.store.pipe(select(canDestroyDishes));
+  readonly canEdit$ = this.store.pipe(select(canEditDishes));
+  readonly displayedColumns: string[] = ['id', 'image', 'name', 'price', 'action'];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   private data: Dish[] = [];
   dataSource = new MatTableDataSource(this.data);

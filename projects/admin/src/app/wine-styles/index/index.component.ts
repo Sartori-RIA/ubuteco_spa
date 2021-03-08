@@ -9,7 +9,7 @@ import {WineStylesFormDialogComponent} from '../wine-styles-form-dialog/wine-sty
 import {MatDialog} from '@angular/material/dialog';
 import {WineStyle} from '../../core/models/wine-style';
 import {
-  selectAllWineStyles,
+  selectAllWineStyles, selectWineStylesLoading,
   selectWineStylesOrderedById,
   selectWineStylesOrderedByName
 } from '../../store/wine-styles/wine-styles.selectors';
@@ -30,12 +30,13 @@ import {
 export class IndexComponent implements OnInit, OnDestroy {
 
   wineStyles$: Observable<WineStyle[]> = this.store.pipe(select(selectAllWineStyles));
-  canCreate$ = this.store.pipe(select(canCreateWineStyles));
-  canDestroy$ = this.store.pipe(select(canDestroyWineStyles));
-  canEdit$ = this.store.pipe(select(canEditWineStyles));
-  canShowActions$ = this.store.pipe(select(canShowWineStyleActions));
-  displayedColumnsAdmin: string[] = ['id', 'name', 'action'];
-  displayedColumns: string[] = ['id', 'name'];
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectWineStylesLoading));
+  readonly canCreate$ = this.store.pipe(select(canCreateWineStyles));
+  readonly canDestroy$ = this.store.pipe(select(canDestroyWineStyles));
+  readonly canEdit$ = this.store.pipe(select(canEditWineStyles));
+  readonly canShowActions$ = this.store.pipe(select(canShowWineStyleActions));
+  readonly displayedColumnsAdmin: string[] = ['id', 'name', 'action'];
+  readonly displayedColumns: string[] = ['id', 'name'];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   private data: BeerStyle[] = [];
   dataSource = new MatTableDataSource(this.data);

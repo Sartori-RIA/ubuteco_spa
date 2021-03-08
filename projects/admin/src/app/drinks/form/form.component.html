@@ -72,6 +72,7 @@
     fxFill
     (cancel)="onCancel()"
     (confirm)="onSubmit()"
+    [loading]="loading$ | async"
     [show]="!data.disabled"
   ></app-dialog-action-buttons>
 </div>

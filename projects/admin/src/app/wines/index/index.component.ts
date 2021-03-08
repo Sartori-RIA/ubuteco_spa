@@ -9,7 +9,7 @@ import {
   selectAllWinesOrderedById,
   selectAllWinesOrderedByName,
   selectAllWinesOrderedByPrice,
-  selectAllWinesOrderedByStyle
+  selectAllWinesOrderedByStyle, selectWinesLoading
 } from '../../store/wines/wines.selectors';
 import {Wine} from '../../core/models/wine';
 import {REMOVE_WINE, REQUEST_ALL_WINES} from '../../store/wines/wines.actions';
@@ -27,10 +27,11 @@ import {BaseDialogParams} from '../../core/models/base.model';
 export class IndexComponent implements OnInit, OnDestroy {
 
   wines$: Observable<Wine[]> = this.store.pipe(select(selectAllWines));
-  canCreate$ = this.store.pipe(select(canCreateWines));
-  canDestroy$ = this.store.pipe(select(canDestroyWines));
-  canEdit$ = this.store.pipe(select(canEditWines));
-  displayedColumns: string[] = ['id', 'image', 'name', 'style', 'price', 'action'];
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectWinesLoading));
+  readonly canCreate$ = this.store.pipe(select(canCreateWines));
+  readonly canDestroy$ = this.store.pipe(select(canDestroyWines));
+  readonly canEdit$ = this.store.pipe(select(canEditWines));
+  readonly displayedColumns: string[] = ['id', 'image', 'name', 'style', 'price', 'action'];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   private data: Wine[] = [];
   dataSource = new MatTableDataSource(this.data);

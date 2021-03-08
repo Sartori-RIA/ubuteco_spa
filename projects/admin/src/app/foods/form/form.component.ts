@@ -1,7 +1,7 @@
 import {FeedbackService} from '../../core/services/api/feedback.service';
 import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store';
 import {Food} from '../../core/models/food';
 import {FoodsService} from '../../core/services/api/foods.service';
@@ -10,6 +10,8 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 import * as moment from 'moment';
 import {CustomValidators} from 'ng2-validation';
 import {BaseDialogParams} from '../../core/models/base.model';
+import {Observable} from 'rxjs';
+import {selectFoodLoading} from '../../store/foods/food.selectors';
 
 @Component({
   selector: 'app-food-form',
@@ -20,7 +22,8 @@ import {BaseDialogParams} from '../../core/models/base.model';
 export class FormComponent implements OnInit {
 
   form: FormGroup = this.mountForm();
-  startDate = moment().fromNow();
+  readonly startDate = moment().fromNow();
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectFoodLoading));
 
   constructor(private store: Store<AppState>,
               private dialog: MatDialog,

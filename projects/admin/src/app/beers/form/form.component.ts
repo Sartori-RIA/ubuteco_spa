@@ -3,7 +3,11 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {BeerStyle} from '../../core/models/beer-style';
 import {select, Store} from '@ngrx/store';
-import {selectAllBeerStyles, selectBeerStyleByName} from '../../store/beer-styles/beer-styles.selectors';
+import {
+  selectAllBeerStyles,
+  selectBeerStyleByName,
+  selectBeerStyleLoading
+} from '../../store/beer-styles/beer-styles.selectors';
 import {Maker} from '../../core/models/maker';
 import {selectAllMakers} from '../../store/makers/makers.selectors';
 import {AppState} from '../../store';
@@ -16,6 +20,7 @@ import {REQUEST_ALL_MAKERS} from '../../store/makers/makers.actions';
 import {Beer} from '../../core/models/beer';
 import {canCreateBeerStyles, canCreateMakers} from '../../store/auth/auth.selectors';
 import {BaseDialogParams} from '../../core/models/base.model';
+import {selectBeerLoading} from '../../store/beers/beers.selectors';
 
 @Component({
   selector: 'app-form',
@@ -28,8 +33,9 @@ export class FormComponent implements OnInit {
   form: FormGroup = this.mountForm();
   readonly beerStyles$: Observable<BeerStyle[]> = this.store.pipe(select(selectAllBeerStyles));
   readonly makers$: Observable<Maker[]> = this.store.pipe(select(selectAllMakers));
-  canCreateBeerStyle$ = this.store.pipe(select(canCreateBeerStyles));
-  canCreateMaker$ = this.store.pipe(select(canCreateMakers));
+  readonly canCreateBeerStyle$ = this.store.pipe(select(canCreateBeerStyles));
+  readonly canCreateMaker$ = this.store.pipe(select(canCreateMakers));
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectBeerLoading));
 
   constructor(private fb: FormBuilder,
               private store: Store<AppState>,

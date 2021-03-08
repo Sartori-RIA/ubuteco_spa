@@ -28,6 +28,7 @@
   <app-dialog-action-buttons
     (cancel)="onCancel()"
     (confirm)="onSubmit()"
+    [loading]="loading$ | async"
     fxFill
   ></app-dialog-action-buttons>
 </div>

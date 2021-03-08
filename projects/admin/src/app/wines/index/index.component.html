@@ -11,6 +11,7 @@
   <app-float-action-button
     [tooltip]="'pages.wines.fab' |translate"
     (fabClick)="openCreateDialog()"
+    [loading]="loading$| async"
     *ngIf="canCreate$ | async"
   ></app-float-action-button>
 

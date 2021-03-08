@@ -7,9 +7,11 @@
 </div>
 <div class="mat-elevation-z8">
 
-  <app-float-action-button (fabClick)="openFormDialog()"
-                           [tooltip]="'pages.beer_styles.fab' |translate"
-                           *ngIf="canCreate$ | async"
+  <app-float-action-button
+    (fabClick)="openFormDialog()"
+    [tooltip]="'pages.beer_styles.fab' |translate"
+    [loading]="loading$ |async"
+    *ngIf="canCreate$ | async"
   ></app-float-action-button>
 
   <table mat-table [dataSource]="dataSource" class=""
@@ -42,8 +44,10 @@
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="(canShowActions$ | async )? displayedColumnsWithActions : displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: (canShowActions$ | async )? displayedColumnsWithActions : displayedColumns;"></tr>
+    <tr mat-header-row
+        *matHeaderRowDef="(canShowActions$ | async )? displayedColumnsWithActions : displayedColumns"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: (canShowActions$ | async )? displayedColumnsWithActions : displayedColumns;"></tr>
   </table>
 
 </div>

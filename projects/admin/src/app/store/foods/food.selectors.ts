@@ -40,7 +40,7 @@ export const selectAllFoodsOrderedByQuantity = (isAsc: boolean) => createSelecto
 );
 
 
-export const selectFoodLoading = () => createSelector(
+export const selectFoodLoading = createSelector(
   selectFoodState,
   (state) => state.loading
 );

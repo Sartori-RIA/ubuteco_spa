@@ -7,7 +7,10 @@
 </div>
 <div class="mat-elevation-z8">
 
-  <app-float-action-button routerLink="/pedidos/add" [tooltip]="'pages.orders.fab' |translate"></app-float-action-button>
+  <app-float-action-button
+    routerLink="/pedidos/add"
+    [tooltip]="'pages.orders.fab' |translate"
+  ></app-float-action-button>
 
   <table mat-table [dataSource]="dataSource"
   >

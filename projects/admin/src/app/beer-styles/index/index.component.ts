@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store';
 import {
-  selectAllBeerStyles,
+  selectAllBeerStyles, selectBeerStyleLoading,
   selectBeerStylesOrderedById,
   selectBeerStylesOrderedByName
 } from '../../store/beer-styles/beer-styles.selectors';
@@ -16,8 +16,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {
   canCreateBeerStyles,
   canDestroyBeerStyles,
-  canEditBeerStyles, canShowBeerStyleActions,
-  selectIsSuperAdmin
+  canEditBeerStyles,
+  canShowBeerStyleActions
 } from '../../store/auth/auth.selectors';
 
 @Component({
@@ -29,12 +29,13 @@ import {
 export class IndexComponent implements OnInit, OnDestroy {
 
   beerStyles$: Observable<BeerStyle[]> = this.store.pipe(select(selectAllBeerStyles));
-  canCreate$ = this.store.pipe(select(canCreateBeerStyles));
-  canDestroy$ = this.store.pipe(select(canDestroyBeerStyles));
-  canEdit$ = this.store.pipe(select(canEditBeerStyles));
-  canShowActions$ = this.store.pipe(select(canShowBeerStyleActions));
-  displayedColumnsWithActions: string[] = ['id', 'name', 'action'];
-  displayedColumns: string[] = ['id', 'name'];
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectBeerStyleLoading));
+  readonly canCreate$ = this.store.pipe(select(canCreateBeerStyles));
+  readonly canDestroy$ = this.store.pipe(select(canDestroyBeerStyles));
+  readonly canEdit$ = this.store.pipe(select(canEditBeerStyles));
+  readonly canShowActions$ = this.store.pipe(select(canShowBeerStyleActions));
+  readonly displayedColumnsWithActions: string[] = ['id', 'name', 'action'];
+  readonly displayedColumns: string[] = ['id', 'name'];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   private data: BeerStyle[] = [];
   dataSource = new MatTableDataSource(this.data);

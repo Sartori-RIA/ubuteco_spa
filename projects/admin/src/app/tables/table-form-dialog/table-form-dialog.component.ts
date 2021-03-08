@@ -1,11 +1,13 @@
 import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import {ActivatedRoute} from '@angular/router';
 import {AppState} from '../../store';
 import {Table} from '../../core/models/table';
 import {CREATE_TABLE, UPDATE_TABLE} from '../../store/tables/table.actions';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {Observable} from 'rxjs';
+import {selectTablesLoading} from '../../store/tables/table.selectors';
 
 @Component({
   selector: 'app-table-form',
@@ -16,6 +18,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 export class TableFormDialogComponent implements OnInit {
 
   form: FormGroup;
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectTablesLoading));
 
   constructor(private activatedRoute: ActivatedRoute,
               private store: Store<AppState>,

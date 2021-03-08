@@ -57,7 +57,17 @@
       />
     </mat-form-field>
 
-    <button (click)="onSubmit()" mat-flat-button color="primary">{{'pages.auth.buttons.sign_in' | translate }}</button>
+    <div fxLayout="row" fxFill>
+
+      <app-button-loading
+        color="primary"
+        style="width: 100%"
+        [loading]="loading$ | async"
+        (btnClick)="onSubmit()"
+      >
+        {{'pages.auth.buttons.sign_in' | translate }}
+      </app-button-loading>
+    </div>
 
     <div style="padding-top: 20px">
       <button fxFill routerLink="/auth/cadastre-se" mat-flat-button

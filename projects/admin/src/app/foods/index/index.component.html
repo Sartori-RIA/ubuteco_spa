@@ -7,9 +7,11 @@
 </div>
 <div class="mat-elevation-z8">
 
-  <app-float-action-button (fabClick)="openCreateDialog()"
-                           [tooltip]="'pages.foods.fab' |translate"
-                           *ngIf="canCreate$|async"
+  <app-float-action-button
+    (fabClick)="openCreateDialog()"
+    [tooltip]="'pages.foods.fab' |translate"
+    [loading]="loading$ | async"
+    *ngIf="canCreate$|async"
   ></app-float-action-button>
 
   <table mat-table [dataSource]="dataSource"
