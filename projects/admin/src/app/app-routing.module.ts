@@ -14,6 +14,7 @@ import {WineStylesGuard} from "./core/guards/wine-styles.guard";
 import {MakersGuard} from "./core/guards/makers.guard";
 import {KitchenGuard} from "./core/guards/kitchen.guard";
 import {WinesGuard} from "./core/guards/wines.guard";
+import {EmployeesGuard} from "./core/guards/employees.guard";
 
 const routes: Routes = [
   {
@@ -135,6 +136,14 @@ const routes: Routes = [
         canActivate: [AuthenticatedGuard, WinesGuard],
         canActivateChild: [WinesGuard],
         canLoad: [WinesGuard]
+      },
+      {
+        path: 'empregados',
+        loadChildren: () => import('./employees/employees.module').then((m) => m.EmployeesModule),
+        data: {title: 'routes.employees'},
+        canActivate: [AuthenticatedGuard, EmployeesGuard],
+        canActivateChild: [EmployeesGuard],
+        canLoad: [EmployeesGuard]
       }
     ]
   },

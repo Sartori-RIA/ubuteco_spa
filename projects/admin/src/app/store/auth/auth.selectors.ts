@@ -215,7 +215,7 @@ export const canEditKitchen = createSelector(
 
 export const canReadMakers = createSelector(
   selectUserRole,
-  (role) =>  role === 'SUPER_ADMIN' || role === 'ADMIN'
+  (role) => role === 'SUPER_ADMIN' || role === 'ADMIN'
 );
 
 export const canEditMakers = createSelector(
@@ -344,7 +344,7 @@ export const canShowWineActions = createSelector(
 
 export const canReadWineStyles = createSelector(
   selectUserRole,
-  (role) =>   role === 'SUPER_ADMIN'
+  (role) => role === 'SUPER_ADMIN'
 );
 
 export const canEditWineStyles = createSelector(
@@ -369,4 +369,26 @@ export const canShowWineStyleActions = createSelector(
   canDestroyWineStyles,
   canEditWineStyles,
   (a, b) => a && b
+);
+
+export const canReadEmployees = createSelector(
+  selectUserRole,
+  (role) => role === 'ADMIN'
+);
+
+export const canCreateEmployees = createSelector(
+  selectUserRole,
+  (role) => role === 'ADMIN'
+);
+
+
+export const canEditEmployees = createSelector(
+  selectUserRole,
+  (role) => role === 'ADMIN'
+);
+
+
+export const canDestroyEmployees = createSelector(
+  selectUserRole,
+  (role) => role === 'ADMIN'
 );

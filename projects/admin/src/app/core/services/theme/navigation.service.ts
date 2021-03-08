@@ -6,7 +6,7 @@ import {select, Store} from '@ngrx/store';
 import {
   canReadBeers,
   canReadBeerStyles, canReadDishes,
-  canReadDrinks, canReadFoods, canReadKitchen,
+  canReadDrinks, canReadEmployees, canReadFoods, canReadKitchen,
   canReadMakers, canReadOrders, canReadTables, canReadWines,
   canReadWineStyles
 } from '../../../store/auth/auth.selectors';
@@ -46,6 +46,14 @@ export class NavigationService {
       state: 'fabricantes',
       iconType: 'material-design',
       canShow$: this.store.pipe(select(canReadMakers))
+    },
+    {
+      name: 'routes.employees',
+      tooltip: 'Blank',
+      canShow$: this.store.pipe(select(canReadEmployees)),
+      state: 'empregados',
+      iconType: 'material-design',
+      icon: 'users'
     },
     {
       name: 'routes.beer_styles',
