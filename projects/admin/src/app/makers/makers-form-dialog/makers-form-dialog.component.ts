@@ -3,8 +3,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Maker} from '../../core/models/maker';
 import {ADD_MAKER, UPDATE_MAKER} from '../../store/makers/makers.actions';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store';
+import {Observable} from 'rxjs';
+import {selectMakersLoading} from '../../store/makers/makers.selectors';
 
 @Component({
   selector: 'app-makers-form-dialog',
@@ -15,6 +17,7 @@ import {AppState} from '../../store';
 export class MakersFormDialogComponent implements OnInit {
 
   form: FormGroup = this.mountForm();
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectMakersLoading));
 
   constructor(public dialogRef: MatDialogRef<MakersFormDialogComponent>,
               private fb: FormBuilder,

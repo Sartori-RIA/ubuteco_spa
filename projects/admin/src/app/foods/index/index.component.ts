@@ -27,10 +27,10 @@ import {BaseDialogParams} from '../../core/models/base.model';
 export class IndexComponent implements OnInit, OnDestroy {
 
   foods$: Observable<Food[]> = this.store.pipe(select(selectAllFoods));
-  canCreate$ = this.store.pipe(select(canCreateFoods));
-  canDestroy$ = this.store.pipe(select(canDestroyFoods));
-  canEdit$ = this.store.pipe(select(canEditFoods));
-  displayedColumns: string[] = ['id', 'image', 'name', 'quantity', 'price', 'action'];
+  readonly canCreate$ = this.store.pipe(select(canCreateFoods));
+  readonly canDestroy$ = this.store.pipe(select(canDestroyFoods));
+  readonly canEdit$ = this.store.pipe(select(canEditFoods));
+  readonly displayedColumns: string[] = ['id', 'image', 'name', 'quantity', 'price', 'action'];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   private data: Food[] = [];
   dataSource = new MatTableDataSource(this.data);

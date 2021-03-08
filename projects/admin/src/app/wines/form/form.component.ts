@@ -20,6 +20,7 @@ import {CREATE_WINE, UPDATE_WINE} from '../../store/wines/wines.actions';
 import {WineStylesFormDialogComponent} from '../../wine-styles/wine-styles-form-dialog/wine-styles-form-dialog.component';
 import {canCreateMakers, canCreateWineStyles} from '../../store/auth/auth.selectors';
 import {BaseDialogParams} from '../../core/models/base.model';
+import {selectWinesLoading} from '../../store/wines/wines.selectors';
 
 @Component({
   selector: 'app-form',
@@ -31,8 +32,9 @@ export class FormComponent implements OnInit, OnDestroy {
   form: FormGroup = this.mountForm();
   wineStyles$: Observable<WineStyle[]> = this.store.pipe(select(selectAllWineStyles));
   makers$: Observable<Maker[]> = this.store.pipe(select(selectAllMakers));
-  canCreateWineStyle$ = this.store.pipe(select(canCreateWineStyles));
-  canCreateMaker$ = this.store.pipe(select(canCreateMakers));
+  readonly canCreateWineStyle$ = this.store.pipe(select(canCreateWineStyles));
+  readonly canCreateMaker$ = this.store.pipe(select(canCreateMakers));
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectWinesLoading));
 
   constructor(private fb: FormBuilder,
               private dialogRef: MatDialogRef<FormComponent>,

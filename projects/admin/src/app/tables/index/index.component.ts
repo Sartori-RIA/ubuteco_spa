@@ -24,12 +24,12 @@ import {canCreateTables, canDestroyTables, canEditTables, canShowTableActions} f
 export class IndexComponent implements OnInit, OnDestroy {
 
   tables$: Observable<Table[]> = this.store.pipe(select(selectAllTables));
-  canCreate$ = this.store.pipe(select(canCreateTables));
-  canDestroy$ = this.store.pipe(select(canDestroyTables));
-  canEdit$ = this.store.pipe(select(canEditTables));
-  canShowActions$ = this.store.pipe(select(canShowTableActions));
-  displayedColumnsWithAction: string[] = ['id', 'name', 'chairs', 'action'];
-  displayedColumns: string[] = ['id', 'name', 'chairs'];
+  readonly canCreate$ = this.store.pipe(select(canCreateTables));
+  readonly canDestroy$ = this.store.pipe(select(canDestroyTables));
+  readonly canEdit$ = this.store.pipe(select(canEditTables));
+  readonly canShowActions$ = this.store.pipe(select(canShowTableActions));
+  readonly displayedColumnsWithAction: string[] = ['id', 'name', 'chairs', 'action'];
+  readonly displayedColumns: string[] = ['id', 'name', 'chairs'];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   private data: Table[] = [];
   dataSource = new MatTableDataSource(this.data);

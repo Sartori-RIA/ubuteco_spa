@@ -3,7 +3,12 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store';
 import {Observable, Subscription} from 'rxjs';
 import {Maker} from '../../core/models/maker';
-import {selectAllMakers, selectMakersOrderedById, selectMakersOrderedByName} from '../../store/makers/makers.selectors';
+import {
+  selectAllMakers,
+  selectMakersLoading,
+  selectMakersOrderedById,
+  selectMakersOrderedByName
+} from '../../store/makers/makers.selectors';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
@@ -20,11 +25,12 @@ import {canCreateMakers, canDestroyMakers, canEditMakers} from '../../store/auth
 export class IndexComponent implements OnInit, OnDestroy {
 
   makers$: Observable<Maker[]> = this.store.pipe(select(selectAllMakers));
-  canCreate$ = this.store.pipe(select(canCreateMakers));
-  canDestroy$ = this.store.pipe(select(canDestroyMakers));
-  canEdit$ = this.store.pipe(select(canEditMakers));
-  displayedColumns: string[] = ['id', 'name', 'country', 'action'];
+  readonly canCreate$ = this.store.pipe(select(canCreateMakers));
+  readonly canDestroy$ = this.store.pipe(select(canDestroyMakers));
+  readonly canEdit$ = this.store.pipe(select(canEditMakers));
+  readonly displayedColumns: string[] = ['id', 'name', 'country', 'action'];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectMakersLoading));
   private data: Maker[] = [];
   dataSource = new MatTableDataSource(this.data);
   private subscription: Subscription;
