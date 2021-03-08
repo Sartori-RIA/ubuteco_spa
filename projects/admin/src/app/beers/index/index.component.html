@@ -29,7 +29,7 @@
     <ng-container matColumnDef="image">
       <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'attributes.product.image'|translate}}</th>
       <td mat-cell *matCellDef="let element">
-        <img class="mat-card-image"  height="80px" [src]="element?.image?.url">
+        <img height="80px" [src]="element?.image?.url">
       </td>
     </ng-container>
 
