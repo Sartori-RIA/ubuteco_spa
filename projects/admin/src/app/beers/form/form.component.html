@@ -91,9 +91,10 @@
 </div>
 <div mat-dialog-actions>
   <app-dialog-action-buttons
-    (cancel)="onCancel()"
     fxFill
+    (cancel)="onCancel()"
     (confirm)="onSubmit()"
+    [loading]="loading$ | async"
     [show]="!data.disabled"
   ></app-dialog-action-buttons>
 </div>
