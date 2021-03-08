@@ -2,7 +2,7 @@ import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {
   ADD_BEER_STYLE,
   ADD_BEER_STYLE_DONE,
-  ADD_BEER_STYLE_FAILED,
+  ADD_BEER_STYLE_FAILED, BEER_STYLES_ALREADY_LOADED,
   DELETE_BEER_STYLE,
   DELETE_BEER_STYLE_DONE,
   DELETE_BEER_STYLE_FAILED,
@@ -51,6 +51,7 @@ const beerStyleReducer = createReducer(initialState,
     ADD_BEER_STYLE_FAILED,
     UPDATE_BEER_STYLE_FAILED,
     DELETE_BEER_STYLE_FAILED,
+    BEER_STYLES_ALREADY_LOADED,
     (state) => ({...state, loading: false})
   ),
   on(REQUEST_ALL_BEER_STYLES_DONE, (state, {data, total}) =>

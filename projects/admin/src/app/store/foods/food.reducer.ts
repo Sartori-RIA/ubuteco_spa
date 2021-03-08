@@ -5,6 +5,7 @@ import {
   CREATE_FOOD,
   CREATE_FOOD_DONE,
   CREATE_FOOD_FAILED,
+  FOODS_ALREADY_LOADED,
   REMOVE_FOOD,
   REMOVE_FOOD_DONE,
   REMOVE_FOOD_FAILED,
@@ -58,6 +59,7 @@ export const foodReducer = createReducer(initialState,
     UPDATE_FOOD_FAILED,
     CREATE_FOOD_FAILED,
     SEARCH_FOODS_FAIL,
+    FOODS_ALREADY_LOADED,
     (state) => ({...state, loading: false})
   ),
   on(REMOVE_FOOD_DONE, (state: FoodState, {id}) =>

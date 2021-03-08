@@ -61,6 +61,7 @@ const beersReducer = createReducer(initialState,
     UPDATE_BEER_FAILED,
     CREATE_BEER_FAILED,
     SEARCH_BEERS_FAIL,
+    BEERS_ALREADY_LOADED,
     (state) => ({...state, loading: false})
   ),
   on(BEERS_ALREADY_LOADED, (state) => ({...state, loading: false})),

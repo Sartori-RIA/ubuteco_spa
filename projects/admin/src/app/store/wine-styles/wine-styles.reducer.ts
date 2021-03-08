@@ -13,7 +13,7 @@ import {
   REQUEST_ALL_WINE_STYLES_FAILED,
   UPDATE_WINE_STYLE,
   UPDATE_WINE_STYLE_DONE,
-  UPDATE_WINE_STYLE_FAILED
+  UPDATE_WINE_STYLE_FAILED, WINE_STYLE_ALREADY_LOADED
 } from './wine-styles.actions';
 import {WineStyle} from '../../core/models/wine-style';
 
@@ -46,6 +46,7 @@ const WINEStyleReducer = createReducer(initialState,
     ADD_WINE_STYLE_FAILED,
     UPDATE_WINE_STYLE_FAILED,
     DELETE_WINE_STYLE_FAILED,
+    WINE_STYLE_ALREADY_LOADED,
     (state) => ({...state, loading: false})),
   on(REQUEST_ALL_WINE_STYLES_DONE, (state, {data, total}) => adapter.upsertMany(data, {
     ...state,

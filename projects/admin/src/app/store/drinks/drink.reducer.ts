@@ -4,7 +4,7 @@ import {Action, createReducer, on} from '@ngrx/store';
 import {
   CREATE_DRINK,
   CREATE_DRINK_DONE,
-  CREATE_DRINK_FAILED,
+  CREATE_DRINK_FAILED, DRINKS_ALREADY_LOADED,
   REMOVE_DRINK,
   REMOVE_DRINK_DONE,
   REMOVE_DRINK_FAILED,
@@ -61,6 +61,7 @@ const drinkReducer = createReducer(initialState,
     UPDATE_DRINK_FAILED,
     CREATE_DRINK_FAILED,
     SEARCH_DRINKS_FAIL,
+    DRINKS_ALREADY_LOADED,
     (state) => ({...state, loading: false})
   ),
   on(CREATE_DRINK_DONE, (state, {drink}) => adapter.addOne(drink, {...state, loading: false})),

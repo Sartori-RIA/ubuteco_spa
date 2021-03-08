@@ -23,9 +23,7 @@ export class KitchenEffects {
     mergeMap(() => this.kitchenService.index()
       .pipe(
         map(({body: data}) => REQUEST_ORDERS_DISHES_DONE({data})),
-        catchError(() => {
-          return of(REQUEST_ORDERS_DISHES_FAIL());
-        })
+        catchError(() => of(REQUEST_ORDERS_DISHES_FAIL()))
       )
     ),
   ));
@@ -35,9 +33,7 @@ export class KitchenEffects {
     mergeMap((action) => this.kitchenService.updateStatus(action.id, action.status)
       .pipe(
         map((dish) => UPDATE_ORDER_DISH_STATUS_DONE({dish})),
-        catchError(() => {
-          return of(UPDATE_ORDER_DISH_STATUS_FAIL());
-        })
+        catchError(() => of(UPDATE_ORDER_DISH_STATUS_FAIL()))
       )
     ),
   ));
