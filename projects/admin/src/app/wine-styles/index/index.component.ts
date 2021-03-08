@@ -9,7 +9,7 @@ import {WineStylesFormDialogComponent} from '../wine-styles-form-dialog/wine-sty
 import {MatDialog} from '@angular/material/dialog';
 import {WineStyle} from '../../core/models/wine-style';
 import {
-  selectAllWineStyles,
+  selectAllWineStyles, selectWineStylesLoading,
   selectWineStylesOrderedById,
   selectWineStylesOrderedByName
 } from '../../store/wine-styles/wine-styles.selectors';
@@ -30,6 +30,7 @@ import {
 export class IndexComponent implements OnInit, OnDestroy {
 
   wineStyles$: Observable<WineStyle[]> = this.store.pipe(select(selectAllWineStyles));
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectWineStylesLoading));
   readonly canCreate$ = this.store.pipe(select(canCreateWineStyles));
   readonly canDestroy$ = this.store.pipe(select(canDestroyWineStyles));
   readonly canEdit$ = this.store.pipe(select(canEditWineStyles));

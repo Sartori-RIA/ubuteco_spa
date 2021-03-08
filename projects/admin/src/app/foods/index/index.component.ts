@@ -8,7 +8,7 @@ import {
   selectAllFoodsOrderedById,
   selectAllFoodsOrderedByName,
   selectAllFoodsOrderedByPrice,
-  selectAllFoodsOrderedByQuantity
+  selectAllFoodsOrderedByQuantity, selectFoodLoading
 } from '../../store/foods/food.selectors';
 import {Food} from '../../core/models/food';
 import {REMOVE_FOOD, REQUEST_ALL_FOODS} from '../../store/foods/food.actions';
@@ -27,6 +27,7 @@ import {BaseDialogParams} from '../../core/models/base.model';
 export class IndexComponent implements OnInit, OnDestroy {
 
   foods$: Observable<Food[]> = this.store.pipe(select(selectAllFoods));
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectFoodLoading));
   readonly canCreate$ = this.store.pipe(select(canCreateFoods));
   readonly canDestroy$ = this.store.pipe(select(canDestroyFoods));
   readonly canEdit$ = this.store.pipe(select(canEditFoods));

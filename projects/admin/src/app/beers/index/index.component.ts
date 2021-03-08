@@ -7,7 +7,8 @@ import {
   selectAllBeersOrderedById,
   selectAllBeersOrderedByName,
   selectAllBeersOrderedByPrice,
-  selectAllBeersOrderedByStyle
+  selectAllBeersOrderedByStyle,
+  selectBeerLoading
 } from '../../store/beers/beers.selectors';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort, Sort} from '@angular/material/sort';
@@ -33,6 +34,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   readonly canShowActions$ = this.store.pipe(select(canShowBeerActions));
   readonly displayedColumns: string[] = ['id', 'image', 'name', 'style', 'price'];
   readonly displayedColumnsWithAction: string[] = ['id', 'image', 'name', 'style', 'price', 'action'];
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectBeerLoading));
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   private data: Beer[] = [];
   dataSource = new MatTableDataSource(this.data);

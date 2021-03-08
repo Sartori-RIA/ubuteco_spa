@@ -7,7 +7,7 @@ import {TableState} from '../../store/tables/table.reducer';
 import {
   selectAllTables,
   selectAllTablesOrderedById,
-  selectAllTablesOrderedByName
+  selectAllTablesOrderedByName, selectTablesLoading
 } from '../../store/tables/table.selectors';
 import {Table} from '../../core/models/table';
 import {REMOVE_TABLE, REQUEST_ALL_TABLES} from '../../store/tables/table.actions';
@@ -24,6 +24,7 @@ import {canCreateTables, canDestroyTables, canEditTables, canShowTableActions} f
 export class IndexComponent implements OnInit, OnDestroy {
 
   tables$: Observable<Table[]> = this.store.pipe(select(selectAllTables));
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectTablesLoading));
   readonly canCreate$ = this.store.pipe(select(canCreateTables));
   readonly canDestroy$ = this.store.pipe(select(canDestroyTables));
   readonly canEdit$ = this.store.pipe(select(canEditTables));

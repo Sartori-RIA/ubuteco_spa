@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store';
 import {
-  selectAllBeerStyles,
+  selectAllBeerStyles, selectBeerStyleLoading,
   selectBeerStylesOrderedById,
   selectBeerStylesOrderedByName
 } from '../../store/beer-styles/beer-styles.selectors';
@@ -29,6 +29,7 @@ import {
 export class IndexComponent implements OnInit, OnDestroy {
 
   beerStyles$: Observable<BeerStyle[]> = this.store.pipe(select(selectAllBeerStyles));
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectBeerStyleLoading));
   readonly canCreate$ = this.store.pipe(select(canCreateBeerStyles));
   readonly canDestroy$ = this.store.pipe(select(canDestroyBeerStyles));
   readonly canEdit$ = this.store.pipe(select(canEditBeerStyles));

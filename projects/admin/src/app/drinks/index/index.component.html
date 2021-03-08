@@ -8,9 +8,11 @@
 
 <div class="mat-elevation-z8">
 
-  <app-float-action-button [tooltip]="'pages.drinks.fab' |translate"
-                           (fabClick)="openCreateDialog()"
-                           *ngIf="canCreate$ | async"
+  <app-float-action-button
+    [tooltip]="'pages.drinks.fab' |translate"
+    (fabClick)="openCreateDialog()"
+    [loading]="loading$ | async"
+    *ngIf="canCreate$ | async"
   ></app-float-action-button>
 
 

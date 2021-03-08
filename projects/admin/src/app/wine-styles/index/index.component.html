@@ -7,9 +7,11 @@
 </div>
 <div class="mat-elevation-z8">
 
-  <app-float-action-button [tooltip]="'pages.wine_styles.fab' |translate"
-                           (fabClick)="openFormDialog()"
-                           *ngIf="canCreate$ | async"
+  <app-float-action-button
+    [tooltip]="'pages.wine_styles.fab' |translate"
+    (fabClick)="openFormDialog()"
+    [loading]="loading$ | async"
+    *ngIf="canCreate$ | async"
   ></app-float-action-button>
 
   <table mat-table [dataSource]="dataSource" class=""

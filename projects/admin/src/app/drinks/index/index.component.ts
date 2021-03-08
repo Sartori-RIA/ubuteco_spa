@@ -27,6 +27,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {FormComponent} from '../form/form.component';
 import {canCreateDrinks, canDestroyDrinks, canEditDrinks} from '../../store/auth/auth.selectors';
 import {BaseDialogParams} from '../../core/models/base.model';
+import {selectBeerStyleLoading} from '../../store/beer-styles/beer-styles.selectors';
 
 @Component({
   selector: 'app-index',
@@ -37,6 +38,7 @@ import {BaseDialogParams} from '../../core/models/base.model';
 export class IndexComponent implements OnInit, OnDestroy, AfterViewInit {
 
   drinks$: Observable<Drink[]> = this.store.pipe(select(selectAllDrinks));
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectBeerStyleLoading));
   readonly drinksCounter$: Observable<number> = this.store.pipe(select(selectDrinksTotal));
   readonly canCreate$ = this.store.pipe(select(canCreateDrinks));
   readonly canDestroy$ = this.store.pipe(select(canDestroyDrinks));

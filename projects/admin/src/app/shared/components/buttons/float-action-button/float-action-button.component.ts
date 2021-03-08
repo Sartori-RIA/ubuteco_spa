@@ -10,5 +10,5 @@ export class FloatActionButtonComponent {
 
   @Output() fabClick = new EventEmitter();
   @Input() tooltip: string;
-
+  @Input() loading = false;
 }
