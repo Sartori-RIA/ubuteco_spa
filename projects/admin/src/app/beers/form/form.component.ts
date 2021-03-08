@@ -20,7 +20,7 @@ import {REQUEST_ALL_MAKERS} from '../../store/makers/makers.actions';
 import {Beer} from '../../core/models/beer';
 import {canCreateBeerStyles, canCreateMakers} from '../../store/auth/auth.selectors';
 import {BaseDialogParams} from '../../core/models/base.model';
-import {selectBeerLoading} from "../../store/beers/beers.selectors";
+import {selectBeerLoading} from '../../store/beers/beers.selectors';
 
 @Component({
   selector: 'app-form',
@@ -35,7 +35,7 @@ export class FormComponent implements OnInit {
   readonly makers$: Observable<Maker[]> = this.store.pipe(select(selectAllMakers));
   canCreateBeerStyle$ = this.store.pipe(select(canCreateBeerStyles));
   canCreateMaker$ = this.store.pipe(select(canCreateMakers));
-  loading$: Observable<boolean> = this.store.pipe(select(selectBeerLoading));
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectBeerLoading));
 
   constructor(private fb: FormBuilder,
               private store: Store<AppState>,

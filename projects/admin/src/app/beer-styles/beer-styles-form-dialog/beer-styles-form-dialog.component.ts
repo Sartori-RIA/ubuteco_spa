@@ -19,7 +19,7 @@ import {Observable} from 'rxjs';
 export class BeerStylesFormDialogComponent implements OnInit {
 
   beerStyleControl: FormControl = this.mountForm();
-  loading$: Observable<boolean> = this.store.pipe(select(selectBeerStyleLoading));
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectBeerStyleLoading));
   constructor(private dialogRef: MatDialogRef<BeerStylesFormDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: BeerStyle,
               private store: Store<AppState>,

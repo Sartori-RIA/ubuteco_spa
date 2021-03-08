@@ -19,7 +19,7 @@ import {selectAuthLoading} from '../../store/auth/auth.selectors';
 export class SignUpComponent implements OnInit {
 
   form: FormGroup = this.mountForm();
-  loading$: Observable<boolean> = this.store.pipe(select(selectAuthLoading));
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectAuthLoading));
 
   constructor(private fb: FormBuilder,
               private store: Store<AppState>,

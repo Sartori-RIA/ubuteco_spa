@@ -12,7 +12,8 @@ import {Maker} from '../../core/models/maker';
 import {REQUEST_ALL_FOODS} from '../../store/foods/food.actions';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CREATE_DISH, REMOVE_DISH_ITEM, UPDATE_DISH} from '../../store/dishes/dishes.actions';
-import {BaseDialogParams} from "../../core/models/base.model";
+import {BaseDialogParams} from '../../core/models/base.model';
+import {selectDishesLoading} from '../../store/dishes/dishes.selectors';
 
 @Component({
   selector: 'app-restaurant-menu-form',
@@ -23,6 +24,7 @@ import {BaseDialogParams} from "../../core/models/base.model";
 export class FormComponent implements OnInit {
   form: FormGroup;
   ingredients: FormArray;
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectDishesLoading));
   readonly foods$: Observable<Food[]> = this.store.pipe(
     select(selectAllFoodsOrderedByName(true))
   );

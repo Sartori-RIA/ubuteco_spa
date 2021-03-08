@@ -17,7 +17,7 @@ export class SignInComponent implements OnInit {
   @ViewChild(MatProgressBar) progressBar: MatProgressBar;
   form: FormGroup = this.mountForm();
   errors$: Observable<string> = this.store.pipe(select(selectSignInErrors));
-  loading$: Observable<boolean> = this.store.pipe(select(selectAuthLoading));
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectAuthLoading));
 
   constructor(private fb: FormBuilder,
               private store: Store<AppState>) {
