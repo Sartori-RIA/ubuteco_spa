@@ -23,8 +23,9 @@
 </div>
 <div mat-dialog-actions>
   <app-dialog-action-buttons
-    (cancel)="onCancel()"
     fxFill
+    [loading]="loading$ | async"
+    (cancel)="onCancel()"
     (confirm)="onSubmit()"
   ></app-dialog-action-buttons>
 </div>

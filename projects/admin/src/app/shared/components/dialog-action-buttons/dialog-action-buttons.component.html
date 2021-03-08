@@ -1,5 +1,10 @@
 <div fxLayout="row" fxFlexFill fxLayoutAlign="space-between">
-  <app-cancel-button *ngIf="show" (cancel)="cancel.emit()"></app-cancel-button>
+  <app-cancel-button *ngIf="show"
+                     (cancel)="cancel.emit()"
+  ></app-cancel-button>
   <span fxFlex></span>
-  <app-confirm-button *ngIf="show" [loading]="loading" (confirmed)="confirm.emit()"></app-confirm-button>
+  <app-confirm-button *ngIf="show"
+                      [loading]="loading"
+                      (confirmed)="confirm.emit()"
+  ></app-confirm-button>
 </div>
