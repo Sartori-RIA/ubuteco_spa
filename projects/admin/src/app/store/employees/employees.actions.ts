@@ -1,8 +1,9 @@
 import {createAction, props} from '@ngrx/store';
 import {User} from '../../core/models/user';
+import {Role} from '../../core/models/role';
 
 export const REQUEST_ALL_EMPLOYEES = createAction('[EMPLOYEES/API] find all',
-  props<{ page: string, force?: boolean}>());
+  props<{ page: string, force?: boolean, organization_id: number }>());
 
 export const REQUEST_ALL_EMPLOYEES_FAILED = createAction('[EMPLOYEES/API] find all fail');
 
@@ -31,3 +32,11 @@ export const DELETE_EMPLOYEE_FAILED = createAction('[EMPLOYEES/API] delete faile
 export const EMPLOYEES_ALREADY_LOADED = createAction(
   '[EMPLOYEES/API] already loaded'
 );
+
+export const REQUEST_ROLES = createAction('[ROLES/API] request roles');
+
+export const REQUEST_ROLES_ALREADY_LOADED = createAction('[ROLES/API] request roles already loaded');
+
+export const REQUEST_ROLES_DONE = createAction('[ROLES/API] request roles done', props<{ data: Role[] }>());
+
+export const REQUEST_ROLES_FAIL = createAction('[ROLES/API] request roles fail');

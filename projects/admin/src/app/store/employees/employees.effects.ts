@@ -3,7 +3,6 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {FeedbackService} from '../../core/services/api/feedback.service';
 import {catchError, filter, map, mergeMap, withLatestFrom} from 'rxjs/operators';
 import {select, Store} from '@ngrx/store';
-import {selectBeerStylesAllLoaded} from '../beer-styles/beer-styles.selectors';
 import {of} from 'rxjs';
 import {UserService} from '../../core/services/api/user.service';
 import {
@@ -15,19 +14,28 @@ import {
   DELETE_EMPLOYEE_FAILED,
   EMPLOYEES_ALREADY_LOADED,
   REQUEST_ALL_EMPLOYEES,
-  REQUEST_ALL_EMPLOYEES_DONE, REQUEST_ALL_EMPLOYEES_FAILED,
+  REQUEST_ALL_EMPLOYEES_DONE,
+  REQUEST_ALL_EMPLOYEES_FAILED,
+  REQUEST_ROLES,
+  REQUEST_ROLES_ALREADY_LOADED,
+  REQUEST_ROLES_DONE,
+  REQUEST_ROLES_FAIL,
   UPDATE_EMPLOYEE,
   UPDATE_EMPLOYEE_DONE,
   UPDATE_EMPLOYEE_FAILED
 } from './employees.actions';
 import {AppState} from '../index';
+import {selectAllRolesLoaded, selectEmployeesAllLoaded} from './employees.selectors';
+import {OrganizationsService} from '../../core/services/api/organizations.service';
+import {RolesService} from "../../core/services/api/roles.service";
+import {selectBeerStylesAllLoaded} from "../beer-styles/beer-styles.selectors";
 
 @Injectable()
 export class EmployeesEffects {
 
   requestAllEmployees$ = createEffect(() => this.actions$.pipe(
     ofType(REQUEST_ALL_EMPLOYEES),
-    withLatestFrom(this.store.pipe(select(selectBeerStylesAllLoaded))),
+    withLatestFrom(this.store.pipe(select(selectEmployeesAllLoaded))),
     filter(([{page, force}], loaded) => {
       if (force) {
         return true;
@@ -37,7 +45,7 @@ export class EmployeesEffects {
       }
       return false;
     }),
-    mergeMap(([{page}]) => this.userService.index({page}).pipe(
+    mergeMap(([{page, organization_id}]) => this.organizationService.users(organization_id).pipe(
       map(({body, headers}) =>
         REQUEST_ALL_EMPLOYEES_DONE({
           data: body,
@@ -48,9 +56,24 @@ export class EmployeesEffects {
         this.feedback.errorAction('fetch', true);
         return of(REQUEST_ALL_EMPLOYEES_FAILED());
       })
-      ),
+      )
     )),
   );
+
+  requestRole$ = createEffect(() => this.actions$.pipe(
+    ofType(REQUEST_ROLES),
+    withLatestFrom(this.store.pipe(select(selectAllRolesLoaded))),
+    filter(([{}, loaded]) => {
+      if (loaded) {
+        this.store.dispatch(REQUEST_ROLES_ALREADY_LOADED());
+      }
+      return !loaded;
+    }),
+    mergeMap(() => this.rolesService.index().pipe(
+      map(({body}) => REQUEST_ROLES_DONE({data: body})),
+      catchError(() => of(REQUEST_ROLES_FAIL()))
+    ))
+  ));
 
   newEmployee$ = createEffect(() => this.actions$.pipe(
     ofType(ADD_EMPLOYEE),
@@ -102,7 +125,9 @@ export class EmployeesEffects {
 
   constructor(private actions$: Actions,
               private userService: UserService,
+              private organizationService: OrganizationsService,
               private store: Store<AppState>,
+              private rolesService: RolesService,
               private feedback: FeedbackService) {
   }
 }

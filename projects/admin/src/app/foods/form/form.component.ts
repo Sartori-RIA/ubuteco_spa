@@ -27,7 +27,6 @@ export class FormComponent implements OnInit {
 
   constructor(private store: Store<AppState>,
               private dialog: MatDialog,
-              private feedbackService: FeedbackService,
               private dialogRef: MatDialogRef<FormComponent>,
               @Inject(MAT_DIALOG_DATA) public data: BaseDialogParams<Food>,
               private foodService: FoodsService,

@@ -1,0 +1,52 @@
+<div mat-dialog-title>
+  <div fxFlex="100" class="text-center">
+    <h1
+      *ngIf="!!data.data && !data.disabled">{{'pages.employees.dialog.update.title'|translate:{id: data?.data?.id} }}</h1>
+
+    <h1 *ngIf="!data.data && !data.disabled">{{'pages.employees.dialog.new.title'|translate}}</h1>
+
+    <h1 *ngIf="!!data.data && data.disabled">{{data.data.name}}</h1>
+  </div>
+</div>
+
+<div mat-dialog-content>
+  <div [formGroup]="form">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+      <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.base.name'|translate}}</mat-label>
+        <input formControlName="name" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.user.email'|translate}}</mat-label>
+        <input formControlName="email" matInput>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" fxFlex="100" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100"
+                      fxFlex.xs="100">
+        <mat-label>{{'attributes.role.to_human'|translate}}</mat-label>
+        <mat-select [compareWith]="compareSelectValues" formControlName="role">
+          <mat-option *ngFor="let role of roles$ | async" [value]="role">
+            <div fxFlex="100">
+              {{ "attributes.role." + role.name.toLowerCase() | translate}}
+            </div>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <app-dialog-action-buttons
+    (cancel)="onCancel()"
+    (confirm)="onSubmit()"
+    [show]="!data.disabled"
+    [loading]="loading$ | async"
+    fxFill
+  ></app-dialog-action-buttons>
+</div>

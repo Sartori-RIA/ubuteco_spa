@@ -7,10 +7,14 @@ import * as fromEmployees from '../store/employees/employees.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {EmployeesEffects} from '../store/employees/employees.effects';
 import { IndexComponent } from './index/index.component';
+import { FormComponent } from './form/form.component';
 
 
 @NgModule({
-  declarations: [IndexComponent],
+  declarations: [
+    IndexComponent,
+    FormComponent
+  ],
   imports: [
     SharedModule,
     EmployeesRoutingModule,
