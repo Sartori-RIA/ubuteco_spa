@@ -1,13 +1,20 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import {IconName} from '@fortawesome/fontawesome-svg-core';
 import {IconDefinition} from '@fortawesome/fontawesome-common-types';
 import {select, Store} from '@ngrx/store';
 import {
   canReadBeers,
-  canReadBeerStyles, canReadDishes,
-  canReadDrinks, canReadFoods, canReadKitchen,
-  canReadMakers, canReadOrders, canReadTables, canReadWines,
+  canReadBeerStyles,
+  canReadDishes,
+  canReadDrinks,
+  canReadEmployees,
+  canReadFoods,
+  canReadKitchen,
+  canReadMakers,
+  canReadOrders,
+  canReadTables,
+  canReadWines,
   canReadWineStyles
 } from '../../../store/auth/auth.selectors';
 import {AppState} from '../../../store';
@@ -35,9 +42,6 @@ export interface IBadge {
 })
 export class NavigationService {
 
-  constructor(private store: Store<AppState>) {
-  }
-
   iconMenu: IMenuItem[] = [
     {
       name: 'routes.makers',
@@ -46,6 +50,14 @@ export class NavigationService {
       state: 'fabricantes',
       iconType: 'material-design',
       canShow$: this.store.pipe(select(canReadMakers))
+    },
+    {
+      name: 'routes.users',
+      tooltip: 'Blank',
+      canShow$: this.store.pipe(select(canReadEmployees)),
+      state: 'empregados',
+      iconType: 'material-design',
+      icon: 'group'
     },
     {
       name: 'routes.beer_styles',
@@ -128,4 +140,7 @@ export class NavigationService {
       canShow$: this.store.pipe(select(canReadOrders))
     },
   ];
+
+  constructor(private store: Store<AppState>) {
+  }
 }

@@ -10,6 +10,7 @@ export interface User extends BaseModel {
   organization?: Organization;
   picture?: PictureFromS3;
   role?: Role;
+  role_id?: number;
 }
 
 export interface SignUpPayload {

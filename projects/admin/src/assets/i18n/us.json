@@ -37,7 +37,8 @@
     "reports": "Reports",
     "tables": "Tables",
     "wine_styles": "Wine Styles",
-    "wines": "Wines"
+    "wines": "Wines",
+    "users": "Employees"
   },
   "pages": {
     "auth": {
@@ -156,6 +157,28 @@
         },
         "destroy": {
           "success": "Drink successfully removed"
+        }
+      }
+    },
+    "users": {
+      "fab": "New employee",
+      "dialog": {
+        "update": {
+          "title": "Updating Employee: #{{id}}"
+        },
+        "new": {
+          "title": "New employee"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Employee added successfully"
+        },
+        "update": {
+          "success": "Employee updated successfully"
+        },
+        "destroy": {
+          "success": "Employee successfully removed"
         }
       }
     },

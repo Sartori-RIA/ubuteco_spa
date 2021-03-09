@@ -10,10 +10,13 @@
 
 .mat-header-cell {
   text-align: center!important;
+  justify-content: flex-start
 }
 
 .mat-cell {
   text-align: center!important;
 }
-
-
+.mat-sort-header-container {
+  display:flex;
+  justify-content:center;
+}

@@ -5,6 +5,7 @@ import {environment} from '../../../../environments/environment';
 import {BaseService} from './base.service';
 import {Organization} from '../../models/organization';
 import {Observable} from 'rxjs';
+import {User} from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,10 @@ export class OrganizationsService extends BaseService<Organization> {
 
   checkPhone(phone: string): Observable<HttpResponse<any>> {
     return this.http.get<any>(`${this.url}/check/phone`, {observe: 'response', params: {q: phone}});
+  }
+
+  users(id: number, params?: { [key: string]: string | string[] }): Observable<HttpResponse<User[]>> {
+    console.log("buscando users")
+    return this.http.get<User[]>(`${this.url}/${id}/users`, {observe: 'response', params});
   }
 }
