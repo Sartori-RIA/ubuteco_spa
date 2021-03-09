@@ -8,7 +8,7 @@
 <div class="mat-elevation-z8">
 
   <app-float-action-button
-    [tooltip]="'pages.employees.fab' |translate"
+    [tooltip]="'pages.users.fab' |translate"
     (fabClick)="openFormDialog()"
     [loading]="loading$ | async"
     *ngIf="canCreate$ | async"
@@ -37,7 +37,9 @@
 
     <ng-container matColumnDef="role">
       <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'attributes.role.to_human'|translate}}</th>
-      <td mat-cell *matCellDef="let element"> {{element?.role?.name}} </td>
+      <td mat-cell *matCellDef="let element">
+        {{"attributes.role." + element?.role?.name.toLowerCase() | translate}}
+      </td>
     </ng-container>
 
 

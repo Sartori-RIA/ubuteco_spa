@@ -27,8 +27,7 @@ import {
 import {AppState} from '../index';
 import {selectAllRolesLoaded, selectEmployeesAllLoaded} from './employees.selectors';
 import {OrganizationsService} from '../../core/services/api/organizations.service';
-import {RolesService} from "../../core/services/api/roles.service";
-import {selectBeerStylesAllLoaded} from "../beer-styles/beer-styles.selectors";
+import {RolesService} from '../../core/services/api/roles.service';
 
 @Injectable()
 export class EmployeesEffects {
@@ -37,13 +36,13 @@ export class EmployeesEffects {
     ofType(REQUEST_ALL_EMPLOYEES),
     withLatestFrom(this.store.pipe(select(selectEmployeesAllLoaded))),
     filter(([{page, force}], loaded) => {
-      if (force) {
+      if (!!force) {
         return true;
       }
-      if (loaded) {
+      if (!!loaded) {
         this.store.dispatch(EMPLOYEES_ALREADY_LOADED());
       }
-      return false;
+      return !loaded;
     }),
     mergeMap(([{page, organization_id}]) => this.organizationService.users(organization_id).pipe(
       map(({body, headers}) =>
@@ -85,7 +84,7 @@ export class EmployeesEffects {
         }),
         catchError((e) => {
           this.feedback.errorAction('create');
-          return of(ADD_EMPLOYEE_FAILED);
+          return of(ADD_EMPLOYEE_FAILED());
         })
       )
     ),

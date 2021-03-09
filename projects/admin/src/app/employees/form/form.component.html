@@ -23,6 +23,9 @@
                       fxFlex.xs="100">
         <mat-label>{{'attributes.user.email'|translate}}</mat-label>
         <input formControlName="email" matInput>
+        <mat-error *ngIf="!!form.controls.email?.errors?.email_in_use">
+          {{'validations.in_use.email'|translate}}
+        </mat-error>
       </mat-form-field>
 
 

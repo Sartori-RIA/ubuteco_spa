@@ -37,7 +37,8 @@
     "reports": "Reportando",
     "tables": "Mesas",
     "wine_styles": "Estilo de vino",
-    "wines": "Vinos"
+    "wines": "Vinos",
+    "users": "Empleados"
   },
   "pages": {
     "auth": {
@@ -156,6 +157,28 @@
         },
         "destroy": {
           "success": "Bebida eliminada con éxito"
+        }
+      }
+    },
+    "users": {
+      "fab": "Nuevo empleado",
+      "dialog": {
+        "update": {
+          "title": "Actualización de empleado: #{{id}}"
+        },
+        "new": {
+          "title": "Nuevo empleado"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": "Empleado agregado exitosamente"
+        },
+        "update": {
+          "success": "Empleado actualizado correctamente"
+        },
+        "destroy": {
+          "success": "Empleado eliminado correctamente"
         }
       }
     },

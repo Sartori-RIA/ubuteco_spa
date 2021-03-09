@@ -30,6 +30,11 @@ export const selectAllRoles = createSelector(
   (state) => state.roles
 );
 
+export const selectAllEmployeesRoles = createSelector(
+  selectAllRoles,
+  (roles) => roles.filter((role) => (role.name !== 'SUPER_ADMIN' && role.name !== 'CUSTOMER'))
+);
+
 export const selectEmployeesTotal = createSelector(
   selectEmployeesState,
   (state) => state.total

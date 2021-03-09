@@ -25,6 +25,7 @@ export class OrganizationsService extends BaseService<Organization> {
   }
 
   users(id: number, params?: { [key: string]: string | string[] }): Observable<HttpResponse<User[]>> {
+    console.log("buscando users")
     return this.http.get<User[]>(`${this.url}/${id}/users`, {observe: 'response', params});
   }
 }
