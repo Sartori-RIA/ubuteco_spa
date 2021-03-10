@@ -1,14 +1,14 @@
 import {BaseModel} from './base.model';
-import {Customer} from './customer';
 import {Table} from './table';
 import {Beer} from './beer';
 import {Dish} from './dish';
 import {Drink} from './drink';
 import {Wine} from './wine';
 import {Organization} from './organization';
+import {User} from './user';
 
 export interface Order extends BaseModel {
-  user?: Customer;
+  user?: User;
   organization?: Organization;
   organization_id?: number;
   table?: Table;

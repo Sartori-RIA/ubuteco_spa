@@ -6,6 +6,7 @@ import {select, Store} from '@ngrx/store';
 import {
   canReadBeers,
   canReadBeerStyles,
+  canReadCustomers,
   canReadDishes,
   canReadDrinks,
   canReadEmployees,
@@ -56,6 +57,14 @@ export class NavigationService {
       tooltip: 'Blank',
       canShow$: this.store.pipe(select(canReadEmployees)),
       state: 'empregados',
+      iconType: 'material-design',
+      icon: 'group'
+    },
+    {
+      name: 'routes.customers',
+      tooltip: 'Blank',
+      canShow$: this.store.pipe(select(canReadCustomers)),
+      state: 'clientes',
       iconType: 'material-design',
       icon: 'group'
     },

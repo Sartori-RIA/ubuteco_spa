@@ -392,3 +392,8 @@ export const canDestroyEmployees = createSelector(
   selectUserRole,
   (role) => role === 'ADMIN'
 );
+
+export const canReadCustomers = createSelector(
+  selectUserRole,
+  (role) => true
+);
