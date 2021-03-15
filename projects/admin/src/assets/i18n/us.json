@@ -38,7 +38,7 @@
     "tables": "Tables",
     "wine_styles": "Wine Styles",
     "wines": "Wines",
-    "users": "Employees"
+    "employees": "Employees"
   },
   "pages": {
     "auth": {

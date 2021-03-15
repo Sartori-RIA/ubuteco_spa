@@ -38,7 +38,7 @@
     "tables": "Mesas",
     "wine_styles": "Estilo de Vinhos",
     "wines": "Vinhos",
-    "users": "Funcionários"
+    "employees": "Funcionários"
   },
   "pages": {
     "auth": {
