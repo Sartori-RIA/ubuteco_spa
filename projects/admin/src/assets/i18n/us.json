@@ -251,7 +251,7 @@
       "fab": "Add Order",
       "dialog": {
         "item_select": "Select Item",
-        "item_select_option": "{{name}} - R${{price}} - Available: {{quantity}}"
+        "item_select_option": "{{name}} - R$ {{price}} - Available: {{quantity}}"
       },
       "form": {
         "order_n": "Order: #{{id}}",

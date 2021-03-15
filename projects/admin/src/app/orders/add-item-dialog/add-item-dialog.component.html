@@ -5,7 +5,7 @@
     <mat-label>{{'pages.orders.dialog.item_select'|translate}}</mat-label>
     <mat-select formControlName="item">
       <mat-option *ngFor="let item of items$ | async" [value]="item">
-        {{'pages.dialog.item_select_option'|translate: {
+        {{'pages.orders.dialog.item_select_option'|translate: {
         name: item.name,
         price: item.price,
         quantity: item.quantity_stock
