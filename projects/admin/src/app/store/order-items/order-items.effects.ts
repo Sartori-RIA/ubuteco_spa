@@ -48,13 +48,13 @@ export class OrderItemsEffects {
       })
       .pipe(
         map((item) => {
-          this.translate.get('pages.orders.flash.items.success.update')
+          this.translate.get('pages.orders.flash.items.success.updated')
             .pipe(take(1))
             .subscribe((message) => this.feedback.success(message));
           return UPDATE_ORDER_ITEM_DONE({item});
         }),
         catchError((err) => {
-          this.translate.get('pages.orders.flash.items.fail.update')
+          this.translate.get('pages.orders.flash.items.fail.updated')
             .pipe(take(1))
             .subscribe((message) => this.feedback.error(message));
           return of(UPDATE_ORDER_ITEM_FAILED());

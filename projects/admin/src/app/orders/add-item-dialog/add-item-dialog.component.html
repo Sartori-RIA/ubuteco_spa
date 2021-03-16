@@ -1,23 +1,26 @@
 <h1 mat-dialog-title>{{label}}</h1>
 
-<div mat-dialog-content [formGroup]="form">
-  <mat-form-field appearance="outline">
-    <mat-label>{{'pages.orders.dialog.item_select'|translate}}</mat-label>
-    <mat-select formControlName="item">
-      <mat-option *ngFor="let item of items$ | async" [value]="item">
-        {{'pages.orders.dialog.item_select_option'|translate: {
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity_stock
-      } }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+<div mat-dialog-content>
+  <div [formGroup]="form" fxLayout="row wrap" fxLayoutAlign="space-between center">
+    <mat-form-field appearance="outline" fxFill>
+      <mat-label>{{'pages.orders.dialog.item_select'|translate}}</mat-label>
+      <mat-select formControlName="item">
+        <mat-option *ngFor="let item of items$ | async" [value]="item">
+          <span *ngIf="data?.itemType == 'Dish'; else otherProducts">
+            {{'pages.orders.dialog.dish_select_option'|translate: {name: item.name, price: item.price_cents / 100} }}
+          </span>
+          <ng-template #otherProducts>
+            {{'pages.orders.dialog.item_select_option'|translate: {name: item.name, price: item.price_cents / 100, quantity: item.quantity_stock} }}
+          </ng-template>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>{{'attributes.order.quantity'|translate}}</mat-label>
-    <input formControlName="quantity" matInput>
-  </mat-form-field>
+    <mat-form-field appearance="outline" fxFill>
+      <mat-label>{{'attributes.order.quantity'|translate}}</mat-label>
+      <input formControlName="quantity" matInput>
+    </mat-form-field>
+  </div>
 </div>
 
 <div mat-dialog-actions>

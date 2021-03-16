@@ -251,7 +251,8 @@
       "fab": "Novo Pedido",
       "dialog": {
         "item_select": "Selecione o item",
-        "item_select_option": "{{name}} - R$ {{price}} - Dísponíveis: {{quantity}}"
+        "item_select_option": "{{name}} - R$ {{price}} - Dísponíveis: {{quantity}}",
+        "dish_select_option": "{{name}} - R$ {{price}}"
       },
       "form": {
         "order_n": "Pedido #{{id}}",
@@ -272,6 +273,19 @@
             "destroy": "Falhou ao remover o item do pedido",
             "create": "Falhou ao adicionar o item ao pedido"
           }
+        }
+      }
+    },
+    "order_item": {
+      "messages": {
+        "success": {
+          "updated": "Item atualizado ao pedido com sucesso",
+          "destroy": "Item removido do pedido com sucesso"
+        },
+        "fail": {
+          "updated": "Falhou ao atualizar o item ao pedido",
+          "destroy": "Falhou ao remover o item do pedido",
+          "create": "Falhou ao adicionar o item ao pedido"
         }
       }
     },

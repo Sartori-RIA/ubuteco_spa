@@ -30,7 +30,7 @@ export class AddItemDialogComponent implements OnInit {
   constructor(private store: Store<AppState>,
               private fb: FormBuilder,
               public dialogRef: MatDialogRef<AddItemDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) private data: OrderItemDialogData) {
+              @Inject(MAT_DIALOG_DATA) public data: OrderItemDialogData) {
   }
 
   ngOnInit() {
