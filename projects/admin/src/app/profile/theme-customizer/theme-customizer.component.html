@@ -1,31 +1,14 @@
 <div fxLayout="row wrap">
-  <div fxFlex="100" >
+  <div fxFlex="100">
     <mat-card class="p-0">
-      <mat-card-title class="m-0 light-gray">
-        <div class="card-title-text" fxLayout="row wrap" fxLayoutAlign="center center">
-          <button mat-flat-button
-                  [color]="viewMode === 'options' ? 'primary': undefined"
-                  (click)="viewMode = 'options'"
-          >Options
-          </button>
-          <span fxFlex="15px"></span>
-          <button mat-flat-button
-                  [color]="viewMode === 'json' ? 'primary': undefined"
-                  (click)="viewMode = 'json'"
-          >Json
-          </button>
-          <span fxFlex></span>
-        </div>
+      <mat-card-title class="text-center">
+        {{'pages.theme.title'|translate}}
       </mat-card-title>
-      <mat-card-content *ngIf="viewMode === 'json'" style="min-height: 100vh">
-        <pre class="text-muted">{{layoutConf | json}}</pre>
-      </mat-card-content>
 
-      <mat-card-content [perfectScrollbar] *ngIf="viewMode === 'options'">
-        <p><small>Customize the template then copy configuration json.</small></p>
+      <mat-card-content [perfectScrollbar]>
 
         <div class="pb-1 mb-1 border-bottom">
-          <h6 class="title text-muted">Header Colors</h6>
+          <h6 class="title text-muted">{{'pages.theme.header_colors'|translate}}</h6>
 
           <div class="colors">
             <div
@@ -38,7 +21,7 @@
         </div>
 
         <div class="pb-1 mb-1 border-bottom">
-          <h6 class="title text-muted">Sidebar colors</h6>
+          <h6 class="title text-muted">{{'pages.theme.sidebar_colors'|translate}}</h6>
           <div class="colors">
             <div
               class="color {{c.class}}"
@@ -50,7 +33,7 @@
         </div>
 
         <div class="pb-1 mb-1 border-bottom">
-          <h6 class="title text-muted">Footer Colors</h6>
+          <h6 class="title text-muted">{{'pages.theme.footer_colors'|translate}}</h6>
 
           <div class="colors">
             <div

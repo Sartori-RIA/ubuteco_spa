@@ -371,6 +371,12 @@
       "settings": "ajustes",
       "theme": "Tema",
       "security": "La seguridad"
+    },
+    "theme": {
+      "title": "Personaliza tu plantilla",
+      "header_colors": "Colores de encabezado",
+      "sidebar_colors": "Colores del menú lateral",
+      "footer_colors": "Colores de pie de página"
     }
   },
   "attributes": {

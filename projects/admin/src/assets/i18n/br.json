@@ -371,6 +371,12 @@
       "settings": "Configurações",
       "theme": "Tema",
       "security": "Segurança"
+    },
+    "theme": {
+      "title": "Customize o seu template",
+      "header_colors": "Cores do cabeçalho",
+      "sidebar_colors": "Cores do menu lateral",
+      "footer_colors": "Cores do rodapé"
     }
   },
   "attributes": {
