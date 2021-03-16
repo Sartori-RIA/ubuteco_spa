@@ -13,64 +13,55 @@
 
     <div fxLayout="row wrap" fxLayoutAlign="space-between center">
 
-      <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
-                      fxFlex.xs="100">
+      <mat-form-field appearance="outline" fxFlex.lt-md="100" fxFlex.gt-sm="45">
         <mat-label>{{'attributes.base.name'|translate}}</mat-label>
         <input formControlName="name" matInput>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" fxFlex.xl="45" fxFlex.lg="45" fxFlex.md="45" fxflex.sm="100"
-                      fxFlex.xs="100">
+      <mat-form-field appearance="outline" fxFlex.lt-md="100" fxFlex.gt-sm="45">
         <mat-label>{{'attributes.product.description'|translate}}</mat-label>
         <textarea rows="5" formControlName="description" matInput></textarea>
       </mat-form-field>
 
 
-      <mat-form-field appearance="outline" fxFlex.xl="22" fxFlex.lg="22" fxFlex.md="22" fxflex.sm="100"
-                      fxFlex.xs="100">
+      <mat-form-field appearance="outline" fxFlex.lt-md="100" fxFlex.gt-sm="45">
         <mat-label>{{'attributes.product.quantity_stock'|translate}}</mat-label>
         <input formControlName="quantity_stock" type="number" matInput>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" fxFlex.xl="22" fxFlex.lg="22" fxFlex.md="22" fxflex.sm="100"
-                      fxFlex.xs="100">
+      <mat-form-field appearance="outline" fxFlex.lt-md="100" fxFlex.gt-sm="45">
         <mat-label>{{'attributes.product.price'|translate}}</mat-label>
         <input formControlName="price" matInput type="number">
         <mat-icon matPrefix>attach_money</mat-icon>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" fxFlex.xl="22" fxFlex.lg="22" fxFlex.md="22" fxflex.sm="100"
-                      fxFlex.xs="100">
+      <mat-form-field appearance="outline" fxFlex.lt-md="100" fxFlex.gt-sm="45">
         <mat-label>{{'attributes.wine.abv'|translate}}</mat-label>
         <input formControlName="abv" matInput type="number">
         <fa-icon matSuffix [icon]="['fas','percentage']"></fa-icon>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" fxFlex.xl="22" fxFlex.lg="22" fxFlex.md="22" fxflex.sm="100"
-                      fxFlex.xs="100">
+      <mat-form-field appearance="outline" fxFlex.lt-md="100" fxFlex.gt-sm="45">
         <mat-label>{{'attributes.wine.vintage_wine'|translate}}</mat-label>
         <input formControlName="vintage_wine" matInput>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" fxFlex.xl="30" fxFlex.lg="30" fxFlex.md="30" fxflex.sm="100"
-                      fxFlex.xs="100">
+      <mat-form-field appearance="outline" fxFlex.lt-md="100" fxFlex.gt-sm="45">
         <mat-label>{{'attributes.wine.visual'|translate}}</mat-label>
         <input formControlName="visual" matInput>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" fxFlex.xl="30" fxFlex.lg="30" fxFlex.md="30" fxflex.sm="100"
-                      fxFlex.xs="100">
+      <mat-form-field appearance="outline" fxFlex.lt-md="100" fxFlex.gt-sm="45">
         <mat-label>{{'attributes.wine.ripening'|translate}}</mat-label>
         <input formControlName="ripening" matInput>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" fxFlex.xl="30" fxFlex.lg="30" fxFlex.md="30" fxflex.sm="100"
-                      fxFlex.xs="100">
+      <mat-form-field appearance="outline" fxFlex.lt-md="100" fxFlex.gt-sm="45">
         <mat-label>{{'attributes.wine.grapes'|translate}}</mat-label>
         <input formControlName="grapes" matInput>
       </mat-form-field>
 
-      <div fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100" fxFlex.xs="100">
+      <div fxFlex.lt-md="100" fxFlex.gt-sm="45">
         <mat-form-field appearance="outline" [fxFlex]="((canCreateWineStyle$ | async) && !data.disabled)? 80 : 100">
           <mat-label>{{'attributes.wine_style.to_human'|translate}}</mat-label>
           <mat-select [compareWith]="compareSelectValues" formControlName="wine_style">
@@ -87,7 +78,7 @@
         </button>
       </div>
 
-      <div fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="45" fxflex.sm="100" fxFlex.xs="100">
+      <div fxFlex.lt-md="100" fxFlex.gt-sm="45">
         <mat-form-field appearance="outline" [fxFlex]="((canCreateMaker$ | async) && !data.disabled) ? 80 : 100">
           <mat-label>{{'attributes.maker.to_human'|translate}}</mat-label>
           <mat-select [compareWith]="compareSelectValues" formControlName="maker">
