@@ -406,7 +406,7 @@
     "wine": {
       "to_human": "Vino",
       "abv": "ABV",
-      "vintage_wine": "vintage_wine",
+      "vintage_wine": "vino añejo",
       "ripening": "Madurez",
       "visual": "Apariencia",
       "grapes": "Uvas"

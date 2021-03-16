@@ -48,6 +48,7 @@ export class HeaderTopComponent implements OnInit, OnDestroy {
     this.layout.publishLayoutChange({
       sidebarStyle: 'closed'
     });
+    this.layoutConf = this.layout.layoutConf;
   }
 
   onLogout() {

@@ -160,7 +160,7 @@
         }
       }
     },
-    "users": {
+    "employees": {
       "fab": "Novo funcionário",
       "dialog": {
         "update": {
@@ -406,7 +406,7 @@
     "wine": {
       "to_human": "Vinho",
       "abv": "ABV",
-      "vintage_wine": "vintage_wine",
+      "vintage_wine": "Safra do vinho",
       "ripening": "Amadurecimento",
       "visual": "Aparencia",
       "grapes": "Uvas"

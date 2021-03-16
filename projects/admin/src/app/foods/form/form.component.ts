@@ -54,7 +54,7 @@ export class FormComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       const data = this.mountData();
-      if (this.data) {
+      if (this.data?.data?.id) {
         this.store.dispatch(UPDATE_FOOD({food: data}));
       } else {
         this.store.dispatch(CREATE_FOOD({food: data}));

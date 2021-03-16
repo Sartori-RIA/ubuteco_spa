@@ -45,6 +45,8 @@ export class HeaderSideComponent implements OnInit {
     this.layout.publishLayoutChange({
       sidebarStyle: 'closed'
     });
+
+    this.layoutConf = this.layout.layoutConf;
   }
 
   toggleCollapse() {

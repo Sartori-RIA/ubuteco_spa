@@ -56,7 +56,6 @@ export class IndexComponent implements OnInit, OnDestroy {
     this.store.dispatch(REQUEST_ROLES());
     this.dataSource.sort = this.sort;
     this.subscriptions.push(this.users$.subscribe((user) => {
-      console.log(user)
       this.store.dispatch(REQUEST_ALL_EMPLOYEES({page: '1', organization_id: user.organization_id}));
     }));
     this.updateList();
