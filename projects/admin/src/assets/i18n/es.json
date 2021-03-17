@@ -251,7 +251,8 @@
       "fab": "Nuevo pedido",
       "dialog": {
         "item_select": "Seleccione el artículo",
-        "item_select_option": "{{name}} - R$ {{price}} - Disponible: {{quantity}}"
+        "item_select_option": "{{name}} - R$ {{price}} - Disponible: {{quantity}}",
+        "dish_select_option": "{{name}} - R$ {{price}}"
       },
       "form": {
         "order_n": "Orden #{{id}}",
