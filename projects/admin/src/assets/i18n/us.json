@@ -263,15 +263,34 @@
       },
       "flash": {
         "items": {
-          "success": {
-            "updated": "Item successfully updated to order",
-            "destroy": "Item successfully removed from order"
+          "create": {
+            "success": "Item successfully added to order",
+            "fail": "Failed to add the item to the order"
           },
-          "fail": {
-            "updated": "Failed to update item to order",
-            "destroy": "Failed to remove item from order",
-            "create": "Failed to add the item to the order"
+          "update": {
+            "success": "Item successfully updated to order",
+            "fail": "Failed to update item to order"
+          },
+          "destroy": {
+            "success": "Item successfully removed from order",
+            "fail": "Failed to remove item from order"
           }
+        }
+      }
+    },
+    "order_item": {
+      "messages": {
+        "create": {
+          "success": "Item successfully added to order",
+          "fail": "Failed to add the item to the order"
+        },
+        "update": {
+          "success": "Item successfully updated to order",
+          "fail": "Failed to update item to order"
+        },
+        "destroy": {
+          "success": "Item successfully removed from order",
+          "fail": "Failed to remove item from order"
         }
       }
     },

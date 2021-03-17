@@ -31,6 +31,7 @@ import {selectAllOrdersLoaded} from './orders.selectors';
 import {FeedbackService} from '../../core/services/api/feedback.service';
 import {selectCurrentOrganization} from '../auth/auth.selectors';
 import {Organization} from '../../core/models/organization';
+import {ADD_ORDER_ITEM_DONE, DELETE_ORDER_ITEM_DONE, UPDATE_ORDER_ITEM_DONE} from '../order-items/order-items.actions';
 
 @Injectable()
 export class OrdersEffects {
@@ -113,6 +114,26 @@ export class OrdersEffects {
       catchError(() => of(SEARCH_ORDERS_FAIL()))
     ))
   ));
+
+  onReloadOrderAfterUpSert$ = createEffect(() => this.actions$.pipe(
+    ofType(ADD_ORDER_ITEM_DONE, UPDATE_ORDER_ITEM_DONE),
+    mergeMap(({item}) => this.ordersService.show(item.order_id)
+      .pipe(
+        map((order) => REQUEST_ORDER_DONE({order})),
+        catchError(() => of(REQUEST_ORDER_FAILED()))
+      )
+    )
+  ));
+  onReloadOrderAfterDestroy$ = createEffect(() => this.actions$.pipe(
+    ofType(DELETE_ORDER_ITEM_DONE),
+    mergeMap(({order_id}) => this.ordersService.show(order_id)
+      .pipe(
+        map((order) => REQUEST_ORDER_DONE({order})),
+        catchError(() => of(REQUEST_ORDER_FAILED()))
+      )
+    )
+  ));
+
 
   constructor(private actions$: Actions,
               private store: Store<AppState>,

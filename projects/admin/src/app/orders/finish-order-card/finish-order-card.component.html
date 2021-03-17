@@ -5,18 +5,27 @@
       <div class="line mb-1">
         <span class="fw-500">{{'attributes.order.subtotal'|translate}}</span>
         <span fxFlex></span>
-        <span class="text-muted"><mat-icon>attach_money</mat-icon>{{order.total}}</span>
+        <span class="text-muted">
+          <mat-icon>attach_money</mat-icon>
+          <span style="font-size: 24px">{{order?.total_cents | formatCents}}</span>
+        </span>
       </div>
       <div class="line mb-1">
         <span class="fw-500">{{'attributes.order.discount'|translate}}</span>
         <span fxFlex></span>
-        <span class="text-muted"><mat-icon>attach_money</mat-icon>{{order.discount}}</span>
+        <span class="text-muted">
+          <mat-icon>attach_money</mat-icon>
+          <span style="font-size: 24px">{{order?.discount_cents | formatCents}}</span>
+        </span>
       </div>
       <mat-divider class=""></mat-divider>
       <div class="line mb-1 pt-1">
         <span class="fw-500">{{'attributes.order.total'|translate}}</span>
         <span fxFlex></span>
-        <span class="text-muted"><mat-icon>attach_money</mat-icon>{{order.total_with_discount}}</span>
+        <span class="text-muted">
+          <mat-icon>attach_money</mat-icon>
+          <span style="font-size: 24px">{{order?.total_with_discount_cents | formatCents}}</span>
+        </span>
       </div>
       <mat-card-actions>
         <span fxFlex></span>

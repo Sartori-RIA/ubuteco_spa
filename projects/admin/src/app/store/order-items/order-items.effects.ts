@@ -48,13 +48,13 @@ export class OrderItemsEffects {
       })
       .pipe(
         map((item) => {
-          this.translate.get('pages.orders.flash.items.success.updated')
+          this.translate.get('pages.orders.flash.items.update.success')
             .pipe(take(1))
             .subscribe((message) => this.feedback.success(message));
           return UPDATE_ORDER_ITEM_DONE({item});
         }),
         catchError((err) => {
-          this.translate.get('pages.orders.flash.items.fail.updated')
+          this.translate.get('pages.orders.flash.items.update.fail')
             .pipe(take(1))
             .subscribe((message) => this.feedback.error(message));
           return of(UPDATE_ORDER_ITEM_FAILED());
@@ -70,13 +70,13 @@ export class OrderItemsEffects {
       orderItemId: action.id,
     }).pipe(
       map(() => {
-        this.translate.get('pages.orders.flash.items.success.update')
+        this.translate.get('pages.orders.flash.items.destroy.success')
           .pipe(take(1))
           .subscribe((message) => this.feedback.success(message));
         return DELETE_ORDER_ITEM_DONE(action);
       }),
       catchError((err) => {
-        this.translate.get('pages.orders.flash.items.fail.destroy')
+        this.translate.get('pages.orders.flash.items.destroy.fail')
           .pipe(take(1))
           .subscribe((message) => this.feedback.error(message));
         return of(DELETE_ORDER_ITEM_FAILED());
@@ -97,7 +97,7 @@ export class OrderItemsEffects {
           return ADD_ORDER_ITEM_DONE({item});
         }),
         catchError((err) => {
-          this.translate.get('pages.orders.flash.items.fail.create')
+          this.translate.get('pages.orders.flash.items.create.fail')
             .pipe(take(1))
             .subscribe((message) => this.feedback.success(message));
           return of(ADD_ORDER_ITEM_FAILED());

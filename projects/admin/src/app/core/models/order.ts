@@ -15,8 +15,14 @@ export interface Order extends BaseModel {
   table_id?: number;
   order_items?: OrderItem[];
   total?: number;
+  total_cents?: number;
+  total_currency?: number;
   discount?: number;
+  discount_cents?: number;
+  discount_currency?: number;
   total_with_discount?: number;
+  total_with_discount_cents?: number;
+  total_with_discount_currency?: number;
 }
 
 export interface OrderItem extends BaseModel {

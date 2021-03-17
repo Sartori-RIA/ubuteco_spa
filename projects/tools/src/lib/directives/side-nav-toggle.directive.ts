@@ -35,7 +35,6 @@ export class SideNavToggleDirective implements OnInit, OnDestroy {
 
   initSideNav() {
     this.isMobile = this.mediaObserver.isActive('xs') || this.mediaObserver.isActive('sm');
-    // console.log(this.isMobile)
     this.updateSidenav();
     this.screenSizeWatcher = this.mediaObserver.media$.subscribe((change: MediaChange) => {
       this.isMobile = (change.mqAlias === 'xs') || (change.mqAlias === 'sm');

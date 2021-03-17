@@ -261,17 +261,34 @@
         "close_order": "Cerrar orden",
         "remove": "Para eliminar"
       },
-      "flash": {
-        "items": {
-          "success": {
-            "updated": "El artículo se actualizó correctamente para ordenar",
-            "destroy": "Artículo eliminado correctamente del pedido"
-          },
-          "fail": {
-            "updated": "No se pudo actualizar el artículo al pedido.",
-            "destroy": "No se pudo quitar el artículo del pedido.",
-            "create": "No se pudo agregar el artículo al pedido."
-          }
+      "items": {
+        "create": {
+          "success": "Artículo agregado exitosamente al pedido",
+          "fail": "No se pudo agregar el artículo al pedido."
+        },
+        "update": {
+          "success": "El artículo se actualizó correctamente para ordenar",
+          "fail": "No se pudo actualizar el artículo al pedido."
+        },
+        "destroy": {
+          "success": "Artículo eliminado correctamente del pedido",
+          "fail": "No se pudo quitar el artículo del pedido."
+        }
+      }
+    },
+    "order_item": {
+      "messages": {
+        "create": {
+          "success": "Artículo agregado exitosamente al pedido",
+          "fail": "No se pudo agregar el artículo al pedido."
+        },
+        "update": {
+          "success": "El artículo se actualizó correctamente para ordenar",
+          "fail": "No se pudo actualizar el artículo al pedido."
+        },
+        "destroy": {
+          "success": "Artículo eliminado correctamente del pedido",
+          "fail": "No se pudo quitar el artículo del pedido."
         }
       }
     },

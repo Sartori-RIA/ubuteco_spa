@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FormatCentsPipe implements PipeTransform {
 
   transform(value: any, ...args: any[]): any {
-    return `R$ ${value / 100}`;
+    return value / 100;
   }
 
 }

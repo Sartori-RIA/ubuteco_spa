@@ -13,7 +13,6 @@ export class SidenavTogglerDirective {
 
   @HostListener('click')
   onClick() {
-    // console.log(this.egretSidenavHelperService.getSidenav(this.id))
     this.egretSidenavHelperService.getSidenav(this.id).toggle();
   }
 }

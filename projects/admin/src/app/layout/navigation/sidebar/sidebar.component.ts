@@ -68,7 +68,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.matchMediaService.onMediaChange
       .pipe(takeUntil(this.unsubscribeAll))
       .subscribe(() => {
-        // console.log("medua sub");
         if (this.mediaObserver.isActive(this.lockedBreakpoint)) {
           this.sidebarLockedOpen = true;
           this.opened = true;

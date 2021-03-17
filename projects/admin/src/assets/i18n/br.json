@@ -264,28 +264,34 @@
       },
       "flash": {
         "items": {
-          "success": {
-            "updated": "Item atualizado ao pedido com sucesso",
-            "destroy": "Item removido do pedido com sucesso"
+          "create": {
+            "success": "Item adicionado ao pedido com sucesso",
+            "fail": "Falhou ao adicionar o item ao pedido"
           },
-          "fail": {
-            "updated": "Falhou ao atualizar o item ao pedido",
-            "destroy": "Falhou ao remover o item do pedido",
-            "create": "Falhou ao adicionar o item ao pedido"
+          "update": {
+            "success": "Item atualizado ao pedido com sucesso",
+            "fail": "Falhou ao atualizar o item ao pedido"
+          },
+          "destroy": {
+            "success": "Item removido do pedido com sucesso",
+            "fail": "Falhou ao remover o item do pedido"
           }
         }
       }
     },
     "order_item": {
       "messages": {
-        "success": {
-          "updated": "Item atualizado ao pedido com sucesso",
-          "destroy": "Item removido do pedido com sucesso"
+        "create": {
+          "success": "Item adicionado ao pedido com sucesso",
+          "fail": "Falhou ao adicionar o item ao pedido"
         },
-        "fail": {
-          "updated": "Falhou ao atualizar o item ao pedido",
-          "destroy": "Falhou ao remover o item do pedido",
-          "create": "Falhou ao adicionar o item ao pedido"
+        "update": {
+          "success": "Item atualizado ao pedido com sucesso",
+          "fail": "Falhou ao atualizar o item ao pedido"
+        },
+        "destroy": {
+          "success": "Item removido do pedido com sucesso",
+          "fail": "Falhou ao remover o item do pedido"
         }
       }
     },
