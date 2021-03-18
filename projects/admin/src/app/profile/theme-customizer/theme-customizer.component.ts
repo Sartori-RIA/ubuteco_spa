@@ -11,20 +11,16 @@ import {FOOTER_COLOR_CHANGED, SIDEBAR_COLOR_CHANGED, TOP_BAR_COLOR_CHANGED} from
   templateUrl: './theme-customizer.component.html',
   styleUrls: ['./theme-customizer.component.scss']
 })
-export class ThemeCustomizerComponent implements OnInit {
+export class ThemeCustomizerComponent {
 
   viewMode: 'options' | 'json' = 'options';
-  layoutConf: ILayoutConf;
+  layoutConf: ILayoutConf = this.layout.layoutConf;
   sidebarColors$ = this.store.pipe(select(selectSidebarColors));
   topBarColors$ = this.store.pipe(select(selectTopBarColors));
   footerColors$ = this.store.pipe(select(selectFooterColors));
 
   constructor(private layout: LayoutService,
               private store: Store<AppState>) {
-  }
-
-  ngOnInit() {
-    this.layoutConf = this.layout.layoutConf;
   }
 
   updateSidebar(data: CustomizerColors) {

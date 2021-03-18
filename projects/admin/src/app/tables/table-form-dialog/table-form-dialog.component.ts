@@ -17,7 +17,7 @@ import {selectTablesLoading} from '../../store/tables/table.selectors';
 })
 export class TableFormDialogComponent implements OnInit {
 
-  form: FormGroup;
+  form: FormGroup = this.mountForm();
   readonly loading$: Observable<boolean> = this.store.pipe(select(selectTablesLoading));
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -28,12 +28,11 @@ export class TableFormDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.mountForm();
     this.updateForm();
   }
 
-  mountForm() {
-    this.form = this.fb.group({
+  mountForm(): FormGroup {
+   return this.fb.group({
       name: [null, Validators.required],
       chairs: [null, [Validators.required,
         Validators.min(0),

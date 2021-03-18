@@ -28,14 +28,14 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   wines$: Observable<Wine[]> = this.store.pipe(select(selectAllWines));
   readonly loading$: Observable<boolean> = this.store.pipe(select(selectWinesLoading));
-  readonly canCreate$ = this.store.pipe(select(canCreateWines));
-  readonly canDestroy$ = this.store.pipe(select(canDestroyWines));
-  readonly canEdit$ = this.store.pipe(select(canEditWines));
+  readonly canCreate$: Observable<boolean> = this.store.pipe(select(canCreateWines));
+  readonly canDestroy$: Observable<boolean> = this.store.pipe(select(canDestroyWines));
+  readonly canEdit$: Observable<boolean> = this.store.pipe(select(canEditWines));
   readonly displayedColumns: string[] = ['id', 'image', 'name', 'style', 'price', 'action'];
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort!: MatSort;
   private data: Wine[] = [];
   dataSource = new MatTableDataSource(this.data);
-  private subscription: Subscription;
+  private subscription?: Subscription;
 
   constructor(private store: Store<AppState>,
               private dialog: MatDialog,
@@ -84,7 +84,9 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   delete(wine: Wine) {
-    this.store.dispatch(REMOVE_WINE({id: wine.id}));
+    if (!!wine?.id) {
+      this.store.dispatch(REMOVE_WINE({id: wine.id}));
+    }
   }
 
   openShow(wine: Wine) {
@@ -104,7 +106,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   applyFilter(word: string) {
-    this.dataSource.filter = word.trim().toLowerCase();
+    this.dataSource.filter = word
   }
 
   private updateBeerList() {

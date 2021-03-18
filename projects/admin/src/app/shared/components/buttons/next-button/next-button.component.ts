@@ -9,6 +9,6 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@
 export class NextButtonComponent {
 
   @Output() next = new EventEmitter();
-  @Input() tooltip: string;
+  @Input() tooltip = '';
 
 }

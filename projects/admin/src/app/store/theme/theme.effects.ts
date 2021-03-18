@@ -35,7 +35,7 @@ export class ThemeEffects {
 
   loadTheme$ = createEffect(() => this.actions$.pipe(
     ofType(THEME_REQUESTED),
-    mergeMap(({user}) => this.themeService.show(user.organization.theme_id)
+    mergeMap(({user}) => this.themeService.show(user!.organization!.theme_id!)
       .pipe(
         map((theme) => THEME_LOADED({theme})),
         catchError(() => of(THEME_FAILED()))

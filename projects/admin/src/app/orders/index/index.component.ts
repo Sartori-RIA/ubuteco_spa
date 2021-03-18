@@ -20,7 +20,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['id', 'client', 'table', 'total', 'action'];
   private data: Order[] = [];
   dataSource = new MatTableDataSource(this.data);
-  private subscription: Subscription;
+  private subscription?: Subscription;
 
   constructor(private store: Store<AppState>,
               private router: Router,
@@ -37,11 +37,13 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   cancelOrder(order: Order) {
-    this.store.dispatch(REMOVE_ORDER({id: order.id}));
+    if (order.id) {
+      this.store.dispatch(REMOVE_ORDER({id: order.id}));
+    }
   }
 
   applyFilter(word: string) {
-    this.dataSource.filter = word.trim().toLowerCase();
+    this.dataSource.filter = word
   }
 
   private updateOrderList() {

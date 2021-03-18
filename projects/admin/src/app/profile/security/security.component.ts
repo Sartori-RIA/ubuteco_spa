@@ -19,9 +19,9 @@ import {User} from '../../core/models/user';
 })
 export class SecurityComponent implements OnInit, OnDestroy {
 
-  form: FormGroup;
+  form: FormGroup = this.mountForm();
   subscriptions: Subscription[] = [];
-  user$: Observable<User> = this.store.pipe(select(selectCurrentUser));
+  user$: Observable<User | undefined> = this.store.pipe(select(selectCurrentUser));
   loading$: Observable<boolean> = this.store.pipe(select(selectAuthLoading));
 
   constructor(private  fb: FormBuilder,
@@ -30,7 +30,6 @@ export class SecurityComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.mountForm();
     this.updateForm();
     this.subscriptions.push(this.form.controls.password.valueChanges.pipe(distinctUntilChanged()).subscribe((values) => {
       if (!!(values?.password) || !(values?.confirm_password)) {
@@ -67,8 +66,8 @@ export class SecurityComponent implements OnInit, OnDestroy {
     this.form.markAllAsTouched();
   }
 
-  private mountForm() {
-    this.form = this.fb.group({
+  private mountForm(): FormGroup {
+    return this.fb.group({
       email: [null,
         [Validators.required, Validators.email],
         [uButecoValidators.uniqueEmail(this.userService)]],
@@ -79,6 +78,10 @@ export class SecurityComponent implements OnInit, OnDestroy {
 
   private updateForm() {
     this.user$.pipe(take(1)).subscribe((data) => {
+      if (!data?.email) {
+        return;
+      }
+
       this.form.patchValue({
         email: data.email,
       });

@@ -24,8 +24,8 @@ import {Wine} from '../../core/models/wine';
 export class AddItemDialogComponent implements OnInit {
 
   form: FormGroup = this.mountForm();
-  items$: Observable<Drink[] | Beer[] | Dish[] | Wine[]>;
-  label: string;
+  items$?: Observable<Drink[] | Beer[] | Dish[] | Wine[]>;
+  label?: string;
 
   constructor(private store: Store<AppState>,
               private fb: FormBuilder,

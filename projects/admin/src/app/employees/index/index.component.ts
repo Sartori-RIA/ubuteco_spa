@@ -22,7 +22,7 @@ import {
 } from '../../store/employees/employees.selectors';
 import {DELETE_EMPLOYEE, REQUEST_ALL_EMPLOYEES, REQUEST_ROLES} from '../../store/employees/employees.actions';
 import {BaseDialogParams} from '../../core/models/base.model';
-import {FormComponent} from "../form/form.component";
+import {FormComponent} from '../form/form.component';
 
 @Component({
   selector: 'app-index',
@@ -37,8 +37,8 @@ export class IndexComponent implements OnInit, OnDestroy {
   readonly canDestroy$ = this.store.pipe(select(canDestroyEmployees));
   readonly canEdit$ = this.store.pipe(select(canEditEmployees));
   readonly displayedColumns: string[] = ['id', 'name', 'email', 'role', 'action'];
-  readonly users$: Observable<User> = this.store.pipe(select(selectCurrentUser));
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  readonly users$: Observable<User | undefined> = this.store.pipe(select(selectCurrentUser));
+  @ViewChild(MatSort, {static: true}) sort!: MatSort;
   private data: User[] = [];
   dataSource = new MatTableDataSource(this.data);
   private subscriptions: Subscription[] = [];
@@ -49,14 +49,16 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions?.forEach((v) => v.unsubscribe());
+    this.subscriptions.forEach((v) => v.unsubscribe());
   }
 
   ngOnInit(): void {
     this.store.dispatch(REQUEST_ROLES());
     this.dataSource.sort = this.sort;
     this.subscriptions.push(this.users$.subscribe((user) => {
-      this.store.dispatch(REQUEST_ALL_EMPLOYEES({page: '1', organization_id: user.organization_id}));
+      if (user?.organization_id) {
+        this.store.dispatch(REQUEST_ALL_EMPLOYEES({page: '1', organization_id: user.organization_id}));
+      }
     }));
     this.updateList();
   }
@@ -91,11 +93,13 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   destroy(element: User) {
-    this.store.dispatch(DELETE_EMPLOYEE({id: element.id}));
+    if (element.id) {
+      this.store.dispatch(DELETE_EMPLOYEE({id: element.id}));
+    }
   }
 
   applyFilter(value: string) {
-    this.dataSource.filter = value.trim().toLowerCase();
+    this.dataSource.filter = value;
   }
 
   private updateList() {

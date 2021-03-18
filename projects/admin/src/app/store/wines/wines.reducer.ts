@@ -26,7 +26,6 @@ export const featureKey = 'wines';
 
 export interface WineState extends EntityState<Wine> {
   loaded: boolean;
-  currentWine: Wine;
   loading: boolean;
   total: number;
 }
@@ -35,7 +34,6 @@ const adapter: EntityAdapter<Wine> = createEntityAdapter<Wine>();
 
 const initialState: WineState = adapter.getInitialState({
   loaded: false,
-  currentWine: undefined,
   loading: false,
   total: 0
 });
@@ -76,7 +74,6 @@ const winesReducer = createReducer(initialState,
   on(UPDATE_WINE_DONE, (state, {wine}) => adapter.upsertOne(wine, {
     ...state,
     loaded: true,
-    currentWine: wine,
     loading: false
   })),
   on(CREATE_WINE_DONE, (state, {wine}) => adapter.addOne(wine, {

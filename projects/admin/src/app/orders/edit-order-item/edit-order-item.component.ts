@@ -13,7 +13,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class EditOrderItemComponent implements OnInit {
 
-  @Input() item: OrderItem;
+  @Input() item!: OrderItem;
   form: FormGroup = this.mountForm();
 
   constructor(private store: Store<AppState>,
@@ -29,7 +29,9 @@ export class EditOrderItemComponent implements OnInit {
       const quantity = this.form.controls.quantity.value;
       if (quantity && quantity !== this.item.quantity) {
         const item: OrderItem = {...this.item, quantity};
-        this.store.dispatch(UPDATE_ORDER_ITEM({order_id: this.item.order_id, item}));
+        if (this.item.order_id) {
+          this.store.dispatch(UPDATE_ORDER_ITEM({order_id: this.item.order_id, item}));
+        }
       }
     }
   }

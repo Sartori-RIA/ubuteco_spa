@@ -47,7 +47,7 @@ export class WinesEffects {
     }),
     mergeMap(([{page}]) => this.wineService.index({page}).pipe(
       map(({body, headers}) => REQUEST_ALL_WINES_DONE({
-          data: body,
+          data: body || [],
           total: Number(headers.get('total'))
         })
       ),

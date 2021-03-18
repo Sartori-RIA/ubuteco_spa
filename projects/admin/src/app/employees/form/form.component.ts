@@ -7,11 +7,10 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 import {BaseDialogParams} from '../../core/models/base.model';
 import {UserService} from '../../core/services/api/user.service';
 import {User} from '../../core/models/user';
-import {selectAllEmployeesRoles, selectAllRoles, selectEmployeesLoading} from '../../store/employees/employees.selectors';
+import {selectAllEmployeesRoles, selectEmployeesLoading} from '../../store/employees/employees.selectors';
 import {Role} from '../../core/models/role';
 import {uButecoValidators} from '../../shared/validators/u-buteco.validators';
 import {ADD_EMPLOYEE, UPDATE_EMPLOYEE} from '../../store/employees/employees.actions';
-import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-form',
@@ -61,7 +60,7 @@ export class FormComponent implements OnInit {
   }
 
   compareSelectValues(val1: Role, val2: Role) {
-    if (!!val1 === false || !!val2 === false) {
+    if (!val1 || !val2) {
       return false;
     }
 

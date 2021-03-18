@@ -31,7 +31,7 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../index';
 import {THEME_LOADED} from '../theme/theme.actions';
 import {OrganizationsService} from '../../core/services/api/organizations.service';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Injectable()
 export class AuthEffects {
@@ -89,8 +89,10 @@ export class AuthEffects {
     mergeMap(() => this.userService.me()
       .pipe(
         map((user) => {
-          this.kitchenSocket.joinInRoom(user.organization.cnpj);
-          this.store.dispatch(THEME_LOADED({theme: user.organization.theme}));
+          if (user?.organization?.theme && user?.organization?.cnpj) {
+            this.kitchenSocket.joinInRoom(user.organization.cnpj);
+            this.store.dispatch(THEME_LOADED({theme: user.organization.theme}));
+          }
           return LOAD_USER_DONE({user});
         }),
         catchError(() => of(LOAD_USER_FAILED()))
@@ -145,7 +147,7 @@ export class AuthEffects {
         });
       });
     })
-  ), {dispatch: false})
+  ), {dispatch: false});
 
   constructor(private actions$: Actions,
               private authService: AuthService,

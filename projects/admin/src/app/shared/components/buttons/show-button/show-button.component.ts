@@ -9,6 +9,6 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@
 export class ShowButtonComponent {
 
   @Output() showElement = new EventEmitter();
-  @Input() tooltip: string;
+  @Input() tooltip = '';
 
 }

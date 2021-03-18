@@ -26,7 +26,7 @@ import {Dish} from '../../core/models/dish';
 export class UploadFileEffects {
   sendFile$ = createEffect(() => this.actions$.pipe(
     ofType(UPLOAD_REQUEST),
-    concatMap(({entityType, file, entityId, entityCouncil, entityState}) => {
+    concatMap(({entityType, file, entityId}) => {
       let observable: Observable<HttpEvent<User | Beer | Wine | Drink | Food | Dish>>;
       switch (entityType) {
         case 'Beer':
@@ -70,7 +70,7 @@ export class UploadFileEffects {
       case HttpEventType.Sent:
         return UPLOAD_STARTED();
       case HttpEventType.UploadProgress:
-        return UPLOAD_PROGRESS({progress: Math.round((100 * event.loaded) / event.total)});
+        return UPLOAD_PROGRESS({progress: Math.round((100 * event.loaded) / event?.total! || 0)});
       case HttpEventType.ResponseHeader:
       case HttpEventType.Response:
         if (event.status === 200) {

@@ -7,8 +7,8 @@ import {MatDialogRef} from '@angular/material/dialog';
   styleUrls: ['./app-loader.component.css']
 })
 export class AppLoaderComponent implements OnInit {
-  title;
-  message;
+  title = '';
+  message = '';
 
   constructor(public dialogRef: MatDialogRef<AppLoaderComponent>) {
   }

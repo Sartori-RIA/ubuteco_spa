@@ -4,7 +4,7 @@ import {LayoutService} from './layout.service';
 import {Colors, CustomizerColors, Theme} from '../../models/theme';
 import {Observable, zip} from 'rxjs';
 import {select, Store} from '@ngrx/store';
-import {canEditTheme, selectCurrentUser, selectIsAdmin, selectIsSuperAdmin} from '../../../store/auth/auth.selectors';
+import {canEditTheme, selectCurrentUser} from '../../../store/auth/auth.selectors';
 import {AppState} from '../../../store';
 import {take} from 'rxjs/operators';
 import {User} from '../../models/user';
@@ -40,7 +40,7 @@ export class CustomizerService {
     'green'
   ];
   private readonly theme$: Observable<Theme> = this.store.pipe(select(selectTheme));
-  private readonly user$: Observable<User> = this.store.pipe(select(selectCurrentUser));
+  private readonly user$: Observable<User | undefined> = this.store.pipe(select(selectCurrentUser));
 
   constructor(private router: Router,
               private layout: LayoutService,
@@ -78,7 +78,7 @@ export class CustomizerService {
     this.footerColors$ = this.store.pipe(select(selectFooterColors));
   }
 
-  removeClass(el, className): void {
+  removeClass(el, className: string): void {
     if (!el || el.length === 0) {
       return;
     }
@@ -92,7 +92,7 @@ export class CustomizerService {
     }
   }
 
-  addClass(el, className): void {
+  addClass(el, className: string): void {
     if (!el) {
       return;
     }
@@ -106,7 +106,7 @@ export class CustomizerService {
     }
   }
 
-  findClosest(el, className): void {
+  findClosest(el, className: string): void {
     if (!el) {
       return;
     }
@@ -119,14 +119,14 @@ export class CustomizerService {
     }
   }
 
-  hasClass(el, className): boolean {
+  hasClass(el, className: string): boolean {
     if (!el) {
-      return;
+      return false;
     }
     return (` ${el.className} `.replace(/[\n\t]/g, ' ').indexOf(` ${className} `) > -1);
   }
 
-  toggleClass(el, className): void {
+  toggleClass(el, className: string): void {
     if (!el) {
       return;
     }

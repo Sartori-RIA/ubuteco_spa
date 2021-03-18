@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { EditOrderItemComponent } from './order-item.component';
+import { EditOrderItemComponent } from './edit-order-item.component';
 
 describe('OrderItemComponent', () => {
   let component: EditOrderItemComponent;

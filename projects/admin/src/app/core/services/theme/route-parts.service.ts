@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Params, Router} from '@angular/router';
 
-interface IRoutePart {
+export interface IRoutePart {
   title: string;
   breadcrumb: string;
   params?: Params;

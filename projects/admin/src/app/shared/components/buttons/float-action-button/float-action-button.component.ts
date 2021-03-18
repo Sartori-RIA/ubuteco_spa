@@ -9,6 +9,6 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@
 export class FloatActionButtonComponent {
 
   @Output() fabClick = new EventEmitter();
-  @Input() tooltip: string;
-  @Input() loading = false;
+  @Input() tooltip = '';
+  @Input() loading: boolean | null = false;
 }

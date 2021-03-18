@@ -1,3 +1,3 @@
-<app-trash-button *ngIf="canDestroy" (deleteElement)="destroy.emit()"></app-trash-button>
-<app-edit-button *ngIf="canEdit" (edit)="update.emit()"></app-edit-button>
-<app-show-button *ngIf="canShow" (showElement)="show.emit()"></app-show-button>
+<app-trash-button *ngIf="canDestroy" (deleteElement)="destroyElement.emit()"></app-trash-button>
+<app-edit-button *ngIf="canEdit" (edit)="updateElement.emit()"></app-edit-button>
+<app-show-button *ngIf="canShow" (showElement)="showElement.emit()"></app-show-button>

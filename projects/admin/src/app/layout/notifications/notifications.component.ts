@@ -7,7 +7,7 @@ import { Router, NavigationEnd } from '@angular/router';
   templateUrl: './notifications.component.html'
 })
 export class NotificationsComponent implements OnInit {
-  @Input() notificPanel;
+  @Input() notificPanel?: any;
 
   // Dummy notifications
   notifications = [{

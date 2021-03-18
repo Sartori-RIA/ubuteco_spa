@@ -82,9 +82,9 @@ const dishesReducer = createReducer(
     loading: false
   })),
   on(REMOVE_DISH_ITEM_DONE, (state, {dish_id, item_id}) => {
-    const index = state.entities[dish_id].dish_ingredients.findIndex((item) => item.id === item_id)
+    const index = state.entities[dish_id]?.dish_ingredients?.findIndex((item) => item.id === item_id)
     const newState = state
-    newState.entities[dish_id].dish_ingredients.slice(index, 1)
+    newState?.entities[dish_id]?.dish_ingredients?.slice(index, 1)
     return {...newState}
   })
 );

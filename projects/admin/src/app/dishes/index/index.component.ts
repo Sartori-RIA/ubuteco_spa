@@ -10,7 +10,8 @@ import {
   selectAllDishes,
   selectAllDishesOrderedById,
   selectAllDishesOrderedByName,
-  selectAllDishesOrderedByPrice, selectDishesLoading
+  selectAllDishesOrderedByPrice,
+  selectDishesLoading
 } from '../../store/dishes/dishes.selectors';
 import {REMOVE_DISH, REQUEST_ALL_DISHES} from '../../store/dishes/dishes.actions';
 import {MatDialog} from '@angular/material/dialog';
@@ -33,10 +34,10 @@ export class IndexComponent implements OnInit, OnDestroy {
   readonly canDestroy$ = this.store.pipe(select(canDestroyDishes));
   readonly canEdit$ = this.store.pipe(select(canEditDishes));
   readonly displayedColumns: string[] = ['id', 'image', 'name', 'price', 'action'];
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort!: MatSort;
   private data: Dish[] = [];
   dataSource = new MatTableDataSource(this.data);
-  private subscription: Subscription;
+  private subscription?: Subscription;
 
   constructor(private store: Store<AppState>,
               private dialog: MatDialog,
@@ -44,9 +45,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.subscription?.unsubscribe();
   }
 
   ngOnInit() {
@@ -78,11 +77,13 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   deleteDish(item: Dish) {
-    this.store.dispatch(REMOVE_DISH({id: item.id}));
+    if (item.id) {
+      this.store.dispatch(REMOVE_DISH({id: item.id}));
+    }
   }
 
   applyFilter(word: string) {
-    this.dataSource.filter = word.trim().toLowerCase();
+    this.dataSource.filter = word;
   }
 
   openForm() {

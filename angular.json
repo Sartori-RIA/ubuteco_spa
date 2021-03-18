@@ -102,6 +102,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "codeCoverage": true,
             "main": "projects/admin/src/test.ts",
             "polyfills": "projects/admin/src/polyfills.ts",
             "tsConfig": "projects/admin/tsconfig.spec.json",
@@ -232,6 +233,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "codeCoverage": true,
             "main": "projects/public/src/test.ts",
             "polyfills": "projects/public/src/polyfills.ts",
             "tsConfig": "projects/public/tsconfig.spec.json",
@@ -274,46 +276,6 @@
         }
       }
     },
-    "tools": {
-      "projectType": "library",
-      "root": "projects/tools",
-      "sourceRoot": "projects/tools/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "tsConfig": "projects/tools/tsconfig.lib.json",
-            "project": "projects/tools/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/tools/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/tools/src/test.ts",
-            "tsConfig": "projects/tools/tsconfig.spec.json",
-            "karmaConfig": "projects/tools/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/tools/tsconfig.lib.json",
-              "projects/tools/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    }
   },
   "cli": {
     "defaultCollection": "@ngrx/schematics",

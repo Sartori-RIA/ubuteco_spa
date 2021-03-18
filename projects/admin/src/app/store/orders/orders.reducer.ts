@@ -29,7 +29,7 @@ export const featureKey = 'orders';
 export interface OrderState extends EntityState<Order> {
   loaded: boolean;
   loading: boolean;
-  preCreatedOrder: Order;
+  preCreatedOrder?: Order;
   total: number;
 }
 

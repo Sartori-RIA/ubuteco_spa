@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {ConfirmDialogComponent} from "../../dialogs/confirm-dialog/confirm-dialog.component";
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmDialogComponent} from '../../dialogs/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-trash-button',
@@ -11,18 +11,18 @@ import {ConfirmDialogComponent} from "../../dialogs/confirm-dialog/confirm-dialo
 export class TrashButtonComponent {
 
   @Output() deleteElement = new EventEmitter();
-  @Input() tooltip: string;
+  @Input() tooltip = '';
 
   constructor(private dialog: MatDialog) {
   }
 
   confirmToDelete() {
-    const ref = this.dialog.open(ConfirmDialogComponent)
+    const ref = this.dialog.open(ConfirmDialogComponent);
     ref.afterClosed().subscribe((res) => {
       if (res?.confirm) {
-        this.deleteElement.emit()
+        this.deleteElement.emit();
       }
-    })
+    });
   }
 
 }

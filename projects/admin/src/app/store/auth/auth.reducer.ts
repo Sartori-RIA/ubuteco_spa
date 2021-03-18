@@ -24,9 +24,9 @@ import {LocalStorage} from '../../shared/util/storage';
 export const featureKey = 'auth';
 
 export interface AuthState {
-  user: User;
-  token: string;
-  errors: string;
+  user?: User;
+  token?: string;
+  errors?: string;
   loading: boolean;
 
 }
@@ -54,7 +54,7 @@ const authReducer = createReducer(initialState,
     (state) => ({...state, loading: false})),
   on(LOAD_USER_DONE, UPDATE_USER_DONE, (state, {user}) =>
     ({...state, user, theme: user?.organization?.theme, loading: false})),
-  on(UPDATE_ORGANIZATION_DONE, (state, {data}) => ({...state, user: {...state.user.organization, organization: data}}))
+  on(UPDATE_ORGANIZATION_DONE, (state, {data}) => ({...state, user: {...state.user, organization: data}}))
 );
 
 export function reducer(state: AuthState | undefined, action: Action): AuthState {

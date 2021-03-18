@@ -40,7 +40,7 @@ export class WineStylesEffects {
     }),
     mergeMap(([{page}]) => this.wineStyleService.index({page}).pipe(
       map(({body, headers}) => REQUEST_ALL_WINE_STYLES_DONE({
-          data: body,
+          data: body || [],
           total: Number(headers.get('total'))
         })
       ),

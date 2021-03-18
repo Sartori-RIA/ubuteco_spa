@@ -13,7 +13,7 @@ import {SignOutComponent} from '../../../auth/sign-out/sign-out.component';
 export class HeaderTopComponent implements OnInit, OnDestroy {
   layoutConf: ILayoutConf;
   menuItems = this.navService.iconMenu;
-  menuItemSub: Subscription;
+  subscription?: Subscription;
   egretThemes: any[] = [];
   @Input() notificPanel;
 
@@ -28,7 +28,7 @@ export class HeaderTopComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.menuItemSub.unsubscribe();
+    this.subscription?.unsubscribe();
   }
 
   changeTheme(theme) {

@@ -1,10 +1,5 @@
-<div fxLayout="row">
+<app-search (onSearch)="applyFilter($event)"></app-search>
 
-  <mat-form-field fxFill appearance="outline">
-    <input matInput (keyup)="applyFilter($event.target.value)" [placeholder]="'commons.labels.search'|translate">
-  </mat-form-field>
-
-</div>
 <div class="mat-elevation-z8">
 
   <app-float-action-button
@@ -32,7 +27,7 @@
 
     <ng-container matColumnDef="total">
       <th mat-header-cell *matHeaderCellDef>{{'attributes.order.total'|translate}}</th>
-      <td mat-cell *matCellDef="let element"> {{element?.total | currency}} </td>
+      <td mat-cell *matCellDef="let element"> {{element?.total_cents | currency}} </td>
     </ng-container>
 
     <ng-container matColumnDef="action">

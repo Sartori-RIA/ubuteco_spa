@@ -6,7 +6,7 @@ import {LoaderComponent} from './loader.component';
   providedIn: 'root'
 })
 export class AppLoaderService {
-  dialogRef: MatDialogRef<LoaderComponent>;
+  dialogRef?: MatDialogRef<LoaderComponent>;
 
   constructor(private dialog: MatDialog) {
   }
@@ -19,6 +19,6 @@ export class AppLoaderService {
   }
 
   close() {
-    this.dialogRef.close();
+    this.dialogRef?.close();
   }
 }

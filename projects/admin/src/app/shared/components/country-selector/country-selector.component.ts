@@ -12,7 +12,7 @@ import {LocalStorage} from '../../util/storage';
 export class CountrySelectorComponent implements OnInit {
 
   countries: Country[] = COUNTRIES_DB;
-  selectedCountry: Country;
+  selectedCountry: Country = this.countries[0];
 
   constructor(private translateService: TranslateService,
               @Inject(PLATFORM_ID) private platformId: any) {
@@ -21,7 +21,10 @@ export class CountrySelectorComponent implements OnInit {
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       const country: string = LocalStorage.country();
-      this.selectedCountry = this.countries.find((v) =>  v?.alpha3Code?.toLowerCase() === country?.toLowerCase());
+      const selected = this.countries.find((v) => v?.alpha3Code?.toLowerCase() === country?.toLowerCase());
+      if (!!selected) {
+        this.selectedCountry = selected;
+      }
     }
   }
 

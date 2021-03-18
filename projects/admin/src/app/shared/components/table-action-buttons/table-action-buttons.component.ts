@@ -7,11 +7,12 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 })
 export class TableActionButtonsComponent {
 
-  @Input() canEdit = true;
-  @Input() canDestroy = true;
-  @Input() canShow = true;
+  @Input() canEdit: boolean | null = true;
+  @Input() canDestroy: boolean | null = true;
+  @Input() canShow: boolean | null = true;
 
-  @Output() destroy = new EventEmitter();
-  @Output() update = new EventEmitter();
-  @Output() show = new EventEmitter();
+  @Output() destroyElement = new EventEmitter();
+  @Output() updateElement = new EventEmitter();
+  @Output() showElement = new EventEmitter();
+
 }

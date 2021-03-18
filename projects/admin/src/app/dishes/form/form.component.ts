@@ -22,7 +22,7 @@ import {selectDishesLoading} from '../../store/dishes/dishes.selectors';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormComponent implements OnInit {
-  form: FormGroup;
+  form: FormGroup = this.mountForm();
   ingredients: FormArray;
   readonly loading$: Observable<boolean> = this.store.pipe(select(selectDishesLoading));
   readonly foods$: Observable<Food[]> = this.store.pipe(
@@ -41,12 +41,11 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(REQUEST_ALL_FOODS({page: '1'}));
-    this.mountForm();
     this.updateForm();
   }
 
-  mountForm() {
-    this.form = this.fb.group({
+  mountForm(): FormGroup {
+    return this.fb.group({
       id: [null, Validators.required],
       name: [null, Validators.required],
       price: [null, [Validators.required, Validators.min(0)]],
@@ -68,7 +67,7 @@ export class FormComponent implements OnInit {
   }
 
   compareSelectValues(val1: Maker, val2: Maker): boolean {
-    if (!!val1 === false || !!val2 === false) {
+    if (!val1 || !val2) {
       return false;
     }
     return val1.id === val2.id;
@@ -114,9 +113,10 @@ export class FormComponent implements OnInit {
   private updateForm() {
     if (!!this.data.data) {
       const data = this.data.data;
+      const cents: number = data.price_cents || 0;
       this.form.patchValue({
         name: data.name,
-        price: data.price_cents / 100
+        price: cents / 100
       });
       data.dish_ingredients?.forEach((v, index) => {
         let form = (this.form.controls.ingredients as FormArray).controls[index] as FormGroup;
@@ -146,7 +146,7 @@ export class FormComponent implements OnInit {
     if (formIngredients.valid) {
       item.dish_ingredients_attributes = [];
       formIngredients.controls.forEach(v => {
-        item.dish_ingredients_attributes.push({
+        item.dish_ingredients_attributes?.push({
           quantity: v.value.quantity,
           food_id: v.value.food.id,
           id: v.value.id

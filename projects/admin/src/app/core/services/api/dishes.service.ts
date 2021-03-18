@@ -34,7 +34,7 @@ export class DishesService extends BaseService<Dish> {
     const form = new FormData();
     form.append('name', data.name);
     form.append('price', data.price.toString());
-    data.dish_ingredients_attributes.forEach((v, i) => {
+    data.dish_ingredients_attributes?.forEach((v, i) => {
       form.append(`dish_ingredients_attributes[${i}][food_id]`, v.food_id.toString());
       form.append(`dish_ingredients_attributes[${i}][quantity]`, v.quantity.toString());
       if (v.id) {

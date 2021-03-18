@@ -8,7 +8,8 @@ import {
   selectAllFoodsOrderedById,
   selectAllFoodsOrderedByName,
   selectAllFoodsOrderedByPrice,
-  selectAllFoodsOrderedByQuantity, selectFoodLoading
+  selectAllFoodsOrderedByQuantity,
+  selectFoodLoading
 } from '../../store/foods/food.selectors';
 import {Food} from '../../core/models/food';
 import {REMOVE_FOOD, REQUEST_ALL_FOODS} from '../../store/foods/food.actions';
@@ -32,10 +33,10 @@ export class IndexComponent implements OnInit, OnDestroy {
   readonly canDestroy$ = this.store.pipe(select(canDestroyFoods));
   readonly canEdit$ = this.store.pipe(select(canEditFoods));
   readonly displayedColumns: string[] = ['id', 'image', 'name', 'quantity', 'price', 'action'];
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort!: MatSort;
   private data: Food[] = [];
   dataSource = new MatTableDataSource(this.data);
-  private subscription: Subscription;
+  private subscription?: Subscription;
 
   constructor(private store: Store<AppState>,
               private dialog: MatDialog,
@@ -43,9 +44,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.subscription?.unsubscribe();
   }
 
   ngOnInit() {
@@ -77,11 +76,13 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   deleteFood(food: Food) {
-    this.store.dispatch(REMOVE_FOOD({id: food.id}));
+    if (food.id) {
+      this.store.dispatch(REMOVE_FOOD({id: food.id}));
+    }
   }
 
   applyFilter(word: string) {
-    this.dataSource.filter = word.trim().toLowerCase();
+    this.dataSource.filter = word;
   }
 
   openShowDialog(food: Food) {

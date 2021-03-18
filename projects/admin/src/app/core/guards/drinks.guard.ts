@@ -10,9 +10,9 @@ import {
   UrlTree
 } from '@angular/router';
 import {Observable} from 'rxjs';
-import {select, Store} from "@ngrx/store";
-import {AppState} from "../../store";
-import {canReadDrinks} from "../../store/auth/auth.selectors";
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../../store';
+import {canReadDrinks} from '../../store/auth/auth.selectors';
 
 @Injectable({
   providedIn: 'root'

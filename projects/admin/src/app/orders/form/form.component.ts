@@ -28,11 +28,11 @@ import {REQUEST_ALL_WINES} from '../../store/wines/wines.actions';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormComponent implements OnInit, OnDestroy {
-    order$: Observable<Order>;
+    order$?: Observable<Order | undefined>;
     orderItems$: Observable<OrderItem[]> = this.store.pipe(select(selectAllOrderItems));
     readonly tables$: Observable<Table[]> = this.store.pipe(select(selectAllTables));
     readonly form: FormGroup = this.mountForm();
-    private subscription: Subscription;
+    private subscription?: Subscription;
     private readonly actions = [
         REQUEST_ALL_TABLES,
         REQUEST_ALL_DISHES,
@@ -96,7 +96,7 @@ export class FormComponent implements OnInit, OnDestroy {
     }
 
     onSelectTable(event: MatSelectChange) {
-        this.order$.pipe(take(1)).subscribe((order) => {
+        this.order$?.pipe(take(1)).subscribe((order) => {
             const table: Table = event.source.value as Table;
             const data: Order = {...order, table, table_id: table.id};
             this.store.dispatch(UPDATE_ORDER({order: data}));
@@ -104,7 +104,7 @@ export class FormComponent implements OnInit, OnDestroy {
     }
 
     private updateForm() {
-        this.subscription = this.order$.pipe(
+        this.subscription = this.order$?.pipe(
             tap((order) => {
                 if (order) {
                     this.form.patchValue({

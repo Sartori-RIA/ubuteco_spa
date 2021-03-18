@@ -10,8 +10,8 @@ import {MatDialogRef} from '@angular/material/dialog';
 })
 export class LoaderComponent {
 
-  title: string;
-  message: string;
+  title?: string;
+  message?: string;
   options: AnimationOptions = {
     path: '/assets/animations/loading.json'
   };

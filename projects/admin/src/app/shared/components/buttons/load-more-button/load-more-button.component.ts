@@ -9,6 +9,6 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@
 export class LoadMoreButtonComponent {
 
   @Output() loadMore = new EventEmitter();
-  @Input() loading: boolean;
-  @Input() tooltip: string;
+  @Input() loading = false;
+  @Input() tooltip = '';
 }

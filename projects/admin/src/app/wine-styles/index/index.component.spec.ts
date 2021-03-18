@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { IndexComponent } from './wine-styles.component';
+import { IndexComponent } from './index.component';
 
 describe('WineStylesComponent', () => {
   let component: IndexComponent;

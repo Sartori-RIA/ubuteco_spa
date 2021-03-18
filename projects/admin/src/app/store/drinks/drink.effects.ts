@@ -47,7 +47,7 @@ export class DrinkEffects {
     }),
     mergeMap(([{page}]) => this.drinkService.index({page}).pipe(
       map(({body, headers}) => REQUEST_ALL_DRINKS_DONE({
-          data: body,
+          data: body || [],
           total: Number(headers.get('total'))
         })
       ),

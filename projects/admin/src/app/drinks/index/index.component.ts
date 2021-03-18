@@ -44,11 +44,11 @@ export class IndexComponent implements OnInit, OnDestroy, AfterViewInit {
   readonly canDestroy$ = this.store.pipe(select(canDestroyDrinks));
   readonly canEdit$ = this.store.pipe(select(canEditDrinks));
   readonly displayedColumns: string[] = ['id', 'image', 'name', 'maker', 'price', 'action'];
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort!: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
   private data: Drink[] = [];
   dataSource = new MatTableDataSource(this.data);
-  private subscription: Subscription;
+  private subscription?: Subscription;
 
   constructor(private store: Store<AppState>,
               private dialog: MatDialog,
@@ -56,9 +56,7 @@ export class IndexComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.subscription?.unsubscribe();
   }
 
   ngAfterViewInit(): void {
@@ -97,7 +95,9 @@ export class IndexComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   delete(drink: Drink) {
-    this.store.dispatch(REMOVE_DRINK({id: drink.id}));
+    if (drink.id) {
+      this.store.dispatch(REMOVE_DRINK({id: drink.id}));
+    }
   }
 
   openShowDialog(drink: Drink) {
@@ -106,7 +106,7 @@ export class IndexComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   applyFilter(word: string) {
-    this.dataSource.filter = word.trim().toLowerCase();
+    this.dataSource.filter = word;
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }

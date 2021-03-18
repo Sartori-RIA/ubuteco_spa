@@ -9,6 +9,6 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@
 export class CloseButtonComponent {
 
   @Output() closed = new EventEmitter();
-  @Input() tooltip: string;
+  @Input() tooltip = '';
 
 }

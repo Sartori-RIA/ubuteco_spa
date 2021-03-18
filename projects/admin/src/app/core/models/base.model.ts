@@ -12,6 +12,6 @@ export interface PictureFromS3 {
 }
 
 export interface BaseDialogParams<T> {
-  data: T;
+  data?: T;
   disabled: boolean;
 }

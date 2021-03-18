@@ -72,7 +72,7 @@ export const selectSignInErrors = createSelector(
 
 export const selectAuthLoading = createSelector(
   authFeatureSelector,
-  (state) => state?.loading
+  (state) => state.loading
 );
 
 export const canReadBeerStyles = createSelector(
