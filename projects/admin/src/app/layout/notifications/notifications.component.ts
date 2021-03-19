@@ -39,7 +39,7 @@ export class NotificationsComponent implements OnInit {
         }
     });
   }
-  clearAll(e) {
+  clearAll(e: Event) {
     e.preventDefault();
     this.notifications = [];
   }

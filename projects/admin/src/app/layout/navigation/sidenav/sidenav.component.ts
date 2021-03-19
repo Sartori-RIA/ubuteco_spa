@@ -8,5 +8,5 @@ import {IMenuItem} from '../../../core/services/theme/navigation.service';
 export class SidenavComponent {
   @Input() public items: IMenuItem[] = [];
   @Input() public hasIconMenu = false;
-  @Input() public iconMenuTitle = ''
+  @Input() public iconMenuTitle = '';
 }

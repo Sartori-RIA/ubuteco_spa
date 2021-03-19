@@ -51,7 +51,7 @@ export class CustomizerService {
   changeSidebarColor(color: CustomizerColors): void {
     this.layout.publishLayoutChange({sidebarColor: color.class});
     zip(this.user$, this.theme$, this.canEditTheme$).pipe(take(1)).subscribe(([user, theme, canEdit]) => {
-      if (canEdit) {
+      if (canEdit && user) {
         this.store.dispatch(UPDATE_THEME({theme: {...theme, color_sidebar: color.class}, user}));
       }
     });
@@ -61,7 +61,7 @@ export class CustomizerService {
   changeTopbarColor(color: CustomizerColors): void {
     this.layout.publishLayoutChange({topbarColor: color.class});
     zip(this.user$, this.theme$, this.canEditTheme$).pipe(take(1)).subscribe(([user, theme, canEdit]) => {
-      if (canEdit) {
+      if (canEdit && user) {
         this.store.dispatch(UPDATE_THEME({theme: {...theme, color_header: color.class}, user}));
       }
     });
@@ -71,14 +71,14 @@ export class CustomizerService {
   changeFooterColor(color: CustomizerColors): void {
     this.layout.publishLayoutChange({footerColor: color.class});
     zip(this.user$, this.theme$, this.canEditTheme$).pipe(take(1)).subscribe(([user, theme, canEdit]) => {
-      if (canEdit) {
+      if (canEdit && user) {
         this.store.dispatch(UPDATE_THEME({theme: {...theme, color_footer: color.class}, user}));
       }
     });
     this.footerColors$ = this.store.pipe(select(selectFooterColors));
   }
 
-  removeClass(el, className: string): void {
+  removeClass(el: any, className: string): void {
     if (!el || el.length === 0) {
       return;
     }
@@ -92,7 +92,7 @@ export class CustomizerService {
     }
   }
 
-  addClass(el, className: string): void {
+  addClass(el: any, className: string): void {
     if (!el) {
       return;
     }
@@ -106,7 +106,7 @@ export class CustomizerService {
     }
   }
 
-  findClosest(el, className: string): void {
+  findClosest(el: any, className: string): void {
     if (!el) {
       return;
     }
@@ -119,14 +119,14 @@ export class CustomizerService {
     }
   }
 
-  hasClass(el, className: string): boolean {
+  hasClass(el: HTMLElement, className: string): boolean {
     if (!el) {
       return false;
     }
     return (` ${el.className} `.replace(/[\n\t]/g, ' ').indexOf(` ${className} `) > -1);
   }
 
-  toggleClass(el, className: string): void {
+  toggleClass(el: any, className: string): void {
     if (!el) {
       return;
     }

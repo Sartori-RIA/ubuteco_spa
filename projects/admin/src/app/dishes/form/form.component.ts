@@ -23,11 +23,9 @@ import {selectDishesLoading} from '../../store/dishes/dishes.selectors';
 })
 export class FormComponent implements OnInit {
   form: FormGroup = this.mountForm();
-  ingredients: FormArray;
-  readonly loading$: Observable<boolean> = this.store.pipe(select(selectDishesLoading));
-  readonly foods$: Observable<Food[]> = this.store.pipe(
-    select(selectAllFoodsOrderedByName(true))
-  );
+  ingredients?: FormArray;
+  readonly loading$ = this.store.pipe(select(selectDishesLoading));
+  readonly foods$ = this.store.pipe(select(selectAllFoodsOrderedByName(true)));
 
   constructor(private activatedRoute: ActivatedRoute,
               private store: Store<AppState>,
@@ -40,13 +38,12 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(REQUEST_ALL_FOODS({page: '1'}));
     this.updateForm();
   }
 
   mountForm(): FormGroup {
     return this.fb.group({
-      id: [null, Validators.required],
+      id: [null],
       name: [null, Validators.required],
       price: [null, [Validators.required, Validators.min(0)]],
       ingredients: this.fb.array([this.createIngredient()])
@@ -55,7 +52,7 @@ export class FormComponent implements OnInit {
 
   addIngredient() {
     this.ingredients = this.form.get('ingredients') as FormArray;
-    this.ingredients.push(this.createIngredient());
+    this.ingredients?.push(this.createIngredient());
   }
 
   createIngredient(): FormGroup {
@@ -116,7 +113,8 @@ export class FormComponent implements OnInit {
       const cents: number = data.price_cents || 0;
       this.form.patchValue({
         name: data.name,
-        price: cents / 100
+        price: cents / 100,
+        id: data.id
       });
       data.dish_ingredients?.forEach((v, index) => {
         let form = (this.form.controls.ingredients as FormArray).controls[index] as FormGroup;
@@ -140,7 +138,8 @@ export class FormComponent implements OnInit {
     const value = this.form.value;
     const item: Dish = {
       name: value.name,
-      price: value.price
+      price: value.price,
+      id: value.id
     };
     const formIngredients = this.form.controls.ingredients as FormArray;
     if (formIngredients.valid) {

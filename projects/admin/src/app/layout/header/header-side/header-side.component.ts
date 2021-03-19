@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {LayoutService} from '../../../core/services/theme/layout.service';
 import {ILayoutConf} from '../../../core/models/theme';
 import {MatDialog} from '@angular/material/dialog';
@@ -6,6 +6,7 @@ import {SignOutComponent} from '../../../auth/sign-out/sign-out.component';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../store';
 import {selectCurrentUser} from '../../../store/auth/auth.selectors';
+import {MatSidenav} from '@angular/material/sidenav';
 
 export interface Langs {
   name: string;
@@ -17,19 +18,15 @@ export interface Langs {
   selector: 'app-header-side',
   templateUrl: './header-side.template.html'
 })
-export class HeaderSideComponent implements OnInit {
-  @Input() notificPanel;
+export class HeaderSideComponent {
+  @Input() notificPanel!: MatSidenav;
   user$ = this.store.pipe(select(selectCurrentUser));
-  public layoutConf: ILayoutConf;
+  public layoutConf: ILayoutConf = this.layout.layoutConf;
 
   constructor(private layout: LayoutService,
               private store: Store<AppState>,
               private dialog: MatDialog
   ) {
-  }
-
-  ngOnInit() {
-    this.layoutConf = this.layout.layoutConf;
   }
 
   toggleNotific() {

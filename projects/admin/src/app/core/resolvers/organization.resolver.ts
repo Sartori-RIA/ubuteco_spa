@@ -1,9 +1,8 @@
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {User} from '../models/user';
 import {Injectable} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {selectCurrentOrganization, selectCurrentUser} from '../../store/auth/auth.selectors';
+import {selectCurrentOrganization} from '../../store/auth/auth.selectors';
 import {filter, first, tap} from 'rxjs/operators';
 import {LOAD_USER} from '../../store/auth/auth.actions';
 import {Organization} from '../models/organization';
@@ -11,12 +10,13 @@ import {Organization} from '../models/organization';
 @Injectable({
   providedIn: 'root'
 })
-export class OrganizationResolver implements Resolve<Organization> {
+export class OrganizationResolver implements Resolve<Organization | undefined> {
 
   constructor(private store: Store) {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Organization> | Promise<Organization> | Organization {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
+    : Observable<Organization | undefined> | Promise<Organization> | Organization {
     return this.store.pipe(select(selectCurrentOrganization),
       tap((organization) => {
         if (!organization) {

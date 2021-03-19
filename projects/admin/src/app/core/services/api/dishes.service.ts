@@ -22,7 +22,7 @@ export class DishesService extends BaseService<Dish> {
   }
 
   removeItem(dishId: number, dishItemId: number): Observable<Dish> {
-    return this.http.delete<Dish>(`${this.url}/${dishId}/ingredients/${dishItemId}`).pipe()
+    return this.http.delete<Dish>(`${this.url}/${dishId}/ingredients/${dishItemId}`).pipe();
   }
 
   updateWithPicture(data: Dish, fileName: string, file: File): Observable<HttpEvent<Dish>> {

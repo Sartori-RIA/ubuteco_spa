@@ -6,6 +6,7 @@ import {environment} from '../../../../environments/environment';
 import {Logger} from '@ngrx/data';
 import {Observable} from 'rxjs';
 import {User} from '../../models/user';
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +17,11 @@ export class ThemeService extends BaseService<Theme> {
     super(http, environment.api_url, logger);
   }
 
-  update(theme: Theme, currentUser?: User): Observable<Theme> {
+  updateTheme(theme: Theme, currentUser: User): Observable<Theme> {
     return this.http.put<Theme>(`${this.url}organizations/${currentUser.organization_id}/themes/${theme.id}`, theme).pipe();
   }
 
-  show(id: number, currentUser?: User): Observable<Theme> {
-    return this.http.get<Theme>(`${this.url}profiles/${currentUser.id}/themes`).pipe();
+  showTheme(currentUser: User): Observable<Theme> {
+    return this.http.get<Theme[]>(`${this.url}organizations/${currentUser.organization_id}/themes`).pipe(map((res) => res[0]));
   }
 }

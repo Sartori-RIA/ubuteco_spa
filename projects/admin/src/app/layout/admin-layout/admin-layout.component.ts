@@ -10,7 +10,7 @@ import {
 } from '@angular/router';
 import {filter} from 'rxjs/operators';
 import {LayoutService} from '../../core/services/theme/layout.service';
-import {ILayoutConf} from '../../core/models/theme';
+import {IAdjustScreenOptions, ILayoutConf} from '../../core/models/theme';
 
 @Component({
   selector: 'app-admin-layout',
@@ -23,8 +23,8 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   scrollConfig = {};
   layoutConf: ILayoutConf = {};
   adminContainerClasses: any = {};
-  private moduleLoaderSub: Subscription;
-  private layoutConfSub: Subscription;
+  private moduleLoaderSub?: Subscription;
+  private layoutConfSub?: Subscription;
   private readonly routerEventSub: Subscription;
 
   constructor(private router: Router,
@@ -33,8 +33,10 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
     // Close sidenav after route change in mobile
     this.routerEventSub = router.events.pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((routeChange: NavigationEnd) => {
-        this.layout.adjustLayout({route: routeChange.url});
+      .subscribe((routeChange) => {
+        if (routeChange instanceof NavigationEnd) {
+          this.layout.adjustLayout({route: routeChange.url});
+        }
         this.scrollToTop();
       });
   }
@@ -59,7 +61,7 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
+  onResize(event: IAdjustScreenOptions) {
     this.layout.adjustLayout(event);
   }
 
@@ -82,15 +84,9 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.moduleLoaderSub) {
-      this.moduleLoaderSub.unsubscribe();
-    }
-    if (this.layoutConfSub) {
-      this.layoutConfSub.unsubscribe();
-    }
-    if (this.routerEventSub) {
-      this.routerEventSub.unsubscribe();
-    }
+    this.moduleLoaderSub?.unsubscribe();
+    this.layoutConfSub?.unsubscribe();
+    this.routerEventSub?.unsubscribe();
   }
 
   closeSidebar() {
@@ -99,22 +95,19 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  sidebarMouseenter(e) {
+  sidebarMouseenter() {
     if (this.layoutConf.sidebarStyle === 'compact') {
       this.layout.publishLayoutChange({sidebarStyle: 'full'}, {transitionClass: true});
     }
   }
 
-  sidebarMouseleave(e) {
-    if (
-      this.layoutConf.sidebarStyle === 'full' &&
-      this.layoutConf.sidebarCompactToggle
-    ) {
+  sidebarMouseleave() {
+    if (this.layoutConf.sidebarStyle === 'full' && this.layoutConf.sidebarCompactToggle) {
       this.layout.publishLayoutChange({sidebarStyle: 'compact'}, {transitionClass: true});
     }
   }
 
-  updateAdminContainerClasses(layoutConf) {
+  updateAdminContainerClasses(layoutConf: ILayoutConf) {
     return {
       'navigation-top': layoutConf.navigationPos === 'top',
       'sidebar-full': layoutConf.sidebarStyle === 'full',

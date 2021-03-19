@@ -28,7 +28,6 @@ export interface AuthState {
   token?: string;
   errors?: string;
   loading: boolean;
-
 }
 
 const initialState: AuthState = {

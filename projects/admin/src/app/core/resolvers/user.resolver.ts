@@ -10,12 +10,13 @@ import {LOAD_USER} from '../../store/auth/auth.actions';
 @Injectable({
   providedIn: 'root'
 })
-export class UserResolver implements Resolve<User> {
+export class UserResolver implements Resolve<User | undefined> {
 
   constructor(private store: Store) {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User> | Promise<User> | User {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
+    : Observable<User | undefined> | Promise<User> | User {
     return this.store.pipe(select(selectCurrentUser),
       tap((user) => {
         if (!user) {

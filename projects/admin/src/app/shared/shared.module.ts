@@ -8,7 +8,6 @@ import {FlexLayoutModule, FlexModule} from '@angular/flex-layout';
 import {FormatCentsPipe} from './pipes/format-cents.pipe';
 import {MaterialModule} from '../material/material.module';
 import {ButtonLoadingComponent} from './components/buttons/button-loading/button-loading.component';
-import {AppLoaderComponent} from '../../../../public/src/app/shared/components/app-loader/app-loader.component';
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {RouterModule} from '@angular/router';
 import {CustomFormsModule} from 'ng2-validation';
@@ -53,11 +52,11 @@ const LIBS_MODULES = [
   PerfectScrollbarModule,
   AvatarModule,
   TranslateModule,
-  SweetAlert2Module
+  SweetAlert2Module,
+  AppLoaderModule,
 ];
 
 const COMPONENTS = [
-  AppLoaderComponent,
   ContainerComponent,
   ConfirmDialogComponent,
   BackButtonComponent,

@@ -38,7 +38,7 @@
             <mat-select [compareWith]="compareSelectValues" formControlName="food">
               <mat-option *ngFor="let food of foods$ | async" [value]="food">
                 <div fxFlex="100">
-                  <img height="60px" [src]="food.image.url" fxFlex="20"/>
+                  <img height="60px" [src]="food.image?.url || ''" fxFlex="20"/>
                   <span fxFlexOffset="10" fxFlex="60">{{food.name}} - {{food.price_cents | formatCents}}</span>
                 </div>
               </mat-option>

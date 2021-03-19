@@ -43,7 +43,7 @@ export const REMOVE_ORDER_DONE = createAction('[Orders/API] order canceled',
 export const REMOVE_ORDER_FAILED = createAction('[Orders/API] failed to cancel');
 
 export const CREATE_ORDER = createAction('[Orders/API] create',
-  props<{ order: Order }>()
+  props<{ order: Order | null }>()
 );
 
 export const CREATE_ORDER_DONE = createAction('[Orders/API] create done',

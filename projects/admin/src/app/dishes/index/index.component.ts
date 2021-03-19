@@ -29,7 +29,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 
 
   menu$: Observable<Dish[]> = this.store.pipe(select(selectAllDishes));
-  readonly loading$: Observable<boolean> = this.store.pipe(select(selectDishesLoading));
+  readonly loading$ = this.store.pipe(select(selectDishesLoading));
   readonly canCreate$ = this.store.pipe(select(canCreateDishes));
   readonly canDestroy$ = this.store.pipe(select(canDestroyDishes));
   readonly canEdit$ = this.store.pipe(select(canEditDishes));

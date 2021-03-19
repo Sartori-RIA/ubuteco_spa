@@ -11,8 +11,8 @@ import {
 import {MediaObserver} from '@angular/flex-layout';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {MatchMediaService} from '../../../../../../tools/src/lib/services';
 import {SidebarHelperService} from '../../../core/services/theme/sidebar-helper.service';
+import {MatchMediaService} from '../../../core/services/theme/match-media.service';
 
 @Component({
   selector: 'app-sidebar',
