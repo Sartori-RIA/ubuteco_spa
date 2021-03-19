@@ -17,11 +17,13 @@ export class AuthService {
 
   onSignIn(data: User): Observable<User> {
     return this.http.post<User>(`${this.url}sign_in`, {user: data}, {observe: 'response'})
-      .pipe(map((response) => {
-        const token = response.headers.get('Authorization');
-        LocalStorage.setJwt(token);
-        LocalStorage.setUser(response.body);
-        return response.body;
+      .pipe(map(({headers, body}) => {
+        const token = headers.get('Authorization');
+        if (token && body) {
+          LocalStorage.setJwt(token);
+          LocalStorage.setUser(body);
+        }
+        return body!;
       }));
   }
 
@@ -36,11 +38,13 @@ export class AuthService {
 
   onSignUp(data: SignUpPayload): Observable<User> {
     return this.http.post<User>(`${this.url}sign_up`, data, {observe: 'response'})
-      .pipe(map((response) => {
-        const token = response.headers.get('Authorization');
-        LocalStorage.setJwt(token);
-        LocalStorage.setUser(response.body);
-        return response.body;
+      .pipe(map(({body, headers}) => {
+        const token = headers.get('Authorization');
+        if (token && body) {
+          LocalStorage.setJwt(token);
+          LocalStorage.setUser(body);
+        }
+        return body!;
       }));
   }
 

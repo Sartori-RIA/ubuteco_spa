@@ -20,20 +20,20 @@
         </button>
       </td>
       <td>
-        <img class="cart-thumbnail" [src]="item.item.image.url"></td>
+        <img class="cart-thumbnail" [src]="item?.item?.image?.url"></td>
       <td>
-        <span>{{item.item.name}}</span></td>
+        <span>{{item?.item?.name}}</span></td>
       <td>
         <fa-icon class="width-4" [icon]="['fas', getItemTypeIcon(item)]"></fa-icon>
       </td>
       <td>
-        {{item.item.price_cents | formatCents}}
+        {{(item?.item?.price_cents || 0) | formatCents}}
       </td>
       <td>
         <app-edit-order-item [item]="item" ></app-edit-order-item>
       </td>
       <td>
-        {{item.item.price_cents * item.quantity | formatCents}}
+        {{(item?.item?.price_cents || 0) * (item.quantity || 0) | formatCents}}
       </td>
     </tr>
   </ng-container>

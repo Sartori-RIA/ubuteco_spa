@@ -1,6 +1,6 @@
 import {AbstractControl, AsyncValidatorFn, ValidationErrors} from '@angular/forms';
 import {cnpj as cnpjValidators, cpf as cpfValidator} from 'cpf-cnpj-validator';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {OrganizationsService} from '../../core/services/api/organizations.service';
 import {UserService} from '../../core/services/api/user.service';
@@ -25,11 +25,11 @@ export namespace uButecoValidators {
   export function uniqueEmail(service: UserService, oldEmail?: string): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors> => {
       if (control.value == null) {
-        return null;
+        return of({email_in_use: false} );
       }
       return service.checkEmail(control.value).pipe(
         map((response) =>
-          response.status === 200 && oldEmail !== control.value ? {email_in_use: true} : null)
+          response.status === 200 && oldEmail !== control.value ? {email_in_use: true} : {email_in_use: false} )
       );
     };
   }
@@ -37,11 +37,11 @@ export namespace uButecoValidators {
   export function uniqueCNPJ(service: OrganizationsService, oldCnpj?: string): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors> => {
       if (control.value == null) {
-        return null;
+        return of({cnpj_in_use: false} );
       }
       return service.checkCNPJ(control.value.replace(/\D+/g, '')).pipe(
         map((response) =>
-          response.status === 200 && oldCnpj !== control.value ? {cnpj_in_use: true} : null)
+          response.status === 200 && oldCnpj !== control.value ? {cnpj_in_use: true} : {cnpj_in_use: false} )
       );
     };
   }
@@ -49,11 +49,11 @@ export namespace uButecoValidators {
   export function uniquePhone(service: OrganizationsService, oldPhone?: string): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors> => {
       if (control.value == null) {
-        return null;
+        return of({phone_in_use: false});
       }
       return service.checkPhone(control.value.replace(/\D+/g, '')).pipe(
         map((response) =>
-          response.status === 200 && oldPhone !== control.value ? {phone_in_use: true} : null)
+          response.status === 200 && oldPhone !== control.value ? {phone_in_use: true} : {phone_in_use: false})
       );
     };
   }
@@ -61,11 +61,11 @@ export namespace uButecoValidators {
   export function uniqueBeerStyle(service: BeerStylesService, oldName?: string): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors> => {
       if (control.value == null) {
-        return null;
+        return of({name_in_use: false});
       }
       return service.checkStyleAvailable(control.value).pipe(
         map((response) =>
-          response.status === 200 && oldName !== control.value ? {name_in_use: true} : null)
+          response.status === 200 && oldName !== control.value ? {name_in_use: true} : {name_in_use: false})
       );
     };
   }
@@ -73,11 +73,11 @@ export namespace uButecoValidators {
   export function uniqueWineStyle(service: WineStyleService, oldName?: string): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors> => {
       if (control.value == null) {
-        return null;
+        return of({name_in_use: false});
       }
       return service.checkStyleAvailable(control.value).pipe(
         map((response) =>
-          response.status === 200 && oldName !== control.value ? {name_in_use: true} : null)
+          response.status === 200 && oldName !== control.value ? {name_in_use: true} : {name_in_use: false})
       );
     };
   }

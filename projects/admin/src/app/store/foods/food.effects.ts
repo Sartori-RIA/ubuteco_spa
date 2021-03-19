@@ -47,7 +47,7 @@ export class FoodEffects {
     }),
     mergeMap(([{page}]) => this.foodService.index({page}).pipe(
       map(({body, headers}) => REQUEST_ALL_FOODS_DONE({
-          data: body,
+          data: body || [],
           total: Number(headers.get('total'))
         })
       ),

@@ -14,9 +14,9 @@ import {MatProgressBar} from '@angular/material/progress-bar';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignInComponent implements OnInit {
-  @ViewChild(MatProgressBar) progressBar: MatProgressBar;
+  @ViewChild(MatProgressBar) progressBar!: MatProgressBar;
   form: FormGroup = this.mountForm();
-  errors$: Observable<string> = this.store.pipe(select(selectSignInErrors));
+  errors$: Observable<string | undefined> = this.store.pipe(select(selectSignInErrors));
   readonly loading$: Observable<boolean> = this.store.pipe(select(selectAuthLoading));
 
   constructor(private fb: FormBuilder,

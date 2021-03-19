@@ -32,7 +32,7 @@ export const selectAllDrinksOrderedByPrice = (isAsc: boolean) => createSelector(
 
 export const selectAllDrinksOrderedByMaker = (isAsc: boolean) => createSelector(
   selectAllDrinks,
-  (drinks) => drinks.sort((a, b) => compare(a.maker.name.toLocaleLowerCase(), b.maker.name.toLocaleLowerCase(), isAsc))
+  (drinks) => drinks.sort((a, b) => compare(a.maker?.name.toLocaleLowerCase(), b.maker?.name.toLocaleLowerCase(), isAsc))
 );
 
 export const selectAllDrinksLoaded = createSelector(

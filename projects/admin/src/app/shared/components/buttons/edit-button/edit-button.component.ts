@@ -8,6 +8,6 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@
 })
 export class EditButtonComponent {
   @Output() edit = new EventEmitter();
-  @Input() tooltip: string;
+  @Input() tooltip = '';
 
 }

@@ -22,7 +22,7 @@ export class UploadFileComponent implements OnInit, OnDestroy {
 
   progress$: Observable<number> = this.store.pipe(select(selectUploadProgress));
   files: File[] = [];
-  subscription: Subscription;
+  subscription?: Subscription;
   started$: Observable<boolean> = this.store.pipe(select(selectUploaderAlreadyStarted));
 
   constructor(private store: Store<AppState>,
@@ -59,7 +59,7 @@ export class UploadFileComponent implements OnInit, OnDestroy {
     this.cdRefs.detectChanges();
   }
 
-  onRemove(event) {
+  onRemove(event: File) {
     this.files.splice(this.files.indexOf(event), 1);
   }
 

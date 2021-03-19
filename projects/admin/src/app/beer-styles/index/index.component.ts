@@ -2,7 +2,8 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store';
 import {
-  selectAllBeerStyles, selectBeerStyleLoading,
+  selectAllBeerStyles,
+  selectBeerStyleLoading,
   selectBeerStylesOrderedById,
   selectBeerStylesOrderedByName
 } from '../../store/beer-styles/beer-styles.selectors';
@@ -36,10 +37,10 @@ export class IndexComponent implements OnInit, OnDestroy {
   readonly canShowActions$ = this.store.pipe(select(canShowBeerStyleActions));
   readonly displayedColumnsWithActions: string[] = ['id', 'name', 'action'];
   readonly displayedColumns: string[] = ['id', 'name'];
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort!: MatSort;
   private data: BeerStyle[] = [];
   dataSource = new MatTableDataSource(this.data);
-  private subscription: Subscription;
+  private subscription?: Subscription;
 
   constructor(private store: Store<AppState>,
               private changeDetectorRefs: ChangeDetectorRef,
@@ -74,11 +75,13 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   destroy(beerStyle: BeerStyle) {
-    this.store.dispatch(DELETE_BEER_STYLE({id: beerStyle.id}));
+    if (!!beerStyle.id) {
+      this.store.dispatch(DELETE_BEER_STYLE({id: beerStyle.id}));
+    }
   }
 
   applyFilter(word: string) {
-    this.dataSource.filter = word.trim().toLowerCase();
+    this.dataSource.filter = word;
   }
 
   openFormDialog(element?: BeerStyle) {

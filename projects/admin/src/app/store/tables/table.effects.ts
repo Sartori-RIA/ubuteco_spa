@@ -50,7 +50,7 @@ export class TableEffects {
     }),
     mergeMap(([{page}]) => this.tableService.index({page}).pipe(
       map(({body, headers}) => REQUEST_ALL_TABLES_DONE({
-          data: body,
+          data: body || [],
           total: Number(headers.get('total'))
         })
       ),

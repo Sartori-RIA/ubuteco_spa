@@ -12,8 +12,8 @@ export class LayoutService {
   layoutConf: ILayoutConf = {};
   layoutConfSubject = new BehaviorSubject<ILayoutConf>(this.layoutConf);
   layoutConf$ = this.layoutConfSubject.asObservable();
-  isMobile: boolean;
-  currentRoute: string;
+  isMobile = false;
+  currentRoute = '';
   private theme$: Observable<Theme> = this.store.pipe(select(selectTheme));
 
   constructor(private store: Store<AppState>) {

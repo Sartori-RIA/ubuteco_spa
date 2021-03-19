@@ -3,17 +3,17 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../../store';
 import {environment} from '../../../environments/environment';
 import * as ActionCable from 'actioncable';
+import {Cable, ChannelNameWithParams} from 'actioncable';
 import {LocalStorage} from '../../shared/util/storage';
 import {NEW_ORDER_DISH_RECEIVED, UPDATE_ORDER_DISH_STATUS_DONE} from '../../store/kitchen/kitchen.actions';
 import {ActionCableDish} from '../models/kitchen-dish';
-import {Cable, ChannelNameWithParams} from 'actioncable';
 
 @Injectable({
   providedIn: 'root'
 })
 export class KitchenSocketService {
 
-  private consumer: Cable;
+  private consumer?: Cable;
 
 
   constructor(private store: Store<AppState>,
@@ -38,9 +38,9 @@ export class KitchenSocketService {
       received(data) {
         ngZone.run(() => {
           const dish: ActionCableDish = JSON.parse(data);
-          if (dish.action === 'create') {
+          if (dish.action === 'create' && dish.obj) {
             store.dispatch(NEW_ORDER_DISH_RECEIVED({dish: dish.obj}));
-          } else {
+          } else if (dish.obj) {
             store.dispatch(UPDATE_ORDER_DISH_STATUS_DONE({dish: dish.obj}));
           }
         });

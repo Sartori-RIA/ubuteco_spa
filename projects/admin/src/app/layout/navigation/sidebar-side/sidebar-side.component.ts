@@ -17,11 +17,11 @@ import {LOAD_USER} from '../../../store/auth/auth.actions';
 })
 export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
   menuItems = this.navService.iconMenu;
-  hasIconTypeMenuItem: boolean;
-  iconTypeMenuTitle: string;
-  layoutConf: ILayoutConf;
-  user$: Observable<User> = this.store.pipe(select(selectCurrentUser));
-  private menuItemsSub: Subscription;
+  hasIconTypeMenuItem = false;
+  iconTypeMenuTitle = '';
+  layoutConf: ILayoutConf = this.layout.layoutConf;
+  user$: Observable<User | undefined> = this.store.pipe(select(selectCurrentUser));
+  private subscription?: Subscription;
 
   constructor(private navService: NavigationService,
               private store: Store<AppState>,
@@ -31,16 +31,13 @@ export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.store.dispatch(LOAD_USER());
-    this.layoutConf = this.layout.layoutConf;
   }
 
   ngAfterViewInit() {
   }
 
   ngOnDestroy() {
-    if (this.menuItemsSub) {
-      this.menuItemsSub.unsubscribe();
-    }
+    this.subscription?.unsubscribe();
   }
 
   onLogout() {

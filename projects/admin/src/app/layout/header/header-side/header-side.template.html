@@ -46,8 +46,8 @@
       <ngx-avatar *ngIf="user$ | async; let user"
                   class="my-avatar"
                   [size]="40"
-                  [name]="user?.name"
-                  [src]="user?.picture?.url"
+                  [name]="user?.name || ''"
+                  [src]="user?.picture?.url || ''"
       ></ngx-avatar>
   </button>
 

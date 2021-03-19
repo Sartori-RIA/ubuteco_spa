@@ -1,0 +1,5 @@
+<div fxLayout="row">
+  <mat-form-field fxFill appearance="outline">
+    <input matInput (keyup)="applyFilter(getValue($event.target))" [placeholder]="'commons.labels.search'|translate">
+  </mat-form-field>
+</div>

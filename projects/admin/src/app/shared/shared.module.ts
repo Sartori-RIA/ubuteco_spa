@@ -6,14 +6,8 @@ import {HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FlexLayoutModule, FlexModule} from '@angular/flex-layout';
 import {FormatCentsPipe} from './pipes/format-cents.pipe';
-import {AppLoaderModule} from '../app-loader/app-loader.module';
 import {MaterialModule} from '../material/material.module';
-import {BreadcrumbComponent} from './components/breadcrumb/breadcrumb.component';
 import {ButtonLoadingComponent} from './components/buttons/button-loading/button-loading.component';
-import {BottomSheetShareComponent} from './components/bottom-sheet-share/bottom-sheet-share.component';
-import {AppLoaderComponent} from '../../../../public/src/app/shared/components/app-loader/app-loader.component';
-import {CookieCodeToolsModule} from '../../../../tools/src/lib/cookie-code-tools.module';
-import {SidebarTogglerDirective} from './directives/sidebar-toggler.directive';
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {RouterModule} from '@angular/router';
 import {CustomFormsModule} from 'ng2-validation';
@@ -33,9 +27,11 @@ import {TrashButtonComponent} from './components/buttons/trash-button/trash-butt
 import {AvatarModule} from 'ngx-avatar';
 import {TranslateModule} from '@ngx-translate/core';
 import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
-import {CountrySelectorComponent} from "./components/country-selector/country-selector.component";
-import { DialogActionButtonsComponent } from './components/dialog-action-buttons/dialog-action-buttons.component';
-import { TableActionButtonsComponent } from './components/table-action-buttons/table-action-buttons.component';
+import {CountrySelectorComponent} from './components/country-selector/country-selector.component';
+import {DialogActionButtonsComponent} from './components/dialog-action-buttons/dialog-action-buttons.component';
+import {TableActionButtonsComponent} from './components/table-action-buttons/table-action-buttons.component';
+import {AppLoaderModule} from './components/app-loader/app-loader.module';
+import { SearchComponent } from './components/search/search.component';
 
 const NG_MODULES = [
   CommonModule,
@@ -56,17 +52,11 @@ const LIBS_MODULES = [
   PerfectScrollbarModule,
   AvatarModule,
   TranslateModule,
-  SweetAlert2Module
-];
-
-const IBUTECO_LIBS = [
-  CookieCodeToolsModule
+  SweetAlert2Module,
+  AppLoaderModule,
 ];
 
 const COMPONENTS = [
-  BreadcrumbComponent,
-  AppLoaderComponent,
-  BottomSheetShareComponent,
   ContainerComponent,
   ConfirmDialogComponent,
   BackButtonComponent,
@@ -82,26 +72,22 @@ const COMPONENTS = [
   TrashButtonComponent,
   CountrySelectorComponent,
   DialogActionButtonsComponent,
-  TableActionButtonsComponent
+  TableActionButtonsComponent,
+  SearchComponent,
 ];
 
 const PIPES = [
   FormatCentsPipe
 ];
-const DIRECTIVES = [
-  SidebarTogglerDirective
-];
 
 @NgModule({
   declarations: [
     ...COMPONENTS,
-    ...PIPES,
-    ...DIRECTIVES,
+    ...PIPES
   ],
   imports: [
     ...NG_MODULES,
     ...LIBS_MODULES,
-    ...IBUTECO_LIBS,
     AppLoaderModule,
     MaterialModule
   ],
@@ -110,8 +96,6 @@ const DIRECTIVES = [
     ...LIBS_MODULES,
     ...COMPONENTS,
     ...PIPES,
-    ...DIRECTIVES,
-    ...IBUTECO_LIBS,
     AppLoaderModule,
     MaterialModule
   ]

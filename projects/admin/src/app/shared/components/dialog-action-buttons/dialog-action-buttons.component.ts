@@ -10,5 +10,5 @@ export class DialogActionButtonsComponent {
   @Output() cancel = new EventEmitter();
   @Output() confirm = new EventEmitter();
   @Input() show = true;
-  @Input() loading = false;
+  @Input() loading: boolean | null = false;
 }

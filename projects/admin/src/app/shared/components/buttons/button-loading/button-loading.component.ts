@@ -7,12 +7,12 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 })
 export class ButtonLoadingComponent {
 
-  @Input() loading: boolean;
-  @Input() btnClass: string;
+  @Input() loading: boolean | null = false;
+  @Input() btnClass?: string;
   @Input() raised = true;
-  @Input() style;
+  @Input() style: any = null;
   @Input() loadingText = 'Please wait';
   @Input() type: 'button' | 'submit' = 'submit';
-  @Input() color: 'primary' | 'accent' | 'warn';
+  @Input() color: 'primary' | 'accent' | 'warn' = 'primary';
   @Output() btnClick = new EventEmitter();
 }

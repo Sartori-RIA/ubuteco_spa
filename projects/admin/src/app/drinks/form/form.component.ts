@@ -87,9 +87,10 @@ export class FormComponent implements OnInit {
   private updateForm() {
     if (!!this.data.data) {
       const data = this.data.data;
+      const cents: number = data.price_cents || 0;
       this.form.patchValue({
         name: data.name,
-        price: data.price_cents / 100,
+        price: cents / 100,
         maker: data.maker,
         quantity_stock: data.quantity_stock,
         description: data.description,

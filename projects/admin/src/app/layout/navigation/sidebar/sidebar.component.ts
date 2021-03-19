@@ -11,8 +11,8 @@ import {
 import {MediaObserver} from '@angular/flex-layout';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {MatchMediaService} from '../../../../../../tools/src/lib/services';
 import {SidebarHelperService} from '../../../core/services/theme/sidebar-helper.service';
+import {MatchMediaService} from '../../../core/services/theme/match-media.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -21,24 +21,19 @@ import {SidebarHelperService} from '../../../core/services/theme/sidebar-helper.
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   // Name
-  @Input()
-  name: string;
+  @Input() name!: string;
 
   // right
   @Input()
-  @HostBinding('class.position-right')
-  right: boolean;
+  @HostBinding('class.position-right') right!: boolean;
 
   // Open
-  @HostBinding('class.open')
-  opened: boolean;
+  @HostBinding('class.open') opened!: boolean;
 
-  @HostBinding('class.sidebar-locked-open')
-  sidebarLockedOpen: boolean;
+  @HostBinding('class.sidebar-locked-open') sidebarLockedOpen!: boolean;
 
   // mode
-  @HostBinding('class.is-over')
-  isOver: boolean;
+  @HostBinding('class.is-over') isOver!: boolean;
 
   private backdrop: HTMLElement | null = null;
 
@@ -100,7 +95,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   showBackdrop() {
     this.backdrop = this.renderer.createElement('div');
-    this.backdrop.classList.add('egret-sidebar-overlay');
+    this.backdrop?.classList.add('egret-sidebar-overlay');
 
     this.renderer.appendChild(
       this.elementRef.nativeElement.parentElement,
@@ -108,7 +103,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     );
 
     // Close sidebar onclick
-    this.backdrop.addEventListener('click', () => {
+    this.backdrop?.addEventListener('click', () => {
       this.close();
     });
 
@@ -117,7 +112,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   hideBackdrop() {
     if (this.backdrop) {
-      this.backdrop.parentNode.removeChild(this.backdrop);
+      this.backdrop.parentNode?.removeChild(this.backdrop);
       this.backdrop = null;
     }
 

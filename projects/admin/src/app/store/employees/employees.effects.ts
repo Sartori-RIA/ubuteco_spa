@@ -47,7 +47,7 @@ export class EmployeesEffects {
     mergeMap(([{page, organization_id}]) => this.organizationService.users(organization_id).pipe(
       map(({body, headers}) =>
         REQUEST_ALL_EMPLOYEES_DONE({
-          data: body,
+          data: body || [],
           total: Number(headers.get('total'))
         })
       ),
@@ -69,7 +69,7 @@ export class EmployeesEffects {
       return !loaded;
     }),
     mergeMap(() => this.rolesService.index().pipe(
-      map(({body}) => REQUEST_ROLES_DONE({data: body})),
+      map(({body}) => REQUEST_ROLES_DONE({data: body || []})),
       catchError(() => of(REQUEST_ROLES_FAIL()))
     ))
   ));

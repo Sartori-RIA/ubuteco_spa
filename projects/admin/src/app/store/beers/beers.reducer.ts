@@ -27,7 +27,6 @@ export const featureKey = 'beers';
 
 export interface BeerState extends EntityState<Beer> {
   loaded: boolean;
-  currentBeer: Beer;
   loading: boolean;
 }
 
@@ -36,7 +35,6 @@ const adapter: EntityAdapter<Beer> = createEntityAdapter<Beer>();
 const initialState: BeerState = adapter.getInitialState({
   loaded: false,
   loading: false,
-  currentBeer: undefined,
 });
 
 export const {
@@ -71,13 +69,11 @@ const beersReducer = createReducer(initialState,
   on(UPDATE_BEER_DONE, (state, {beer}) => adapter.upsertOne(beer, {
     ...state,
     loaded: true,
-    currentBeer: beer,
     loading: false
   })),
   on(CREATE_BEER_DONE, (state, {beer}) => adapter.addOne(beer, {
     ...state,
     loaded: true,
-    currentBeer: beer,
     loading: false
   })),
   on(SEARCH_BEERS_DONE, (state, {data}) => adapter.setAll(data, {

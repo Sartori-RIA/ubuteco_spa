@@ -37,10 +37,10 @@ export class IndexComponent implements OnInit, OnDestroy {
   readonly canShowActions$ = this.store.pipe(select(canShowWineStyleActions));
   readonly displayedColumnsAdmin: string[] = ['id', 'name', 'action'];
   readonly displayedColumns: string[] = ['id', 'name'];
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort!: MatSort;
   private data: BeerStyle[] = [];
   dataSource = new MatTableDataSource(this.data);
-  private subscription: Subscription;
+  private subscription?: Subscription;
 
   constructor(private store: Store<AppState>,
               private changeDetectorRefs: ChangeDetectorRef,
@@ -75,11 +75,17 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   destroy(beerStyle: BeerStyle) {
-    this.store.dispatch(DELETE_WINE_STYLE({id: beerStyle.id}));
+    if (beerStyle.id) {
+      this.store.dispatch(DELETE_WINE_STYLE({id: beerStyle.id}));
+    }
   }
 
   applyFilter(word: string) {
-    this.dataSource.filter = word.trim().toLowerCase();
+    this.dataSource.filter = word
+  }
+
+  getValue(target: EventTarget): string {
+    return (target as HTMLInputElement).value;
   }
 
   openFormDialog(element?: WineStyle) {

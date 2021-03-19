@@ -15,7 +15,7 @@ import {MatSelectChange} from '@angular/material/select/select';
 })
 export class DishesStatusesComponent implements OnInit {
 
-  @Input() dish: KitchenDish;
+  @Input() dish!: KitchenDish;
   readonly statuses: OrderItemStatus[] = [
     'awaiting',
     'canceled',

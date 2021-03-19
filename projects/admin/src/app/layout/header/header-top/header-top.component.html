@@ -17,32 +17,6 @@
         </li>
       </ul>
       <span fxFlex></span>
-
-      <!-- Theme Switcher -->
-      <button
-        mat-icon-button
-        id="schemeToggle"
-        [style.overflow]="'visible'"
-        matTooltip="Color Schemes"
-        [matMenuTriggerFor]="themeMenu"
-        class="topbar-button-right">
-        <mat-icon>format_color_fill</mat-icon>
-      </button>
-      <mat-menu #themeMenu="matMenu">
-        <mat-grid-list
-          class="theme-list"
-          cols="2"
-          rowHeight="48px">
-          <mat-grid-tile
-            *ngFor="let theme of egretThemes"
-            (click)="changeTheme(theme)">
-            <div mat-menu-item [title]="theme.name">
-              <div [style.background]="theme.baseColor" class="egret-swatch"></div>
-              <mat-icon class="active-icon" *ngIf="theme.isActive">check</mat-icon>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </mat-menu>
       <!-- Notification toggle button -->
       <button
         mat-icon-button
@@ -55,7 +29,12 @@
       </button>
       <!-- Top left user menu -->
       <button mat-icon-button [matMenuTriggerFor]="accountMenu" class="topbar-button-right mr-1 img-button">
-        <img src="assets/images/face-7.jpg" alt="">
+        <div fxLayout="row" fxLayoutAlign="center" *ngIf="user$ | async; let user">
+          <ngx-avatar class="my-avatar"
+                      [size]="200"
+                      [name]="user?.name || ''"
+                      [src]="user?.picture?.url || ''"></ngx-avatar>
+        </div>
       </button>
       <mat-menu #accountMenu="matMenu">
         <button mat-menu-item routerLink="/perfil">
@@ -70,7 +49,7 @@
           <mat-icon>settings</mat-icon>
           <span>{{'pages.menu.theme'|translate}}</span>
         </button>
-        <button mat-menu-item (click)="onLogout()" >
+        <button mat-menu-item (click)="onLogout()">
           <mat-icon>exit_to_app</mat-icon>
           <span>{{'pages.menu.sign_out'|translate}}</span>
         </button>

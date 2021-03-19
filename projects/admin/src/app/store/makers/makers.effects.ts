@@ -43,7 +43,7 @@ export class MakersEffects {
     }),
     mergeMap(([{page}]) => this.makersService.index({page}).pipe(
       map(({body, headers}) => REQUEST_ALL_MAKERS_DONE({
-          data: body,
+          data: body || [],
           total: Number(headers.get('total'))
         })
       ),

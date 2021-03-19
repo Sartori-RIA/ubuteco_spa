@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { FormComponent } from './food-form.component';
+import { FormComponent } from './form.component';
 
 describe('FoodFormComponent', () => {
   let component: FormComponent;

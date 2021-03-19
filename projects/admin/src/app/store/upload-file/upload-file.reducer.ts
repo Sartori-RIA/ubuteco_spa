@@ -15,8 +15,8 @@ export type UploadStatus = 'request' | 'cancel' | 'reset' | 'started' | 'complet
 
 export interface UploadFileState {
   progress: number;
-  status: UploadStatus;
-  error: string;
+  status?: UploadStatus;
+  error?: string;
   started: boolean;
 }
 

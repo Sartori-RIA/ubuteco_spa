@@ -47,7 +47,7 @@ export class DishesEffects {
     }),
     mergeMap(([{page}]) => this.dishesService.index({page}).pipe(
       map(({body, headers}) => REQUEST_ALL_DISHES_DONE({
-          data: body,
+          data: body || [],
           total: Number(headers.get('total'))
         })
       ),

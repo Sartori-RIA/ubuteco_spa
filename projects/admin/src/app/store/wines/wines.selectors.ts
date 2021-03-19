@@ -40,11 +40,6 @@ export const selectAllWinesLoaded = createSelector(
   (state) => state.loaded
 );
 
-export const selectCurrentWine = createSelector(
-  selectWinesState,
-  (state) => state.currentWine
-);
-
 export const selectWinesLoading = createSelector(
   selectWinesState,
   (state) => state.loading

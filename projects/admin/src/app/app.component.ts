@@ -22,7 +22,7 @@ import {LocalStorage} from './shared/util/storage';
 export class AppComponent implements OnInit, OnDestroy {
   appTitle = 'uButeco';
   pageTitle = '';
-  subscription: Subscription;
+  subscription?: Subscription;
 
   constructor(private store: Store<AppState>,
               public title: Title,

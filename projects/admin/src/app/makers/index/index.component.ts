@@ -29,11 +29,11 @@ export class IndexComponent implements OnInit, OnDestroy {
   readonly canDestroy$ = this.store.pipe(select(canDestroyMakers));
   readonly canEdit$ = this.store.pipe(select(canEditMakers));
   readonly displayedColumns: string[] = ['id', 'name', 'country', 'action'];
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort!: MatSort;
   readonly loading$: Observable<boolean> = this.store.pipe(select(selectMakersLoading));
   private data: Maker[] = [];
   dataSource = new MatTableDataSource(this.data);
-  private subscription: Subscription;
+  private subscription?: Subscription;
 
   constructor(private store: Store<AppState>,
               private changeDetectorRefs: ChangeDetectorRef,
@@ -68,11 +68,13 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   destroy(maker: Maker) {
-    this.store.dispatch(DELETE_MAKER({id: maker.id}));
+    if (maker.id) {
+      this.store.dispatch(DELETE_MAKER({id: maker.id}));
+    }
   }
 
   applyFilter(word: string) {
-    this.dataSource.filter = word.trim().toLowerCase();
+    this.dataSource.filter = word
   }
 
   openFormDialog(element?: Maker) {

@@ -1,38 +1,37 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Component, Input, OnDestroy} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
 import {LayoutService} from '../../../core/services/theme/layout.service';
 import {NavigationService} from '../../../core/services/theme/navigation.service';
 import {ILayoutConf} from '../../../core/models/theme';
 import {MatDialog} from '@angular/material/dialog';
 import {SignOutComponent} from '../../../auth/sign-out/sign-out.component';
+import {User} from '../../../core/models/user';
+import {select, Store} from '@ngrx/store';
+import {selectCurrentUser} from '../../../store/auth/auth.selectors';
+import {AppState} from '../../../store';
+import {MatSidenav} from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-header-top',
   templateUrl: './header-top.component.html'
 })
-export class HeaderTopComponent implements OnInit, OnDestroy {
-  layoutConf: ILayoutConf;
+export class HeaderTopComponent implements OnDestroy {
+  user$: Observable<User | undefined> = this.store.pipe(select(selectCurrentUser));
+  layoutConf: ILayoutConf = this.layout.layoutConf;
   menuItems = this.navService.iconMenu;
-  menuItemSub: Subscription;
-  egretThemes: any[] = [];
-  @Input() notificPanel;
+  subscription?: Subscription;
+  @Input() notificPanel!: MatSidenav;
 
   constructor(private layout: LayoutService,
               private navService: NavigationService,
-              private dialog: MatDialog
+              private dialog: MatDialog,
+              private store: Store<AppState>
   ) {
   }
 
-  ngOnInit() {
-    this.layoutConf = this.layout.layoutConf;
-  }
 
   ngOnDestroy() {
-    this.menuItemSub.unsubscribe();
-  }
-
-  changeTheme(theme) {
-    this.layout.publishLayoutChange({matTheme: theme.name});
+    this.subscription?.unsubscribe();
   }
 
   toggleNotific() {

@@ -31,17 +31,12 @@ export const selectAllBeersOrderedByPrice = (isAsc: boolean) => createSelector(
 
 export const selectAllBeersOrderedByStyle = (isAsc: boolean) => createSelector(
   selectAllBeers,
-  (beers) => beers.sort((a, b) => compare(a.beer_style.name, b.beer_style.name, isAsc))
+  (beers) => beers.sort((a, b) => compare(a.beer_style?.name, b.beer_style?.name, isAsc))
 );
 
 export const selectAllBeersLoaded = createSelector(
   selectBeersState,
   (state) => state.loaded
-);
-
-export const selectCurrentBeer = createSelector(
-  selectBeersState,
-  (state) => state.currentBeer
 );
 
 export const selectBeerLoading = createSelector(

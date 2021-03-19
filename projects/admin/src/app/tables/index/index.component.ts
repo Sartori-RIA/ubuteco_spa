@@ -25,16 +25,16 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   tables$: Observable<Table[]> = this.store.pipe(select(selectAllTables));
   readonly loading$: Observable<boolean> = this.store.pipe(select(selectTablesLoading));
-  readonly canCreate$ = this.store.pipe(select(canCreateTables));
-  readonly canDestroy$ = this.store.pipe(select(canDestroyTables));
-  readonly canEdit$ = this.store.pipe(select(canEditTables));
-  readonly canShowActions$ = this.store.pipe(select(canShowTableActions));
+  readonly canCreate$: Observable<boolean> = this.store.pipe(select(canCreateTables));
+  readonly canDestroy$: Observable<boolean> = this.store.pipe(select(canDestroyTables));
+  readonly canEdit$: Observable<boolean> = this.store.pipe(select(canEditTables));
+  readonly canShowActions$: Observable<boolean> = this.store.pipe(select(canShowTableActions));
   readonly displayedColumnsWithAction: string[] = ['id', 'name', 'chairs', 'action'];
   readonly displayedColumns: string[] = ['id', 'name', 'chairs'];
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort!: MatSort;
   private data: Table[] = [];
   dataSource = new MatTableDataSource(this.data);
-  private subscription: Subscription;
+  private subscription?: Subscription;
 
   constructor(private store: Store<TableState>,
               private changeDetectorRefs: ChangeDetectorRef,
@@ -68,7 +68,9 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   destroy(table: Table) {
-    this.store.dispatch(REMOVE_TABLE({id: table.id}));
+    if (table.id) {
+      this.store.dispatch(REMOVE_TABLE({id: table.id}));
+    }
   }
 
   openFormDialog(element?: Table) {
@@ -78,7 +80,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   applyFilter(word: string) {
-    this.dataSource.filter = word.trim().toLowerCase();
+    this.dataSource.filter = word
   }
 
   private updateList() {

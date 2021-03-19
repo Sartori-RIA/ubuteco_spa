@@ -21,7 +21,9 @@ export class OrderItemsComponent {
   }
 
   onRemoveItem(item: OrderItem) {
-    this.store.dispatch(DELETE_ORDER_ITEM({order_id: item.order_id, id: item.id}));
+    if (item.order_id && item.id) {
+      this.store.dispatch(DELETE_ORDER_ITEM({order_id: item.order_id, id: item.id}));
+    }
   }
 
   getItemTypeIcon(item: OrderItem): IconName {
@@ -34,6 +36,8 @@ export class OrderItemsComponent {
         return 'hamburger';
       case 'Wine':
         return 'wine-bottle';
+      default:
+        return 'beer';
     }
   }
 

@@ -1,4 +1,3 @@
-import {FeedbackService} from '../../core/services/api/feedback.service';
 import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
@@ -72,9 +71,10 @@ export class FormComponent implements OnInit {
   private updateForm() {
     if (!!this.data.data) {
       const data = this.data.data;
+      const cents: number = data.price_cents || 0;
       this.form.patchValue({
         name: data.name,
-        price: data.price_cents / 100,
+        price: cents / 100,
         quantity_stock: data.quantity_stock,
         valid_until: data.valid_until,
       });

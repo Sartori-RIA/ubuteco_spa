@@ -47,7 +47,7 @@ export class BeersEffects {
     }),
     mergeMap(([{page}]) => this.beerService.index({page}).pipe(
       map(({body, headers}) => REQUEST_ALL_BEERS_DONE({
-          data: body,
+          data: body || [],
           total: Number(headers.get('total'))
         })
       ),

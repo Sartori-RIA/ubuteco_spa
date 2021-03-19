@@ -6,8 +6,8 @@
           <ngx-avatar (clickOnAvatar)="openImageDialog()"
                       class="my-avatar"
                       [size]="200"
-                      [name]="user?.name"
-                      [src]="user?.picture?.url"></ngx-avatar>
+                      [name]="user?.name || ''"
+                      [src]="user?.picture?.url || ''"></ngx-avatar>
         </div>
 
         <div class="profile-title text-center mb-1">

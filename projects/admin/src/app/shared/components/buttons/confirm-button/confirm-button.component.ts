@@ -9,7 +9,7 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@
 export class ConfirmButtonComponent {
 
   @Output() confirmed = new EventEmitter();
-  @Input() toolTip: string;
-  @Input() loading: boolean;
+  @Input() toolTip = '';
+  @Input() loading: boolean | null = false;
 
 }

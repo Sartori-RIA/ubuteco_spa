@@ -7,10 +7,17 @@
       <mat-select formControlName="item">
         <mat-option *ngFor="let item of items$ | async" [value]="item">
           <span *ngIf="data?.itemType == 'Dish'; else otherProducts">
-            {{'pages.orders.dialog.dish_select_option'|translate: {name: item.name, price: item.price_cents / 100} }}
+            {{'pages.orders.dialog.dish_select_option'|translate: {
+            name: item.name,
+            price: (item?.price_cents || 0) / 100
+          } }}
           </span>
           <ng-template #otherProducts>
-            {{'pages.orders.dialog.item_select_option'|translate: {name: item.name, price: item.price_cents / 100, quantity: item.quantity_stock} }}
+            {{'pages.orders.dialog.item_select_option'|translate: {
+            name: item.name,
+            price: (item?.price_cents || 0) / 100,
+            quantity: item.quantity_stock
+          } }}
           </ng-template>
         </mat-option>
       </mat-select>

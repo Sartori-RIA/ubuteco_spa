@@ -8,7 +8,7 @@ import {Order} from '../../core/models/order';
 })
 export class FinishOrderCardComponent implements OnInit {
 
-  @Input() order: Order;
+  @Input() order!: Order;
 
   constructor() {
   }

@@ -8,7 +8,7 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@
 })
 export class CancelButtonComponent {
   @Output() cancel = new EventEmitter();
-  @Input() tooltip: string;
+  @Input() tooltip = '';
 
 }
 

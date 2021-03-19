@@ -35,10 +35,10 @@ export class IndexComponent implements OnInit, OnDestroy {
   readonly displayedColumns: string[] = ['id', 'image', 'name', 'style', 'price'];
   readonly displayedColumnsWithAction: string[] = ['id', 'image', 'name', 'style', 'price', 'action'];
   readonly loading$: Observable<boolean> = this.store.pipe(select(selectBeerLoading));
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort!: MatSort;
   private data: Beer[] = [];
   dataSource = new MatTableDataSource(this.data);
-  private subscription: Subscription;
+  private subscription?: Subscription;
 
   constructor(private store: Store<AppState>,
               private dialog: MatDialog,
@@ -82,11 +82,13 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   deleteBeer(beer: Beer) {
-    this.store.dispatch(REMOVE_BEER({id: beer.id}));
+    if (!!beer.id) {
+      this.store.dispatch(REMOVE_BEER({id: beer.id}));
+    }
   }
 
   applyFilter(word: string) {
-    this.dataSource.filter = word.trim().toLowerCase();
+    this.dataSource.filter = word;
   }
 
   openCreateDialog() {

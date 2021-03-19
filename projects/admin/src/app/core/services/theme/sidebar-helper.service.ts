@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
 import {SidebarComponent} from '../../../layout/navigation/sidebar/sidebar.component';
 
+interface SidebarComponentList {
+  [key: string]: SidebarComponent;
+}
 @Injectable({
   providedIn: 'root'
 })
 export class SidebarHelperService {
-  sidebarList: SidebarComponent[];
+  sidebarList: SidebarComponentList = {};
 
-  constructor() {
-    this.sidebarList = [];
-  }
-
-  setSidebar(name, sidebar): void {
+  setSidebar(name: string, sidebar: SidebarComponent): void {
     this.sidebarList[name] = sidebar;
   }
 
-  getSidebar(name): any {
+  getSidebar(name: string): any {
     return this.sidebarList[name];
   }
 
-  removeSidebar(name) {
+  removeSidebar(name: string) {
     if (!this.sidebarList[name]) {
       console.warn(`The sidebar with name '${name}' doesn't exist.`);
     }

@@ -7,7 +7,7 @@ import { Router, NavigationEnd } from '@angular/router';
   templateUrl: './notifications.component.html'
 })
 export class NotificationsComponent implements OnInit {
-  @Input() notificPanel;
+  @Input() notificPanel?: any;
 
   // Dummy notifications
   notifications = [{
@@ -39,7 +39,7 @@ export class NotificationsComponent implements OnInit {
         }
     });
   }
-  clearAll(e) {
+  clearAll(e: Event) {
     e.preventDefault();
     this.notifications = [];
   }

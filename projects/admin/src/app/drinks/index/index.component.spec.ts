@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { IndexComponent } from './drinks.component';
+import { IndexComponent } from './index.component';
 
 describe('DrinksComponent', () => {
   let component: IndexComponent;

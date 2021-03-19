@@ -20,15 +20,12 @@ import {
 import {AppState} from '../../../store';
 
 export interface IMenuItem {
-  name?: string; // Used as display text for item and title for separator type
-  state?: string; // Router state
-  icon?: string | IconName; // Material icon name
-  tooltip?: string; // Tooltip text
+  name: string; // Used as display text for item and title for separator type
+  state: string; // Router state
+  icon: string; // Material icon name
+  tooltip: string;
   disabled?: boolean; // If true, item will not be appeared in sidenav.
   badges?: IBadge[];
-  iconType: 'font-awesome' | 'material-design';
-  fontSet?: 'fab' | 'fas' | 'far'; // optional, only to font awesome icons
-  faIcon?: IconDefinition; // optional, only to font awesome icons
   canShow$: Observable<boolean>;
 }
 
@@ -45,98 +42,86 @@ export class NavigationService {
   iconMenu: IMenuItem[] = [
     {
       name: 'routes.makers',
-      tooltip: 'Blank',
+      tooltip: 'routes.makers',
       icon: 'dashboard',
       state: 'fabricantes',
-      iconType: 'material-design',
       canShow$: this.store.pipe(select(canReadMakers))
     },
     {
       name: 'routes.employees',
-      tooltip: 'Blank',
+      tooltip: 'routes.employees',
       canShow$: this.store.pipe(select(canReadEmployees)),
       state: 'empregados',
-      iconType: 'material-design',
       icon: 'group'
     },
     {
       name: 'routes.beer_styles',
-      tooltip: 'Blank',
+      tooltip: 'routes.beer_styles',
       icon: 'style',
       state: 'estilos-cervejas',
-      iconType: 'material-design',
       canShow$: this.store.pipe(select(canReadBeerStyles))
     },
     {
       name: 'routes.wine_styles',
-      tooltip: 'Blank',
+      tooltip: 'routes.wine_styles',
       icon: 'style',
       state: 'estilos-vinhos',
-      iconType: 'material-design',
       canShow$: this.store.pipe(select(canReadWineStyles))
     },
     {
       name: 'routes.drinks',
-      tooltip: 'Blank',
+      tooltip: 'routes.drinks',
       icon: 'local_bar',
       state: 'bebidas',
-      iconType: 'material-design',
       canShow$: this.store.pipe(select(canReadDrinks))
     },
     {
       name: 'routes.beers',
-      tooltip: 'Blank',
+      tooltip: 'routes.beers',
       icon: 'sports_bar',
       state: 'cervejas',
-      iconType: 'material-design',
       canShow$: this.store.pipe(select(canReadBeers))
     },
     {
       name: 'routes.wines',
-      tooltip: 'Blank',
+      tooltip: 'routes.wines',
       icon: 'wine_bar',
       state: 'vinhos',
-      iconType: 'material-design',
       canShow$: this.store.pipe(select(canReadWines))
     },
     {
       name: 'routes.foods',
-      tooltip: 'Blank',
+      tooltip: 'routes.foods',
       icon: 'inventory',
       state: 'alimentos',
-      iconType: 'material-design',
       canShow$: this.store.pipe(select(canReadFoods))
     },
     {
       name: 'routes.dishes',
-      tooltip: 'Blank',
+      tooltip: 'routes.dishes',
       icon: 'restaurant_menu',
       state: 'cardapio',
-      iconType: 'material-design',
       canShow$: this.store.pipe(select(canReadDishes))
     },
     {
       name: 'routes.kitchen',
-      tooltip: 'Blank',
+      tooltip: 'routes.kitchen',
       icon: 'restaurant',
       state: 'cozinha',
-      iconType: 'material-design',
       canShow$: this.store.pipe(select(canReadKitchen))
     },
     {
       name: 'routes.tables',
-      tooltip: 'Blank',
+      tooltip: 'routes.tables',
       icon: 'event_seat',
       state: 'mesas',
-      iconType: 'material-design',
       canShow$: this.store.pipe(select(canReadTables))
     },
     {
       name: 'routes.orders',
-      tooltip: 'Blank',
+      tooltip: 'routes.orders',
       icon: 'shopping_cart',
       state: 'pedidos/list',
-      iconType: 'material-design',
       canShow$: this.store.pipe(select(canReadOrders))
     },
   ];

@@ -50,7 +50,7 @@ export class OrdersEffects {
     }),
     mergeMap(([{page}]) => this.ordersService.index({page}).pipe(
       map(({body, headers}) => REQUEST_ALL_ORDERS_DONE({
-          data: body,
+          data: body || [],
           total: Number(headers.get('total'))
         })
       ),
@@ -87,7 +87,7 @@ export class OrdersEffects {
     withLatestFrom(this.store.pipe(select(selectCurrentOrganization))),
     mergeMap(([action, organization]) => this.ordersService.create({
         ...action.order,
-        organization_id: organization.id,
+        organization_id: organization?.id,
         organization: organization as Organization
       })
         .pipe(
@@ -117,7 +117,7 @@ export class OrdersEffects {
 
   onReloadOrderAfterUpSert$ = createEffect(() => this.actions$.pipe(
     ofType(ADD_ORDER_ITEM_DONE, UPDATE_ORDER_ITEM_DONE),
-    mergeMap(({item}) => this.ordersService.show(item.order_id)
+    mergeMap(({item}) => this.ordersService.show(item.order_id || 0)
       .pipe(
         map((order) => REQUEST_ORDER_DONE({order})),
         catchError(() => of(REQUEST_ORDER_FAILED()))

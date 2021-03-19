@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { OrganizationComponent } from './settings.component';
+import { OrganizationComponent } from './organization.component';
 
 describe('SettingsComponent', () => {
   let component: OrganizationComponent;

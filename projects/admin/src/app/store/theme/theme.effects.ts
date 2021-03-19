@@ -25,7 +25,7 @@ import {AppState} from '../index';
 export class ThemeEffects {
   updateTheme$ = createEffect(() => this.actions$.pipe(
     ofType(UPDATE_THEME),
-    mergeMap(({user, theme}) => this.themeService.update(theme, user)
+    mergeMap(({user, theme}) => this.themeService.updateTheme(theme, user)
       .pipe(
         map((data) => UPDATE_THEME_DONE({theme: data})),
         catchError(() => of(UPDATE_THEME_FAILED()))
@@ -35,7 +35,7 @@ export class ThemeEffects {
 
   loadTheme$ = createEffect(() => this.actions$.pipe(
     ofType(THEME_REQUESTED),
-    mergeMap(({user}) => this.themeService.show(user.organization.theme_id)
+    mergeMap(({user}) => this.themeService.showTheme(user)
       .pipe(
         map((theme) => THEME_LOADED({theme})),
         catchError(() => of(THEME_FAILED()))

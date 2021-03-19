@@ -17,9 +17,9 @@ import {take} from "rxjs/operators";
 export class AboutComponent implements OnInit, OnDestroy {
 
   form: FormGroup = this.mountForm();
-  user$: Observable<User> = this.store.pipe(select(selectCurrentUser));
+  user$: Observable<User | undefined> = this.store.pipe(select(selectCurrentUser));
   loading$: Observable<boolean> = this.store.pipe(select(selectAuthLoading));
-  subscription: Subscription;
+  subscription?: Subscription;
 
   constructor(private fb: FormBuilder,
               private store: Store<AppState>) {

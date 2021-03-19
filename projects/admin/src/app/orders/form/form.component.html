@@ -21,11 +21,11 @@
         </mat-form-field>
       </div>
 
-      <div class="p-t-1" fxFlex="100">
+      <div class="p-t-1" fxFlex="100" *ngIf="order.id as order_id ">
         <div fxLayout="row" fxLayoutAlign="space-between">
           <button fxFlex="20"
                   mat-flat-button
-                  (click)="onAddDrink(order.id)"
+                  (click)="onAddDrink(order_id)"
                   color="primary"
           >
             <fa-icon class="width-4" size="3x" [icon]="['fas', 'cocktail']"></fa-icon>
@@ -33,20 +33,20 @@
           <button fxFlex="20"
                   mat-flat-button
                   color="primary"
-                  (click)="onAddBeer(order.id)"
+                  (click)="onAddBeer(order_id)"
           >
             <fa-icon class="width-4" size="3x" [icon]="['fas', 'beer']"></fa-icon>
           </button>
           <button fxFlex="20"
                   mat-flat-button
-                  (click)="onAddFood(order.id)"
+                  (click)="onAddFood(order_id)"
                   color="primary"
           >
             <fa-icon class="width-4" size="3x" [icon]="['fas', 'hamburger']"></fa-icon>
           </button>
           <button fxFlex="20"
                   mat-flat-button
-                  (click)="onAddWine(order.id)"
+                  (click)="onAddWine(order_id)"
                   color="primary"
           >
             <fa-icon class="width-4" size="3x" [icon]="['fas', 'wine-bottle']"></fa-icon>

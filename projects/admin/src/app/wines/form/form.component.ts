@@ -90,7 +90,7 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   compareSelectValues(val1: WineStyle | Maker, val2: WineStyle | Maker) {
-    if (!!val1 === false || !!val2 === false) {
+    if (!val1 || !val2) {
       return false;
     }
 
@@ -111,8 +111,9 @@ export class FormComponent implements OnInit, OnDestroy {
         name, abv, price_cents, description, wine_style, quantity_stock,
         maker, grapes, ripening, vintage_wine, visual
       } = this.data.data;
+      const cents = price_cents || 0;
       this.form.patchValue({
-        name, price: price_cents / 100, wine_style,
+        name, price: cents / 100, wine_style,
         maker, abv, quantity_stock, description,
         grapes, ripening, vintage_wine, visual
       });

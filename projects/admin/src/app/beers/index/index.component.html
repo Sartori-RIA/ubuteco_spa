@@ -1,10 +1,4 @@
-<div fxLayout="row">
-
-  <mat-form-field fxFill appearance="outline">
-    <input matInput (keyup)="applyFilter($event.target.value)" [placeholder]="'commons.labels.search'|translate">
-  </mat-form-field>
-
-</div>
+<app-search (onSearch)="applyFilter($event)"></app-search>
 
 <div class="mat-elevation-z8">
 
@@ -54,9 +48,9 @@
         <app-table-action-buttons
           [canDestroy]="canDestroy$ | async"
           [canEdit]="canEdit$ | async"
-          (destroy)="deleteBeer(element)"
-          (update)="openEditDialog(element)"
-          (show)="showElement(element)"
+          (destroyElement)="deleteBeer(element)"
+          (updateElement)="openEditDialog(element)"
+          (showElement)="showElement(element)"
         ></app-table-action-buttons>
       </td>
     </ng-container>

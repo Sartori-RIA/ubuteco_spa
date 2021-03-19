@@ -16,7 +16,7 @@ import {LOAD_USER} from '../../store/auth/auth.actions';
 })
 export class ProfileComponent {
 
-  user$: Observable<User> = this.store.pipe(select(selectCurrentUser));
+  user$: Observable<User | undefined> = this.store.pipe(select(selectCurrentUser));
   canReadOrg$: Observable<boolean> = this.store.pipe(select(canReadOrganization));
   canEditTheme$: Observable<boolean> = this.store.pipe(select(canEditTheme));
 
@@ -26,6 +26,9 @@ export class ProfileComponent {
 
   openImageDialog() {
     this.user$.pipe(take(1)).subscribe((user) => {
+      if (!user?.id) {
+        return;
+      }
       const params: UploadFileParams = {
         entityId: user.id,
         entityType: 'User'

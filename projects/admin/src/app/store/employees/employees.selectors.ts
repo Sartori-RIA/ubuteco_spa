@@ -74,7 +74,7 @@ export const selectEmployeesOrderedByEmail = (isAsc: boolean) => createSelector(
 
 export const selectEmployeesOrderedRole = (isAsc: boolean) => createSelector(
   selectAllEmployees,
-  (users) => users.sort((a, b) => compare(a.role.name, b.role.name, isAsc))
+  (users) => users.sort((a, b) => compare(a.role?.name, b.role?.name, isAsc))
 );
 
 export const selectAllRolesLoaded = createSelector(

@@ -22,7 +22,7 @@ export class KitchenEffects {
     ofType(REQUEST_ORDERS_DISHES),
     mergeMap(() => this.kitchenService.index()
       .pipe(
-        map(({body: data}) => REQUEST_ORDERS_DISHES_DONE({data})),
+        map(({body}) => REQUEST_ORDERS_DISHES_DONE({data: body || []})),
         catchError(() => of(REQUEST_ORDERS_DISHES_FAIL()))
       )
     ),

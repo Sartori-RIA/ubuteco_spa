@@ -5,9 +5,7 @@ export type UploadEntityType = 'User' | 'Beer' | 'Wine' | 'Drink' | 'Food' | 'Di
 export const UPLOAD_REQUEST = createAction('[File Upload Form] Request', props<{
   file: File,
   entityType: UploadEntityType,
-  entityId?: number,
-  entityCouncil?: string,
-  entityState?: string
+  entityId: number
 }>());
 
 export const UPLOAD_CANCEL = createAction('[File Upload Form] Cancel');

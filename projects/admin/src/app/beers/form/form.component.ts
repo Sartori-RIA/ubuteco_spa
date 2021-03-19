@@ -77,7 +77,7 @@ export class FormComponent implements OnInit {
   }
 
   compareSelectValues(val1: BeerStyle | Maker, val2: BeerStyle | Maker) {
-    if (!!val1 === false || !!val2 === false) {
+    if (!val1 || !val2) {
       return false;
     }
 
@@ -91,9 +91,10 @@ export class FormComponent implements OnInit {
   private updateForm() {
     if (this.data.data) {
       const beer = this.data?.data;
+      const cents: number = this.data.data.price_cents || 0;
       this.form.patchValue({
         name: beer.name,
-        price: beer.price_cents / 100,
+        price: cents / 100,
         beer_style: beer.beer_style,
         maker: beer.maker,
         ibu: beer.ibu,
@@ -101,7 +102,7 @@ export class FormComponent implements OnInit {
         quantity_stock: beer.quantity_stock,
         description: beer.description
       });
-      if (!!this.data.disabled) {
+      if (this.data.disabled) {
         this.form.disable();
       }
     }
