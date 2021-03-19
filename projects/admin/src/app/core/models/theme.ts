@@ -40,7 +40,6 @@ export interface ILayoutConf {
   sidebarStyle?: string; // full, compact, closed
   sidebarCompactToggle?: boolean; // sidebar expandable on hover
   sidebarColor?: string; // Sidebar background color http://demos.ui-lib.com/egret-doc/#egret-colors
-  dir?: string; // ltr, rtl
   isMobile?: boolean; // updated automatically
   useBreadcrumb?: boolean; // Breadcrumb enabled/disabled
   breadcrumb?: string; // simple, title

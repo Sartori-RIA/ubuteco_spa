@@ -23,7 +23,6 @@ export class LayoutService {
         sidebarStyle: 'full',
         sidebarColor: theme?.color_sidebar || 'slate',
         sidebarCompactToggle: false,
-        dir: 'ltr',
         useBreadcrumb: true,
         topbarFixed: false,
         footerFixed: true,

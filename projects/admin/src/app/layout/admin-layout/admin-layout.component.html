@@ -1,4 +1,4 @@
-<div class="app-admin-wrap" [dir]='layoutConf?.dir'>
+<div class="app-admin-wrap">
   <!-- Header for top navigation layout -->
   <!-- ONLY REQUIRED FOR **TOP** NAVIGATION LAYOUT -->
   <app-header-top
@@ -7,7 +7,6 @@
   </app-header-top>
   <!-- Main Container -->
   <mat-sidenav-container
-    [dir]='layoutConf.dir'
     class="app-admin-container app-side-nav-container mat-drawer-transition sidebar-{{layoutConf?.sidebarColor}} topbar-{{layoutConf?.topbarColor}} footer-{{layoutConf?.footerColor}}"
     [ngClass]="adminContainerClasses">
     <mat-sidenav-content>
@@ -15,8 +14,8 @@
       <!-- ONLY REQUIRED FOR **SIDE** NAVIGATION LAYOUT -->
       <app-sidebar-side
         *ngIf="layoutConf.navigationPos === 'side'"
-        (mouseenter)="sidebarMouseenter($event)"
-        (mouseleave)="sidebarMouseleave($event)"
+        (mouseenter)="sidebarMouseenter()"
+        (mouseleave)="sidebarMouseleave()"
       ></app-sidebar-side>
 
       <!-- Top navigation layout (navigation for mobile screen) -->

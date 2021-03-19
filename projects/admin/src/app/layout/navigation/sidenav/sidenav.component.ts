@@ -3,10 +3,10 @@ import {IMenuItem} from '../../../core/services/theme/navigation.service';
 
 @Component({
   selector: 'app-sidenav',
-  templateUrl: './sidenav.template.html'
+  templateUrl: './sidenav.component.html'
 })
 export class SidenavComponent {
-  @Input() public items: IMenuItem[] = [];
-  @Input() public hasIconMenu = false;
-  @Input() public iconMenuTitle = '';
+  @Input() items: IMenuItem[] = [];
+  @Input() hasIconMenu = false;
+  @Input() iconMenuTitle = '';
 }

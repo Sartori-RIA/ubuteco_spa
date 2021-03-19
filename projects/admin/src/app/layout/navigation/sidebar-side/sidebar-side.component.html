@@ -20,9 +20,9 @@
           ></ngx-avatar>
         </div>
         <span class="app-user-name mb-05">
-                <mat-icon class="icon-xs text-muted">lock</mat-icon>
+          <mat-icon class="icon-xs text-muted">lock</mat-icon>
           {{(user$ | async)?.name}}
-                </span>
+        </span>
         <!-- Small buttons -->
         <div class="app-user-controls">
           <button
@@ -62,8 +62,10 @@
         </div>
       </div>
       <!-- Navigation -->
-      <app-sidenav [items]="menuItems" [hasIconMenu]="hasIconTypeMenuItem"
-                   [iconMenuTitle]="iconTypeMenuTitle"></app-sidenav>
+      <app-sidenav [items]="menuItems"
+                   [hasIconMenu]="hasIconTypeMenuItem"
+                   [iconMenuTitle]="iconTypeMenuTitle"
+      ></app-sidenav>
     </div>
   </div>
 </div>
