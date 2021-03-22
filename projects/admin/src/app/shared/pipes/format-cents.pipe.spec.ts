@@ -11,6 +11,6 @@ describe('FormatCentsPipe', () => {
   });
   it('should to format cents with decimal', () => {
     const pipe = new FormatCentsPipe();
-    expect(pipe.transform(1555)).toBe(15.5);
+    expect(pipe.transform(1555)).toBe(15.55);
   });
 });

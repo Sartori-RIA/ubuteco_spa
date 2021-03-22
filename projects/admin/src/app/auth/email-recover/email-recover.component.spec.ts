@@ -1,6 +1,10 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { EmailRecoverComponent } from './email-recover.component';
+import {EmailRecoverComponent} from './email-recover.component';
+import {SharedModule} from '../../shared/shared.module';
+import {TranslateTestingModule} from 'ngx-translate-testing';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgxTranslateModule} from '../../ngx-translate/ngx-translate.module';
 
 describe('EmailRecoverComponent', () => {
   let component: EmailRecoverComponent;
@@ -8,9 +12,15 @@ describe('EmailRecoverComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmailRecoverComponent ]
+      declarations: [EmailRecoverComponent],
+      imports: [
+        SharedModule,
+        BrowserAnimationsModule,
+        TranslateTestingModule,
+        NgxTranslateModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

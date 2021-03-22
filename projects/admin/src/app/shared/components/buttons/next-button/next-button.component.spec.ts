@@ -1,6 +1,11 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { NextButtonComponent } from './next-button.component';
+import {NextButtonComponent} from './next-button.component';
+import {MatButtonModule} from '@angular/material/button';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateTestingModule} from 'ngx-translate-testing';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {NgxTranslateModule} from '../../../../ngx-translate/ngx-translate.module';
 
 describe('NextButtonComponent', () => {
   let component: NextButtonComponent;
@@ -8,9 +13,16 @@ describe('NextButtonComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ NextButtonComponent ]
+      imports: [
+        MatButtonModule,
+        MatTooltipModule,
+        BrowserAnimationsModule,
+        TranslateTestingModule,
+        NgxTranslateModule
+      ],
+      declarations: [NextButtonComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

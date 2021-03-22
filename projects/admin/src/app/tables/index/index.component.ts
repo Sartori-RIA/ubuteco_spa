@@ -38,7 +38,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<TableState>,
               private changeDetectorRefs: ChangeDetectorRef,
-              private dialog: MatDialog,) {
+              private dialog: MatDialog) {
   }
 
   ngOnDestroy(): void {
@@ -80,7 +80,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   applyFilter(word: string) {
-    this.dataSource.filter = word
+    this.dataSource.filter = word;
   }
 
   private updateList() {

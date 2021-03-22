@@ -1,6 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TableActionButtonsComponent } from './table-action-buttons.component';
+import {TableActionButtonsComponent} from './table-action-buttons.component';
+import {EditButtonComponent} from '../buttons/edit-button/edit-button.component';
+import {TrashButtonComponent} from '../buttons/trash-button/trash-button.component';
+import {ShowButtonComponent} from '../buttons/show-button/show-button.component';
+import {TranslateTestingModule} from 'ngx-translate-testing';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material/dialog';
+import {NgxTranslateModule} from '../../../ngx-translate/ngx-translate.module';
 
 describe('TableActionButtonsComponent', () => {
   let component: TableActionButtonsComponent;
@@ -8,9 +15,20 @@ describe('TableActionButtonsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TableActionButtonsComponent ]
+      declarations: [
+        TableActionButtonsComponent,
+        EditButtonComponent,
+        TrashButtonComponent,
+        ShowButtonComponent,
+      ],
+      imports: [
+        MatDialogModule,
+        BrowserAnimationsModule,
+        TranslateTestingModule,
+        NgxTranslateModule,
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

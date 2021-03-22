@@ -14,7 +14,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 import {MakersFormDialogComponent} from '../../makers/makers-form-dialog/makers-form-dialog.component';
 import {canCreateMakers} from '../../store/auth/auth.selectors';
 import {BaseDialogParams} from '../../core/models/base.model';
-import {selectBeerStyleLoading} from '../../store/beer-styles/beer-styles.selectors';
+import {selectDrinksLoading} from '../../store/drinks/drink.selectors';
 
 @Component({
   selector: 'app-drink-form',
@@ -27,7 +27,7 @@ export class FormComponent implements OnInit {
   form: FormGroup = this.mountForm();
   readonly makers$: Observable<Maker[]> = this.store.pipe(select(selectAllMakers));
   readonly canCreateMaker$ = this.store.pipe(select(canCreateMakers));
-  readonly loading$: Observable<boolean> = this.store.pipe(select(selectBeerStyleLoading));
+  readonly loading$: Observable<boolean> = this.store.pipe(select(selectDrinksLoading));
 
   constructor(private store: Store<AppState>,
               private drinkService: DrinksService,

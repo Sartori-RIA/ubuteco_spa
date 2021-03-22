@@ -1,21 +1,49 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { SecurityComponent } from './security.component';
+import {SecurityComponent} from './security.component';
+import {MockStore, provideMockStore} from '@ngrx/store/testing';
+import {SharedModule} from '../../shared/shared.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateTestingModule} from 'ngx-translate-testing';
+import {Logger} from '@ngrx/data';
+import {authInitialState} from '../../spec-helpers/states/auth.fake-state';
+import {NgxTranslateModule} from '../../ngx-translate/ngx-translate.module';
+import {UserService} from '../../core/services/api/user.service';
+import {selectAuthLoading} from '../../store/auth/auth.selectors';
 
 describe('SecurityComponent', () => {
   let component: SecurityComponent;
   let fixture: ComponentFixture<SecurityComponent>;
-
-  beforeEach(async(() => {
+  let store: MockStore;
+  let userService: UserService;
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SecurityComponent ]
-    })
-    .compileComponents();
+      providers: [
+        provideMockStore({
+          selectors: [
+            {selector: selectAuthLoading, value: false}
+          ],
+          initialState: {
+            auth: authInitialState
+          }
+        }),
+        Logger,
+      ],
+      declarations: [SecurityComponent],
+      imports: [
+        SharedModule,
+        BrowserAnimationsModule,
+        TranslateTestingModule,
+        NgxTranslateModule
+      ]
+    }).compileComponents();
+    store = TestBed.inject(MockStore);
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SecurityComponent);
     component = fixture.componentInstance;
+    userService = TestBed.inject(UserService);
     fixture.detectChanges();
   });
 

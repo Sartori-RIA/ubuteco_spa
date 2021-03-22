@@ -1,13 +1,10 @@
-import { LayoutModule } from '@angular/cdk/layout';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { DashComponent } from './dash.component';
+import {DashComponent} from './dash.component';
+import {SharedModule} from '../shared/shared.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateTestingModule} from 'ngx-translate-testing';
+import {NgxTranslateModule} from '../ngx-translate/ngx-translate.module';
 
 describe('DashComponent', () => {
   let component: DashComponent;
@@ -17,13 +14,10 @@ describe('DashComponent', () => {
     TestBed.configureTestingModule({
       declarations: [DashComponent],
       imports: [
-        NoopAnimationsModule,
-        LayoutModule,
-        MatButtonModule,
-        MatCardModule,
-        MatGridListModule,
-        MatIconModule,
-        MatMenuModule,
+        SharedModule,
+        BrowserAnimationsModule,
+        TranslateTestingModule,
+        NgxTranslateModule
       ]
     }).compileComponents();
   }));

@@ -16,7 +16,7 @@ export interface Langs {
 
 @Component({
   selector: 'app-header-side',
-  templateUrl: './header-side.template.html'
+  templateUrl: './header-side.component.html'
 })
 export class HeaderSideComponent {
   @Input() notificPanel!: MatSidenav;

@@ -13,8 +13,5 @@
 <div mat-dialog-actions>
   <app-cancel-button mat-dialog-close></app-cancel-button>
   <span fxFlex></span>
-  <button mat-raised-button
-          (click)="onConfirm()"
-          color="primary"
-  >{{'commons.buttons.confirm' | translate}}</button>
+  <app-confirm-button (confirmed)="onConfirm()"></app-confirm-button>
 </div>

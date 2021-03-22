@@ -1,6 +1,11 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { ButtonLoadingComponent } from './button-loading.component';
+import {ButtonLoadingComponent} from './button-loading.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateTestingModule} from 'ngx-translate-testing';
+import {MatButtonModule} from '@angular/material/button';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {NgxTranslateModule} from '../../../../ngx-translate/ngx-translate.module';
 
 describe('ButtonLoadingComponent', () => {
   let component: ButtonLoadingComponent;
@@ -8,9 +13,16 @@ describe('ButtonLoadingComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ButtonLoadingComponent ]
+      imports: [
+        MatButtonModule,
+        MatProgressSpinnerModule,
+        BrowserAnimationsModule,
+        TranslateTestingModule,
+        NgxTranslateModule
+      ],
+      declarations: [ButtonLoadingComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,15 +1,11 @@
 import {FeedbackService} from '../../core/services/api/feedback.service';
 import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
-import {ActivatedRoute, Router} from '@angular/router';
 import {AppState} from '../../store';
 import {Dish} from '../../core/models/dish';
-import {Food} from '../../core/models/food';
 import {selectAllFoodsOrderedByName} from '../../store/foods/food.selectors';
 import {Maker} from '../../core/models/maker';
-import {REQUEST_ALL_FOODS} from '../../store/foods/food.actions';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CREATE_DISH, REMOVE_DISH_ITEM, UPDATE_DISH} from '../../store/dishes/dishes.actions';
 import {BaseDialogParams} from '../../core/models/base.model';
@@ -27,12 +23,10 @@ export class FormComponent implements OnInit {
   readonly loading$ = this.store.pipe(select(selectDishesLoading));
   readonly foods$ = this.store.pipe(select(selectAllFoodsOrderedByName(true)));
 
-  constructor(private activatedRoute: ActivatedRoute,
-              private store: Store<AppState>,
+  constructor(private store: Store<AppState>,
               private dialogRef: MatDialogRef<FormComponent>,
               @Inject(MAT_DIALOG_DATA) public data: BaseDialogParams<Dish>,
               private dialog: MatDialog,
-              private router: Router,
               private feedbackService: FeedbackService,
               private fb: FormBuilder) {
   }

@@ -111,7 +111,12 @@
             "assets": [
               "projects/admin/src/favicon.ico",
               "projects/admin/src/assets",
-              "projects/admin/src/manifest.webmanifest"
+              "projects/admin/src/manifest.webmanifest",
+              {
+                "glob": "**/*",
+                "input": "node_modules/svg-country-flags/svg",
+                "output": "assets/svg-country-flags/svg"
+              }
             ],
             "styles": [
               "projects/admin/src/styles.scss"
