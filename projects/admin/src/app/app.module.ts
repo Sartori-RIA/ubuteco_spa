@@ -1,4 +1,4 @@
-import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -23,8 +23,6 @@ import {AuthModule} from './auth/auth.module';
 import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {NgxMaskModule} from 'ngx-mask';
-import {COUNTRIES_DB} from './core/models/country';
-import {MatIconRegistry} from '@angular/material/icon';
 import {FontAwesomeIconsModule} from './font-awesome-icons/font-awesome-icons.module';
 import {NgxTranslateModule} from './ngx-translate/ngx-translate.module';
 

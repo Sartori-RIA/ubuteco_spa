@@ -29,8 +29,6 @@ import {MaterialModule} from '../material/material.module';
     MaterialModule,
     AuthRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forFeature(fromAuth.featureKey, fromAuth.reducer),
-    EffectsModule.forFeature([AuthEffects])
   ],
   exports: [
     SignOutComponent
