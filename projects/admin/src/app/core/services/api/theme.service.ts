@@ -6,7 +6,7 @@ import {environment} from '../../../../environments/environment';
 import {Logger} from '@ngrx/data';
 import {Observable} from 'rxjs';
 import {User} from '../../models/user';
-import {map} from "rxjs/operators";
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

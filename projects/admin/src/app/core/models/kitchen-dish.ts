@@ -11,5 +11,5 @@ export interface KitchenDish extends BaseModel {
 
 export class ActionCableDish {
   obj?: KitchenDish;
-  action?: 'create' | 'update'
+  action?: 'create' | 'update';
 }

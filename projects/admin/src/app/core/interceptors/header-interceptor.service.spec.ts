@@ -8,7 +8,6 @@ import {authInitialState} from '../../spec-helpers/states/auth.fake-state';
 
 describe('HeaderInterceptorService', () => {
   let store: MockStore;
-  const initialState = {};
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -32,7 +31,7 @@ describe('HeaderInterceptorService', () => {
   });
 
   it('should be created', () => {
-    const service: HeaderInterceptorService = TestBed.get(HeaderInterceptorService);
+    const service = TestBed.inject(HeaderInterceptorService);
     expect(service).toBeTruthy();
   });
 });

@@ -1,9 +1,9 @@
 import {OrderItem} from '../../core/models/order';
 import {beer} from './beer.factory';
 import {dish} from './dish.factory';
-import {KitchenDish} from "../../core/models/kitchen-dish";
-import {order} from "./order.factory";
-import {table} from "./table.factory";
+import {KitchenDish} from '../../core/models/kitchen-dish';
+import {order} from './order.factory';
+import {table} from './table.factory';
 
 export const orderItemBeer: OrderItem = {
   status: 'with_the_client',
@@ -26,4 +26,4 @@ export const kitchenDish: KitchenDish = {
   dish,
   order_item: orderItemDish,
   table,
-}
+};

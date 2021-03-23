@@ -2,9 +2,9 @@ import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
 import {SidebarComponent} from './sidebar.component';
 import {SharedModule} from '../../../shared/shared.module';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {TranslateTestingModule} from "ngx-translate-testing";
-import {TranslateModule} from "@ngx-translate/core";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateTestingModule} from 'ngx-translate-testing';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('SidebarComponent', () => {
   let component: SidebarComponent;

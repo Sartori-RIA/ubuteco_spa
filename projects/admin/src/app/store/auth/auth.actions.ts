@@ -36,4 +36,4 @@ export const UPDATE_ORGANIZATION_DONE = createAction('[ORGANIZATION/API] update 
 
 export const UPDATE_ORGANIZATION_FAILED = createAction('[ORGANIZATION/API] update organization failed');
 
-export const FORBIDDEN_ACTION = createAction('[DEVISE/CANCANCAN] trying a forbidden action')
+export const FORBIDDEN_ACTION = createAction('[DEVISE/CANCANCAN] trying a forbidden action');

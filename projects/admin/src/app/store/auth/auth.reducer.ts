@@ -35,7 +35,7 @@ const initialState: AuthState = {
   token: undefined,
   errors: undefined,
   loading: false,
-}
+};
 
 const authReducer = createReducer(initialState,
   on(SIGN_IN, SIGN_UP, (state) => ({...state, loading: true})),

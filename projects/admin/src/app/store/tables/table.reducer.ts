@@ -28,7 +28,7 @@ export const featureKey = 'table';
 export interface TableState extends EntityState<Table> {
   loaded: boolean;
   loading: boolean;
-  total: number
+  total: number;
 }
 
 const adapter: EntityAdapter<Table> = createEntityAdapter<Table>();
@@ -70,7 +70,7 @@ const tableReducer = createReducer(initialState,
     total: data.length,
     loading: false
   }))
-)
+);
 
 export function reducer(state: TableState | undefined, action: Action): TableState {
   return tableReducer(state, action);
