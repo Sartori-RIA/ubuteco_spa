@@ -1,6 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DialogActionButtonsComponent } from './dialog-action-buttons.component';
+import {DialogActionButtonsComponent} from './dialog-action-buttons.component';
+import {ConfirmButtonComponent} from '../buttons/confirm-button/confirm-button.component';
+import {CancelButtonComponent} from '../buttons/cancel-button/cancel-button.component';
+import {TranslateTestingModule} from 'ngx-translate-testing';
+import {NgxTranslateModule} from '../../../ngx-translate/ngx-translate.module';
 
 describe('DialogActionButtonsComponent', () => {
   let component: DialogActionButtonsComponent;
@@ -8,9 +12,17 @@ describe('DialogActionButtonsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogActionButtonsComponent ]
+      declarations: [
+        DialogActionButtonsComponent,
+        ConfirmButtonComponent,
+        CancelButtonComponent,
+      ],
+      imports: [
+        TranslateTestingModule,
+        NgxTranslateModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

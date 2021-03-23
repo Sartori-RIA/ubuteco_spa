@@ -35,7 +35,7 @@ export class DishesComponent implements OnInit, OnDestroy {
   }
 
   applyFilter(word: string) {
-    this.dataSource.filter = word
+    this.dataSource.filter = word;
   }
 
   private updateDishesList() {

@@ -19,7 +19,7 @@ import {
   UPDATE_EMPLOYEE,
   UPDATE_EMPLOYEE_DONE
 } from './employees.actions';
-import {Role} from "../../core/models/role";
+import {Role} from '../../core/models/role';
 
 export const featureKey = 'employees';
 

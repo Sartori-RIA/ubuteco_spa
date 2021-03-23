@@ -7,10 +7,10 @@ import {Component, EventEmitter, Output} from '@angular/core';
 })
 export class SearchComponent {
 
-  @Output() onSearch = new EventEmitter<string>();
+  @Output() search = new EventEmitter<string>();
 
   applyFilter(word: string) {
-    this.onSearch.emit(word.trim().toLowerCase());
+    this.search.emit(word.trim().toLowerCase());
   }
 
   getValue(target: EventTarget | null): string {

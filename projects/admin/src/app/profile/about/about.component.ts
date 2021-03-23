@@ -2,11 +2,11 @@ import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/co
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable, Subscription} from 'rxjs';
 import {select, Store} from '@ngrx/store';
-import {selectAuthLoading, selectCurrentUser,} from '../../store/auth/auth.selectors';
+import {selectAuthLoading, selectCurrentUser, } from '../../store/auth/auth.selectors';
 import {AppState} from '../../store';
 import {User} from '../../core/models/user';
 import {UPDATE_USER} from '../../store/auth/auth.actions';
-import {take} from "rxjs/operators";
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-about',

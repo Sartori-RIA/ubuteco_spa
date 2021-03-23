@@ -27,7 +27,7 @@ export const featureKey = 'drinks';
 export interface DrinkState extends EntityState<Drink> {
   loaded: boolean;
   loading: boolean;
-  total: number
+  total: number;
 }
 
 const adapter: EntityAdapter<Drink> = createEntityAdapter<Drink>();

@@ -82,13 +82,13 @@ const dishesReducer = createReducer(
     loading: false
   })),
   on(REMOVE_DISH_ITEM_DONE, (state, {dish_id, item_id}) => {
-    const dish = state.entities[dish_id]
-    if (dish != undefined) {
-      const index = dish.dish_ingredients?.findIndex((item) => item.id === item_id)
-      dish.dish_ingredients?.slice(index, 1)
-      return adapter.upsertOne(dish, {...state, loading: false})
+    const dish = state.entities[dish_id];
+    if (dish !== undefined) {
+      const index = dish.dish_ingredients?.findIndex((item) => item.id === item_id);
+      dish.dish_ingredients?.slice(index, 1);
+      return adapter.upsertOne(dish, {...state, loading: false});
     } else {
-      return state
+      return state;
     }
   })
 );

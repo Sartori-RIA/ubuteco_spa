@@ -1,6 +1,11 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { CloseButtonComponent } from './close-button.component';
+import {CloseButtonComponent} from './close-button.component';
+import {MatButtonModule} from '@angular/material/button';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateTestingModule} from 'ngx-translate-testing';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {NgxTranslateModule} from '../../../../ngx-translate/ngx-translate.module';
 
 describe('CloseButtonComponent', () => {
   let component: CloseButtonComponent;
@@ -8,9 +13,16 @@ describe('CloseButtonComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CloseButtonComponent ]
+      imports: [
+        MatButtonModule,
+        MatTooltipModule,
+        BrowserAnimationsModule,
+        TranslateTestingModule,
+        NgxTranslateModule
+      ],
+      declarations: [CloseButtonComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

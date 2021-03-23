@@ -1,6 +1,11 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { CancelButtonComponent } from './cancel-button.component';
+import {CancelButtonComponent} from './cancel-button.component';
+import {MatButtonModule} from '@angular/material/button';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateTestingModule} from 'ngx-translate-testing';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {NgxTranslateModule} from '../../../../ngx-translate/ngx-translate.module';
 
 describe('CancelButtonComponent', () => {
   let component: CancelButtonComponent;
@@ -8,9 +13,16 @@ describe('CancelButtonComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CancelButtonComponent ]
+      imports: [
+        MatButtonModule,
+        MatTooltipModule,
+        BrowserAnimationsModule,
+        TranslateTestingModule,
+        NgxTranslateModule
+      ],
+      declarations: [CancelButtonComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

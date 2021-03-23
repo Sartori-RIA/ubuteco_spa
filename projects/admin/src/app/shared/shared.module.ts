@@ -14,7 +14,6 @@ import {CustomFormsModule} from 'ng2-validation';
 import {CustomFormsModule as NgxCustomFormsModule} from 'ngx-custom-validators';
 import {ContainerComponent} from './components/container/container.component';
 import {ConfirmDialogComponent} from './components/dialogs/confirm-dialog/confirm-dialog.component';
-import {BackButtonComponent} from './components/buttons/back-button/back-button.component';
 import {CancelButtonComponent} from './components/buttons/cancel-button/cancel-button.component';
 import {CloseButtonComponent} from './components/buttons/close-button/close-button.component';
 import {ConfirmButtonComponent} from './components/buttons/confirm-button/confirm-button.component';
@@ -59,7 +58,6 @@ const LIBS_MODULES = [
 const COMPONENTS = [
   ContainerComponent,
   ConfirmDialogComponent,
-  BackButtonComponent,
   ButtonLoadingComponent,
   CancelButtonComponent,
   CloseButtonComponent,

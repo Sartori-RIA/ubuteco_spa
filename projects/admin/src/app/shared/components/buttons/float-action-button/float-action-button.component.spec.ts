@@ -1,6 +1,12 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { FloatActionButtonComponent } from './float-action-button.component';
+import {FloatActionButtonComponent} from './float-action-button.component';
+import {MatButtonModule} from '@angular/material/button';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateTestingModule} from 'ngx-translate-testing';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {NgxTranslateModule} from '../../../../ngx-translate/ngx-translate.module';
 
 describe('FloatActionButtonComponent', () => {
   let component: FloatActionButtonComponent;
@@ -8,9 +14,17 @@ describe('FloatActionButtonComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ FloatActionButtonComponent ]
+      imports: [
+        MatButtonModule,
+        MatProgressSpinnerModule,
+        MatTooltipModule,
+        BrowserAnimationsModule,
+        TranslateTestingModule,
+        NgxTranslateModule
+      ],
+      declarations: [FloatActionButtonComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

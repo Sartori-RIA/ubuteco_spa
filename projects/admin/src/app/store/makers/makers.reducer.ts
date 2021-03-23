@@ -24,7 +24,7 @@ export const makersFeatureKey = 'makers';
 export interface MakerState extends EntityState<Maker> {
   loaded: boolean;
   loading: boolean;
-  total: number
+  total: number;
 }
 
 const adapter: EntityAdapter<Maker> = createEntityAdapter<Maker>();

@@ -1,6 +1,12 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { ConfirmButtonComponent } from './confirm-button.component';
+import {ConfirmButtonComponent} from './confirm-button.component';
+import {MatButtonModule} from '@angular/material/button';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateTestingModule} from 'ngx-translate-testing';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {NgxTranslateModule} from '../../../../ngx-translate/ngx-translate.module';
 
 describe('ConfirmButtonComponent', () => {
   let component: ConfirmButtonComponent;
@@ -8,9 +14,17 @@ describe('ConfirmButtonComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConfirmButtonComponent ]
+      imports: [
+        MatButtonModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        BrowserAnimationsModule,
+        TranslateTestingModule,
+        NgxTranslateModule
+      ],
+      declarations: [ConfirmButtonComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

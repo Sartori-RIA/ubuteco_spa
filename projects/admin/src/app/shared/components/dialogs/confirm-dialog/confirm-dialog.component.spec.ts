@@ -1,6 +1,12 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { ConfirmDialogComponent } from './confirm-dialog.component';
+import {ConfirmDialogComponent} from './confirm-dialog.component';
+import {ConfirmButtonComponent} from '../../buttons/confirm-button/confirm-button.component';
+import {CancelButtonComponent} from '../../buttons/cancel-button/cancel-button.component';
+import {TranslateTestingModule} from 'ngx-translate-testing';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {NgxTranslateModule} from '../../../../ngx-translate/ngx-translate.module';
 
 describe('ConfirmDialogComponent', () => {
   let component: ConfirmDialogComponent;
@@ -8,9 +14,28 @@ describe('ConfirmDialogComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConfirmDialogComponent ]
+      providers: [
+        {
+          provide: MatDialogRef,
+          useValue: {}
+        },
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: {}
+        },
+      ],
+      declarations: [
+        ConfirmDialogComponent,
+        ConfirmButtonComponent,
+        CancelButtonComponent,
+      ],
+      imports: [
+        BrowserAnimationsModule,
+        TranslateTestingModule,
+        NgxTranslateModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

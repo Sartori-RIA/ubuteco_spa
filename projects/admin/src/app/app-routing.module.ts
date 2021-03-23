@@ -3,18 +3,18 @@ import {ExtraOptions, PreloadAllModules, RouterModule, Routes} from '@angular/ro
 import {AuthenticatedGuard} from './core/guards/authenticated.guard';
 import {DashComponent} from './dash/dash.component';
 import {AdminLayoutComponent} from './layout/admin-layout/admin-layout.component';
-import {DrinksGuard} from "./core/guards/drinks.guard";
-import {DishesGuard} from "./core/guards/dishes.guard";
-import {BeersGuard} from "./core/guards/beers.guard";
-import {FoodsGuard} from "./core/guards/foods.guard";
-import {TablesGuard} from "./core/guards/tables.guard";
-import {OrdersGuard} from "./core/guards/orders.guard";
-import {BeerStylesGuard} from "./core/guards/beer-styles.guard";
-import {WineStylesGuard} from "./core/guards/wine-styles.guard";
-import {MakersGuard} from "./core/guards/makers.guard";
-import {KitchenGuard} from "./core/guards/kitchen.guard";
-import {WinesGuard} from "./core/guards/wines.guard";
-import {EmployeesGuard} from "./core/guards/employees.guard";
+import {DrinksGuard} from './core/guards/drinks.guard';
+import {DishesGuard} from './core/guards/dishes.guard';
+import {BeersGuard} from './core/guards/beers.guard';
+import {FoodsGuard} from './core/guards/foods.guard';
+import {TablesGuard} from './core/guards/tables.guard';
+import {OrdersGuard} from './core/guards/orders.guard';
+import {BeerStylesGuard} from './core/guards/beer-styles.guard';
+import {WineStylesGuard} from './core/guards/wine-styles.guard';
+import {MakersGuard} from './core/guards/makers.guard';
+import {KitchenGuard} from './core/guards/kitchen.guard';
+import {WinesGuard} from './core/guards/wines.guard';
+import {EmployeesGuard} from './core/guards/employees.guard';
 
 const routes: Routes = [
   {

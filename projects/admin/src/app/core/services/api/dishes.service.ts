@@ -32,8 +32,9 @@ export class DishesService extends BaseService<Dish> {
 
   private mountdishFormData(data: Dish, fileName: string, file: File | Blob) {
     const form = new FormData();
+    const price: string = data.price !== undefined ? data.price.toString() : '0';
     form.append('name', data.name);
-    form.append('price', data.price.toString());
+    form.append('price', price);
     data.dish_ingredients_attributes?.forEach((v, i) => {
       form.append(`dish_ingredients_attributes[${i}][food_id]`, v.food_id.toString());
       form.append(`dish_ingredients_attributes[${i}][quantity]`, v.quantity.toString());

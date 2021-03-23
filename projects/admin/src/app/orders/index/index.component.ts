@@ -43,7 +43,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   applyFilter(word: string) {
-    this.dataSource.filter = word
+    this.dataSource.filter = word;
   }
 
   private updateOrderList() {

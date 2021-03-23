@@ -1,0 +1,37 @@
+dist: trusty
+
+sudo: required
+
+language: node_js
+
+node_js:
+  - '10'
+
+addons:
+  chrome: stable
+
+cache:
+  directories:
+    - "./node_modules"
+
+install:
+  - npm install
+
+before_script:
+  - npm install -g @angular/cli
+
+script:
+  - ng lint
+  - ng test  -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+  #- ng e2e  -- --protractor-config=projects/admin/e2e/protractor-ci.conf.js
+
+before_deploy:
+  - ng build --prod
+
+deploy:
+  provider: firebase
+  project: ibuteco-ce9c3
+  token:
+    secure: ex88/GlZ8Y2M4l73DMAtjYSntYQvqftZOYULSXhVz6YQ2ZhRV7HctD8ymETj8oMvycxfDARtSeriavoNqqHr6we6GeuISmFJv7sTPmYjd3DQ3yBTIDZkHKMSPl7lX5MMCVcoST2i0K0lV6lUwfMU44YeQ/4dqlxG9yCJXhm+L7afIZmSlqiyOFdW7vyF0l+psuFAAFF6/tgfmIGTbaMqHWMuulS1/BFAVujsxzfIi1U/ZH+tXAZKSJebNOucgS/BK5u+n2q0A27enNBN97sEyVW/bJQLvFXIsaCMAd9X8YrsIOl5phzXamtrzL9q0WWPML+XbKpJ4C849MMjlMLJUa1oW84uAcWRR8VVohOhMg5DUNFM5tCrLiE5vSCzyMCjbkvpHraUO2NHCiz0L5v43kpsu5so4A8hs1Ix7ZP/Yf4InO9BZ61L8wq/frVrJhvOm9cA+MwdIh9wcUyK5bdBdo7NwbcAUkqh6TYWEAUNLwE8Hyv7/XwWO7V66gRO05BFDXI1Qd4LsRwR9ignc6SfMVhGPQBVzVpdWbml+nJxHuSib/DK/7YqpxGb8BmXmVtcEaXSwCiEou1VI5JgCGXuI2WU9QCCplW7Nu5X7DdjWm0bRyLtgIYB6zwbvNBO6TdXEoHrSEGwYLlCZTm7I2tLkhP4mLzrzhGvBUaXdqLvMlQ=
+  on:
+    branch: master
