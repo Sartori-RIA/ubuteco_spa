@@ -8,14 +8,14 @@ import {BeerStylesService} from '../../core/services/api/beer-styles.service';
 import {WineStyleService} from '../../core/services/api/wine-style.service';
 
 export namespace uButecoValidators {
-  export function cpf(control: AbstractControl): { [key: string]: boolean } | null {
+  export function cpf(control: AbstractControl): ValidationErrors | null {
     if (cpfValidator.isValid(control.value)) {
       return null;
     }
     return {cpf_invalid: true};
   }
 
-  export function cnpj(control: AbstractControl): { [key: string]: boolean } | null {
+  export function cnpj(control: AbstractControl): ValidationErrors | null {
     if (cnpjValidators.isValid(control.value)) {
       return null;
     }
@@ -59,25 +59,25 @@ export namespace uButecoValidators {
   }
 
   export function uniqueBeerStyle(service: BeerStylesService, oldName?: string): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors> => {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
       if (control.value == null) {
-        return of({name_in_use: false});
+        return of(null);
       }
       return service.checkStyleAvailable(control.value).pipe(
         map((response) =>
-          response.status === 200 && oldName !== control.value ? {name_in_use: true} : {name_in_use: false})
+          response.status === 200 && oldName !== control.value ? {name_in_use: true} : null)
       );
     };
   }
 
   export function uniqueWineStyle(service: WineStyleService, oldName?: string): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors> => {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
       if (control.value == null) {
-        return of({name_in_use: false});
+        return of(null);
       }
       return service.checkStyleAvailable(control.value).pipe(
         map((response) =>
-          response.status === 200 && oldName !== control.value ? {name_in_use: true} : {name_in_use: false})
+          response.status === 200 && oldName !== control.value ? {name_in_use: true} : null)
       );
     };
   }
