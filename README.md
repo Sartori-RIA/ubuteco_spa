@@ -24,3 +24,7 @@
 1. Run [Backend](https://github.com/Sartori-RIA/ubuteco_api) project
 2. `npm i` -> install dependencies
 3. `ng s -o` -> run project and open in default port `4200`
+
+## Supporters
+
+![https://jb.gg/OpenSource](./supporters/jetbrains.svg)
