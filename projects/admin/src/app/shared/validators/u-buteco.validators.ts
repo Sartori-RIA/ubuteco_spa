@@ -23,37 +23,37 @@ export namespace uButecoValidators {
   }
 
   export function uniqueEmail(service: UserService, oldEmail?: string): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors> => {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
       if (control.value == null) {
-        return of({email_in_use: false} );
+        return of(null);
       }
       return service.checkEmail(control.value).pipe(
         map((response) =>
-          response.status === 200 && oldEmail !== control.value ? {email_in_use: true} : {email_in_use: false} )
+          response.status === 200 && oldEmail !== control.value ? {email_in_use: true} : null)
       );
     };
   }
 
   export function uniqueCNPJ(service: OrganizationsService, oldCnpj?: string): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors> => {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
       if (control.value == null) {
-        return of({cnpj_in_use: false} );
+        return of(null);
       }
       return service.checkCNPJ(control.value.replace(/\D+/g, '')).pipe(
         map((response) =>
-          response.status === 200 && oldCnpj !== control.value ? {cnpj_in_use: true} : {cnpj_in_use: false} )
+          response.status === 200 && oldCnpj !== control.value ? {cnpj_in_use: true} : null)
       );
     };
   }
 
   export function uniquePhone(service: OrganizationsService, oldPhone?: string): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors> => {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
       if (control.value == null) {
-        return of({phone_in_use: false});
+        return of(null);
       }
       return service.checkPhone(control.value.replace(/\D+/g, '')).pipe(
         map((response) =>
-          response.status === 200 && oldPhone !== control.value ? {phone_in_use: true} : {phone_in_use: false})
+          response.status === 200 && oldPhone !== control.value ? {phone_in_use: true} : null)
       );
     };
   }

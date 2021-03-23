@@ -36,8 +36,8 @@
         type="email"
         name="email"
       />
-      <mat-error>
-        {{!!form.controls.email?.errors?.required ? '' : ('validations.in_use.email'|translate)}}
+      <mat-error *ngIf="!!form.controls.email?.errors?.email_in_use">
+        {{'validations.in_use.email' | translate }}
       </mat-error>
     </mat-form-field>
 

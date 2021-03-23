@@ -61,7 +61,7 @@ export class WineStylesFormDialogComponent implements OnInit {
     return this.fb.control(
       null,
       [Validators.required],
-      [uButecoValidators.uniqueBeerStyle(this.wineStyle, this.data?.name)]
+      [uButecoValidators.uniqueWineStyle(this.wineStyle, this.data?.name)]
     );
   }
 }
