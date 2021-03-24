@@ -15,9 +15,9 @@ export namespace LocalStorage {
 
   export const country = (): string => {
     const data = localStorage.getItem('country');
-    if (data === 'pt') {
+    if (data?.toLocaleLowerCase() === 'pt' || data?.toLocaleLowerCase() === 'pt-br') {
       setCountry('br');
     }
-    return localStorage.getItem('country') || 'br';
+    return localStorage.getItem('country') || 'us';
   };
 }
