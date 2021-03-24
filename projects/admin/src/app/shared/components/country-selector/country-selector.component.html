@@ -1,11 +1,11 @@
 <button mat-button [matMenuTriggerFor]="versionPicker">
-  <mat-icon [svgIcon]="selectedCountry.alpha2Code.toLowerCase()"></mat-icon>
+  <mat-icon [svgIcon]="selectedCountry.flag_name.toLowerCase()"></mat-icon>
   <mat-icon>arrow_drop_down</mat-icon>
 </button>
 <mat-menu #versionPicker="matMenu">
   <button mat-menu-item *ngFor="let country of countries"
           (click)="onCountrySelected(country)">
-    <mat-icon [svgIcon]="country.alpha2Code.toLowerCase()"></mat-icon>
+    <mat-icon [svgIcon]="country.flag_name.toLowerCase()"></mat-icon>
     <small>{{country.name}}</small>
   </button>
 </mat-menu>

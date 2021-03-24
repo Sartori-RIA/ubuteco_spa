@@ -21,7 +21,7 @@ export class CountrySelectorComponent implements OnInit {
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       const country: string = LocalStorage.country();
-      const selected = this.countries.find((v) => v?.alpha3Code?.toLowerCase() === country?.toLowerCase());
+      const selected = this.countries.find((v) => v?.flag_name?.toLowerCase() === country?.toLowerCase());
       if (!!selected) {
         this.selectedCountry = selected;
       }
@@ -30,8 +30,8 @@ export class CountrySelectorComponent implements OnInit {
 
   onCountrySelected(country: Country) {
     if (isPlatformBrowser(this.platformId)) {
-      this.translateService.use(country.alpha3Code.toLowerCase());
-      LocalStorage.setCountry(country.alpha3Code.toLowerCase());
+      this.translateService.use(country.flag_name.toLowerCase());
+      LocalStorage.setCountry(country.flag_name.toLowerCase());
       this.selectedCountry = country;
     }
   }

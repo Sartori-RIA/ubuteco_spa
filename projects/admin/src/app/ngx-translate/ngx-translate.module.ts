@@ -34,7 +34,7 @@ export class NgxTranslateModule {
 
   registerCountries() {
     for (const country of COUNTRIES_DB) {
-      const countryAlpha2Code = country.alpha2Code.toLowerCase();
+      const countryAlpha2Code = country.flag_name.toLowerCase();
       this.iconRegistry
         .addSvgIcon(countryAlpha2Code, this.sanitizer
           .bypassSecurityTrustResourceUrl(`assets/svg-country-flags/svg/${countryAlpha2Code}.svg`));
