@@ -1,8 +1,8 @@
 import {AbstractControl, AsyncValidatorFn, ValidationErrors} from '@angular/forms';
 import {Observable, of} from 'rxjs';
-import {BeerStylesService} from "../../core/services/api/beer-styles.service";
-import {map} from "rxjs/operators";
-import {WineStyleService} from "../../core/services/api/wine-style.service";
+import {BeerStylesService} from '../../core/services/api/beer-styles.service';
+import {map} from 'rxjs/operators';
+import {WineStyleService} from '../../core/services/api/wine-style.service';
 
 export namespace uButecoMockValidators {
   export function uniqueEmail(): AsyncValidatorFn {

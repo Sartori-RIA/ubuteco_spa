@@ -11,7 +11,7 @@ import {beerStyleInitialState} from '../../spec-helpers/states/beer-styles.fake-
 import {NgxTranslateModule} from '../../ngx-translate/ngx-translate.module';
 import {authInitialState} from '../../spec-helpers/states/auth.fake-state';
 import {selectBeerStyleLoading} from '../../store/beer-styles/beer-styles.selectors';
-import {uButecoMockValidators} from "../../spec-helpers/validators/mock-validatiors";
+import {uButecoMockValidators} from '../../spec-helpers/validators/mock-validatiors';
 
 describe('BeerStylesFormDialogComponent', () => {
   let component: BeerStylesFormDialogComponent;

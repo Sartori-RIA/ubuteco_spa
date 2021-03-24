@@ -12,7 +12,7 @@ import {NgxTranslateModule} from '../../ngx-translate/ngx-translate.module';
 import {UserService} from '../../core/services/api/user.service';
 import {authInitialState} from '../../spec-helpers/states/auth.fake-state';
 import {selectEmployeesLoading} from '../../store/employees/employees.selectors';
-import {uButecoMockValidators} from "../../spec-helpers/validators/mock-validatiors";
+import {uButecoMockValidators} from '../../spec-helpers/validators/mock-validatiors';
 
 describe('Employees/FormComponent', () => {
   let component: FormComponent;

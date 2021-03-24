@@ -9,7 +9,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {Logger} from '@ngrx/data';
 import {authInitialState} from '../../spec-helpers/states/auth.fake-state';
 import {NgxTranslateModule} from '../../ngx-translate/ngx-translate.module';
-import {uButecoMockValidators} from "../../spec-helpers/validators/mock-validatiors";
+import {uButecoMockValidators} from '../../spec-helpers/validators/mock-validatiors';
 
 describe('OrganizationComponent', () => {
   let component: OrganizationComponent;
