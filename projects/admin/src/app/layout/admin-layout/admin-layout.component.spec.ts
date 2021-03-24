@@ -14,11 +14,13 @@ import {SidebarTopComponent} from '../navigation/sidebar-top/sidebar-top.compone
 import {HeaderSideComponent} from '../header/header-side/header-side.component';
 import {NotificationsComponent} from '../notifications/notifications.component';
 import {authInitialState} from '../../spec-helpers/states/auth.fake-state';
+import {LayoutService} from '../../core/services/theme/layout.service';
 
 describe('AdminLayoutComponent', () => {
   let component: AdminLayoutComponent;
   let fixture: ComponentFixture<AdminLayoutComponent>;
   let store: MockStore;
+  let layoutService: LayoutService;
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       providers: [provideMockStore({
@@ -44,6 +46,7 @@ describe('AdminLayoutComponent', () => {
       ]
     }).compileComponents();
     store = TestBed.inject(MockStore);
+    layoutService = TestBed.inject(LayoutService);
   }));
 
   beforeEach(() => {
