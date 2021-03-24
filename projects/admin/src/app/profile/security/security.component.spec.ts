@@ -10,6 +10,7 @@ import {authInitialState} from '../../spec-helpers/states/auth.fake-state';
 import {NgxTranslateModule} from '../../ngx-translate/ngx-translate.module';
 import {UserService} from '../../core/services/api/user.service';
 import {selectAuthLoading} from '../../store/auth/auth.selectors';
+import {uButecoMockValidators} from "../../spec-helpers/validators/mock-validatiors";
 
 describe('SecurityComponent', () => {
   let component: SecurityComponent;
@@ -43,6 +44,7 @@ describe('SecurityComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SecurityComponent);
     component = fixture.componentInstance;
+    component.form.controls.email.setAsyncValidators(uButecoMockValidators.uniqueEmail());
     userService = TestBed.inject(UserService);
     fixture.detectChanges();
   });

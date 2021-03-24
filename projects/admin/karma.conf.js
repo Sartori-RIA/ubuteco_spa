@@ -28,8 +28,11 @@ module.exports = function (config) {
       dir: require('path').join(__dirname, '../../coverage/admin'),
       subdir: '.',
       reporters: [
-        { type: 'html' },
-        { type: 'text-summary' }
+        {type: 'html'},
+        {type: 'text-summary'},
+        {type: 'cobertura'},
+        {type: 'json'},
+        {type: 'json-summary'},
       ]
     },
     reporters: ['progress', 'kjhtml', 'coverage'],
@@ -37,7 +40,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['ChromeHeadlessCI'],
+    browsers: ['Chrome', 'ChromeHeadlessCI'],
     singleRun: false,
     restartOnFileChange: true,
     customLaunchers: {

@@ -14,6 +14,11 @@ cache:
   directories:
     - "./node_modules"
 
+env:
+  global:
+    - CC_TEST_REPORTER_ID=05e065325e2fafd3eda638cb5d14c99793222340656b8d0e1b09293286e390da
+    - FIREBASE_SECURE_TOKEN=ex88/GlZ8Y2M4l73DMAtjYSntYQvqftZOYULSXhVz6YQ2ZhRV7HctD8ymETj8oMvycxfDARtSeriavoNqqHr6we6GeuISmFJv7sTPmYjd3DQ3yBTIDZkHKMSPl7lX5MMCVcoST2i0K0lV6lUwfMU44YeQ/4dqlxG9yCJXhm+L7afIZmSlqiyOFdW7vyF0l+psuFAAFF6/tgfmIGTbaMqHWMuulS1/BFAVujsxzfIi1U/ZH+tXAZKSJebNOucgS/BK5u+n2q0A27enNBN97sEyVW/bJQLvFXIsaCMAd9X8YrsIOl5phzXamtrzL9q0WWPML+XbKpJ4C849MMjlMLJUa1oW84uAcWRR8VVohOhMg5DUNFM5tCrLiE5vSCzyMCjbkvpHraUO2NHCiz0L5v43kpsu5so4A8hs1Ix7ZP/Yf4InO9BZ61L8wq/frVrJhvOm9cA+MwdIh9wcUyK5bdBdo7NwbcAUkqh6TYWEAUNLwE8Hyv7/XwWO7V66gRO05BFDXI1Qd4LsRwR9ignc6SfMVhGPQBVzVpdWbml+nJxHuSib/DK/7YqpxGb8BmXmVtcEaXSwCiEou1VI5JgCGXuI2WU9QCCplW7Nu5X7DdjWm0bRyLtgIYB6zwbvNBO6TdXEoHrSEGwYLlCZTm7I2tLkhP4mLzrzhGvBUaXdqLvMlQ=
+
 install:
   - npm install
 
@@ -25,6 +30,12 @@ script:
   - ng test  -- --no-watch --no-progress --browsers=ChromeHeadlessCI
   #- ng e2e  -- --protractor-config=projects/admin/e2e/protractor-ci.conf.js
 
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter format-coverage -t simplecov -o ./coverage/codeclimate.$CI_NODE_INDEX.json ./coverage/admin/coverage-final.json; fi
+  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter sum-coverage --output - --parts 1 coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage --input -; fi
+
+
 before_deploy:
   - ng build --prod
 
@@ -32,6 +43,6 @@ deploy:
   provider: firebase
   project: ibuteco-ce9c3
   token:
-    secure: ex88/GlZ8Y2M4l73DMAtjYSntYQvqftZOYULSXhVz6YQ2ZhRV7HctD8ymETj8oMvycxfDARtSeriavoNqqHr6we6GeuISmFJv7sTPmYjd3DQ3yBTIDZkHKMSPl7lX5MMCVcoST2i0K0lV6lUwfMU44YeQ/4dqlxG9yCJXhm+L7afIZmSlqiyOFdW7vyF0l+psuFAAFF6/tgfmIGTbaMqHWMuulS1/BFAVujsxzfIi1U/ZH+tXAZKSJebNOucgS/BK5u+n2q0A27enNBN97sEyVW/bJQLvFXIsaCMAd9X8YrsIOl5phzXamtrzL9q0WWPML+XbKpJ4C849MMjlMLJUa1oW84uAcWRR8VVohOhMg5DUNFM5tCrLiE5vSCzyMCjbkvpHraUO2NHCiz0L5v43kpsu5so4A8hs1Ix7ZP/Yf4InO9BZ61L8wq/frVrJhvOm9cA+MwdIh9wcUyK5bdBdo7NwbcAUkqh6TYWEAUNLwE8Hyv7/XwWO7V66gRO05BFDXI1Qd4LsRwR9ignc6SfMVhGPQBVzVpdWbml+nJxHuSib/DK/7YqpxGb8BmXmVtcEaXSwCiEou1VI5JgCGXuI2WU9QCCplW7Nu5X7DdjWm0bRyLtgIYB6zwbvNBO6TdXEoHrSEGwYLlCZTm7I2tLkhP4mLzrzhGvBUaXdqLvMlQ=
+    secure: $FIREBASE_SECURE_TOKEN
   on:
     branch: master

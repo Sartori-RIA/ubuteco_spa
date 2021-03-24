@@ -39,6 +39,7 @@ export class HeaderInterceptorService implements HttpInterceptor {
             break;
           case 0:
             // alert('servidor desligado ou inalcançável')
+            console.log('server is down');
             break;
         }
         return throwError(err);

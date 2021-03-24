@@ -11,6 +11,7 @@ import {wineStyleInitialState} from '../../spec-helpers/states/wine-styles.fake-
 import {NgxTranslateModule} from '../../ngx-translate/ngx-translate.module';
 import {authInitialState} from '../../spec-helpers/states/auth.fake-state';
 import {selectWineStylesLoading} from '../../store/wine-styles/wine-styles.selectors';
+import {uButecoMockValidators} from "../../spec-helpers/validators/mock-validatiors";
 
 describe('WineStylesFormDialogComponent', () => {
   let component: WineStylesFormDialogComponent;
@@ -52,6 +53,7 @@ describe('WineStylesFormDialogComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(WineStylesFormDialogComponent);
     component = fixture.componentInstance;
+    component.wineStyleControl.setAsyncValidators(uButecoMockValidators.uniqueWineStyle());
     fixture.detectChanges();
   });
 

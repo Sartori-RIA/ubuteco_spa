@@ -9,6 +9,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {Logger} from '@ngrx/data';
 import {authInitialState} from '../../spec-helpers/states/auth.fake-state';
 import {NgxTranslateModule} from '../../ngx-translate/ngx-translate.module';
+import {uButecoMockValidators} from "../../spec-helpers/validators/mock-validatiors";
 
 describe('OrganizationComponent', () => {
   let component: OrganizationComponent;
@@ -39,6 +40,8 @@ describe('OrganizationComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(OrganizationComponent);
     component = fixture.componentInstance;
+    component.form.controls.cnpj.setAsyncValidators(uButecoMockValidators.uniqueCNPJ());
+    component.form.controls.phone.setAsyncValidators(uButecoMockValidators.uniquePhone());
     fixture.detectChanges();
   });
 

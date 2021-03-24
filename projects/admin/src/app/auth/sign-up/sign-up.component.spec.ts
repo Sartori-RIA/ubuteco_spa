@@ -11,6 +11,7 @@ import {authInitialState} from '../../spec-helpers/states/auth.fake-state';
 import {NgxTranslateModule} from '../../ngx-translate/ngx-translate.module';
 import {NgxMaskModule} from 'ngx-mask';
 import {UserService} from '../../core/services/api/user.service';
+import {uButecoMockValidators} from "../../spec-helpers/validators/mock-validatiors";
 
 describe('SignUpComponent', () => {
   let component: SignUpComponent;
@@ -44,6 +45,9 @@ describe('SignUpComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SignUpComponent);
     component = fixture.componentInstance;
+    component.form.controls.email.setAsyncValidators(uButecoMockValidators.uniqueEmail());
+    component.form.controls.cnpj.setAsyncValidators(uButecoMockValidators.uniqueCNPJ());
+    component.form.controls.organization_phone.setAsyncValidators(uButecoMockValidators.uniquePhone());
     fixture.detectChanges();
   });
 

@@ -8,7 +8,6 @@ import {TranslateTestingModule} from 'ngx-translate-testing';
 import {makersInitialState} from '../../spec-helpers/states/makers.fake-state';
 import {NgxTranslateModule} from '../../ngx-translate/ngx-translate.module';
 import {authInitialState} from '../../spec-helpers/states/auth.fake-state';
-import {TableActionButtonsComponent} from '../../shared/components/table-action-buttons/table-action-buttons.component';
 import {FontAwesomeIconsModule} from '../../font-awesome-icons/font-awesome-icons.module';
 import {selectMakersLoading} from '../../store/makers/makers.selectors';
 
@@ -28,8 +27,7 @@ describe('Makers/IndexComponent', () => {
         }
       })],
       declarations: [
-        IndexComponent,
-        TableActionButtonsComponent,
+        IndexComponent
       ],
       imports: [
         SharedModule,

@@ -4,6 +4,7 @@ import {AuthenticatedGuard} from './authenticated.guard';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {authInitialState} from '../../spec-helpers/states/auth.fake-state';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('AuthenticatedGuard', () => {
   let guard: AuthenticatedGuard;

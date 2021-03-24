@@ -12,6 +12,7 @@ import {NgxTranslateModule} from '../../ngx-translate/ngx-translate.module';
 import {UserService} from '../../core/services/api/user.service';
 import {authInitialState} from '../../spec-helpers/states/auth.fake-state';
 import {selectEmployeesLoading} from '../../store/employees/employees.selectors';
+import {uButecoMockValidators} from "../../spec-helpers/validators/mock-validatiors";
 
 describe('Employees/FormComponent', () => {
   let component: FormComponent;
@@ -55,6 +56,7 @@ describe('Employees/FormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FormComponent);
     component = fixture.componentInstance;
+    component.form.controls.email.setAsyncValidators(uButecoMockValidators.uniqueEmail());
     fixture.detectChanges();
   });
 

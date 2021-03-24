@@ -5,7 +5,7 @@ import {ConfirmButtonComponent} from '../../buttons/confirm-button/confirm-butto
 import {CancelButtonComponent} from '../../buttons/cancel-button/cancel-button.component';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {NgxTranslateModule} from '../../../../ngx-translate/ngx-translate.module';
 
 describe('ConfirmDialogComponent', () => {
@@ -32,7 +32,8 @@ describe('ConfirmDialogComponent', () => {
       imports: [
         BrowserAnimationsModule,
         TranslateTestingModule,
-        NgxTranslateModule
+        NgxTranslateModule,
+        MatDialogModule,
       ]
     })
       .compileComponents();
