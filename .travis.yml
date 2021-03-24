@@ -27,7 +27,7 @@ before_script:
 
 script:
   - ng lint
-  - ng test  -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+  - ng test  -- --no-watch --progress --source-map --browsers=ChromeHeadlessCI
   #- ng e2e  -- --protractor-config=projects/admin/e2e/protractor-ci.conf.js
 
 after_script:
