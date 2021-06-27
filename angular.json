@@ -25,7 +25,6 @@
             "main": "projects/admin/src/main.ts",
             "polyfills": "projects/admin/src/polyfills.ts",
             "tsConfig": "projects/admin/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/admin/src/favicon.ico",
               "projects/admin/src/assets",
@@ -49,7 +48,13 @@
               "ng2-validation",
               "actioncable",
               "@bugsnag/js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -81,7 +86,8 @@
               "serviceWorker": true,
               "ngswConfigPath": "projects/admin/ngsw-config.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
