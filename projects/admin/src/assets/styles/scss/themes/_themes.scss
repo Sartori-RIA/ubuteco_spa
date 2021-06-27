@@ -1,22 +1,22 @@
-@import '~@angular/material/theming';
-@include mat-core();
+@use '~@angular/material' as mat;
+@include mat.core();
 
 // Keep atleast one file
 $mat-primary: map-get($material-colors, platform);
 $mat-accent: map-get($material-colors, amber);
 
 
-$egret-primary: mat-palette($mat-primary);
-$egret-accent: mat-palette($mat-accent);
+$egret-primary: mat.define-palette($mat-primary);
+$egret-accent: mat.define-palette($mat-accent);
 
 // custom theme palettes are passed into a theme function
-$egret-theme: mat-light-theme($egret-primary, $egret-accent);
+$egret-theme: mat.define-light-theme($egret-primary, $egret-accent);
 
 $primary-dark: darken(map-get($mat-primary, 500), 8%);
 
 // Material theme is wrapped by a parent class
 
-@include angular-material-theme($egret-theme);
+@include mat.all-component-themes($egret-theme);
 
 .mat-bg-primary,
 .topbar,
