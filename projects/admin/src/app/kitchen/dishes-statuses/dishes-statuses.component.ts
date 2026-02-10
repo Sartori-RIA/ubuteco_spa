@@ -49,7 +49,7 @@ export class DishesStatusesComponent implements OnInit {
 
   private updateForm() {
     this.form.patchValue({
-      status: this.dish.order_item.status
+      status: this.dish.status
     });
   }
 }

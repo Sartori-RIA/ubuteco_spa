@@ -11,27 +11,30 @@
   >
 
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>{{'attributes.base.id'|translate|uppercase}}</th>
-      <td mat-cell *matCellDef="let element"> {{element?.id}} </td>
+      <th mat-header-cell *matHeaderCellDef>{{ 'attributes.base.id'|translate|uppercase }}</th>
+      <td mat-cell *matCellDef="let element"> {{ element?.id }}</td>
     </ng-container>
 
     <ng-container matColumnDef="client">
-      <th mat-header-cell *matHeaderCellDef>{{'attributes.order.customer'|translate}}</th>
-      <td mat-cell *matCellDef="let element"> {{element?.user?.name}} </td>
+      <th mat-header-cell *matHeaderCellDef>{{ 'attributes.order.customer'|translate }}</th>
+      <td mat-cell *matCellDef="let element"> {{ element?.user?.name }}</td>
     </ng-container>
 
     <ng-container matColumnDef="table">
-      <th mat-header-cell *matHeaderCellDef>{{'attributes.order.table'|translate}}</th>
-      <td mat-cell *matCellDef="let element"> {{element?.table?.name}} </td>
+      <th mat-header-cell *matHeaderCellDef>{{ 'attributes.order.table'|translate }}</th>
+      <td mat-cell *matCellDef="let element"> {{ element?.table?.name }}</td>
     </ng-container>
 
     <ng-container matColumnDef="total">
-      <th mat-header-cell *matHeaderCellDef>{{'attributes.order.total'|translate}}</th>
-      <td mat-cell *matCellDef="let element"> {{element?.total_cents | currency}} </td>
+      <th mat-header-cell *matHeaderCellDef>{{ 'attributes.order.total'|translate }}</th>
+      <td mat-cell
+          *matCellDef="let element"> {{ element?.total_with_discount_cents | formatCents }}
+        {{ element?.total_with_discount_currency }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef>{{'commons.labels.action'|translate}}</th>
+      <th mat-header-cell *matHeaderCellDef>{{ 'commons.labels.action'|translate }}</th>
       <td mat-cell *matCellDef="let element">
         <app-trash-button (deleteElement)="cancelOrder(element)"></app-trash-button>
         <button routerLink="/pedidos/{{element.id}}" mat-button>
